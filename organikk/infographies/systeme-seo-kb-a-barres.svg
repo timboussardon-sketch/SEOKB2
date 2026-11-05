@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.h{font-size:40px;font-weight:700;fill:#0B0B0F;letter-spacing:-1.2px}
+.sub{font-size:20px;fill:#333}
+.t{font-size:24px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.5px}
+.s{font-size:17px;fill:#333}
+.a{font-size:15px;font-weight:500;fill:#777}
+.big{font-size:150px;font-weight:700;fill:#0B0B0F;letter-spacing:-6px}
+.v{font-size:17px;font-weight:700;fill:#0B0B0F}
+.line{fill:none;stroke:#0B0B0F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thin{fill:none;stroke:#0B0B0F;stroke-width:1;stroke-linecap:round}
+</style>
+<linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset=".45" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient>
+<filter id="on" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="m"/><feComponentTransfer in="m" result="a"><feFuncA type="linear" slope=".6"/></feComponentTransfer><feComposite in="a" in2="SourceGraphic" operator="in" result="c"/><feBlend in="SourceGraphic" in2="c" mode="overlay"/></filter>
+<marker id="p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#0B0B0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1536" height="1024" fill="#FFF"/>
+<text class="h" x="60" y="110">Ce que contient le vault SEO KB</text>
+<text class="sub" x="60" y="148">Pages .md par dossier de wiki/, comptées le 27 octobre 2026</text>
+<text class="big" x="52" y="460">1 034</text>
+<text class="t" x="60" y="512">pages dans wiki/</text>
+<text class="s" x="60" y="544">compilées par Claude Code</text>
+<text class="s" x="60" y="570">depuis 1 297 fichiers dans raw/</text>
+<line class="thin" x1="860" y1="216" x2="860" y2="858"/>
+<text class="s" x="840" y="256" text-anchor="end">sources</text>
+<g fill="url(#og)" filter="url(#on)"><rect x="860" y="230" width="560" height="40"/></g>
+<text class="v" x="1432" y="256">182</text>
+<text class="s" x="840" y="314" text-anchor="end">entities</text>
+<rect x="860" y="297" width="249" height="22" fill="#0B0B0F"/>
+<text class="v" x="1121" y="314">81</text>
+<text class="s" x="840" y="372" text-anchor="end">synthèses</text>
+<rect x="860" y="355" width="240" height="22" fill="#0B0B0F"/>
+<text class="v" x="1112" y="372">78</text>
+<text class="s" x="840" y="430" text-anchor="end">concepts</text>
+<rect x="860" y="413" width="215" height="22" fill="#0B0B0F"/>
+<text class="v" x="1087" y="430">70</text>
+<text class="s" x="840" y="488" text-anchor="end">queries</text>
+<rect x="860" y="471" width="160" height="22" fill="#0B0B0F"/>
+<text class="v" x="1032" y="488">52</text>
+<text class="s" x="840" y="546" text-anchor="end">briefs</text>
+<rect x="860" y="529" width="98" height="22" fill="#0B0B0F"/>
+<text class="v" x="970" y="546">32</text>
+<text class="s" x="840" y="604" text-anchor="end">méthodes</text>
+<rect x="860" y="587" width="83" height="22" fill="#0B0B0F"/>
+<text class="v" x="955" y="604">27</text>
+<text class="s" x="840" y="662" text-anchor="end">clusters</text>
+<rect x="860" y="645" width="43" height="22" fill="#0B0B0F"/>
+<text class="v" x="915" y="662">14</text>
+<text class="s" x="840" y="720" text-anchor="end">posts LinkedIn</text>
+<rect x="860" y="703" width="34" height="22" fill="#0B0B0F"/>
+<text class="v" x="906" y="720">11</text>
+<text class="s" x="840" y="778" text-anchor="end">revues de presse</text>
+<rect x="860" y="761" width="25" height="22" fill="#0B0B0F"/>
+<text class="v" x="897" y="778">8</text>
+<text class="s" x="840" y="836" text-anchor="end">preuves</text>
+<rect x="860" y="819" width="22" height="22" fill="#0B0B0F"/>
+<text class="v" x="894" y="836">7</text>
+<text class="a" x="60" y="964">Source : comptage des fichiers .md de seo-kb, 27/10/2026. Hors registres, index et log.</text>
+</svg>

@@ -1,0 +1,646 @@
+@@h1 I built an SEO system with Obsidian, Jev and Claude (it works!)
+@@sub (no SEO tool)
+@@by Timothée
+
+@@open
+I'm going to give you solid arguments to sell you on setting up a system and to stop chatting in Claude or ChatGPT.
+
+@@image images/01-search-console.png
+
+But first, there is a problem.
+
+People often teach you what to do: do this, do that.
+
+Much more rarely why you should do it, which data to rely on, and in which cases it's worth it.
+
+For example, everybody tells you that you need to be cited by AI. That's a bad angle. The stake is to do everything you can to find keywords that LLMs won't eat in the next 5 years.
+
+Another example: people sell you traffic curves to show you how good the SEO strategy was. In 2026, that's hard to accept. You now have to find business keywords and stop chasing traffic as if it were an interesting KPI.
+
+Same thing for keyword volume: most of the keywords that bring in clients don't exist in classic SEO tools. Literally undetectable. Well, you have to find them. That's your mission as a consultant!
+
+There is no hack or secret to tackle this GEO or AI SEO. Your data will make the difference. We're entering a data game, and nothing else.
+
+Except that today you can't benefit from it, because you don't have a system. And you don't have permanent memory.
+
+Oh, and it's not just about learning to write skills, it's about having a complete system that can act as an assistant. Like a junior consultant.
+
+For example, you can ask it this:
+
+@@image images/02-scoring-geo.png
+
+What you see in the image is a mission I gave to my scoring agent.
+
+It reads my text and scores each paragraph against my GEO criteria.
+
+That lowers the risk of writing for nothing.
+
+But you can also ask it to model your Google Search Console data, like we did with Seocity.app.
+
+@@image images/03-seocity.png
+
+The only limit of the system is your ability to project yourself into the project and to come up with proposals.
+
+Anyway, the arguments.
+
+@@h2n ARGUMENT 1: The system is meant to replace all your SEO tools
+
+@@image images/04-argument-1-outils.png
+
+@@h2n ARGUMENT 2: To win the SEO game, you will have to dominate the proprietary data game.
+
+@@image images/05-argument-2-data.png
+
+@@h2 THE SETUP
+
+You should never move to Obsidian without implementing the LLM wiki model:
+
+@@image images/06-llm-wiki-arborescence.png 78
+
+The principle comes from Andrej Karpathy.
+
+The idea:
+
+the LLM writes and maintains its own wiki.
+
+In each new conversation, it can start again from what it has already learned and written.
+
+My Obsidian space is split into two parts.
+
+@@h4 raw/
+That's where I keep all the raw sources:
+
+@@li client calls;
+
+@@li Search Console exports;
+
+@@li articles;
+
+@@li other original data.
+
+Claude never modifies this folder.
+
+@@h4 wiki/
+That's the part organized by Claude, which connects the different sources from the different /raw folders
+
+@@h2 THE SYSTEM IN 4 ADVANTAGES
+
+@@b 1. You have permanent memory:
+
+Claude forgets the context → you need a local system with Obsidian
+
+@@b 2. The system is an exponential model:
+
+Tomorrow companies will buy your SEO system, and will stop paying a day rate
+
+@@b 3. Fight technical isolation:
+
+New models every day, you no longer know what to try. Here, you keep the same base and you iterate with structural updates, without ever starting again from 0
+
+@@b 4. Huge efficiency gain:
+
+No memory and no Obsidian → massive productivity loss, because you have no standardized process for your audits, keyword research, etc.
+
+@@image images/07-message-client.png 62
+
+@@h2 CLAUDE x OBSIDIAN: keywords
+
+How the system thinks about keywords:
+
+@@li Don't look for keywords eaten by LLMs, look for the ones your user will click on.
+
+@@li 80% of keyword research is commodity → AI will do it as well as or better than any tool
+
+@@li 20% is the real work: go and look on Reddit, on X, look for real expertise and real experience
+
+@@li Drop the paid tools: keywords obviously, but semantics too
+
+@@li Stop selling traffic → sell leads by finding business keywords
+
+@@li Build corpora / databases per client for each keyword research, so the system goes and picks the information straight from them
+
+@@li One SEO base shared by all your SEO projects holds all your strategies, thinking, studies and stats for future research
+
+@@li Keywords must be researched with the client context: expertise, tone, point of view → no copy-paste from a classic SEO tool
+
+@@k The mission
+Sort keywords by business interest and decide what to push, create, consolidate or discard
+
+@@k Output
+@@li purchase intents;
+
+@@li opportunities with no page created yet;
+
+@@li underperforming pages;
+
+@@li discarded queries;
+
+@@li 3 actions maximum
+
+@@k Full skill
+@@skill
+name: seo-mots-cles-business
+
+description: Sorts a site's keywords by business intent, with or without Search Console. Three gates, five decisions, no invented volume. Triggers: "business keywords", "which keywords to target", "what should my site fight for".
+
+# Business keywords
+
+## What you give Claude
+
+- The offer and the conversion point (quote, appointment, purchase).
+- The target, the market, the language.
+- The URLs of the offer pages.
+- The Search Console export, Queries + Pages, 3 to 6 months, if you have it.
+- Client verbatims, if you have any.
+
+## Instruction
+
+> Run seo-mots-cles-business on [URL]. Offer: [...], target: [...], conversion: [...], market: [...].
+
+## Steps
+
+1. List the non-brand queries. Group the variants of one need into one intent. Flag each merge.
+
+2. Without Search Console, collect Google Suggest, web search and verbatims. Two queries that share the same top 10 go on one page.
+
+3. Discard what an AI answers without a click: definition, "how to", single fact. Keep purchase, price, comparison, reviews, local.
+
+4. Run each intent through the three gates:
+- Matches the offer? Yes / No.
+- Business intent? Strong / Medium / Weak, read from the modifiers, never from the volume.
+- Demonstrated opportunity? Already captured / New / Not demonstrated.
+
+5. Decide: PUSH, CREATE, CONSOLIDATE, DISCARD or TO VALIDATE.
+
+## Observed demand
+
+Write Weak / Medium / Strong, with the signals named next to it.
+
+Strong: 5 Suggest variants or more, 7 mentions in calls or more.
+
+Only 20 Search Console impressions or more confirm the demand.
+
+## Output
+
+- Diagnosis in one sentence.
+- 3 to 5 figures, with source and period.
+- Four tables: captured intents, opportunities with no page, underperforming pages, discarded queries with their reason.
+- 3 actions maximum, each justified by its gate.
+- What the data does not allow you to conclude.
+
+## Rules
+
+- No invented volume, position or CPC.
+- No score out of 10.
+- A high-volume query outside the offer ends up DISCARDED, reason written.
+- Search Console does not show the whole market.
+- No page created by reflex. First look for an existing URL or existing content.
+
+Save the output in `YYYY-MM-DD-<site>-mots-cles-business.md`.
+@@end
+
+@@h2 CLAUDE x OBSIDIAN: SEO audit and pre-audit
+
+@@li The indexing audit: no need to go to Search Console by hand, the system does it on its own
+
+@@li The PageSpeed audit: the system checks whether your pages are fast, you don't need to do it yourself
+
+@@li Audits no longer sell → stop billing them separately, they must be included or automated
+
+@@li With a system: you no longer need to run the audit by hand for each client
+
+@@li The audit enriches the site's memory → with each audit you feed the site's history for the system
+
+@@li Automation must not remove the manual check, which lets you sense trends and weak signals, in Search Console in particular
+
+@@li The audit without a CMS is simpler and faster, you run it straight from Claude
+
+@@k The mission
+Analyze indexing, speed, content, cannibalization, internal linking, structured data and business keywords.
+
+@@k Output
+@@li full diagnosis;
+
+@@li priority business angle;
+
+@@li overall SEO scoring;
+
+@@li 90-day roadmap;
+
+@@li indexing
+
+@@li Hn structure
+
+@@li items to fix
+
+@@h3 Pre-audit before a call
+The pre-audit is separate from the full audit.
+
+@@k The mission
+Prepare an SEO pre-audit before a call, from the URL alone and from public data.
+
+@@k Output
+@@li Summary: 3 to 5 sentences.
+
+@@li Diagnosis.
+
+@@li Angle.
+
+@@li Dated SEO state.
+
+@@li Prioritized page templates.
+
+@@li 90-day roadmap.
+
+@@li Call notes.
+
+@@li To verify.
+
+@@k Full pre-audit skill
+@@skill
+name: seo-pre-audit
+
+description: Prepares an SEO pre-audit before a call, from the URL alone and from public data. Triggers: "prepare the pre-call", "run a pre-audit", "pre-call on [site]".
+
+# Pre-audit before a call
+
+## What you give Claude
+
+- The site URL.
+- The offer, the target and the goal, if you know them. Otherwise Claude infers them and marks them "to confirm on the call".
+
+## Instruction
+
+> Run a pre-audit on https://mysite.com. It sells [offer] to [target], the goal is [goal].
+
+## Hard rule
+
+No invented volume, position or traffic.
+
+An unverified figure carries `[TO SOURCE]` or "to collect on the call".
+
+## 1. Public collection
+
+- Identity: age, size, offers, who decides.
+- Model: who pays, sales cycle, conversion point.
+- SEO: sitemap, useful pages, geo or decision pages, lastmod, redesign.
+- AI: queries absorbed by AI, or decision queries.
+- Proprietary data: client cases, method, internal figures.
+- To ask on the call: Search Console access, weight of each offer in revenue.
+
+## 2. The 7 questions
+
+1. Defensible niche: where to attack first.
+2. Pain that costs money.
+3. Page templates: 4 to 6.
+4. Path to the lead.
+5. Timing: why now.
+6. Objections.
+7. Call outcome: 90-day roadmap and proposal.
+
+Settle 2 or 3 of these questions. The others become questions for the call.
+
+## 3. Output
+
+- Summary: 3 to 5 sentences.
+- Diagnosis.
+- Angle.
+- Dated SEO state.
+- Prioritized page templates.
+- 90-day roadmap.
+- Call notes.
+- To verify.
+
+No "visibility": talk about positions, AI citations, leads.
+@@end
+
+@@h2 The technical agents
+
+@@h3 1.1 internal linking agent:
+@@li A skill knows the site's history and runs semantic calculations → it gives you the right page pairings
+
+@@li The system suggests the right internal links so you don't have to look for them by hand
+
+@@li The goal: avoid having only pages that go round in circles on informational content
+
+@@li With internal linking automated by the system: one click and it's done
+
+@@li Internal linking belongs to the technical part that is 80% automated (audit, keyword research, internal linking, technical fixes)
+
+@@k The mission
+The system suggests the right internal links so you don't have to look for them by hand.
+
+@@k Output
+@@li pillars and hubs;
+
+@@li orphan pages;
+
+@@li inbound / outbound;
+
+@@li source and target of each link;
+
+@@li passage;
+
+@@li anchors;
+
+@@li justification;
+
+@@li 3 priority actions.
+
+@@k Full skill
+@@skill
+name: maillage-systeme
+
+description: Audits and builds a site's internal linking without Search Console. Triggers: "audit the internal linking", "orphan pages", "linking plan".
+
+# Internal linking
+
+## What you give Claude
+
+- The sitemap URL, or the list of articles.
+- Your 3 to 5 pillar keywords.
+- Your offer pages: audit, contact, quote, tool.
+
+## Instruction
+
+> Audit the internal linking of mysite.com. My offer pages: [URL].
+
+## Step 0: crawl
+
+python3 ~/.claude/skills/maillage-systeme/scripts/crawl_graph.py https://mysite.com/sitemap.xml -o ./maillage-data
+
+Only `index.json` enters the conversation.
+
+A link present on 80% of pages or more is a template link. It doesn't count.
+
+## Steps
+
+1. Classify each page: Know or Do.
+
+2. Group into pillars of 3 pages minimum, with one hub each.
+
+3. Count body links by distinct source pages. Spot orphans and dead ends.
+
+4. For each link to create: passage and 3 anchors (exact, partial, semantic).
+
+5. Rank them:
+- orphan offer page;
+- Know to Do link;
+- hub to satellite;
+- orphan outside the offer;
+- link between pillars.
+
+## Criteria for an anchor
+
+- It says what the target promises.
+- The sentence still reads well without the link.
+- It is not already used toward the same target.
+- The 5 words around it are about the target's topic.
+
+One failed criterion: the anchor is rejected.
+
+## Output
+
+- Pillars and hubs.
+- Table: page, inbound, outbound, status.
+- Link plan: source, target, passage, anchors, justification.
+- Diagnosis in one sentence, 3 P1 actions maximum.
+- What the data does not allow you to conclude.
+
+## Before adding the links
+
+- Read each passage out loud without the link.
+- Insert in batches of 10 to 20.
+- Rerun the crawl after each batch.
+- End criterion: zero orphan offer pages.
+
+## Rules
+
+- No numeric score.
+- An orphan legal page is not a problem.
+- Links in the text, never in a "See also".
+- Never a link to the homepage from the content.
+
+Save the output in `YYYY-MM-DD-<site>-maillage.md`.
+@@end
+
+@@h3 1.2 structured data agent:
+@@k The mission
+Check that the information in the JSON-LD matches what the page displays.
+
+@@k Output
+@@li markup present;
+
+@@li inconsistent values;
+
+@@li schemas to add or remove;
+
+@@li JSON-LD validation.
+
+@@k Full skill
+@@skill
+name: seo-donnees-structurees
+
+description: Sets up or audits a site's JSON-LD structured data, derived from the content of each page. Triggers: "structured data", "JSON-LD", "schema.org", "rich results", "markup".
+
+# JSON-LD structured data
+
+## What you give Claude
+
+- Access to the site's code.
+- The URLs of the pages to check.
+- The real identity: name, logo, founder, social profiles.
+
+## Instruction
+
+> Set up JSON-LD structured data on this project.
+
+> Check that the markup of [URL] matches what the page displays.
+
+## Three rules
+
+1. One source. All the JSON-LD comes from one module (`lib/schema.ts`).
+
+2. One entity, referenced by `@id`. Organization, WebSite and Person are emitted once.
+
+3. Derived from the content. A field typed by hand goes out of sync at the first edit.
+
+## What each signal triggers
+
+| Signal in the page | Schema |
+|---|---|
+| Article | `Article` |
+| Any page | `BreadcrumbList` |
+| Real FAQ block | `FAQPage` |
+| YouTube video | `VideoObject` |
+| Numbered steps | `HowTo` |
+| Displayed price | `Product` / `Offer` |
+
+Never ask "which schema do you want". Read the page, emit what it proves.
+
+## Procedure
+
+1. Identify the framework and its version.
+2. Find where the data lives.
+3. Create `lib/schema.ts`.
+4. Emit the site graph in the root layout.
+5. Emit one JSON-LD array per page.
+6. Delete the old redeclared blocks.
+7. Validate with the Google and schema.org tools.
+
+## Audit: three checks
+
+- The JSON is valid.
+- Each marked-up value exists as is on the page.
+- The markup serves a real Google feature.
+
+## Forbidden
+
+- `FAQPage` or `HowTo` "just in case".
+- `aggregateRating`, reviews or prices that can't be verified.
+- Author and publisher redeclared on each page.
+- Hard-coded `wordCount` or dates.
+
+Ask for your approval before each write to the code.
+@@end
+
+@@h3 1.3 Indexing agent
+@@k The mission
+Check whether pages are indexed, redirected, unknown or not testable.
+
+@@k Output
+@@li HTTP (404/500, redirects)
+
+@@li non-blocking robots.txt
+
+@@li No noindex (HTML + header)
+
+@@li Sitemap (presence, freshness)
+
+@@li Sitemap ↔ source consistency
+
+@@li Internal linking: how many inbound links per URL (crawl + hubs)?
+
+@@li Content length (thin proxy)
+
+@@li Estimated Google indexing (site:) or Search Console API
+
+@@li Markdown report
+
+@@k Skill:
+@@skill
+You are an SEO auditor specialized in indexing. Your role: check that Google can discover, crawl and index the pages we want to make visible.
+
+What you are given
+
+Domain: [site.com]
+
+List of URLs: public sitemap.xml or urls.txt (one per line)
+
+Priority pages: the 5-30 offer pages (business-critical)
+
+Hub pages: / , /blog , footer, categories (for internal linking)
+
+The 9 checks to run (read-only)
+
+TECHNICAL (causes):
+
+HTTP: final codes + redirects (301/302/200)?
+
+robots.txt: does it block Googlebot or * on these URLs?
+
+noindex: present in a meta tag or in an HTTP header?
+
+Sitemap: present, consistent, lastmod < 6 months?
+
+Consistency: sitemap URLs = given list? Orphans?
+
+Internal linking: how many inbound links per URL (crawl + hubs)?
+
+Content: length per URL (< 300 words = short, dig further)
+
+GOOGLE (observation): 8. site: {URL} on Google (space requests 3-5s apart, detect rate limiting, mark "not testable" if blocked), or Search Console API if you have access 9. Soft 404: test 3 nonexistent URLs, record their title and canonical
+
+Mandatory report
+
+Markdown format with:
+
+Summary: X/N pages with no confirmed defect
+
+Key figures: table of the 9 checks
+
+What blocks: max 3 problems, each = Observation + Proof + Impact + Action + Priority/Effort/Confidence
+
+What works: what is working (avoid negative bias)
+
+Google inspection: table of the URLs inspected one by one
+
+Limits: what we could not test and why
+
+Pre-decision (mandatory): diagnosis (1 sentence) → figures (3-5) → State (Critical/To improve/Healthy) → Problems + Actions P1-P3 → What we cannot conclude
+
+Guardrails
+
+Read-only: no Search Console submit, no forcing
+
+Never: HTTP 200 = indexed, outside sitemap = problem, 1 link = not discovered
+
+Always: "not testable" ≠ "not indexed"
+
+Prioritize offer pages and real anomalies (accidental noindex, 404)
+
+No extrapolation: N URLs tested ≠ whole cluster
+
+Trigger
+
+"Indexing audit of [domain], sitemap: [URL]"
+@@end
+
+@@h2 I'm adding a layer with a new model: JEV
+
+@@image images/08-jev.png
+
+Trying not to get too technical about Jev (but it's important to talk about it), it's a model used to verify, classify and score, not to write.
+
+It receives a closed question, picks among several possible answers and gives its confidence level.
+
+In my system, I use it mostly with three scripts: verifier.py to check whether each sentence is backed by the sources, liens.py to check the relevance of internal links, and matiere.py to detect proof or real data.
+
+Its main interest is speed: about 0.8 second per call. Jev sorts the information, but doesn't make the final decisions.
+
+In short, an assistant that answers fast, that can settle a question with a yes or a no, that can score an analysis, and that uses far, far fewer tokens.
+
+@@k The mission
+JEV is there to sort and verify, not to write content for example.
+
+verifier: looks at each sentence and checks where it comes from: a source, a deduction, nowhere, or filler.
+
+liens: spots the internal links that are useful and discards vague or misleading anchors.
+
+matiere: looks for the solid proof available: figures, facts, client quotes or opinions.
+
+calibrer: compares JEV's choices with mine. No automation until we reach 80% agreement on at least 30 cases.
+
+The rule stays simple:
+
+JEV sorts, but the final decision is always mine.
+
+@@k What we give it
+@@li a draft;
+
+@@li the sources: calls, tickets, site pages;
+
+@@li the opportunities detected;
+
+@@li my previous validations.
+
+@@k Output
+@@li the unsourced or useless sentences
+
+@@li the internal links to keep for internal linking
+
+@@li the best proof available in my Obsidian on a given topic
+
+@@li a history of decisions to improve the system
+
+@@final An SEO agent that watches your site 24/7: https://organikk.co/agent-seo/

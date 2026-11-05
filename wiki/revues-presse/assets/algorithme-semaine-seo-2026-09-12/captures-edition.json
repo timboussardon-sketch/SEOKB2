@@ -1,0 +1,42 @@
+[
+  {
+    "id": "similarweb-titre",
+    "url": "https://ir.similarweb.com/news-events/press-releases/detail/160/similarweb-state-of-ecommerce-2026-report-details-how-ai-is-changing-shopper-journey",
+    "text": "Similarweb State",
+    "tag": "h1",
+    "capturedAt": "2026-09-12T12:05:36.455Z",
+    "finalUrl": "https://ir.similarweb.com/news-events/press-releases/detail/160/similarweb-state-of-ecommerce-2026-report-details-how-ai-is-changing-shopper-journey",
+    "clip": {
+      "x": 0,
+      "y": 708,
+      "width": 1085,
+      "height": 76.78125
+    },
+    "file": "capture-similarweb-titre.png",
+    "method": "Chrome screenshot, original DOM, cropped to the cited heading or condition"
+  },
+  {
+    "id": "commoncrawl-titre",
+    "url": "https://commoncrawl.org/blog/a-content-analysis-of-llms-txt-files-from-the-july-2026-crawl-archive",
+    "text": "A Content Analysis",
+    "tag": "h1",
+    "capturedAt": "2026-09-12T12:05:37.123Z",
+    "finalUrl": "https://commoncrawl.org/blog/a-content-analysis-of-llms-txt-files-from-the-july-2026-crawl-archive",
+    "clip": {
+      "x": 10,
+      "y": 381.09375,
+      "width": 500,
+      "height": 200
+    },
+    "file": "capture-commoncrawl-titre.png",
+    "method": "Chrome screenshot, original DOM, cropped to the cited heading or condition"
+  },
+  {
+    "id": "google-image-officielle",
+    "url": "https://developers.google.com/static/search/docs/images/aggregator-unit.png",
+    "file": "google-aggregator-officiel.png",
+    "capturedAt": "2026-09-12T12:05:37.761Z",
+    "status": 200,
+    "method": "Original asset downloaded from the official Google documentation"
+  }
+]

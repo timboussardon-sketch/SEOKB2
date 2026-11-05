@@ -1,0 +1,231 @@
+Je veux ajouter des boucles d'apprentissage à mon système.
+
+Mon système, c'est mon environnement de travail : mes fichiers, mes skills, mes tâches
+planifiées. On n'installe rien sur un site. Les sites que je suis, le mien comme ceux de
+mes clients, sont des sources de données que le système lit.
+
+Ce que je veux : à chaque fois qu'une action SEO est faite sur un de ces sites, son
+résultat réel revient tout seul dans ma base de connaissances, et la décision suivante
+le lit.
+
+Une boucle d'apprentissage, c'est quatre choses. S'il en manque une, ce n'est pas une
+boucle :
+
+1. un déclencheur (une action datée : page publiée, lien ajouté, balise réécrite)
+2. une source de vérité (une donnée mesurée, pas une estimation)
+3. un jalon (une échéance à laquelle on relit la donnée)
+4. un retour écrit (le verdict va dans un fichier que la prochaine décision lit)
+
+## Règles dures
+
+- Pas de source de vérité, pas de boucle. Si la donnée n'existe pas, tu me le dis et on
+  n'installe pas la boucle. Jamais de chiffre estimé, jamais de volume inventé.
+- Zéro impression à l'échéance est un résultat, pas une donnée manquante. Il doit
+  s'écrire comme tel.
+- Pas assez de volume pour trancher est aussi un résultat. Statut « bruité », on ne
+  conclut pas.
+- La partie mesure ne passe jamais par un modèle de langage. Ce sont des scripts
+  déterministes et rejouables. Le modèle ne sert qu'à écrire le commentaire et à en
+  tirer une règle.
+- Rien ne s'écrit automatiquement dans mes consignes permanentes. Une boucle propose un
+  durcissement, c'est moi qui valide.
+- Une boucle s'écrit une fois, pas une fois par site. Le résolveur est commun ; ce qui
+  change d'un site à l'autre, c'est son registre et sa source. Si tu te retrouves à
+  dupliquer un script par site, c'est que le site est passé en dur quelque part.
+
+## Étape 1 — Ce que j'ai réellement
+
+Avant de proposer quoi que ce soit, établis mon inventaire de sources :
+
+- Search Console connectée ? Sur quelles propriétés, et depuis quelle date remonte
+  l'historique exportable ?
+- Un export automatisé de cette donnée quelque part, ou faut-il le construire ?
+- Des logs serveur accessibles ?
+- Un outil de mesure d'audience, et un CRM ou un formulaire qui trace les demandes ?
+- Où vivent mes notes et ma doctrine (dossier, vault, dépôt) ?
+- Quels sites je suis aujourd'hui, et pour chacun : le mien ou celui d'un client, et à
+  quelles sources j'ai accès dessus. Les sources ne sont pas les mêmes partout, et une
+  boucle ne s'ouvre que sur les sites où sa source existe.
+
+Montre-moi l'inventaire. Ne propose pas de boucle dont la source est absente.
+
+## Étape 2 — Le catalogue
+
+Voici les boucles à couvrir. Pour chacune, dis-moi si ma source existe, puis classe-les
+en « installable maintenant », « installable après un branchement », « hors de portée ».
+
+ 1. Exposition d'une publication
+    Déclencheur : une URL mise en ligne
+    Source : Search Console, lignes date x page
+    Jalon : J+30, J+90
+    Retour : impressions, clics, position. Décide si on refait ce modèle de page
+
+ 2. Requête visée contre requête obtenue
+    Déclencheur : une page publiée avec sa requête cible déclarée
+    Source : Search Console, lignes requête x page
+    Jalon : J+60
+    Retour : la page capte-t-elle la cible ou autre chose. Le brief suivant part de ce
+    qui est réellement capté
+
+ 3. Délai d'indexation
+    Déclencheur : une URL publiée
+    Source : Search Console, inspection d'URL
+    Jalon : J+7, J+21
+    Retour : délai moyen par modèle de page. Décide où renforcer les liens internes
+
+ 4. Effet du maillage
+    Déclencheur : N liens internes ajoutés vers une URL
+    Source : Search Console sur l'URL cible, avant et après
+    Jalon : J+30
+    Retour : effet mesuré par type de page source. Décide où pointer les liens suivants
+
+ 5. Réécriture de balise title
+    Déclencheur : une balise modifiée
+    Source : Search Console, CTR à position comparable
+    Jalon : J+28
+    Retour : CTR avant et après, à position stable. Apprend quelles formulations
+    marchent, site par site : ce qui gagne sur l'un ne gagne pas forcément sur l'autre
+
+ 6. Cannibalisation
+    Déclencheur : deux URLs présentes sur une même requête
+    Source : Search Console, requête x page
+    Jalon : hebdomadaire
+    Retour : laquelle Google retient, et si son choix bouge. Décide fusion, redirection
+    301, ou différenciation
+
+ 7. Élagage
+    Déclencheur : une page redirigée en 301
+    Source : Search Console sur la cible et sur le total du site
+    Jalon : J+45
+    Retour : le trafic est-il récupéré. Décide de poursuivre ou d'arrêter
+
+ 8. Décroissance
+    Déclencheur : balayage, sans déclencheur
+    Source : Search Console sur trois mois glissants
+    Jalon : mensuel
+    Retour : pages en baisse continue, croisées avec leur date de dernière mise à jour.
+    Décide quoi rafraîchir
+
+ 9. Données structurées
+    Déclencheur : un balisage ajouté
+    Source : Search Console, rapports d'apparence dans les résultats
+    Jalon : J+21
+    Retour : apparition constatée ou non. Décide si le balisage vaut le coût sur ce type
+    de page
+
+10. Performance technique
+    Déclencheur : un correctif déployé
+    Source : données de vitesse sur le terrain, fenêtre de 28 jours
+    Jalon : J+28
+    Retour : passage du seuil ou non. Sinon le correctif n'en était pas un
+
+11. Crawl réel
+    Déclencheur : publication d'un lot de pages
+    Source : logs serveur
+    Jalon : J+14
+    Retour : ce que le robot a réellement demandé. Révèle les pages ignorées, que la
+    Search Console ne montre pas
+
+12. Visites contre demandes
+    Déclencheur : une conversion enregistrée
+    Source : outil d'audience et CRM, reliés par le paramètre de campagne
+    Jalon : mensuel
+    Retour : quelles pages produisent des demandes, pas des visites. C'est la seule
+    boucle qui parle d'argent
+
+13. Visibilité dans les moteurs de réponse
+    Déclencheur : une page publiée
+    Source : relevé sur un jeu de requêtes figé, refait à l'identique
+    Jalon : J+30
+    Retour : citée ou non, et par quel moteur. Coûteux et instable : à garder sur un
+    petit jeu de requêtes, sinon ça ne tient pas dans la durée
+
+14. Verdict humain sur le travail
+    Déclencheur : une livraison faite par l'agent
+    Source : mes propres messages dans les transcripts
+    Jalon : immédiat
+    Retour : ce que j'ai refusé et pourquoi. Les refus qui se répètent deviennent des
+    règles
+
+## Étape 3 — Par où commencer
+
+N'installe pas tout. Commence par les boucles 1, 3 et 8 : elles n'ont besoin que de la
+Search Console, que j'ai déjà. Ajoute la 14 si mes sessions de travail sont enregistrées
+quelque part.
+
+La boucle 12 est la plus utile de toutes, et la plus coûteuse à brancher. Dis-moi ce
+qu'elle demande avant qu'on s'y mette.
+
+## Étape 3bis — Ce que ça va donner, et quand
+
+Dis-le moi avant qu'on commence, que je ne me fasse pas d'illusions.
+
+Une page a besoin d'environ 30 impressions sur la fenêtre mesurée avant qu'on puisse en
+lire quoi que ce soit. En dessous, c'est du bruit, et la boucle doit répondre « bruité »
+au lieu d'inventer une tendance.
+
+Alors compte-le, site par site : combien de pages ont atteint ce seuil sur les 30
+derniers jours, et quel pourcentage du total ça fait. Donne-moi les deux chiffres. C'est
+eux qui disent si les boucles de mesure vont servir ici, ou si elles vont répondre
+« bruité » pendant des mois.
+
+Sur un site qui démarre, la seule boucle qui parle tout de suite est la 14 : sa donnée
+existe déjà en entier et ne dépend d'aucune échéance. Les autres demandent trente jours
+avant leur premier verdict, et du volume pour que ce verdict veuille dire quelque chose.
+
+## Étape 4 — Comment construire chacune
+
+Pour chaque boucle retenue, trois morceaux séparés :
+
+1. Un registre : un fichier où chaque action est enregistrée avec sa date, son URL et
+   son intention. C'est ce qui rend la mesure possible plus tard. Sans registre, on ne
+   sait plus ce qu'on a fait.
+2. Un résolveur : un script qui lit le registre, va chercher la donnée à l'échéance, et
+   remplit le résultat. Déterministe, rejouable, il doit donner le même résultat si on
+   le relance. Statuts explicites : mesuré, bruité, nul, échéance non atteinte, hors
+   périmètre.
+3. Une passe de lecture : elle écrit le commentaire, et propose une règle quand un motif
+   se répète. Elle n'écrit que dans mes fichiers d'apprentissage.
+
+Puis la mise en automatique : une tâche planifiée quotidienne qui lance les trois dans
+cet ordre. Le binaire s'appelle par son nom avec un PATH correct, jamais par un chemin
+absolu.
+
+## Étape 5 — Garde-fous
+
+Trois pièges, tous rencontrés pour de vrai sur un système en marche. Tu les évites
+explicitement, et tu me montres comment.
+
+**Le silence.** Une tâche planifiée morte ne renvoie pas d'erreur : elle cesse d'écrire.
+Installe un contrôle qui lit la date portée par le NOM du dernier fichier produit par
+chaque automatisation, la compare à sa cadence attendue, et écrit le verdict dans un
+fichier que je lis au démarrage. Jamais la date de modification : un simple commit la
+rafraîchit et fait passer une tâche morte pour vivante. Ce contrôle fait partie de
+l'installation, pas des améliorations à prévoir plus tard.
+
+**La fenêtre qui déborde.** Si la boucle lit « depuis hier à minuit » alors que sa borne
+de fin est « maintenant », elle couvre 48 heures et compte chaque verdict deux jours de
+suite. Une fenêtre glissante se définit par sa durée, jamais par une date de début.
+
+**La source qu'on croit connaître.** Avant de coder un chemin de lecture, vérifie où la
+donnée est réellement écrite, et pas où tu supposes qu'elle l'est. Une source incomplète
+ne provoque aucune erreur : elle produit un rapport faux qui annonce « rien aujourd'hui »
+sur une journée pleine.
+
+Et pour le reste : fais échouer bruyamment. Une boucle qui ne trouve pas sa donnée le
+dit, elle n'écrit jamais un rapport confiant avec les chiffres de la semaine dernière.
+Ce qui est en tête du rapport, ce sont les cas qui parlent : une automatisation qui ne
+produit plus, une page à zéro impression à l'échéance, une règle déjà posée qui rechute,
+un jalon dont le verdict vient de tomber. Le reste peut rester dans le tableau.
+
+## Étape 6 — Ce que tu me rends
+
+Pour chaque boucle installée : où est son registre, quel script la résout, à quelle
+heure elle tourne, et quel fichier je dois ouvrir pour lire ses verdicts. Lance-en une à
+la main devant moi et montre-moi le fichier écrit, pas le code.
+
+Pour chaque boucle écartée : laquelle, et quelle source me manque pour l'ouvrir.
+
+Et le tableau de couverture : en ligne mes sites, en colonne les boucles, dans chaque
+case ouverte, en attente d'une source, ou hors de portée. C'est ce tableau que je veux
+regarder pour savoir où j'en suis.

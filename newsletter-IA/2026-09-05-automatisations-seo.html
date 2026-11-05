@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 automatisations à mettre en place pour ton SEO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FCFCFB;
+    --ink:#14161A;
+    --ink-2:#3A4048;
+    --muted:#6B7280;
+    --accent:#1B4DE4;
+    --accent-soft:#F0F4FE;
+    --line:#E4E5E2;
+    --line-strong:#CFD2CE;
+    --font:'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:64px 24px 120px}
+
+  header.head{padding-bottom:36px;margin-bottom:44px;border-bottom:1px solid var(--line)}
+  h1{font-size:40px;line-height:1.15;font-weight:600;letter-spacing:-.02em;margin:0 0 20px}
+  .lede{font-size:19px;line-height:1.6;color:var(--ink-2);margin:0}
+  .meta{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:24px}
+
+  h2{font-size:27px;line-height:1.25;font-weight:600;letter-spacing:-.015em;color:var(--accent);margin:64px 0 20px}
+  h3{font-size:21px;line-height:1.3;font-weight:600;letter-spacing:-.01em;color:var(--ink);margin:0 0 18px}
+  p{margin:0 0 20px}
+  a{color:var(--accent)}
+
+  ul{margin:0 0 20px;padding:0;list-style:none}
+  ul li{position:relative;padding-left:20px;margin-bottom:9px}
+  ul li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;background:var(--accent);border-radius:1px}
+  ol{margin:0 0 20px;padding-left:22px}
+  ol li{margin-bottom:12px}
+
+  /* fiche automatisation */
+  .auto{border-top:1px solid var(--line-strong);padding-top:36px;margin-top:52px}
+  .num{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500;display:block;margin-bottom:10px}
+  .lab{
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);margin:26px 0 6px;
+  }
+  .auto p{margin:0 0 14px}
+  .steps{counter-reset:s;margin:0 0 14px;padding:0;list-style:none}
+  .steps li{position:relative;padding-left:30px;margin-bottom:9px}
+  .steps li::before{
+    counter-increment:s;content:counter(s);
+    position:absolute;left:0;top:1px;
+    font-family:var(--mono);font-size:12px;color:var(--accent);
+    width:20px;text-align:left;background:none;border-radius:0;height:auto;
+  }
+  .out{border:1px solid var(--line-strong);border-radius:8px;background:#fff;padding:18px 22px 6px;margin:12px 0 18px}
+  .out p{font-size:16px}
+  .guard{font-size:16px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
+  .guard strong{color:var(--ink)}
+
+  .note{background:var(--accent-soft);border:1px solid #D6E1FB;border-radius:8px;padding:20px 24px 4px;margin:28px 0}
+  .note p{font-size:16px}
+
+  .table-wrap{overflow-x:auto;margin:28px 0}
+  table{width:100%;border-collapse:collapse;font-size:15px;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden}
+  th{text-align:left;font-weight:600;font-size:13px;background:#F4F5F2;color:var(--ink);padding:12px 16px;border-bottom:1px solid var(--line-strong)}
+  td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+  tr:last-child td{border-bottom:none}
+  td:first-child{color:var(--ink);font-weight:500}
+
+  pre{font-family:var(--mono);font-size:13px;line-height:1.6;background:#F7F8F5;border:1px solid var(--line);border-radius:8px;padding:20px;overflow-x:auto;margin:20px 0;color:var(--ink-2);white-space:pre-wrap}
+  code{font-family:var(--mono);font-size:14px;background:#F2F3F0;padding:2px 5px;border-radius:4px}
+
+  footer.end{margin-top:72px;padding-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+
+  @media (max-width:600px){
+    .wrap{padding:40px 20px 80px}
+    h1{font-size:30px}
+    h2{font-size:23px;margin-top:48px}
+    h3{font-size:19px}
+    body{font-size:16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="head">
+  <h1>10 automatisations à mettre en place pour ton SEO</h1>
+  <p class="lede">Celles que j'installe en ce moment chez deux consultantes SEO que j'accompagne. Pour chacune : ce qu'elle fait, le problème qu'elle règle, comment elle fonctionne, et ce que tu obtiens en sortie.</p>
+  <p class="meta">5 septembre 2026 · Timothée Boussardon</p>
+</header>
+
+<p>Une automatisation, c'est une tâche que tu refais tout le temps, écrite une bonne fois, et qui se relance seule à heure fixe. Tu ne la refais plus. Tu relis et tu valides.</p>
+
+<p>Les dix qui suivent ne sortent pas d'une liste d'idées. Elles viennent des tâches que deux consultantes SEO m'ont listées elles-mêmes : l'une gère une douzaine de comptes e-commerce dans une agence, l'autre travaille en sous-traitance pour des agences et en direct avec des artisans et des professions libérales à Bordeaux. Deux métiers différents au quotidien, et pourtant six tâches identiques.</p>
+
+<h2>La règle de tri, avant tout</h2>
+
+<p>Une tâche doit passer trois tests avant qu'on la construise. C'est ce tri qui évite de passer une journée à automatiser quelque chose que tu fais deux fois par an.</p>
+
+<ul>
+  <li><strong>Ça revient au moins une fois par mois.</strong> En dessous, tu passeras plus de temps à construire qu'à faire.</li>
+  <li><strong>Ça s'appuie sur une donnée à laquelle tu as vraiment accès.</strong> Pas de Search Console, pas de suivi de position. On règle l'accès d'abord.</li>
+  <li><strong>Ça suit toujours les mêmes étapes.</strong> Si tu improvises à chaque fois, ce n'est pas encore automatisable, c'est un travail d'expert.</li>
+</ul>
+
+<p>Ce qui ne passe pas les trois tests reste à la main. C'est souvent là qu'est ta valeur.</p>
+
+<h2>Les dix</h2>
+
+<!-- 01 -->
+<div class="auto">
+<span class="num">01</span>
+<h3>La revue de presse de ton secteur</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>Une sélection d'actualités vérifiées, préparée à intervalle régulier, prête à relire. Sur ton secteur à toi (le SEO et l'IA) ou sur celui d'un client.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>Tu passes trente minutes par jour à faire défiler LinkedIn, et tu retiens ce qui fait du bruit, pas ce qui change ton métier. Ou tu ne fais plus de veille du tout, et tu apprends une nouveauté trois semaines après, par un client.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<ol class="steps">
+  <li>Exploration large de l'écosystème : annonces officielles, études publiées, forums techniques, papers, dépôts de brevets.</li>
+  <li>Filtrage par impact réel sur le métier. Le test appliqué à chaque sujet : est-ce qu'un professionnel expérimenté apprend quelque chose ?</li>
+  <li>Vérification de chaque information avant écriture. Sans source précise, la phrase ne s'écrit pas.</li>
+  <li>Rédaction courte, 150 à 250 mots par sujet, sans interprétation. L'analyse, c'est toi qui l'ajoutes.</li>
+</ol>
+<p>Le point qui fait la qualité : le système est payé pour dire non. Deux sujets solides valent mieux que cinq déjà vus. Une journée creuse s'écrit comme une journée creuse.</p>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> un document par édition, 2 à 4 sujets. Chaque sujet porte un titre factuel, les faits, une section « Limites » (ce que la source ne permet pas d'affirmer : taille d'échantillon, méthode, absence de causalité) et ses sources. Plus une statistique du jour et des propositions de posts que tu valides.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> rien n'est publié. Ni sur ton fil, ni sur le site d'un client.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>Savoir pour qui : toi, un client précis, ou ton fil LinkedIn. Et à quelle fréquence.</p>
+</div>
+
+<!-- 02 -->
+<div class="auto">
+<span class="num">02</span>
+<h3>Le suivi de position et le dashboard client</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>Un point régulier sur qui monte et qui descend dans Google, client par client. La même extraction alimente le tableau de bord que tu montres.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>Tu ouvres la Search Console compte par compte, tu compares à l'œil, et tu rates les baisses lentes. Celles qui se voient au bout de trois mois, quand le client les a vues aussi. Et tu refais le même tableau à la main chaque mois.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<ol class="steps">
+  <li>Extraction par l'API Search Console, 28 derniers jours contre les 28 précédents.</li>
+  <li>Position pondérée par les impressions. Une position moyenne brute est faussée par des requêtes vues deux fois dans le mois.</li>
+  <li>Séparation des requêtes qui montent et de celles qui descendent, avec l'écart.</li>
+  <li>Option : un relevé de citations dans ChatGPT, Gemini et Perplexity sur la liste de mots-clés que tu fixes.</li>
+</ol>
+<p>Sur le relevé IA, une précision qui compte : minimum 30 passages par mot-clé et par moteur. Une réponse d'IA change d'une fois sur l'autre, donc un seul test ne prouve rien. Et le coût de chaque relevé est annoncé avant d'être lancé.</p>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> la liste des requêtes en hausse et en baisse sur la période, et un tableau de bord régénéré chaque semaine. Sur le relevé IA, trois mesures séparées, jamais un score unique : le domaine est-il cité en source, la marque est-elle nommée dans le texte de la réponse, et comment ça évolue relevé après relevé.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> le commentaire au client, tu l'écris toi-même. Le système laisse la place vide.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>L'accès Search Console d'au moins un client, et ta liste de mots-clés à suivre. C'est toi qui la fixes.</p>
+</div>
+
+<!-- 03 -->
+<div class="auto">
+<span class="num">03</span>
+<h3>Les opportunités Search Console</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>Sort les pages qui sont à deux doigts de la page 1 et qui méritent une reprise, plutôt qu'une nouvelle page.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>Tu produis du contenu neuf alors que tu as déjà des pages en position 8 qui ne demandent qu'un titre réécrit. Créer une page coûte beaucoup plus cher que corriger une page qui existe déjà et qui reçoit des impressions.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<ol class="steps">
+  <li>Filtre sur les positions 3 à 15, en retirant les requêtes de marque et la page d'accueil.</li>
+  <li>Tri par impressions décroissantes.</li>
+  <li>Calcul de l'écart entre le taux de clic réel et le taux attendu à cette position (autour de 7 % en position 4, 5 % en position 5, 2 à 3 % de la 6 à la 10).</li>
+  <li>Croisement avec l'intention : une requête d'achat passe devant une requête d'information.</li>
+  <li>Priorisation, puis liste des leviers page par page : titre, méta-description, H1, FAQ en haut de page, ajout d'un fait précis.</li>
+</ol>
+<p>Le filtre qui change tout, c'est le croisement avec l'intention. Sans lui, tu remontes des requêtes bien placées qui ne rapportent rien même en position 1.</p>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> un tableau de 5 à 10 pages avec URL, position, impressions, taux de clic réel, taux attendu, écart et intention. Puis une fiche par page avec au moins deux actions concrètes, dont un exemple de réécriture avant et après.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> la position exacte issue de la Search Console, jamais une estimation. Et aucune proposition de nouvelle page tant que les reprises ne sont pas épuisées.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>Un export Search Console sur 90 jours, et ta définition d'une requête qui vaut le coup pour ce client : des critères, ou ta liste de mots-clés déjà validée.</p>
+</div>
+
+<!-- 04 -->
+<div class="auto">
+<span class="num">04</span>
+<h3>Le suivi de tes corrections</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>Revérifie, URL par URL, si le correctif que tu as recommandé a vraiment été appliqué.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>Tu recommandes, et trois semaines plus tard tu ne sais plus ce qui a été fait. Tu le découvres au call mensuel, devant le client. Ou pire : on te dit que c'est fait, et ça ne l'est pas.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<p>Neuf contrôles sur chaque URL, sans aucun outil payant :</p>
+<ul>
+  <li>le code de réponse et la chaîne de redirections</li>
+  <li>le fichier robots.txt, qui peut bloquer la page sans que ça se voie</li>
+  <li>la balise noindex, cherchée dans le code de la page <em>et</em> dans l'en-tête HTTP</li>
+  <li>la présence dans le sitemap, et la date de dernière modification déclarée</li>
+  <li>les liens internes qui pointent vers la page</li>
+  <li>la longueur réelle du contenu</li>
+  <li>le statut d'indexation observable</li>
+</ul>
+<p>La séparation entre la cause et le symptôme est volontaire. Une page peut répondre correctement et porter un noindex ajouté par erreur pendant une refonte. Une version qui ne regarde que le statut dira « tout va bien ».</p>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> trois états par URL, fait, pas fait, ou cassé (cassé veut dire qu'un nouveau problème est apparu depuis ta recommandation). Les anomalies critiques remontent en tête du rapport, les mineures en dessous. Et un texte de relance prêt à envoyer.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> une page non testable ne devient jamais une page non indexée. Quand Google limite les vérifications, c'est écrit comme tel.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>Pour un client test, la liste de ce que tu as recommandé : l'URL, le correctif attendu, la date. Un simple document suffit.</p>
+</div>
+
+<!-- 05 -->
+<div class="auto">
+<span class="num">05</span>
+<h3>Le score de santé du lundi</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>Chaque lundi matin, l'état du site : indexation, erreurs 404 apparues dans la semaine, écarts par rapport à la semaine précédente.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>Tu découvres une chute quand le client t'appelle. Entre deux rapports mensuels, personne ne regarde, et un site qui casse un mardi soir reste cassé trois semaines.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<p>Ce sont les mêmes contrôles que le suivi de correction, appliqués à tout le site et comparés à la semaine d'avant. Pour un client qui vient de migrer, on ajoute un contrôle des redirections et de l'indexation des nouvelles pages : c'est le moment où les choses cassent le plus.</p>
+<p>Sur la version avancée, le score se calcule sur quatre dimensions au niveau du site, pas page par page : le rendement, la concentration du trafic, le renouvellement, et la tenue dans le temps. Chaque dimension est notée par comparaison avec d'autres sites, à poids égaux. Une note dont tu ne peux pas justifier chaque point s'effondre à la première question du client.</p>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> un état hebdomadaire par client, les anomalies de la semaine, et le volet migration quand il y a lieu. À l'endroit que tu choisis : ton coffre de notes, un fichier partagé, un brouillon d'email.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> usage interne. Ce score ne part jamais au client tel quel, et surtout pas tout seul.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>Le client à surveiller, et l'endroit où tu veux recevoir l'état chaque lundi.</p>
+</div>
+
+<!-- 06 -->
+<div class="auto">
+<span class="num">06</span>
+<h3>Les briefs depuis ton planning éditorial</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>Lit ton planning (un simple Google Sheet) et prépare les briefs des contenus prévus dans les 30 prochains jours.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>Le brief est la pièce qui décide de la qualité de l'article. C'est aussi celle qu'on bâcle, parce qu'elle n'est pas facturée et qu'elle arrive toujours au mauvais moment. Un mauvais plan donne un mauvais contenu, même très bien rédigé.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<ol class="steps">
+  <li>Décodage de l'intention derrière la requête, et des intentions secondaires.</li>
+  <li>Liste des sujets que Google attend sur cette requête : entités, vocabulaire d'expert, termes qui apparaissent toujours ensemble.</li>
+  <li>Micro-intentions : ce que la personne se demande avant, pendant et après sa décision.</li>
+  <li>Construction de la structure des titres. Un H2 = un sujet distinct, et au moins un H2 doit apporter quelque chose que les autres pages ne disent pas.</li>
+  <li>Contenu attendu par H2 : type, longueur, éléments obligatoires.</li>
+  <li>Signaux d'expérience et d'expertise à intégrer, puis format complémentaire (tableau, vidéo, calculateur).</li>
+</ol>
+<p>On regarde les autres pages en place pour repérer ce qu'elles n'ont pas dit. Jamais pour les recopier : une page qui répète les huit premiers résultats n'a aucune raison de passer devant eux.</p>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> un brief par contenu prévu dans les 30 jours, avec la structure Hn complète et le contenu attendu sous chaque titre. Génération glissante chaque mois, jamais tout le planning d'un coup, puisqu'il va encore bouger.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> sur les pages stratégiques que tu as signalées, le système prépare une base et s'arrête. La structure et l'angle restent à toi.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>L'accès à ton planning, et le tri entre tes pages stratégiques et tes déclinaisons.</p>
+</div>
+
+<!-- 07 -->
+<div class="auto">
+<span class="num">07</span>
+<h3>Le résumé par client, puis le résumé global</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>Chaque semaine, un récapitulatif par client, puis un résumé qui regroupe tous tes dossiers.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>À dix clients, tu reconstruis l'état d'un dossier de mémoire avant chaque appel. Et tu oublies l'action que tu avais promise il y a trois semaines, celle qui n'est écrite nulle part parce qu'elle a été dite à l'oral.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<ol class="steps">
+  <li>Lecture de la matière : comptes rendus de call, échanges, notes du dossier.</li>
+  <li>Extraction des actions et classement en deux états : déjà en place, ou à faire.</li>
+  <li>Remontée de deux ou trois points d'attention par client.</li>
+  <li>Regroupement de l'essentiel de tous les clients dans un seul document.</li>
+</ol>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> une fiche par client en trois blocs (en place, à faire, points d'attention), plus le résumé global. À l'endroit que tu choisis : coffre de notes, outil de gestion de projet, brouillon d'email, ou plusieurs à la fois.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> si ça produit un email, il reste en brouillon.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>Savoir d'où viennent tes comptes rendus de call, et décider où le résumé atterrit.</p>
+</div>
+
+<!-- 08 -->
+<div class="auto">
+<span class="num">08</span>
+<h3>Tes brouillons d'email</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>À partir du rapport du mois d'un client, prépare un brouillon d'email de suivi dans ta boîte.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>Le rapport est fait, les chiffres sont là, et l'email prend encore vingt minutes par client parce qu'il faut remettre les données en phrases. Multiplié par dix clients, c'est une demi-journée par mois sur du travail de mise en forme.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<ol class="steps">
+  <li>Tu colles deux ou trois emails que tu as réellement envoyés.</li>
+  <li>Le système en tire ta structure : comment tu ouvres, quel niveau de détail chiffré tu donnes, comment tu fermes.</li>
+  <li>Il remplit cette structure avec les vraies données du rapport de ce client.</li>
+  <li>Il crée le brouillon dans ta boîte.</li>
+</ol>
+<p>La qualité vient entièrement des emails d'exemple. Sans eux, tu obtiens un email correct qui ne te ressemble pas, et que tu réécriras de toute façon.</p>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> un brouillon par client, avec les chiffres du mois déjà en place, à relire et à corriger.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> brouillon uniquement. Aucun envoi, même quand tout semble parfait.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>Tes vrais emails en exemple, ta boîte connectée, et le rapport du client. Donc à monter après les briques 02 et 04.</p>
+</div>
+
+<!-- 09 -->
+<div class="auto">
+<span class="num">09</span>
+<h3>L'étude de marché d'un client</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>Construit une étude sur le marché d'un client, à partir de sources que tu choisis, pour alimenter tes pages avec de la donnée réelle.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>Tes pages produits disent la même chose que toutes les autres, parce qu'elles sont écrites sans donnée. Un texte sans chiffre et sans source, c'est exactement ce qu'une IA générative produit en trois secondes, et personne ne paie pour ça.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<ol class="steps">
+  <li>Tu donnes le client, l'angle (taille du marché, comportement d'achat, tendances) et deux ou trois sources fiables de départ.</li>
+  <li>Le système part de tes sources et complète avec du vérifiable.</li>
+  <li>Il structure le résultat pour qu'il se réutilise dans un brief ou un article plus tard.</li>
+</ol>
+<p>Demander « fais-moi une étude de marché » sans rien donner produit un résumé générique. Ce sont tes sources de départ qui font toute la différence.</p>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> une étude structurée et réutilisable, avec la source de chaque chiffre.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> aucun chiffre inventé. Une donnée introuvable est signalée comme telle.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>Le sujet, l'angle, et tes deux ou trois sources de départ.</p>
+</div>
+
+<!-- 10 -->
+<div class="auto">
+<span class="num">10</span>
+<h3>Ta liste de prospects</h3>
+
+<p class="lab">Ce que ça fait</p>
+<p>Construit une liste de prospects vérifiée, avec le bon contact et son profil, à partir de sources publiques.</p>
+
+<p class="lab">Le problème que ça règle</p>
+<p>Tu prospectes quand tu n'as plus de missions, donc trop tard. Et avant même d'écrire le premier message, tu perds deux jours à construire la liste.</p>
+
+<p class="lab">Comment ça fonctionne</p>
+<ol class="steps">
+  <li>Cadrage de la cible. Une seule, pas trois.</li>
+  <li>Collecte à partir d'annuaires publics. On ne cherche pas « partout sur le web », on part de bases identifiées.</li>
+  <li>Dédoublonnage.</li>
+  <li>Passe automatique : le site répond-il, y a-t-il un blog. Ce filtre retire environ 40 % des lignes.</li>
+  <li>Enrichissement ligne par ligne : le décideur, son profil, le niveau de trafic estimé.</li>
+  <li>Consolidation et score.</li>
+</ol>
+<p>Un point qui surprend tout le monde : dans ce système, un trafic faible donne un meilleur score. Une boîte assez sérieuse pour tenir un blog mais avec peu de trafic a un besoin évident, et un dirigeant encore joignable.</p>
+
+<div class="out">
+  <p><strong>Ce que tu obtiens :</strong> une ligne par prospect avec l'URL, le contact décideur, son profil, le niveau de trafic estimé, et l'endroit où chaque information a été trouvée.</p>
+  <p class="guard"><strong>Le garde-fou :</strong> jamais un nom, un email ou un profil inventé. Une information introuvable laisse la case vide. Le trafic est donné en niveau (faible, moyen, fort), jamais en chiffre exact, parce qu'on ne l'a pas.</p>
+</div>
+
+<p class="lab">Ce qu'il te faut avant</p>
+<p>Une cible claire pour le premier lot, et le format de sortie que tu veux.</p>
+</div>
+
+<h2>Les deux qu'on n'automatise qu'à moitié</h2>
+
+<p>Ces deux-là reviennent dans toutes les listes, et je les traite différemment.</p>
+
+<p><strong>Tes posts LinkedIn.</strong> Transformer un cas client documenté en brouillon de post, oui. Publier, commenter, répondre en messages, non. Ce sont ces trois choses qui font marcher LinkedIn, et elles ne se délèguent pas.</p>
+
+<p><strong>Tes pages d'annuaire.</strong> La génération à la demande, oui. Le choix du sujet et de la source, non. Et pas de routine automatique là-dessus : une page publiée sans que tu l'aies décidée, c'est un risque pour rien.</p>
+
+<p>La ligne est toujours la même. On automatise ce qui est pénible et peu différenciant. On garde les idées de contenu, le jugement éditorial, et le contrôle final d'une migration.</p>
+
+<h2>Dans quel ordre les monter</h2>
+
+<p>L'ordre compte autant que la liste. Celui-ci est calé sur ce qui débloque le plus vite.</p>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Ordre</th><th>Brique</th><th>Pourquoi à ce moment</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Revue de presse</td><td>Aucun accès à obtenir, résultat visible dès le lendemain</td></tr>
+    <tr><td>2</td><td>Suivi de position et dashboard</td><td>Une seule extraction règle deux tâches</td></tr>
+    <tr><td>3</td><td>Suivi de correction</td><td>Même logique de contrôle récurrent sur des URL</td></tr>
+    <tr><td>4</td><td>Brouillons d'email</td><td>Dépend des deux précédentes : les emails partent des rapports</td></tr>
+    <tr><td>5</td><td>Liste de prospects</td><td>Demande surtout une cible stable</td></tr>
+    <tr><td>6</td><td>LinkedIn et annuaires</td><td>À la demande, jamais en routine</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Les quatre autres (opportunités Search Console, score de santé, briefs, résumés clients) se branchent une fois les accès en place. Elles réutilisent la même donnée.</p>
+
+<h2>Les quatre règles à écrire dans chacune</h2>
+
+<p>Peu importe l'automatisation, ces quatre phrases doivent y figurer. C'est ce qui sépare un système qui t'aide d'un système qui te crée du travail de correction.</p>
+
+<div class="note">
+  <p><strong>1. Elle pose ses questions avant de construire.</strong> Fréquence, client concerné, source de la matière, destination du résultat. Une automatisation lancée sans cadrage produit quelque chose que tu ne réutiliseras pas.</p>
+  <p><strong>2. Elle montre son premier résultat avant qu'on programme la répétition.</strong> Sinon tu découvres l'erreur au bout de six semaines, multipliée par six semaines.</p>
+  <p><strong>3. Elle ne publie jamais et n'envoie jamais à ta place.</strong> Elle prépare, tu valides, tu cliques.</p>
+  <p><strong>4. Elle donne la donnée exacte ou elle dit qu'elle ne l'a pas.</strong> Jamais d'approximation, jamais d'arrondi qui change le sens.</p>
+</div>
+
+<p>En pratique, le début d'un prompt de mise en place ressemble à ça :</p>
+
+<pre>Avant de construire quoi que ce soit, pose-moi ces questions
+une par une et attends ma réponse à chacune :
+1. À quelle fréquence et quel jour je veux ce résultat ?
+2. Pour quel client on commence ?
+3. Où dois-tu aller chercher la matière ?
+4. Où je veux que le résultat atterrisse ?
+
+Une fois les réponses obtenues :
+- Montre-moi le premier résultat avant de programmer la répétition.
+- N'envoie et ne publie jamais à ma place.
+- Ne me donne jamais un chiffre que tu n'as pas confirmé dans
+  les données réelles.</pre>
+
+<h2>Deux choses à savoir avant de te lancer</h2>
+
+<p><strong>Une tâche programmée coûte plus cher qu'une demande ponctuelle.</strong> Beaucoup plus. Sur un abonnement à 20 $ par mois, tu ne multiplies pas les automatisations sans regarder ce que ça consomme. Commence par une seule, mesure, puis ajoute.</p>
+
+<p><strong>Une automatisation tombe en silence.</strong> Elle ne t'envoie pas d'erreur, elle arrête simplement de tourner. Chez moi, une routine d'emails est restée morte trois jours avant que je le voie. Depuis, un récapitulatif quotidien sert de preuve de vie : s'il n'arrive pas, c'est que quelque chose est cassé.</p>
+
+<p>Et le point qui compte le plus. Ces dix automatisations n'apportent pas le métier, elles exécutent des tâches que tu sais déjà faire. Si tu n'es pas bon en SEO, elles produiront vite des choses moyennes, et plus vite qu'avant. C'est ton jugement qui décide de ce qu'on garde. Ça, ça ne s'automatise pas.</p>
+
+<footer class="end">
+  <p>Tu veux le prompt complet de mise en place d'une de ces dix ? Réponds à ce mail en me disant laquelle.</p>
+</footer>
+
+</div>
+</body>
+</html>

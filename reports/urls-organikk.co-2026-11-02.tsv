@@ -1,0 +1,39 @@
+url	http	wc	inbound	title_eq_h1	meta_robots	canon_self	x_robots
+https://organikk.co/	200	857	135	False	index, follow	True	
+https://organikk.co/etudes-de-cas/	200	419	3	False	index, follow	True	
+https://organikk.co/chaine-youtube-seo/	200	801	1	False	index, follow	True	
+https://organikk.co/contact/	200	44	1	False	index, follow	True	
+https://organikk.co/resultats/	200	204	1	False	index, follow	True	
+https://organikk.co/guides/	200	336	1	False	index, follow	True	
+https://organikk.co/avis/	200	589	1	False	index, follow	True	
+https://organikk.co/plan-du-site/	200	104	0	False	index, follow	True	
+https://organikk.co/audit-seo/	200	57	0	False	index, follow	True	
+https://organikk.co/blog/	200	73	58	False	index, follow	True	
+https://organikk.co/glossaire/	200	1345	59	False	index, follow	True	
+https://organikk.co/strategie-seo-b2b/	200	3009	4	False	index, follow	True	
+https://organikk.co/etudes-de-cas-seo-b2b/	200	3724	2	True	index, follow	True	
+https://organikk.co/accompagnement-seo-geo/	200	1365	1	False	index, follow	True	
+https://organikk.co/accompagnement-1-1-30-jours/	200	634	11	False	index, follow	True	
+https://organikk.co/consultant-lead-seo/	200	1368	1	False	index, follow	True	
+https://organikk.co/consultant-geo/	200	3453	62	False	index, follow	True	
+https://organikk.co/consultant-seo-geo-lyon/	200	3098	64	False	index, follow	True	
+https://organikk.co/consultant-seo-lyon/	200	3776	63	False	index, follow	True	
+https://organikk.co/consultant-seo-saas/	200	1733	59	False	index, follow	True	
+https://organikk.co/consultants-seo/	200	91	60	True	index, follow	True	
+https://organikk.co/formation-seo-ia/	200	586	1	False	index, follow	True	
+https://organikk.co/outils/calculateur-budget-seo/	200	2351	58	False	index, follow	True	
+https://organikk.co/outils/calculateur-cout-lead-seo/	200	1818	58	False	index, follow	True	
+https://organikk.co/bootcamp/programme/	200	1786	1	False	index, follow	True	
+https://organikk.co/bootcamp-quiz/	200	812	1	False	index, follow	True	
+https://organikk.co/skills/	200	73	35	False		True	
+https://organikk.co/x-ray/	200	1341	60	False		True	
+https://organikk.co/skills-seo/	200	9187	1	True	index, follow	True	
+https://organikk.co/coaching-seo-lyon/	200	604	1	False	index, follow	True	
+https://organikk.co/a-propos/	200	1054	2	False	index, follow	True	
+https://organikk.co/bootcamp-candidature/	200	1551	66	False	index, follow	True	
+https://organikk.co/mentions-legales/	200	649	62	True	index, follow	True	
+https://organikk.co/politique-confidentialite/	200	1451	67	True	index, follow	True	
+https://organikk.co/agent-seo/	200	3051	63	False		True	
+https://organikk.co/en/agent-seo/	200	3036	0	False		True	
+https://organikk.co/guides/audit-seo-technique-claude.html	200	5173	0	False		True	
+https://organikk.co/guides/en/audit-seo-technique-claude.html	200	5000	0	False		True	

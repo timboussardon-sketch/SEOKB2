@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installer tes skills de SEO technique sur Claude · Organikk</title>
+<meta name="description" content="Où déposer les six skills de SEO technique, comment vérifier que Claude Code les voit, comment sortir un export Search Console propre, et la première demande à écrire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════
+     ORGANIKK — tokens repris de src/app/globals.css
+     Palette : #4685F0 · #1B3E8F · #2559DD · gris fzn
+     ═══════════════════════════════════════════════════ */
+  :root{
+    --grad:linear-gradient(120deg,#1B3E8F 0%,#2559DD 48%,#5b86f5 100%);
+    --blue:#4685F0;
+    --blue-deep:#1B3E8F;
+    --blue-mid:#2559DD;
+    --blue-light:#A8C7FF;
+    --white:#ffffff;
+    --page:#F4F5F7;
+    --ink:#111827;
+    --ink-2:#374151;
+    --muted:#6B7280;
+    --faint:#9CA3AF;
+    --line:#E5E7EB;
+    --line-2:#D1D5DB;
+    --dark:#1F2937;
+    --shadow-card:0 16px 40px -24px rgba(17,24,39,.30);
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,#f4f5f7 0%,#ebedf0 50%,#f1f2f5 100%);
+    background-attachment:fixed;
+    color:var(--ink-2);
+    font-family:'Geist', system-ui, -apple-system, sans-serif;
+    font-size:16px; line-height:1.64;
+    letter-spacing:-.011em;
+    -webkit-font-smoothing:antialiased;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  ::selection{background:rgba(70,133,240,.15);color:var(--ink);}
+  .sheet{
+    max-width:760px; margin:32px auto;
+    background:var(--white); border:1px solid var(--line); border-radius:16px;
+    padding:88px 84px; overflow:hidden;
+  }
+  p{margin:0 0 16px;}
+  h1,h2,h3,h4{line-height:1.2;color:var(--ink);margin:0;letter-spacing:-.024em;}
+  a{color:var(--blue);text-decoration:none;border-bottom:1px solid rgba(70,133,240,.32);}
+  a:hover{border-bottom-color:var(--blue);}
+  .brandlink{color:inherit;border-bottom:1px solid currentColor;}
+
+  /* ── Titres d'affichage : dégradé bleu, poids 500 (source unique globals.css) ── */
+  .display{
+    font-size:clamp(28px,3.5vw,40px); font-weight:500; line-height:1.15;
+    letter-spacing:-.025em;
+    background:var(--grad); -webkit-background-clip:text; background-clip:text;
+    color:transparent; -webkit-text-fill-color:transparent;
+  }
+
+  /* ── Couverture ── */
+  .cover{
+    background:var(--grad);
+    margin:-88px -84px 0; padding:120px 84px; min-height:720px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .cover h1{
+    font-size:clamp(32px,4.4vw,48px); font-weight:500; line-height:1.14;
+    letter-spacing:-.03em; color:#fff; -webkit-text-fill-color:#fff; margin:0;
+  }
+  .cover h1 em{font-style:normal;color:var(--blue-light);-webkit-text-fill-color:var(--blue-light);}
+  .cover .lead{
+    margin:24px 0 0; font-size:16px; line-height:1.6;
+    color:rgba(255,255,255,.82); max-width:52ch;
+  }
+  .cover .author{
+    margin-top:88px; padding-top:20px; border-top:1px solid rgba(255,255,255,.2);
+    font-size:14px; color:rgba(255,255,255,.78);
+  }
+  .cover .author a{color:#fff;border-bottom-color:rgba(255,255,255,.45);}
+
+  /* ── Sections ── */
+  .doc-title{font-size:clamp(28px,3.5vw,40px);font-weight:500;line-height:1.15;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;margin:0 0 20px;}
+  .hr{height:1px;background:var(--line);margin:0 0 32px;}
+
+  .chapter{page-break-before:always;break-before:page;padding-top:32px;}
+  /* le CTA final suit la dernière tâche, il ne prend pas une page à lui seul */
+  #suite{page-break-before:auto;break-before:auto;padding-top:0;margin-top:40px;}
+  .chapter h2.ch-title{
+    font-size:clamp(28px,3.5vw,40px); font-weight:500; line-height:1.15; letter-spacing:-.025em;
+    background:var(--grad); -webkit-background-clip:text; background-clip:text;
+    color:transparent; -webkit-text-fill-color:transparent; margin:0 0 16px;
+  }
+  .chapter .ch-lead{font-size:16px;line-height:1.6;color:var(--muted);max-width:60ch;margin:0;}
+  .chapter .ch-body{margin-top:24px;}
+
+  h3.sec{font-size:18px;font-weight:600;color:var(--ink);margin:40px 0 12px;letter-spacing:-.01em;}
+
+  /* ── Sommaire ── */
+  .toc-item{display:block;margin:0 0 20px;color:var(--ink);border:none;}
+  .toc-item .t{font-weight:600;font-size:16px;color:var(--ink);transition:color .2s;}
+  .toc-item .d{color:var(--muted);font-size:14px;margin-top:4px;line-height:1.55;}
+  .toc-item:hover .t{color:var(--blue);}
+  .toc-rule{height:1px;background:var(--line);margin:4px 0 24px;}
+
+  ul,ol{margin:0 0 16px;padding-left:20px;}
+  li{margin:0 0 8px;color:var(--ink-2);}
+  li::marker{color:var(--faint);}
+
+  code{font-family:'Geist', system-ui, sans-serif;background:var(--page);
+    border:1px solid var(--line);padding:0 8px;border-radius:8px;font-size:14px;}
+
+  /* ── Écrans de sortie ── */
+  figure{margin:28px 0;}
+  .term{
+    background:var(--dark); border:1px solid var(--dark); border-radius:16px;
+    padding:24px; overflow-x:auto;
+  }
+  .term pre{
+    margin:0; padding:0; background:none; border:none; color:#D1D5DB;
+    font-family:'Geist Mono', ui-monospace, "SF Mono", Menlo, monospace;
+    font-size:10.5px; line-height:1.64; white-space:pre; letter-spacing:0;
+  }
+  .term .g{color:#34D399} .term .a{color:#FBBF24} .term .r{color:#F87171}
+  .term .dim{color:#9CA3AF} .term .h{color:#ffffff;font-weight:600}
+  figcaption{color:var(--muted);font-size:14px;line-height:1.55;margin-top:12px;
+    max-width:60ch;}
+
+  .end-note{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
+    color:var(--faint);font-size:14px;}
+
+  @media (max-width:820px){
+    .sheet{padding:40px 24px;margin:0;border:0;border-radius:0;}
+    .cover{margin:-40px -24px 0;padding:72px 24px;min-height:auto;}
+    .cover .author{margin-top:56px;}
+  }
+  @media print{
+    html,body{background:#fff;font-size:11pt;width:210mm;}
+    .sheet{border:0;border-radius:0;margin:0;max-width:none;width:210mm;padding:0 14mm;overflow:visible;}
+    /* Couverture a fond perdu : la 1re page perd ses marges. */
+    .cover{margin:0 -14mm;width:210mm;height:297mm;padding:88mm 20mm;min-height:auto;}
+    /* background-clip:text ne survit pas au rendu PDF : couleur pleine */
+    .display,.doc-title,.chapter h2.ch-title{
+      background:none !important;-webkit-background-clip:border-box !important;
+      background-clip:border-box !important;
+      color:#2559DD !important;-webkit-text-fill-color:#2559DD !important;
+    }
+    .cover h1{color:#fff !important;-webkit-text-fill-color:#fff !important;}
+    .cover h1 em{color:#A8C7FF !important;-webkit-text-fill-color:#A8C7FF !important;}
+    a{color:var(--ink);border:none;}
+    /* le lien du call reste visible en PDF */
+    .cta-link{color:#2559DD !important;border-bottom:1px solid #2559DD !important;}
+    .cover .author a,.brandlink{color:inherit !important;border-bottom:1px solid currentColor !important;}
+    .chapter{padding-top:0;}
+    .chapter .ch-body{margin-top:8mm;}
+    .end-note{margin-top:20px;padding-top:12px;}
+    #suite{margin-top:24px;}
+    .term{padding:14px 16px;}
+    .term pre{font-size:6.4pt;line-height:1.5;}
+    figure{margin:20px 0;}
+    figure,.term{page-break-inside:avoid;}
+    h3.sec{page-break-after:avoid;}
+    @page{size:A4;margin:18mm 0;}
+    @page:first{margin:0;}
+  }
+
+  /* ── Ajouts propres à ce guide : commandes, demandes, pannes, encadré ── */
+  .cmd{
+    background:var(--dark); border:1px solid var(--dark); border-radius:16px;
+    padding:20px 24px; overflow-x:auto; margin:20px 0;
+  }
+  .cmd pre{
+    margin:0; padding:0; background:none; border:none; color:#D1D5DB;
+    font-family:'Geist Mono', ui-monospace, "SF Mono", Menlo, monospace;
+    font-size:13px; line-height:1.7; white-space:pre; letter-spacing:0;
+  }
+  .cmd pre .p{color:#9CA3AF;}
+  .cmd pre .c{color:#34D399;}
+
+  .dit{margin:20px 0;display:flex;flex-direction:column;gap:10px;}
+  .dit span{
+    display:block; background:var(--white); border:1px solid var(--line);
+    border-left:3px solid var(--blue); border-radius:0 12px 12px 0;
+    padding:12px 16px; color:var(--ink); font-size:15px; line-height:1.5;
+  }
+
+  .encart{
+    background:var(--page); border:1px solid var(--line); border-radius:16px;
+    padding:24px 26px; margin:28px 0;
+  }
+  .encart h3{font-size:17px;font-weight:600;margin:0 0 10px;}
+  .encart p{margin:0 0 10px;font-size:15px;}
+  .encart p:last-child{margin-bottom:0;}
+
+  ul.pannes{list-style:none;padding:0;margin:20px 0 0;}
+  ul.pannes li{
+    margin:0 0 18px; padding:0 0 18px; border-bottom:1px solid var(--line);
+  }
+  ul.pannes li:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0;}
+  ul.pannes b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px;}
+  ul.pannes span{display:block;color:var(--ink-2);font-size:15px;line-height:1.6;}
+
+  .chute{color:var(--muted);font-style:normal;}
+
+  @media print{
+    .cmd{padding:12px 16px;}
+    .cmd pre{font-size:8.5pt;line-height:1.6;}
+    .cmd,.dit span,.encart,ul.pannes li{page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- ============ COUVERTURE ============ -->
+  <section class="cover">
+    <h1>Installer tes skills de<br><em>SEO technique</em></h1>
+    <p class="lead">Où déposer les six skills, comment vérifier que Claude Code les voit, comment sortir un export Search Console propre, et la première demande à écrire.</p>
+    <div class="author">Timothée Boussardon · <a href="https://organikk.co/">Organikk.co</a> · Août 2026</div>
+  </section>
+
+  <!-- ============ SOMMAIRE ============ -->
+  <section class="chapter" id="sommaire">
+    <div class="ch-body">
+    <h2 class="doc-title">Sommaire</h2>
+    <div class="hr"></div>
+    <a class="toc-item" href="#resume"><div class="t">À lire en premier</div><div class="d">Ce que fait l'installation, ce qu'elle ne fait pas, et le temps que ça prend.</div></a>
+    <a class="toc-item" href="#c1"><div class="t">1. Ce qu'il te faut</div><div class="d">Claude Code, un terminal, Node.js, un accès Search Console pour deux skills.</div></a>
+    <a class="toc-item" href="#c2"><div class="t">2. Déposer les six skills</div><div class="d">Un dossier par skill dans ~/.claude/skills/, un fichier SKILL.md dans chacun.</div></a>
+    <a class="toc-item" href="#c3"><div class="t">3. Vérifier que Claude Code les voit</div><div class="d">Lister le dossier, relancer Claude Code, contrôler les six noms.</div></a>
+    <a class="toc-item" href="#c4"><div class="t">4. Installer Lighthouse et jq</div><div class="d">Les deux outils dont le skill Core Web Vitals a besoin, et l'alternative sans installation globale.</div></a>
+    <a class="toc-item" href="#c5"><div class="t">5. Sortir un export Search Console propre</div><div class="d">Période, onglets Pages et Requêtes, format CSV à ne pas réenregistrer.</div></a>
+    <a class="toc-item" href="#c6"><div class="t">6. La première demande</div><div class="d">Aucune commande à retenir : les six phrases qui déclenchent chaque skill.</div></a>
+    <a class="toc-item" href="#c7"><div class="t">7. Lire le rapport</div><div class="d">Ce que contient chaque rapport markdown, et le seul skill qui écrit dans ton code.</div></a>
+    <a class="toc-item" href="#c8"><div class="t">8. Les pannes fréquentes</div><div class="d">Six erreurs d'installation et ce qui les provoque.</div></a>
+    </div>
+  </section>
+
+  <!-- ============ À LIRE EN PREMIER ============ -->
+  <section class="chapter" id="resume">
+    <h2 class="ch-title">À lire en premier</h2>
+    <p class="ch-lead">Cette installation pose les six skills et te fait sortir ton premier rapport. Compte dix minutes, dont huit d'installation d'outils si tu ne les as pas déjà.</p>
+
+    <div class="ch-body">
+    <ul>
+      <li>Les skills sont des dossiers. Tu les déposes dans <code>~/.claude/skills/</code>.</li>
+      <li>Claude Code les détecte au démarrage suivant. Il n'y a rien à configurer.</li>
+      <li>Un skill a besoin de deux outils en plus : Lighthouse et jq.</li>
+      <li>Deux skills ont besoin d'un export Search Console.</li>
+      <li>Les trois autres tournent avec une URL, un sitemap ou ton code.</li>
+      <li>Tu déclenches un skill en écrivant ta demande, pas avec une commande.</li>
+      <li>Chaque skill rend un rapport en markdown.</li>
+      <li>Aucun skill ne publie ni ne modifie ton site en ligne.</li>
+    </ul>
+
+    <div class="encart">
+      <h3>Les six skills</h3>
+      <p>Indexation, Core Web Vitals, données structurées, maillage par la structure du site, maillage par la Search Console, cannibalisation.</p>
+      <p>Chacun prend une entrée précise, applique la même suite d'étapes à chaque fois et rend un rapport.</p>
+      <p>Le contenu complet des six fichiers <code>SKILL.md</code> est publié dans l'article <a class="cta-link" href="https://organikk.co/blog/6-taches-seo-technique-claude">6 tâches de SEO technique déléguées à Claude</a>.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ 1 ============ -->
+  <section class="chapter" id="c1">
+    <h2 class="ch-title">1. Ce qu'il te faut</h2>
+    <p class="ch-lead">Quatre prérequis, dont un seul est bloquant.</p>
+
+    <div class="ch-body">
+    <p>Claude Code installé sur ton poste.</p>
+    <p>Un terminal ouvert dans le dossier de ton projet, ou dans n'importe quel dossier si tu audites un site en ligne.</p>
+    <p>Node.js, pour installer Lighthouse.</p>
+    <p>Un accès Search Console au site, pour deux des six skills.</p>
+    <p class="chute">Sans Search Console, quatre skills sur six tournent quand même.</p>
+    </div>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section class="chapter" id="c2">
+    <h2 class="ch-title">2. Déposer les six skills</h2>
+    <p class="ch-lead">Un skill est un dossier qui contient un fichier SKILL.md. C'est ce fichier que Claude Code lit.</p>
+
+    <div class="ch-body">
+    <p>Crée le dossier des skills s'il n'existe pas encore.</p>
+    <div class="cmd"><pre>mkdir -p ~/.claude/skills/</pre></div>
+
+    <p>Crée un dossier par skill.</p>
+    <div class="cmd"><pre>cd ~/.claude/skills/
+mkdir -p indexation-check
+mkdir -p seo-core-web-vitals
+mkdir -p seo-donnees-structurees
+mkdir -p maillage-systeme
+mkdir -p maillage-interne-gsc
+mkdir -p seo-cannibalisation</pre></div>
+
+    <p>Ouvre l'article <a class="cta-link" href="https://organikk.co/blog/6-taches-seo-technique-claude">6 tâches de SEO technique déléguées à Claude</a>, qui publie les six fichiers en entier.</p>
+    <p>Copie le contenu de chaque <code>SKILL.md</code> et colle-le dans un fichier <code>SKILL.md</code> à l'intérieur du dossier qui porte le même nom.</p>
+    <p>Ne renomme pas les dossiers. Le nom du dossier est le nom du skill.</p>
+    <p class="chute">Un dossier vide ou un fichier nommé autrement que SKILL.md ne sera jamais lu.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section class="chapter" id="c3">
+    <h2 class="ch-title">3. Vérifier que Claude Code les voit</h2>
+    <p class="ch-lead">Deux contrôles avant de lancer quoi que ce soit.</p>
+
+    <div class="ch-body">
+    <p>Liste le dossier.</p>
+    <div class="cmd"><pre>ls ~/.claude/skills/</pre></div>
+
+    <p>Tu dois voir les six noms.</p>
+    <div class="cmd"><pre>indexation-check
+seo-core-web-vitals
+seo-donnees-structurees
+maillage-systeme
+maillage-interne-gsc
+seo-cannibalisation</pre></div>
+
+    <p>Ferme Claude Code, puis rouvre-le. Il lit les skills au démarrage.</p>
+    <p class="chute">Un skill qui n'apparaît pas dans cette liste ne se déclenchera jamais, quoi que tu écrives.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section class="chapter" id="c4">
+    <h2 class="ch-title">4. Installer Lighthouse et jq</h2>
+    <p class="ch-lead">Le skill Core Web Vitals appelle Lighthouse en local et découpe ses résultats avec jq.</p>
+
+    <div class="ch-body">
+    <div class="cmd"><pre>npm install -g lighthouse
+brew install jq</pre></div>
+
+    <p>Vérifie que les deux répondent.</p>
+    <div class="cmd"><pre>lighthouse --version
+jq --version</pre></div>
+
+    <p>Tu ne veux rien installer en global ? Remplace <code>lighthouse</code> par <code>npx lighthouse</code> dans les commandes.</p>
+    <p>Le premier lancement est plus lent, le résultat est identique.</p>
+    <p class="chute">Les cinq autres skills n'ont besoin d'aucun de ces deux outils.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section class="chapter" id="c5">
+    <h2 class="ch-title">5. Sortir un export Search Console propre</h2>
+    <p class="ch-lead">Deux skills lisent tes données de clics et d'impressions. Ils lisent le CSV d'origine, pas une version retravaillée.</p>
+
+    <div class="ch-body">
+    <div class="encart">
+      <h3>Les deux skills qui lisent ta Search Console</h3>
+      <p>Le maillage sort la hiérarchie des pages mères, filles et petites-filles, puis la liste des liens à poser avec leur ancre et le contexte de la phrase.</p>
+      <p>La cannibalisation classe les conflits par type et tranche : redirection 301, fusion, différenciation, ou rien du tout.</p>
+    </div>
+
+    <p>Ouvre la Search Console, onglet Performances.</p>
+    <p>Choisis la période. Trois mois pour la cannibalisation, six mois pour le maillage.</p>
+    <p>Clique sur Exporter, puis sur CSV.</p>
+    <p>L'archive contient un fichier par onglet. Tu as besoin de Pages et de Requêtes.</p>
+    <p>Dézippe-la dans le dossier de ton projet.</p>
+    <p>Ne réenregistre pas les fichiers depuis un tableur. Les skills lisent les colonnes d'origine.</p>
+    </div>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section class="chapter" id="c6">
+    <h2 class="ch-title">6. La première demande</h2>
+    <p class="ch-lead">Il n'y a pas de commande à retenir. Tu écris ce que tu veux.</p>
+
+    <div class="ch-body">
+    <div class="dit">
+      <span>audit indexation de mon-site.fr, la liste des URLs est dans sitemap.xml</span>
+    </div>
+    <p>Claude Code reconnaît la demande et charge le skill correspondant.</p>
+    <p>Les cinq autres se déclenchent de la même façon.</p>
+    <div class="dit">
+      <span>audit Core Web Vitals de https://mon-site.fr/sitemap.xml</span>
+      <span>audit de cannibalisation, l'export GSC est dans ./gsc-requetes.csv</span>
+      <span>plan de maillage interne à partir de ./gsc-pages.csv</span>
+      <span>audit du maillage interne du site, sans passer par la Search Console</span>
+      <span>mets en place les données structurées JSON-LD sur ce projet</span>
+    </div>
+    <p class="chute">Commence par l'indexation. Tant qu'une page est bloquée, ce que mesurent les autres skills ne sert à rien.</p>
+    </div>
+  </section>
+
+  <!-- ============ 7 ============ -->
+  <section class="chapter" id="c7">
+    <h2 class="ch-title">7. Lire le rapport</h2>
+    <p class="ch-lead">Chaque skill rend un fichier markdown, construit toujours de la même façon.</p>
+
+    <div class="ch-body">
+    <p>Les anomalies critiques sont en tête, les mineures ensuite, les corrections classées par priorité.</p>
+    <p>Le skill d'indexation distingue « non indexée » et « non testable ». Une page non testable n'est pas un problème, c'est une limite de mesure.</p>
+    <p>Le skill de cannibalisation ne recommande jamais une redirection 301 sans avoir regardé les chiffres des deux pages.</p>
+    <p>Le seul skill qui écrit dans ton code est celui des données structurées. Claude Code te demande l'autorisation avant chaque écriture.</p>
+    </div>
+  </section>
+
+  <!-- ============ 8 ============ -->
+  <section class="chapter" id="c8">
+    <h2 class="ch-title">8. Les pannes fréquentes</h2>
+    <p class="ch-lead">Six erreurs reviennent à l'installation. Chacune a une cause unique.</p>
+
+    <div class="ch-body">
+    <ul class="pannes">
+      <li><b>Claude ne trouve pas le skill.</b><span>Le dossier est ailleurs que dans <code>~/.claude/skills/</code>, ou Claude Code n'a pas été relancé depuis la copie.</span></li>
+      <li><b><code>lighthouse: command not found</code></b><span>Node n'est pas installé, ou l'installation globale a échoué. Passe par <code>npx lighthouse</code>.</span></li>
+      <li><b>Le sitemap ressort vide.</b><span>L'URL pointe sur un index de sitemaps et pas sur un sitemap d'URLs. Donne le sitemap enfant.</span></li>
+      <li><b>Le rapport dit « non testable » partout.</b><span>Google limite les requêtes automatisées. Relance plus tard, ou branche l'API Search Console officielle.</span></li>
+      <li><b>Le skill ne trouve pas les colonnes du CSV.</b><span>Le fichier a été ouvert puis réenregistré par un tableur. Repars du CSV d'origine.</span></li>
+      <li><b>Le skill tourne mais ne trouve rien.</b><span>Vérifie la période de l'export. Trois mois de données sur un site neuf ne suffisent pas à faire ressortir un conflit.</span></li>
+    </ul>
+    </div>
+  </section>
+
+  <!-- ============ ALLER PLUS LOIN ============ -->
+  <section class="chapter" id="suite">
+    <div class="ch-body">
+    <p>Les six skills installés, tu as le socle technique. La suite est éditoriale : mots-clés, modèles de pages, rédaction.</p>
+    <p>Les autres guides sont sur <a class="cta-link" href="https://organikk.co/guides">organikk.co/guides</a>.</p>
+    <p>Si tu veux qu'on installe ce système ensemble sur ton site, on peut se faire un call : <a class="cta-link" href="https://cal.com/tim-boussardon-yzrrb1/30min">cal.com/tim-boussardon-yzrrb1/30min</a></p>
+    <p class="end-note">Une question sur l'installation : <a href="mailto:contact@organikk.co">contact@organikk.co</a></p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

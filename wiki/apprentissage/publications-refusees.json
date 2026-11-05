@@ -1,0 +1,289 @@
+{
+  "events": [
+    {
+      "event_id": "ebb2a787ebaef49a473f",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L1",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "b76a1bc684cb4a049bd8",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L1",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "51961fdb11624ffdf1b9",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L1",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "7ea7f53e97274c761ffc",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L2",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "3d739f6d0f7d126faea3",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L3",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "dc3fe9e3bfb99d18708f",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L3",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "91a47a1be15b8ef71c8d",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L4",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "754b5016a3ac941f207f",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L5",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "e51f383edbbe702c8425",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L5",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "59ff4f5071fde86f58bd",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L6",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "efa9a6720abc792f3700",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L7",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "6349cac7154d456349a1",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L8",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "9e1e0dd6e8fd09840948",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L9",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "eb673e49c70cd52a988f",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L9",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "411061bb62113c957a03",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L10",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "ddd129cd1038122cf858",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L11",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "90de288e8b2ebba7e92f",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L12",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "88c09d2dd0574637384e",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L12",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "72cdc3f01da78c91458c",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L12",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "9352ec33101e2fd8fc2d",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L13",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "2752a34af40b94263168",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L13",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "2206af2b8192ed447355",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L13",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "10b9b97dd17b5dde063c",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L13",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "66e2bdaf6f8680b06cdc",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L13",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "8d89147eb15b3c260c6c",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L14",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "6a64b3857d38cf12d05e",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L15",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "66000bb180c049642293",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L16",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "8ff0d35c97e5532053cd",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L17",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "9f12166db5f9db3ceb0a",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L18",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "58d3244f869d9d5ca652",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L19",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "3100e2d9bf2363794c09",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L20",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "bdc7ff9ddacfbf0f2ef6",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L21",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "fc131b1d53f5c945022d",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L22",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "92ba7fc521bc9d6568cd",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L22",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "a877593e28d2acdf3246",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L22",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "166d87e9fbf7ee711b41",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L22",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "b6f52545b3152efeee9b",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L22",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "b7fb57b513d5a7ff6dee",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L23",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "a57ce6cfe6d704d677f7",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L24",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "8e690f21da133821ba96",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L25",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "9844a849dc960242a58c",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L26",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "83a30ade0690cf15e0b9",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L27",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "084c26460a9e525f4c02",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L28",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "2638da424a3d924b7149",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L29",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "887ea49af1b581f4fe35",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L30",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "f4a860bdee2179fcf614",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L31",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "e85de65b6d5c6e6b672c",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L32",
+      "reason": "URL non éditoriale ou non canonique"
+    },
+    {
+      "event_id": "6c94564fe0684f3ca1d7",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L33",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "9c45ec69f6f1cc0db80a",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L33",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "80d395a8235b2d8ed24f",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L33",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "70576e2614e0db026190",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L33",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "1b7a8e59ab34c831efb6",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L33",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "1fe97ce13202400e389f",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L33",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "b132ce0e83c62bc0cf37",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L33",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "b4ffd0c4bcf8af68c1bf",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L33",
+      "reason": "preuve de mise en ligne absente"
+    },
+    {
+      "event_id": "5e7293c45e9e1412945a",
+      "source_reference": "wiki/apprentissage/publications.jsonl#L33",
+      "reason": "preuve de mise en ligne absente"
+    }
+  ],
+  "stats": {
+    "verified": 0,
+    "rejected": 56,
+    "duplicates": 0
+  }
+}

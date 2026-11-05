@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.h{font-size:40px;font-weight:700;fill:#0B0B0F;letter-spacing:-1.2px}
+.sub{font-size:20px;fill:#333}
+.t{font-size:24px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.5px}
+.s{font-size:17px;fill:#333}
+.a{font-size:15px;font-weight:500;fill:#777}
+.big{font-size:150px;font-weight:700;fill:#0B0B0F;letter-spacing:-6px}
+.v{font-size:17px;font-weight:700;fill:#0B0B0F}
+.line{fill:none;stroke:#0B0B0F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thin{fill:none;stroke:#0B0B0F;stroke-width:1;stroke-linecap:round}
+</style>
+<linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset=".45" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient>
+<filter id="on" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="m"/><feComponentTransfer in="m" result="a"><feFuncA type="linear" slope=".6"/></feComponentTransfer><feComposite in="a" in2="SourceGraphic" operator="in" result="c"/><feBlend in="SourceGraphic" in2="c" mode="overlay"/></filter>
+<marker id="p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#0B0B0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<style>
+.ct{font-size:30px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.8px}
+.cs{font-size:19px;fill:#333}
+.li{font-size:17px;fill:#0B0B0F}
+.lg{font-size:16px;fill:#777}
+.n{font-size:22px;font-weight:700;fill:#FFF}
+.num{font-size:54px;font-weight:700;fill:#0B0B0F;letter-spacing:-2px}
+.ic{fill:none;stroke:#0B0B0F;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+</style><radialGradient id="dg" cx=".32" cy=".38" r=".78"><stop offset="0" stop-color="#3a5cff"/><stop offset=".35" stop-color="#2341e0"/><stop offset=".7" stop-color="#12249a"/><stop offset="1" stop-color="#070f4d"/></radialGradient>
+<filter id="dn" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="arithmetic" k1="0" k2="1" k3=".62" k4="-.31" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in"/></filter></defs>
+<rect width="100%" height="100%" fill="#FFF"/>
+<rect x="40" y="40" width="540" height="340" rx="12" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="90" cy="96" r="25" fill="#0B0B0F"/><text class="n" x="90" y="104" text-anchor="middle">1</text>
+<text class="ct" x="132" y="96">Priorités business</text>
+<text class="cs" x="132" y="126">5 parcours commerciaux, pas 5 cocons</text>
+<rect class="ic" x="82" y="155" width="18" height="18" rx="3"/>
+<text class="li" x="116" y="170">Smart CRM</text>
+<text class="lg" x="290" y="170">CRM pour PME</text>
+<rect class="ic" x="82" y="195" width="18" height="18" rx="3"/>
+<text class="li" x="116" y="210">Marketing Hub</text>
+<text class="lg" x="290" y="210">marketing automation</text>
+<rect class="ic" x="82" y="235" width="18" height="18" rx="3"/>
+<text class="li" x="116" y="250">Sales Hub</text>
+<text class="lg" x="290" y="250">gestion commerciale</text>
+<rect class="ic" x="82" y="275" width="18" height="18" rx="3"/>
+<text class="li" x="116" y="290">Service Hub</text>
+<text class="lg" x="290" y="290">service client</text>
+<rect class="ic" x="82" y="315" width="18" height="18" rx="3"/>
+<text class="li" x="116" y="330">Content Hub</text>
+<text class="lg" x="290" y="330">gestion de contenu</text>
+<rect x="630" y="40" width="540" height="340" rx="12" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="680" cy="96" r="25" fill="#0B0B0F"/><text class="n" x="680" y="104" text-anchor="middle">2</text>
+<text class="ct" x="722" y="96">Données propriétaires</text>
+<text class="cs" x="722" y="126">6 sources par offre</text>
+<line x1="670" y1="152" x2="670" y2="352" stroke="#0B0B0F" stroke-opacity=".2"/>
+<path class="ic" d="M694 154h9l6 6v14h-15z M703 154v6h6"/>
+<text class="li" x="726" y="170">Questions posées aux commerciaux</text>
+<path class="ic" d="M694 187h9l6 6v14h-15z M703 187v6h6"/>
+<text class="li" x="726" y="203">Objections et motifs d'abandon</text>
+<path class="ic" d="M694 220h9l6 6v14h-15z M703 220v6h6"/>
+<text class="li" x="726" y="236">Tickets de support</text>
+<path class="ic" d="M694 253h9l6 6v14h-15z M703 253v6h6"/>
+<text class="li" x="726" y="269">Fonctionnalités demandées en démo</text>
+<path class="ic" d="M694 286h9l6 6v14h-15z M703 286v6h6"/>
+<text class="li" x="726" y="302">Cas clients sectoriels</text>
+<path class="ic" d="M694 319h9l6 6v14h-15z M703 319v6h6"/>
+<text class="li" x="726" y="335">Recherches internes et Search Console</text>
+<rect x="1220" y="40" width="540" height="340" rx="12" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="1270" cy="96" r="25" fill="#0B0B0F"/><text class="n" x="1270" y="104" text-anchor="middle">3</text>
+<text class="ct" x="1312" y="96">Micro-intentions</text>
+<text class="cs" x="1312" y="126">10 à 15 questions d'acheteurs par offre</text>
+<text class="num" x="1270" y="260">5</text>
+<text class="lg" x="1270" y="290">offres</text>
+<path d="M1380 242 h34" class="line" marker-end="url(#p)"/>
+<text class="num" x="1440" y="260">25</text>
+<text class="lg" x="1440" y="290">micro-intentions</text>
+<path d="M1550 242 h34" class="line" marker-end="url(#p)"/>
+<text class="num" x="1610" y="260">50</text>
+<text class="lg" x="1610" y="290">questions</text>
+<text class="lg" x="1270" y="346">jusqu'à 75 avec les demandes réelles des prospects</text>
+<rect x="1220" y="430" width="540" height="360" rx="12" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="1270" cy="486" r="25" fill="#0B0B0F"/><text class="n" x="1270" y="494" text-anchor="middle">4</text>
+<text class="ct" x="1312" y="486">Architecture</text>
+<text class="cs" x="1312" y="516">Une page par intention, pas par question</text>
+<rect x="1260" y="630" width="170" height="52" rx="8" fill="none" stroke="#0B0B0F" stroke-width="1.6"/>
+<text class="li" x="1345" y="662" text-anchor="middle" style="font-weight:700">Page business</text>
+<path d="M1430 656 H1460 V570 H1490" fill="none" stroke="#0B0B0F" stroke-opacity=".5" stroke-width="1.4"/>
+<path class="ic" d="M1506 560h9l6 6v14h-15z M1515 560v6h6"/>
+<text class="li" x="1538" y="576">Page sectorielle</text>
+<path d="M1430 656 H1460 V626 H1490" fill="none" stroke="#0B0B0F" stroke-opacity=".5" stroke-width="1.4"/>
+<circle class="ic" cx="1510" cy="622" r="4"/><path class="ic" d="M1503 635a7 7 0 0 1 14 0 M1517 618.5a4 4 0 0 1 0 7 M1519 629a6 6 0 0 1 4 6"/>
+<text class="li" x="1538" y="632">Cas client</text>
+<path d="M1430 656 H1460 V682 H1490" fill="none" stroke="#0B0B0F" stroke-opacity=".5" stroke-width="1.4"/>
+<path class="ic" d="M1506 672h9l6 6v14h-15z M1515 672v6h6"/>
+<text class="li" x="1538" y="688">Page d'appui</text>
+<path d="M1430 656 H1460 V738 H1490" fill="none" stroke="#0B0B0F" stroke-opacity=".5" stroke-width="1.4"/>
+<rect class="ic" x="1504" y="729" width="18" height="18" rx="3"/>
+<text class="li" x="1538" y="744">Outil interactif</text>
+<rect x="1220" y="820" width="540" height="340" rx="12" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="1270" cy="876" r="25" fill="#0B0B0F"/><text class="n" x="1270" y="884" text-anchor="middle">5</text>
+<text class="ct" x="1312" y="876">Preuves propriétaires</text>
+<text class="cs" x="1312" y="906">Une preuve par question d'acheteur</text>
+<circle cx="1281" cy="954" r="11" fill="#0B0B0F"/><path d="M1276 954l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="1306" y="960">Cas client du secteur</text>
+<circle cx="1281" cy="1006" r="11" fill="#0B0B0F"/><path d="M1276 1006l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="1306" y="1012">Tarifs et budget</text>
+<circle cx="1281" cy="1058" r="11" fill="#0B0B0F"/><path d="M1276 1058l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="1306" y="1064">Données clients</text>
+<circle cx="1531" cy="954" r="11" fill="#0B0B0F"/><path d="M1526 954l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="1556" y="960">Démonstration</text>
+<circle cx="1531" cy="1006" r="11" fill="#0B0B0F"/><path d="M1526 1006l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="1556" y="1012">Déploiement réel</text>
+<circle cx="1531" cy="1058" r="11" fill="#0B0B0F"/><path d="M1526 1058l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="1556" y="1064">Avant/après</text>
+<text class="lg" x="1270" y="1116">Chiffre HubSpot : 92 % des pages sectorielles</text>
+<text class="lg" x="1270" y="1140">citées par des moteurs de réponse</text>
+<rect x="630" y="820" width="540" height="340" rx="12" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="680" cy="876" r="25" fill="#0B0B0F"/><text class="n" x="680" y="884" text-anchor="middle">6</text>
+<text class="ct" x="722" y="876">Page optimisée</text>
+<text class="cs" x="722" y="906">Google, les IA et les prospects</text>
+<circle cx="693" cy="954" r="14" fill="#F5F5F5"/><text class="lg" x="693" y="959" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">1</text>
+<text class="li" x="720" y="960">Introduction</text>
+<circle cx="693" cy="1000" r="14" fill="#F5F5F5"/><text class="lg" x="693" y="1005" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">2</text>
+<text class="li" x="720" y="1006">Fonctionnalités</text>
+<circle cx="693" cy="1046" r="14" fill="#F5F5F5"/><text class="lg" x="693" y="1051" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">3</text>
+<text class="li" x="720" y="1052">Déploiement</text>
+<circle cx="693" cy="1092" r="14" fill="#F5F5F5"/><text class="lg" x="693" y="1097" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">4</text>
+<text class="li" x="720" y="1098">Prix</text>
+<circle cx="943" cy="954" r="14" fill="#F5F5F5"/><text class="lg" x="943" y="959" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">5</text>
+<text class="li" x="970" y="960">Preuves</text>
+<circle cx="943" cy="1000" r="14" fill="#F5F5F5"/><text class="lg" x="943" y="1005" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">6</text>
+<text class="li" x="970" y="1006">Questions fréquentes</text>
+<circle cx="943" cy="1046" r="14" fill="#F5F5F5"/><text class="lg" x="943" y="1051" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">7</text>
+<text class="li" x="970" y="1052">Conversion</text>
+<rect x="40" y="820" width="540" height="340" rx="12" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="90" cy="876" r="25" fill="#0B0B0F"/><text class="n" x="90" y="884" text-anchor="middle">7</text>
+<text class="ct" x="132" y="876">Distribution externe</text>
+<text class="cs" x="132" y="906">Des mentions utiles, sans achat de liens</text>
+<path class="ic" d="M92 956h15v17h-13a2 2 0 0 1-2-2z M107 961h3v10a2 2 0 0 1-2 2 M96 961h7 M96 965h7 M96 969h4"/>
+<text class="li" x="130" y="970">Publications spécialisées</text>
+<line x1="130" y1="994" x2="540" y2="994" stroke="#0B0B0F" stroke-opacity=".12"/>
+<path class="ic" d="M99 1024a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5 M103 1020a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/>
+<text class="li" x="130" y="1028">Partenaires sectoriels</text>
+<line x1="130" y1="1052" x2="540" y2="1052" stroke="#0B0B0F" stroke-opacity=".12"/>
+<circle class="ic" cx="98" cy="1076" r="4"/><path class="ic" d="M91 1089a7 7 0 0 1 14 0 M105 1072.5a4 4 0 0 1 0 7 M107 1083a6 6 0 0 1 4 6"/>
+<text class="li" x="130" y="1086">Communautés professionnelles</text>
+<rect x="40" y="430" width="540" height="360" rx="12" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="90" cy="486" r="25" fill="#0B0B0F"/><text class="n" x="90" y="494" text-anchor="middle">8</text>
+<text class="ct" x="132" y="486">Dashboard GEO</text>
+<text class="cs" x="132" y="516">Un reporting par offre</text>
+<rect x="90" y="556" width="104" height="34" rx="17" fill="none" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="li" x="142" y="579" text-anchor="middle" style="font-weight:700">SEO</text>
+<text class="li" x="216" y="579">Clics non-brand, CTR, positions</text>
+<rect x="90" y="622" width="104" height="34" rx="17" fill="none" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="li" x="142" y="645" text-anchor="middle" style="font-weight:700">GEO</text>
+<text class="li" x="216" y="645">Mentions, citations, couverture</text>
+<rect x="90" y="688" width="104" height="34" rx="17" fill="none" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="li" x="142" y="711" text-anchor="middle" style="font-weight:700">Business</text>
+<text class="li" x="216" y="711">Essais, démos, leads, clients</text>
+<path d="M580 300 L605 300 L605 530 L690 530" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="577" y="297" width="6" height="6" fill="#2341e0"/>
+<path d="M900 380 L900 500" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="897" y="377" width="6" height="6" fill="#2341e0"/>
+<path d="M1220 300 L1195 300 L1195 530 L1110 530" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="1217" y="297" width="6" height="6" fill="#2341e0"/>
+<path d="M1220 610 L1110 610" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="1217" y="607" width="6" height="6" fill="#2341e0"/>
+<path d="M1220 900 L1195 900 L1195 670 L1110 670" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="1217" y="897" width="6" height="6" fill="#2341e0"/>
+<path d="M900 820 L900 700" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="897" y="817" width="6" height="6" fill="#2341e0"/>
+<path d="M580 900 L605 900 L605 670 L690 670" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="577" y="897" width="6" height="6" fill="#2341e0"/>
+<path d="M580 610 L690 610" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="577" y="607" width="6" height="6" fill="#2341e0"/>
+<g fill="url(#dg)" filter="url(#dn)"><rect x="690" y="500" width="420" height="200" rx="18"/></g>
+<text x="730" y="590" style="font-size:42px;font-weight:700;fill:#FFF;letter-spacing:-1.2px">Stratégie GEO</text>
+<text x="730" y="626" style="font-size:21px;fill:#FFF">HubSpot, en 8 étapes</text>
+</svg>

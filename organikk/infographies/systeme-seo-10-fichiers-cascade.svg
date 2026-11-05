@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2060" viewBox="0 0 1600 2060">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.h{font-size:40px;font-weight:700;fill:#0B0B0F;letter-spacing:-1.2px}
+.sub{font-size:20px;fill:#333}
+.t{font-size:24px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.5px}
+.s{font-size:17px;fill:#333}
+.a{font-size:15px;font-weight:500;fill:#777}
+.big{font-size:150px;font-weight:700;fill:#0B0B0F;letter-spacing:-6px}
+.v{font-size:17px;font-weight:700;fill:#0B0B0F}
+.line{fill:none;stroke:#0B0B0F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thin{fill:none;stroke:#0B0B0F;stroke-width:1;stroke-linecap:round}
+</style>
+<linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset=".45" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient>
+<filter id="on" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="m"/><feComponentTransfer in="m" result="a"><feFuncA type="linear" slope=".6"/></feComponentTransfer><feComposite in="a" in2="SourceGraphic" operator="in" result="c"/><feBlend in="SourceGraphic" in2="c" mode="overlay"/></filter>
+<marker id="p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#0B0B0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<style>
+.ct{font-size:30px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.8px}
+.cs{font-size:19px;fill:#333}
+.li{font-size:17px;fill:#0B0B0F}
+.lg{font-size:16px;fill:#777}
+.n{font-size:22px;font-weight:700;fill:#FFF}
+.num{font-size:54px;font-weight:700;fill:#0B0B0F;letter-spacing:-2px}
+.ic{fill:none;stroke:#0B0B0F;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.d{font-size:20px;fill:#333}
+.code{font-size:18px;fill:#0B0B0F;font-family:"SF Mono",Menlo,monospace}
+</style><radialGradient id="dg" cx=".32" cy=".38" r=".78"><stop offset="0" stop-color="#3a5cff"/><stop offset=".35" stop-color="#2341e0"/><stop offset=".7" stop-color="#12249a"/><stop offset="1" stop-color="#070f4d"/></radialGradient>
+<filter id="dn" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="arithmetic" k1="0" k2="1" k3=".62" k4="-.31" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in"/></filter></defs>
+<rect width="100%" height="100%" fill="#FFF"/>
+<g fill="url(#dg)" filter="url(#dn)"><path d="M40 58 Q40 40 58 40 H256 Q264 40 270 48 L280 66 Q283 70 290 70 H1182 Q1200 70 1200 88 V352 Q1200 370 1182 370 H58 Q40 370 40 352 Z"/></g>
+<text x="96" y="158" style="font-size:56px;font-weight:700;fill:#FFF;letter-spacing:-1.8px">Ton système SEO</text>
+<text x="96" y="202" style="font-size:24px;fill:#FFF">avec Claude Code, en 10 fichiers</text>
+<text x="96" y="252" style="font-size:20px;fill:#FFF;opacity:.85">Tu ne redonnes plus tes méthodes à chaque conversation. Claude les retrouve.</text>
+<path d="M60 312 Q60 300 72 300 H196 Q204 300 210 308 L220 320 Q223 324 230 324 H1088 Q1100 324 1100 336 V524 Q1100 536 1088 536 H72 Q60 536 60 524 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="84" y="318" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">01</text>
+<text class="ct" x="100" y="370">CLAUDE.md</text>
+<text class="d" x="100" y="408">Le premier fichier que Claude Code consulte. Il lui indique</text>
+<text class="d" x="100" y="436">où trouver tes règles, tes méthodes et tes instructions.</text>
+<path d="M104 480 Q104 468 116 468 H240 Q248 468 254 476 L264 488 Q267 492 274 492 H1132 Q1144 492 1144 504 V692 Q1144 704 1132 704 H116 Q104 704 104 692 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="128" y="486" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">02</text>
+<text class="ct" x="144" y="538">AGENTS.md</text>
+<text class="d" x="144" y="576">Les règles communes : utiliser les données, vérifier les informations,</text>
+<text class="d" x="144" y="604">présenter les résultats, valider avant de modifier un site.</text>
+<path d="M148 648 Q148 636 160 636 H284 Q292 636 298 644 L308 656 Q311 660 318 660 H1176 Q1188 660 1188 672 V860 Q1188 872 1176 872 H160 Q148 872 148 860 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="172" y="654" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">03</text>
+<text class="ct" x="188" y="706">client.md</text>
+<text class="d" x="188" y="744">Ce que ton client vend, à qui, sur quel marché</text>
+<text class="d" x="188" y="772">et ce qui le différencie.</text>
+<path d="M192 816 Q192 804 204 804 H328 Q336 804 342 812 L352 824 Q355 828 362 828 H1220 Q1232 828 1232 840 V1028 Q1232 1040 1220 1040 H204 Q192 1040 192 1028 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="216" y="822" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">04</text>
+<text class="ct" x="232" y="874">conversions.md</text>
+<text class="d" x="232" y="912">Les objectifs commerciaux du site : devis, appels,</text>
+<text class="d" x="232" y="940">inscriptions, achats.</text>
+<path d="M236 984 Q236 972 248 972 H372 Q380 972 386 980 L396 992 Q399 996 406 996 H1264 Q1276 996 1276 1008 V1196 Q1276 1208 1264 1208 H248 Q236 1208 236 1196 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="260" y="990" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">05</text>
+<text class="ct" x="276" y="1042">search-console.csv</text>
+<text class="d" x="276" y="1080">Les données réelles de Google : clics, impressions, positions,</text>
+<text class="d" x="276" y="1108">pages qui ont un potentiel d'amélioration.</text>
+<path d="M280 1152 Q280 1140 292 1140 H416 Q424 1140 430 1148 L440 1160 Q443 1164 450 1164 H1308 Q1320 1164 1320 1176 V1364 Q1320 1376 1308 1376 H292 Q280 1376 280 1364 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="304" y="1158" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">06</text>
+<text class="ct" x="320" y="1210">methodes.md</text>
+<text class="d" x="320" y="1248">Comment tu recherches les mots-clés, construis une stratégie,</text>
+<text class="d" x="320" y="1276">réalises un audit ou prépares un contenu.</text>
+<path d="M324 1320 Q324 1308 336 1308 H460 Q468 1308 474 1316 L484 1328 Q487 1332 494 1332 H1352 Q1364 1332 1364 1344 V1532 Q1364 1544 1352 1544 H336 Q324 1544 324 1532 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="348" y="1326" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">07</text>
+<text class="ct" x="364" y="1378">wiki.md</text>
+<text class="d" x="364" y="1416">Tes méthodes, tes observations et les enseignements</text>
+<text class="d" x="364" y="1444">de tes précédentes missions.</text>
+<path d="M368 1488 Q368 1476 380 1476 H504 Q512 1476 518 1484 L528 1496 Q531 1500 538 1500 H1396 Q1408 1500 1408 1512 V1700 Q1408 1712 1396 1712 H380 Q368 1712 368 1700 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="392" y="1494" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">08</text>
+<text class="ct" x="408" y="1546">workflow.md</text>
+<text class="d" x="408" y="1584">Les étapes dans l'ordre : comprendre l'offre, mots-clés,</text>
+<text class="d" x="408" y="1612">intentions, pages, mesure des résultats.</text>
+<path d="M412 1656 Q412 1644 424 1644 H548 Q556 1644 562 1652 L572 1664 Q575 1668 582 1668 H1440 Q1452 1668 1452 1680 V1868 Q1452 1880 1440 1880 H424 Q412 1880 412 1868 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="436" y="1662" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">09</text>
+<text class="ct" x="452" y="1714">SKILL.md</text>
+<text class="d" x="452" y="1752">Une tâche précise, réutilisable. Un fichier par skill :</text>
+<text class="code" x="452" y="1780">.claude/skills/audit-seo/SKILL.md</text>
+<path d="M456 1824 Q456 1812 468 1812 H592 Q600 1812 606 1820 L616 1832 Q619 1836 626 1836 H1484 Q1496 1836 1496 1848 V2000 Q1496 2012 1484 2012 H468 Q456 2012 456 2000 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.5"/>
+<text x="480" y="1830" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">10</text>
+<text class="ct" x="496" y="1882">suivi.md</text>
+<text class="d" x="496" y="1920">Les actions proposées, les corrections validées</text>
+<text class="d" x="496" y="1948">et les résultats obtenus.</text>
+</svg>

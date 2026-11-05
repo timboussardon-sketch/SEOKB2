@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.h{font-size:40px;font-weight:700;fill:#0B0B0F;letter-spacing:-1.2px}
+.sub{font-size:20px;fill:#333}
+.t{font-size:24px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.5px}
+.s{font-size:17px;fill:#333}
+.a{font-size:15px;font-weight:500;fill:#777}
+.big{font-size:150px;font-weight:700;fill:#0B0B0F;letter-spacing:-6px}
+.v{font-size:17px;font-weight:700;fill:#0B0B0F}
+.line{fill:none;stroke:#0B0B0F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thin{fill:none;stroke:#0B0B0F;stroke-width:1;stroke-linecap:round}
+</style>
+<linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset=".45" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient>
+<filter id="on" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="m"/><feComponentTransfer in="m" result="a"><feFuncA type="linear" slope=".6"/></feComponentTransfer><feComposite in="a" in2="SourceGraphic" operator="in" result="c"/><feBlend in="SourceGraphic" in2="c" mode="overlay"/></filter>
+<marker id="p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#0B0B0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1536" height="1024" fill="#FFF"/>
+<text class="h" x="60" y="110">Le futur du consulting SEO</text>
+<text class="sub" x="60" y="148">Ce que les agents prennent, ce que les équipes gardent</text>
+<text class="a" x="60" y="250">I. AUTOMATISÉ</text>
+<rect x="60" y="270" width="520" height="44" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="80" y="298" style="fill:#777;text-decoration:line-through">Maillage interne</text>
+<rect x="60" y="324" width="520" height="44" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="80" y="352" style="fill:#777;text-decoration:line-through">Métadonnées</text>
+<rect x="60" y="378" width="520" height="44" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="80" y="406" style="fill:#777;text-decoration:line-through">Structures Hn</text>
+<rect x="60" y="432" width="520" height="44" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="80" y="460" style="fill:#777;text-decoration:line-through">Audits répétitifs</text>
+<rect x="60" y="486" width="520" height="44" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="80" y="514" style="fill:#777;text-decoration:line-through">Mises à jour techniques</text>
+<text class="a" x="60" y="596">Compétences à développer</text>
+<rect x="60" y="616" width="520" height="52" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="a" x="80" y="649">01</text><text class="t" x="116" y="650" style="font-size:21px">Créer des agents</text>
+<rect x="60" y="678" width="520" height="52" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="a" x="80" y="711">02</text><text class="t" x="116" y="712" style="font-size:21px">Entraîner un agent</text>
+<rect x="60" y="740" width="520" height="52" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="a" x="80" y="773">03</text><text class="t" x="116" y="774" style="font-size:21px">Faire collaborer plusieurs agents</text>
+<line class="thin" x1="660" y1="220" x2="660" y2="900"/>
+<text class="a" x="740" y="250">II. RÉSERVÉ AUX ÉQUIPES</text>
+<rect x="740" y="270" width="736" height="88" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="t" x="764" y="308">La direction stratégique</text><text class="s" x="764" y="338">Ce qui mérite d'être fait, plutôt que comment le faire</text>
+<rect x="740" y="370" width="736" height="88" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="t" x="764" y="408">La direction artistique</text><text class="s" x="764" y="438">Une intention, des références, une identité, des contraintes</text>
+<rect x="740" y="470" width="736" height="88" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="t" x="764" y="508">La direction éditoriale</text><text class="s" x="764" y="538">Le positionnement, le ton de voix, les messages importants</text>
+<rect x="740" y="570" width="736" height="88" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="t" x="764" y="608">La connaissance du client</text><text class="s" x="764" y="638">Son métier, ses problèmes, ses contraintes, ses objectifs</text>
+<g fill="url(#og)" filter="url(#on)"><rect x="740" y="670" width="736" height="88" rx="6"/></g>
+<text class="t" x="764" y="708" style="fill:#FFF">L'esprit critique</text><text class="s" x="764" y="738" style="fill:#FFF">Repérer les erreurs et les angles morts des agents</text>
+<rect x="740" y="770" width="736" height="88" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="t" x="764" y="808">Savoir critiquer plutôt que produire</text><text class="s" x="764" y="838">Développer sa capacité d'évaluation</text>
+<text class="a" x="60" y="964">Thèse de Tim, newsletter Algorithme.</text>
+</svg>

@@ -1,0 +1,560 @@
+{
+  "schema_version": "0.1.0",
+  "method_version": "0.1.0",
+  "project_id": "synthetic-commercial-blocker",
+  "dataset_kind": "synthetic_test",
+  "dataset_notice": "DONNÉES FICTIVES DE TEST — aucune prévision client.",
+  "scopes": [
+    {
+      "id": "scope-main",
+      "offer_ids": [
+        "offer-main"
+      ],
+      "segments": [
+        "Segment fictif"
+      ],
+      "countries": [
+        "FR"
+      ],
+      "languages": [
+        "fr"
+      ],
+      "description": "Périmètre réservé au test.",
+      "limitations": [
+        "Ne représente aucun marché."
+      ]
+    }
+  ],
+  "offers": [
+    {
+      "id": "offer-main",
+      "name": "Offre fictive",
+      "description": "Offre de test",
+      "source_ids": [
+        "source-test"
+      ],
+      "status": "hypothesis",
+      "commercial_objective": "Tester le contrat de données",
+      "conversion": "Demande qualifiée",
+      "constraints": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "source-test",
+      "kind": "fixture",
+      "origin": "tests/factories.py",
+      "collected_at": "2026-11-05",
+      "document_date": null,
+      "locator": "Données fictives réservées aux tests",
+      "sha256": null,
+      "limitations": [
+        "Aucune mesure client ; jeu fictif."
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "id": "current-traffic",
+      "value": 1000,
+      "quantity": "sessions",
+      "unit": "sessions",
+      "channel": "analytics",
+      "status": "observed",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : current-traffic",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "current-qualified",
+      "value": 0.1,
+      "quantity": "qualified_lead_rate",
+      "unit": "qualified_leads/session",
+      "channel": "analytics",
+      "status": "observed",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : current-qualified",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "current-closing",
+      "value": 0.2,
+      "quantity": "closing_rate",
+      "unit": "clients/qualified_lead",
+      "channel": "crm",
+      "status": "observed",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-10-01",
+        "end": "2026-10-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : current-closing",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "unit-revenue",
+      "value": 1000,
+      "quantity": "revenue_per_client",
+      "unit": "EUR/client",
+      "channel": "operations",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": "EUR",
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : unit-revenue",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "unit-variable",
+      "value": 400,
+      "quantity": "variable_cost_per_client",
+      "unit": "EUR/client",
+      "channel": "operations",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": "EUR",
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : unit-variable",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "investment",
+      "value": 500,
+      "quantity": "investment_cost",
+      "unit": "EUR",
+      "channel": "operations",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": "EUR",
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : investment",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "capacity-clients",
+      "value": 25,
+      "quantity": "client_capacity",
+      "unit": "clients",
+      "channel": "operations",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : capacity-clients",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "capacity-production",
+      "value": 0,
+      "quantity": "production_capacity",
+      "unit": "hours/week",
+      "channel": "operations",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : capacity-production",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "traffic-prudent",
+      "value": 100,
+      "quantity": "sessions",
+      "unit": "sessions",
+      "channel": "analytics",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : traffic-prudent",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "traffic-central",
+      "value": 200,
+      "quantity": "sessions",
+      "unit": "sessions",
+      "channel": "analytics",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : traffic-central",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "traffic-favorable",
+      "value": 400,
+      "quantity": "sessions",
+      "unit": "sessions",
+      "channel": "analytics",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : traffic-favorable",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "future-total",
+      "value": 1100,
+      "quantity": "sessions",
+      "unit": "sessions",
+      "channel": "analytics",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : future-total",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "future-qualified",
+      "value": 0.2,
+      "quantity": "qualified_lead_rate",
+      "unit": "qualified_leads/session",
+      "channel": "analytics",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : future-qualified",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    },
+    {
+      "id": "future-closing",
+      "value": 0.3,
+      "quantity": "closing_rate",
+      "unit": "clients/qualified_lead",
+      "channel": "crm",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : future-closing",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": null
+    }
+  ],
+  "needs": [
+    {
+      "id": "need-main",
+      "text": "Besoin fictif explicitement identifié",
+      "kind": "hypothesis",
+      "scope_id": "scope-main",
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py",
+      "metric_ids": [],
+      "date": "2026-11-05"
+    }
+  ],
+  "groups": [],
+  "actors": [],
+  "actions": [
+    {
+      "id": "action-page",
+      "title": "Documenter le besoin vérifié",
+      "kind": "existing_page",
+      "source_ids": [
+        "source-test"
+      ],
+      "rationale": "Action fictive servant au test.",
+      "urls": [],
+      "status": "proposed",
+      "owner": null,
+      "dependencies": [
+        "action-sales"
+      ],
+      "effort_metric_id": null,
+      "cost_metric_id": null,
+      "planned_date": null,
+      "date_basis_source_ids": [],
+      "validation": {
+        "status": "proposed",
+        "reviewer": null,
+        "date": null,
+        "message": null,
+        "content_sha256": null
+      }
+    },
+    {
+      "id": "action-sales",
+      "title": "Vérifier la qualification et la relance des demandes",
+      "kind": "sales_followup",
+      "source_ids": [
+        "source-test"
+      ],
+      "rationale": "Action fictive servant au test.",
+      "urls": [],
+      "status": "blocked",
+      "owner": null,
+      "dependencies": [],
+      "effort_metric_id": null,
+      "cost_metric_id": null,
+      "planned_date": null,
+      "date_basis_source_ids": [],
+      "validation": {
+        "status": "proposed",
+        "reviewer": null,
+        "date": null,
+        "message": null,
+        "content_sha256": null
+      }
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "opp-main",
+      "title": "Opportunité de test",
+      "offer_id": "offer-main",
+      "scope_id": "scope-main",
+      "need_ids": [
+        "need-main"
+      ],
+      "group_ids": [],
+      "actor_ids": [],
+      "source_ids": [
+        "source-test"
+      ],
+      "urls": [],
+      "gates": {
+        "offer": {
+          "status": "satisfied",
+          "rationale": "Condition explicitement posée par le jeu de test.",
+          "source_ids": [
+            "source-test"
+          ]
+        },
+        "business_intent": {
+          "status": "satisfied",
+          "rationale": "Condition explicitement posée par le jeu de test.",
+          "source_ids": [
+            "source-test"
+          ]
+        },
+        "demonstrated_opportunity": {
+          "status": "satisfied",
+          "rationale": "Condition explicitement posée par le jeu de test.",
+          "source_ids": [
+            "source-test"
+          ]
+        }
+      },
+      "decision": "retain",
+      "priority_reason": "Ordre fictif justifié par la dépendance commerciale du cas.",
+      "feasibility": "À confirmer avec le responsable.",
+      "action_ids": [
+        "action-page",
+        "action-sales"
+      ],
+      "scenario_ids": [
+        "scenario-central"
+      ],
+      "measurement": {
+        "indicator": "Clients qualifiés",
+        "formula": "Clients confirmés dans le CRM sur la période définie.",
+        "source_ids": [
+          "source-test"
+        ],
+        "baseline_metric_id": null,
+        "owner": null,
+        "review_date": null,
+        "attribution": "Aucune attribution réelle : jeu de test.",
+        "continue_if": "Hypothèses confirmées par la mesure.",
+        "revise_if": "Conversion différente du scénario.",
+        "stop_if": "Capacité indisponible.",
+        "limitations": [
+          "Jeu fictif."
+        ]
+      },
+      "validation": {
+        "status": "proposed",
+        "reviewer": null,
+        "date": null,
+        "message": null,
+        "content_sha256": null
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "scenario-central",
+      "opportunity_ids": [
+        "opp-main"
+      ],
+      "name": "central",
+      "model": "full_funnel",
+      "scope_id": "scope-main",
+      "horizon": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": "EUR",
+      "current": {
+        "traffic": "current-traffic",
+        "qualified_lead_rate": "current-qualified",
+        "closing_rate": "current-closing",
+        "revenue_per_client": "unit-revenue",
+        "variable_cost_per_client": "unit-variable"
+      },
+      "future": {
+        "traffic": "future-total",
+        "qualified_lead_rate": "future-qualified",
+        "closing_rate": "future-closing",
+        "revenue_per_client": "unit-revenue",
+        "variable_cost_per_client": "unit-variable"
+      },
+      "investment_cost_id": "investment",
+      "client_capacity_id": "capacity-clients",
+      "revenue_basis": "Jeu fictif : revenu reconnu par nouveau client sur l’horizon de 30 jours ; aucune LTV extrapolée.",
+      "cost_basis": "Coût variable de livraison par client ; investissement additionnel total du même horizon, hors livraison.",
+      "investment_includes_delivery_costs": false,
+      "transfer_rationale": "Hypothèse de test : la hausse des taux dépend du suivi commercial ; aucune causalité établie sur un client.",
+      "requires_action_ids": [
+        "action-sales",
+        "action-page"
+      ],
+      "validation": {
+        "status": "proposed",
+        "reviewer": null,
+        "date": null,
+        "message": null,
+        "content_sha256": null
+      }
+    }
+  ],
+  "aggregates": [],
+  "panels": [],
+  "explored_need_ids": [
+    "need-main"
+  ],
+  "retained_opportunity_ids": [
+    "opp-main"
+  ],
+  "priority_order": [
+    "opp-main"
+  ],
+  "production_capacity_id": "capacity-production",
+  "validation": {
+    "status": "proposed",
+    "reviewer": null,
+    "date": null,
+    "message": null,
+    "content_sha256": null
+  }
+}

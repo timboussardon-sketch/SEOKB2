@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I built an SEO system with Obsidian, Jev and Claude (it works!)</title>
+<meta name="description" content="I&#x27;m going to give you solid arguments to sell you on setting up a system and to stop chatting in Claude or ChatGPT.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I built an SEO system with Obsidian, Jev and Claude (it works!)">
+<meta property="og:description" content="I&#x27;m going to give you solid arguments to sell you on setting up a system and to stop chatting in Claude or ChatGPT.">
+<meta property="og:image" content="og.en.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<script>document.documentElement.className='js'</script>
+<style>@font-face{font-family:"Geist";src:url(geist.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(geist-mono.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{--ink:#2b2b30;--ink-2:#6f6f78;--line:#e8e6e6;--paper:#fff;--c-top:#2f4fe0;--c-bottom:#7fa0ff;--wash:#f7f9ff;--tint:#e8eeff;
+  --ease:cubic-bezier(0.2,0,0,1);--bar:56px;
+  --grad:linear-gradient(160deg,var(--c-top) 0%,var(--c-top) 45%,var(--c-bottom) 100%);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--bar) + 32px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Geist",system-ui,sans-serif;font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased}
+pre,.dir,.root,.nm,.pn,.sname,.cons,.tbar,.schema text,.scoring th[scope=row]{font-family:"Geist Mono",ui-monospace,monospace}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--c-top);outline-offset:3px;border-radius:6px}
+.i{width:16px;height:16px;flex:none}
+
+/* ---------- hero ---------- */
+.panel{position:relative;isolation:isolate;background:var(--grad);color:#fff;overflow:hidden}
+.panel::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.panel>*{position:relative;z-index:1}
+.in{max-width:1080px;margin:0 auto}
+.hero{padding:40px 24px 64px}
+.mark{width:44px;height:44px;display:block}
+.hero .mark{margin-bottom:96px}
+.hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.04;letter-spacing:-.025em;font-weight:600;margin:0;max-width:16em;text-wrap:balance}
+.hero .sub{font-size:20px;margin:28px 0 0;color:rgba(255,255,255,.9)}
+.hero .by{font-family:"Geist Mono",monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:64px 0 0;color:rgba(255,255,255,.85)}
+@keyframes in{from{opacity:0;translate:0 12px}}
+.hero .mark,.hero h1,.hero .sub,.hero .by{animation:in .6s var(--ease) both}
+.hero h1{animation-delay:.1s}.hero .sub{animation-delay:.2s}.hero .by{animation-delay:.3s}
+
+/* ---------- barre haute ---------- */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);box-shadow:0 1px 0 var(--line)}
+.topbar .in{height:var(--bar);padding:0 24px;display:flex;align-items:center;gap:16px}
+.where{display:inline-flex;align-items:center;gap:10px;min-width:0;min-height:40px;margin-right:auto;padding:0 12px 0 10px;border:0;border-radius:10px;background:transparent;font-size:14px;font-weight:500;transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.where:hover{background:var(--wash)}
+.where .cur{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.time{font-size:13px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.time b{font-weight:500;color:var(--ink)}
+.seg2{display:flex;padding:3px;border-radius:10px;background:var(--wash);box-shadow:inset 0 0 0 1px var(--tint)}
+.seg2 button{min-height:34px;padding:0 12px;border:0;border-radius:7px;background:transparent;font-size:13px;font-weight:500;color:var(--ink-2);transition:background-color .15s var(--ease),color .15s var(--ease),scale .15s var(--ease)}
+.seg2 button[aria-pressed=true]{background:#fff;color:var(--c-top);box-shadow:0 0 0 1px var(--tint),0 1px 2px rgba(33,55,157,.1)}
+.lang{font-family:"Geist Mono",monospace;font-size:13px;letter-spacing:.1em;text-decoration:none;min-height:40px;min-width:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;color:var(--ink-2);transition:background-color .15s var(--ease),color .15s var(--ease)}
+.lang:hover{background:var(--wash);color:var(--c-top)}
+.progress{height:2px}
+.progress i{display:block;height:100%;background:var(--c-top);transform-origin:0 50%;transform:scaleX(0)}
+@media(max-width:560px){.time{display:none}.topbar .in{padding:0 12px;gap:8px}}
+
+/* ---------- gabarit ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:80px 24px 120px;display:grid;grid-template-columns:minmax(0,1fr);gap:64px}
+@media(min-width:1024px){.wrap{grid-template-columns:220px minmax(0,680px);justify-content:space-between}}
+nav.toc{display:none}
+@media(min-width:1024px){nav.toc{display:block;position:sticky;top:calc(var(--bar) + 40px);align-self:start;max-height:calc(100vh - var(--bar) - 80px);overflow:auto}}
+nav.toc p,.sheet .sh p{font-size:14px;font-weight:600;margin:0 0 16px}
+nav.toc ol,.sheet ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+nav.toc a,.sheet a{display:block;padding:8px 0 8px 16px;margin-left:-1px;border-left:2px solid transparent;font-size:14px;line-height:1.35;color:var(--ink-2);text-decoration:none;transition:color .15s var(--ease),border-color .15s var(--ease)}
+nav.toc a:hover,.sheet a:hover{color:var(--ink)}
+nav.toc a.on,.sheet a.on{color:var(--c-top);border-left-color:var(--c-top);font-weight:500}
+
+article>p{margin:0 0 22px}
+article h2{font-size:clamp(26px,3.4vw,36px);line-height:1.1;letter-spacing:-.02em;font-weight:600;color:var(--c-top);margin:120px 0 32px;text-wrap:balance}
+article h3{font-size:22px;line-height:1.2;font-weight:600;color:var(--c-top);margin:88px 0 28px}
+article h4{font-size:18px;font-weight:600;margin:48px 0 14px}
+article h4.dir{color:var(--c-top);font-size:16px}
+article p.b{font-weight:600;margin:40px 0 8px}
+article ul{margin:0 0 22px;padding-left:22px}
+article>ul li{margin:0 0 14px;padding-left:6px}
+article li::marker{color:var(--c-top)}
+.js .reveal{opacity:0;translate:0 14px;transition:opacity .6s var(--ease),translate .6s var(--ease)}
+.js .reveal.seen{opacity:1;translate:0 0}
+
+/* ---------- images ---------- */
+figure{margin:44px auto}
+.zoom{display:block;width:100%;padding:0;border:0;background:none;border-radius:14px;cursor:zoom-in}
+.zoom img{display:block;width:100%;height:auto;border-radius:14px;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px}
+h2+figure,h2+.schema{margin-top:0}
+dialog{border:0;padding:0;color:var(--ink)}
+dialog::backdrop{background:rgba(20,26,60,.55)}
+.lightbox{background:transparent;max-width:min(96vw,1400px);max-height:94vh;overflow:visible}
+.lightbox img{display:block;max-width:100%;max-height:90vh;border-radius:12px;background:#fff}
+.lx,.sx,.rx{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:0;border-radius:10px;background:#fff;transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.lx{position:absolute;top:-52px;right:0}
+.lx:hover,.sx:hover,.rx:hover{background:var(--tint)}
+.sheet{width:min(92vw,420px);max-height:80vh;border-radius:20px;padding:24px;box-shadow:0 20px 60px rgba(33,55,157,.25)}
+.sheet .sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.sheet .sh p{margin:0}
+.sheet a{padding:12px 0 12px 16px;font-size:16px}
+
+/* ---------- boutons ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:0;border-radius:8px;background:#fff;box-shadow:0 0 0 1px var(--tint),0 1px 2px rgba(33,55,157,.08);color:var(--c-top);font-size:14px;font-weight:500;white-space:nowrap;transition:background-color .15s var(--ease),color .15s var(--ease),scale .15s var(--ease)}
+.btn:hover{background:var(--tint)}
+.btn:active,.more:active,.node:active,.pill:active,.cta:active,.seg2 button:active,.where:active,.chipb:active,.lx:active,.sx:active,.rx:active,.go:active{scale:.96}
+.btn.ok{background:var(--c-top);color:#fff}
+.ic{position:relative;width:16px;height:16px;flex:none}
+.ic svg{position:absolute;inset:0;width:16px;height:16px;transition:opacity .2s var(--ease),scale .2s var(--ease),filter .2s var(--ease)}
+.ic .i-ok,.btn.ok .i-copy{opacity:0;scale:.25;filter:blur(4px)}
+.btn.ok .i-ok{opacity:1;scale:1;filter:blur(0)}
+
+/* ---------- skills ---------- */
+pre{margin:0;font-size:13px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;color:#3a3a44}
+.skillbox{margin:16px 0 0;border-radius:16px;background:var(--wash);box-shadow:0 0 0 1px var(--tint)}
+.sbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;padding:8px 8px 8px 20px;border-bottom:1px solid var(--tint)}
+.sname{font-size:13px;color:var(--c-top);font-weight:500}
+.smeta{font-size:13px;color:var(--ink-2);margin-right:auto}
+.chips{display:none;flex-wrap:wrap;gap:6px;padding:12px 20px 0}
+.skillbox.open .chips{display:flex}
+.chipb{min-height:32px;padding:0 12px;border:0;border-radius:16px;background:#fff;box-shadow:0 0 0 1px var(--tint);font-size:13px;color:var(--ink-2);transition:background-color .15s var(--ease),color .15s var(--ease),scale .15s var(--ease)}
+.chipb:hover{background:var(--tint);color:var(--c-top)}
+.swrap{padding:20px;overflow:hidden;transition:height .4s var(--ease)}
+.skillbox:not(.open) .swrap{height:190px;-webkit-mask-image:linear-gradient(#000 40%,transparent);mask-image:linear-gradient(#000 40%,transparent)}
+.swrap .h{color:var(--c-top);font-weight:600;scroll-margin-top:calc(var(--bar) + 24px)}
+.swrap .h.flash{background:var(--tint);box-shadow:0 0 0 4px var(--tint);border-radius:2px}
+.swrap .k{color:var(--c-top)}
+.swrap .q{color:#27325c;background:var(--tint);box-shadow:0 0 0 3px var(--tint);border-radius:2px}
+.swrap .c{color:#8a3ffc}
+.swrap .m{color:var(--c-top)}
+.swrap .t{color:var(--ink-2)}
+.more{display:block;width:100%;min-height:48px;border:0;border-top:1px solid var(--tint);background:transparent;color:var(--c-top);font-size:14px;font-weight:500;transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.more:hover{background:var(--tint)}
+.try{padding:20px;border-top:1px solid var(--tint);background:#fff;border-radius:0 0 16px 16px}
+.tl{margin:0 0 12px;font-size:14px;font-weight:600}
+.crow{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px;margin:0 0 16px}
+.cons{flex:1 1 320px;margin:0;font-size:14px;line-height:2.3}
+.fill{font:inherit;font-size:16px;color:var(--c-top);min-height:34px;max-width:100%;padding:0 8px;margin:0 2px;border:0;border-radius:6px;background:var(--wash);box-shadow:inset 0 0 0 1px var(--tint);transition:box-shadow .15s var(--ease)}
+.fill::placeholder{color:#8c97c4}
+.fill:focus{outline:0;box-shadow:inset 0 0 0 2px var(--c-top)}
+.term{margin:16px 0 0;border-radius:12px;background:#1b1d24;overflow:hidden}
+.tbar{padding:10px 16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.1)}
+.term pre{padding:16px;color:#d5d8e0;font-size:13px;min-height:60px}
+.term .c{color:#93a9ff}.term .g{color:#8ed3a6}.term .d{color:#787e93}
+.term .line{display:block;animation:in .3s var(--ease) both}
+.caret::after{content:"▍";color:#93a9ff}
+
+.toolhead{display:none;margin:0 0 24px}
+body.tools .toolhead{display:block}
+body.tools article>:not(.skillbox):not(.toolhead){display:none}
+body.tools nav.toc{display:none}
+body.tools .wrap{grid-template-columns:minmax(0,760px);justify-content:center;padding-top:48px}
+body.tools .skillbox{margin:0 0 32px}
+
+/* ---------- scoring ---------- */
+.scoring{margin:44px 0;border-radius:16px;background:#1b1d24;color:#e6e8ef;padding:8px 20px 12px;overflow-x:auto}
+.scoring table{width:100%;border-collapse:collapse;font-size:14px}
+.scoring caption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.scoring th,.scoring td{text-align:left;padding:12px 16px 12px 0;border-bottom:1px solid rgba(255,255,255,.1);vertical-align:middle}
+.scoring thead th{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:500}
+.scoring tbody tr:last-child>*{border-bottom:0}
+.scoring th[scope=row]{font-size:13px;font-weight:500;white-space:nowrap}
+.scoring .bar{width:26%;min-width:96px}
+.track{display:block;height:10px;border-radius:5px;background:rgba(255,255,255,.12);overflow:hidden}
+.fillbar{display:block;height:100%;border-radius:5px;background:#b3bcff;transform-origin:0 50%;transform:scaleX(var(--v))}
+.js .scoring .fillbar{transform:scaleX(0);transition:transform .9s var(--ease);transition-delay:calc(var(--i) * 90ms)}
+.js .scoring.seen .fillbar{transform:scaleX(var(--v))}
+.scoring .num{font-weight:600;font-variant-numeric:tabular-nums;text-align:right;width:44px}
+.scoring .pb{color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums;text-align:right;width:32px}
+.scoring .diag{color:rgba(255,255,255,.82);padding-right:0}
+.scoring tbody tr{transition:background-color .15s var(--ease)}
+.scoring tbody tr:hover{background:rgba(255,255,255,.05)}
+@media(max-width:640px){.scoring thead{display:none}.scoring tr{display:grid;grid-template-columns:1fr auto auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1)}.scoring tbody tr:last-child{border-bottom:0}.scoring th,.scoring td{padding:0;border:0}.scoring .bar{grid-column:1/-1;width:auto}.scoring .diag{grid-column:1/-1}.scoring .num{grid-row:1;grid-column:2}.scoring .pb{grid-row:1;grid-column:3}}
+
+/* ---------- schémas ---------- */
+.schema{border-radius:16px;background:linear-gradient(180deg,var(--wash),#eef2ff);box-shadow:0 0 0 1px var(--tint);padding:20px}
+.schema svg{display:block;width:100%;height:auto}
+.schema text{font-size:18px;fill:var(--c-top)}
+.schema text.cap{font-size:15px;fill:var(--ink-2)}
+.schema .chip{fill:#fff;stroke:var(--tint)}
+.schema .wire{fill:none;stroke:#cfd8f7;stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:0}
+.schema .spark{fill:none;stroke:var(--c-top);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:.12 1;stroke-dashoffset:-.62}
+.schema .core{filter:drop-shadow(0 10px 18px rgba(47,79,224,.3))}
+.js .schema .wire{stroke-dashoffset:1;transition:stroke-dashoffset .9s var(--ease);transition-delay:calc(var(--i) * 110ms)}
+.js .schema.seen .wire{stroke-dashoffset:0}
+.js .schema .spark{opacity:0}
+@keyframes run{from{stroke-dashoffset:.12;opacity:1}to{stroke-dashoffset:-.62;opacity:1}}
+.js .schema.seen .spark{animation:run 1.4s var(--ease) both;animation-delay:calc(.5s + var(--i) * 110ms)}
+
+/* ---------- relevé Jev ---------- */
+.jev{margin:32px 0;padding:24px;border-radius:16px;background:var(--wash);box-shadow:0 0 0 1px var(--tint)}
+.stack{display:flex;height:18px;border-radius:9px;overflow:hidden;gap:2px}
+.seg{min-width:4px;transform-origin:0 50%}
+.js .jev .stack{clip-path:inset(0 100% 0 0 round 9px);transition:clip-path 1s var(--ease)}
+.js .jev.seen .stack{clip-path:inset(0 0 0 0 round 9px)}
+.ja{background:#2f4fe0}.jb{background:#7fa0ff}.jc{background:#f0a64b}.jd{background:#c9cdd8}
+.jev ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px 24px;margin:20px 0 0;padding:0;font-size:15px}
+.jev li{margin:0;display:flex;align-items:center;gap:8px}
+.jev b{font-variant-numeric:tabular-nums;font-weight:600}
+.dot{width:10px;height:10px;border-radius:3px;flex:none}
+.jl{margin:16px 0 0;font-size:15px}
+.jev figcaption{margin:12px 0 0;font-size:13px;color:var(--ink-2)}
+
+/* ---------- arborescence ---------- */
+.tree{margin:44px 0;border-radius:16px;background:var(--wash);box-shadow:0 0 0 1px var(--tint);display:grid;grid-template-columns:1fr;overflow:hidden}
+@media(min-width:680px){.tree{grid-template-columns:230px 1fr}}
+.nodes{padding:12px;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--tint)}
+@media(min-width:680px){.nodes{border-bottom:0;border-right:1px solid var(--tint)}}
+.root{margin:0;padding:8px 10px;font-size:13px;color:var(--ink-2)}
+.node{display:flex;align-items:center;gap:6px;width:100%;text-align:left;min-height:40px;padding:0 10px;border:0;border-radius:8px;background:transparent;font-size:13px;color:var(--ink);transition:background-color .15s var(--ease),color .15s var(--ease),scale .15s var(--ease)}
+.node:not(.folder){padding-left:32px}
+.chev{width:16px;height:16px;flex:none;transition:rotate .25s var(--ease)}
+.folder[aria-expanded=true] .chev{rotate:90deg}
+.node:hover{background:var(--tint)}
+.node[aria-current=true]{background:var(--c-top);color:#fff}
+.kids{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s var(--ease)}
+.folder[aria-expanded=false]+.kids{grid-template-rows:0fr}
+.kin{overflow:hidden;min-height:0;display:flex;flex-direction:column;gap:2px;padding-left:20px}
+.panes{padding:24px;min-height:220px;background:#fff}
+.pick{margin:0;color:var(--ink-2);font-size:15px}
+.pane{animation:in .25s var(--ease) both}
+.pn{margin:0 0 8px;font-size:15px;font-weight:600;color:var(--c-top)}
+.pd{margin:0;font-size:17px}
+.exl{margin:28px 0 12px;font-size:13px;color:var(--ink-2)}
+.pane pre{padding:16px;border-radius:10px;background:var(--wash);font-size:12.5px}
+
+/* ---------- flottants ---------- */
+.pill{position:fixed;right:20px;bottom:20px;z-index:15;min-height:44px;padding:0 16px;border:0;border-radius:22px;background:#fff;box-shadow:0 0 0 1px var(--tint),0 6px 20px rgba(33,55,157,.16);font-size:14px;font-weight:500;color:var(--c-top);font-variant-numeric:tabular-nums;transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.pill:hover{background:var(--tint)}
+.resume{position:fixed;left:20px;bottom:20px;z-index:15;display:flex;align-items:center;gap:4px;padding:4px;border-radius:16px;background:#fff;box-shadow:0 0 0 1px var(--tint),0 6px 20px rgba(33,55,157,.16);max-width:calc(100vw - 40px);animation:in .4s var(--ease) both}
+.resume[hidden]{display:none}
+.go{display:flex;flex-direction:column;align-items:flex-start;min-height:44px;min-width:0;padding:4px 12px;border:0;border-radius:12px;background:transparent;text-align:left;transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.go:hover{background:var(--tint)}
+.rl{font-size:14px;font-weight:600;color:var(--c-top);line-height:1.3}
+.rs{font-size:13px;color:var(--ink-2);line-height:1.3;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:560px){.resume{bottom:76px}}
+
+/* ---------- fin ---------- */
+.end{padding:120px 24px 64px}
+.end h2{font-size:clamp(30px,4.6vw,52px);line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0 0 40px;max-width:16em;text-wrap:balance}
+.cta{display:inline-flex;align-items:center;gap:14px;min-height:60px;padding:0 24px 0 28px;border-radius:16px;background:#fff;color:var(--c-top);font-size:18px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(20,30,110,.25);transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.cta:hover{background:var(--tint)}
+.cta .i{width:20px;height:20px;transition:translate .2s var(--ease)}
+.cta:hover .i{translate:4px 0}
+.end .mark{margin-top:120px}
+
+/* ---------- test de fin ---------- */
+.qcard{margin:120px 0 0;padding:48px 40px;border-radius:28px}
+.qt{margin:0;font-size:clamp(28px,4vw,40px);line-height:1.08;letter-spacing:-.025em;font-weight:600;text-wrap:balance}
+.qn{margin:16px 0 36px;font-size:16px;color:rgba(255,255,255,.88)}
+@media(max-width:560px){.qcard{padding:36px 24px}}
+.qopen{display:inline-flex;align-items:center;gap:14px;min-height:60px;padding:0 24px 0 28px;border:0;border-radius:16px;background:#fff;color:var(--c-top);font-size:18px;font-weight:600;box-shadow:0 10px 30px rgba(20,30,110,.25);transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.qopen .i{width:20px;height:20px;transition:translate .2s var(--ease)}
+.qopen:hover .i{translate:4px 0}
+.qopen:hover{background:var(--tint)}
+.qopen:active,.qyes:active,.qno:active,.qback:active,.qx:active,.qgo:active{scale:.96}
+.quiz{width:min(92vw,560px);max-height:90vh;border-radius:28px;background:#fff;box-shadow:0 30px 80px rgba(20,30,110,.35);overflow:auto}
+.quiz::backdrop{background:rgba(47,79,224,.22);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2)}
+.quiz[open]{animation:qin .35s var(--ease) both}
+@keyframes qin{from{opacity:0;scale:.96;translate:0 12px}}
+.qhead{display:flex;align-items:center;gap:8px;padding:12px 12px 8px}
+.qstep{margin:0 auto 0 8px;font-size:14px;font-weight:500;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.qback,.qx{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:0;border-radius:12px;background:transparent;color:var(--ink-2);transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.qback .i{rotate:180deg}
+.qback:hover,.qx:hover{background:var(--wash);color:var(--c-top)}
+.qback[hidden]{display:none}
+.qbar{height:3px;margin:0 24px;border-radius:2px;background:var(--tint);overflow:hidden}
+.qbar i{display:block;height:100%;background:var(--c-top);transform-origin:0 50%;transform:scaleX(0);transition:transform .35s var(--ease)}
+.qbody{padding:32px 28px 28px}
+.qq{animation:in .3s var(--ease) both}
+.qtext{margin:0 0 40px;font-size:clamp(21px,3.4vw,26px);line-height:1.3;font-weight:600;letter-spacing:-.01em;text-wrap:balance;min-height:4em}
+.qans{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qyes,.qno{min-height:56px;border:0;border-radius:16px;font-size:17px;font-weight:600;transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.qyes{background:var(--c-top);color:#fff}
+.qyes:hover{background:#2743c4}
+.qno{background:var(--wash);color:var(--c-top);box-shadow:inset 0 0 0 1px var(--tint)}
+.qno:hover{background:var(--tint)}
+.qres{animation:in .35s var(--ease) both}
+.qres[hidden],.qq[hidden],.qnext[hidden],.qalso[hidden]{display:none}
+.qscore{border-radius:20px;padding:28px}
+.qscore p{margin:0;display:flex;align-items:baseline;gap:12px}
+.qscore b{font-size:56px;line-height:1;font-weight:600;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.qscore span{font-size:17px;color:rgba(255,255,255,.9)}
+.qscore p{flex-wrap:wrap}
+.qmeter{height:8px;margin:20px 0 0;border-radius:4px;background:rgba(255,255,255,.25);overflow:hidden}
+.qmeter i{display:block;height:100%;border-radius:4px;background:#fff;transform-origin:0 50%;transform:scaleX(0);transition:transform .9s var(--ease)}
+.qscore .qmsg{margin:20px 0 0;font-size:18px;line-height:1.4;font-weight:500;color:#fff}
+.ql{margin:28px 0 10px;font-size:14px;font-weight:600}
+.qgo{display:flex;align-items:center;min-height:52px;padding:10px 18px;border-radius:14px;background:var(--wash);box-shadow:inset 0 0 0 1px var(--tint);color:var(--c-top);font-weight:600;font-size:16px;line-height:1.3;text-decoration:none;transition:background-color .15s var(--ease),scale .15s var(--ease)}
+.qgo:hover{background:var(--tint)}
+.qalso ul{list-style:none;margin:0;padding:0}
+.qalso li{margin:0}
+.qalso a{display:block;padding:10px 0;font-size:15px;line-height:1.35;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);transition:color .15s var(--ease)}
+.qalso li:last-child a{border-bottom:0}
+.qalso a:hover{color:var(--c-top)}
+.qtips ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.qtips>ul>li{margin:0;border-radius:16px;background:var(--wash);box-shadow:inset 0 0 0 1px var(--tint)}
+.qtip{display:flex;align-items:flex-start;gap:12px;width:100%;min-height:52px;padding:14px 14px 14px 16px;border:0;border-radius:16px;background:transparent;text-align:left;font-size:16px;line-height:1.4;font-weight:600;color:var(--ink);transition:background-color .15s var(--ease),color .15s var(--ease)}
+.qtip:hover{background:var(--tint)}
+.qtip .chev{margin-top:3px;color:var(--c-top)}
+.qtip[aria-expanded=true] .chev{rotate:90deg}
+.qtip[aria-expanded=true]{color:var(--c-top)}
+.qtd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease)}
+.qtip[aria-expanded=true]+.qtd{grid-template-rows:1fr}
+.qtd>div{overflow:hidden;min-height:0}
+.qtd .why{margin:0;padding:0 16px 0 44px;font-size:15px;line-height:1.55;color:var(--ink)}
+.qtd ol{margin:14px 0 0;padding:0 16px 18px 64px;font-size:15px;line-height:1.5}
+.qtd ol li{margin:0 0 8px;padding-left:4px}
+.qtd ol li::marker{color:var(--c-top);font-weight:600}
+.qtd code{font-family:"Geist Mono",ui-monospace,monospace;font-size:12.5px;padding:2px 5px;border-radius:5px;background:#fff;box-shadow:inset 0 0 0 1px var(--tint);overflow-wrap:anywhere}
+.qend{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:32px 0 0}
+.qcta{min-height:52px;font-size:16px;background:var(--c-top);color:#fff;box-shadow:none}
+.qcta:hover{background:#2743c4}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}.js .reveal{opacity:1;translate:0 0}.js .schema .spark{opacity:1}}
+</style>
+</head>
+<body data-lang="en">
+<header class="hero panel">
+  <div class="in">
+    <svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="currentColor"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="currentColor"/></svg>
+    <h1>I built an SEO system with Obsidian, Jev and Claude (it works!)</h1>
+    <p class="sub">(no SEO tool)</p>
+    <p class="by">Timothée</p>
+  </div>
+</header>
+<div class="topbar">
+  <div class="in">
+    <button class="where" type="button" aria-label="Open the contents"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg><span class="cur">Start</span></button>
+    <span class="time" aria-live="off"><b>0</b> min left</span>
+    <div class="seg2" role="group" aria-label="View"><button type="button" data-mode="read" aria-pressed="true">Reading</button><button type="button" data-mode="tools" aria-pressed="false">Skills</button></div>
+    <a class="lang" href="index.html" hreflang="fr">FR</a>
+  </div>
+  <div class="progress" aria-hidden="true"><i></i></div>
+</div>
+<div class="wrap">
+  <nav class="toc" aria-label="Contents"><p>Contents</p><ol><li><a href="#s1">ARGUMENT 1: The system is meant to replace all your SEO tools</a></li><li><a href="#s2">ARGUMENT 2: To win the SEO game, you will have to dominate the proprietary data game.</a></li><li><a href="#s3">THE SETUP</a></li><li><a href="#s4">THE SYSTEM IN 4 ADVANTAGES</a></li><li><a href="#s5">CLAUDE x OBSIDIAN: keywords</a></li><li><a href="#s6">CLAUDE x OBSIDIAN: SEO audit and pre-audit</a></li><li><a href="#s7">The technical agents</a></li><li><a href="#s8">I'm adding a layer with a new model: JEV</a></li></ol></nav>
+  <article>
+<div class="toolhead"><button class="btn dlall" type="button"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7.5 11l4.5 4.5 4.5-4.5"/><path d="M5 20h14"/></svg><span>Download all (.zip)</span></button></div>
+<p>I'm going to give you solid arguments to sell you on setting up a system and to stop chatting in Claude or ChatGPT.</p>
+<figure class="shot"><button class="zoom" type="button" aria-label="Enlarge the image"><img src="images/01-search-console.png" alt="" loading="lazy"></button></figure>
+<p>But first, there is a problem.</p>
+<p>People often teach you what to do: do this, do that.</p>
+<p>Much more rarely why you should do it, which data to rely on, and in which cases it's worth it.</p>
+<p>For example, everybody tells you that you need to be cited by AI. That's a bad angle. The stake is to do everything you can to find keywords that LLMs won't eat in the next 5 years.</p>
+<p>Another example: people sell you traffic curves to show you how good the SEO strategy was. In 2026, that's hard to accept. You now have to find business keywords and stop chasing traffic as if it were an interesting KPI.</p>
+<p>Same thing for keyword volume: most of the keywords that bring in clients don't exist in classic SEO tools. Literally undetectable. Well, you have to find them. That's your mission as a consultant!</p>
+<p>There is no hack or secret to tackle this GEO or AI SEO. Your data will make the difference. We're entering a data game, and nothing else.</p>
+<p>Except that today you can't benefit from it, because you don't have a system. And you don't have permanent memory.</p>
+<p>Oh, and it's not just about learning to write skills, it's about having a complete system that can act as an assistant. Like a junior consultant.</p>
+<p>For example, you can ask it this:</p>
+<div class="scoring reveal"><table><caption>GEO scoring, per paragraph</caption><thead><tr><th scope="col">Score</th><th scope="col" class="bar">Bar</th><th scope="col" class="num">/100</th><th scope="col" class="pb">Pb</th><th scope="col" class="diag">Diagnosis</th></tr></thead><tbody><tr style="--i:0"><th scope="row">Surprise</th><td class="bar"><span class="track"><span class="fillbar" style="--v:0.28"></span></span></td><td class="num" data-v="28">28</td><td class="pb">5</td><td class="diag">Repeats the consensus, no proprietary data</td></tr><tr style="--i:1"><th scope="row">Grounding</th><td class="bar"><span class="track"><span class="fillbar" style="--v:0.41"></span></span></td><td class="num" data-v="41">41</td><td class="pb">7</td><td class="diag">0.7 proof / 100 words, threshold at 2</td></tr><tr style="--i:2"><th scope="row">Content Effort</th><td class="bar"><span class="track"><span class="fillbar" style="--v:0.34"></span></span></td><td class="num" data-v="34">34</td><td class="pb">3</td><td class="diag">Generic synthesis, no test run</td></tr><tr style="--i:3"><th scope="row">RRF Alignment</th><td class="bar"><span class="track"><span class="fillbar" style="--v:0.62"></span></span></td><td class="num" data-v="62">62</td><td class="pb">4</td><td class="diag">Pricing and integrations not covered</td></tr><tr style="--i:4"><th scope="row">RAG Structurer</th><td class="bar"><span class="track"><span class="fillbar" style="--v:0.52"></span></span></td><td class="num" data-v="52">52</td><td class="pb">4</td><td class="diag">Answer 78 words after the H2 "How to choose"</td></tr><tr style="--i:5"><th scope="row">Freshness Guard</th><td class="bar"><span class="track"><span class="fillbar" style="--v:0.15"></span></span></td><td class="num" data-v="15">15</td><td class="pb">2</td><td class="diag">Last date cited: 2023</td></tr><tr style="--i:6"><th scope="row">Action Engine</th><td class="bar"><span class="track"><span class="fillbar" style="--v:0.38"></span></span></td><td class="num" data-v="38">38</td><td class="pb">3</td><td class="diag">Explains without letting you act</td></tr></tbody></table></div>
+<p>What you see in the image is a mission I gave to my scoring agent.</p>
+<p>It reads my text and scores each paragraph against my GEO criteria.</p>
+<p>That lowers the risk of writing for nothing.</p>
+<p>But you can also ask it to model your Google Search Console data, like we did with Seocity.app.</p>
+<figure class="shot"><button class="zoom" type="button" aria-label="Enlarge the image"><img src="images/03-seocity.png" alt="" loading="lazy"></button></figure>
+<p>The only limit of the system is your ability to project yourself into the project and to come up with proposals.</p>
+<p>Anyway, the arguments.</p>
+<h2 id="s1" class="reveal">ARGUMENT 1: The system is meant to replace all your SEO tools</h2>
+<figure class="schema reveal"><svg viewBox="0 0 760 320" role="img" aria-label="Six tools connected to Claude Code and your notes"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset=".45" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient></defs><path class="wire" pathLength="1" d="M225 40 C270 40,262 148,295 148" style="--i:0"/><path class="spark" pathLength="1" d="M225 40 C270 40,262 148,295 148" style="--i:0"/><path class="wire" pathLength="1" d="M225 160 C270 160,262 160,295 160" style="--i:1"/><path class="spark" pathLength="1" d="M225 160 C270 160,262 160,295 160" style="--i:1"/><path class="wire" pathLength="1" d="M225 280 C270 280,262 172,295 172" style="--i:2"/><path class="spark" pathLength="1" d="M225 280 C270 280,262 172,295 172" style="--i:2"/><path class="wire" pathLength="1" d="M535 40 C490 40,498 148,465 148" style="--i:3"/><path class="spark" pathLength="1" d="M535 40 C490 40,498 148,465 148" style="--i:3"/><path class="wire" pathLength="1" d="M535 160 C490 160,498 160,465 160" style="--i:4"/><path class="spark" pathLength="1" d="M535 160 C490 160,498 160,465 160" style="--i:4"/><path class="wire" pathLength="1" d="M535 280 C490 280,498 172,465 172" style="--i:5"/><path class="spark" pathLength="1" d="M535 280 C490 280,498 172,465 172" style="--i:5"/><rect class="core" x="295" y="114" width="170" height="92" rx="26" fill="url(#g1)"/><g transform="translate(338 160)" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(0)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(30)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(60)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(90)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(120)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(150)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(180)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(210)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(240)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(270)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(300)"/><line x1="0" y1="-5" x2="0" y2="-17" transform="rotate(330)"/></g><line x1="380" y1="134" x2="380" y2="186" stroke="rgba(255,255,255,.35)"/><g transform="translate(422 160)"><path d="M-3 -19 L9 -11 L14 6 L5 19 L-9 16 L-14 2 Z" fill="#fff"/><path d="M-3 -19 L1 -2 L14 6 M1 -2 L-9 16 M1 -2 L-14 2" stroke="#b9c8ff" stroke-width="1.2" fill="none"/></g><text class="cap" x="380" y="238" text-anchor="middle">Claude Code · your notes</text><text x="215" y="46" text-anchor="end">Search Console</text><text x="215" y="166" text-anchor="end">Keyword Planner</text><text x="215" y="286" text-anchor="end">YouTube</text><text x="545" y="46">Lighthouse</text><text x="545" y="166">Analytics</text><text x="545" y="286">Trends</text></svg></figure>
+<h2 id="s2" class="reveal">ARGUMENT 2: To win the SEO game, you will have to dominate the proprietary data game.</h2>
+<figure class="schema reveal"><svg viewBox="0 0 760 380" role="img" aria-label="Five sources connected to Obsidian"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset=".45" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient></defs><path class="wire" pathLength="1" d="M270 40 C400 40,420 165,540 165" style="--i:0"/><path class="spark" pathLength="1" d="M270 40 C400 40,420 165,540 165" style="--i:0"/><path class="wire" pathLength="1" d="M270 112 C400 112,420 175,540 175" style="--i:1"/><path class="spark" pathLength="1" d="M270 112 C400 112,420 175,540 175" style="--i:1"/><path class="wire" pathLength="1" d="M270 184 C400 184,420 185,540 185" style="--i:2"/><path class="spark" pathLength="1" d="M270 184 C400 184,420 185,540 185" style="--i:2"/><path class="wire" pathLength="1" d="M270 256 C400 256,420 195,540 195" style="--i:3"/><path class="spark" pathLength="1" d="M270 256 C400 256,420 195,540 195" style="--i:3"/><path class="wire" pathLength="1" d="M270 328 C400 328,420 205,540 205" style="--i:4"/><path class="spark" pathLength="1" d="M270 328 C400 328,420 205,540 205" style="--i:4"/><rect class="chip" x="20" y="15" width="250" height="50" rx="16"/><text x="38" y="46">Client call</text><rect class="chip" x="20" y="87" width="250" height="50" rx="16"/><text x="38" y="118">Support ticket</text><rect class="chip" x="20" y="159" width="250" height="50" rx="16"/><text x="38" y="190">Previous SEO strategy</text><rect class="chip" x="20" y="231" width="250" height="50" rx="16"/><text x="38" y="262">Thinking</text><rect class="chip" x="20" y="303" width="250" height="50" rx="16"/><text x="38" y="334">Video</text><rect class="core" x="540" y="135" width="180" height="100" rx="26" fill="url(#g2)"/><g transform="translate(630 185) scale(1.25)"><path d="M-3 -19 L9 -11 L14 6 L5 19 L-9 16 L-14 2 Z" fill="#fff"/><path d="M-3 -19 L1 -2 L14 6 M1 -2 L-9 16 M1 -2 L-14 2" stroke="#b9c8ff" stroke-width="1.2" fill="none"/></g><text class="cap" x="630" y="268" text-anchor="middle">Obsidian · your notes</text></svg></figure>
+<h2 id="s3" class="reveal">THE SETUP</h2>
+<p>You should never move to Obsidian without implementing the LLM wiki model:</p>
+<figure class="shot"><button class="zoom" type="button" aria-label="Enlarge the image"><img src="images/06-llm-wiki-arborescence.png" alt="" loading="lazy"></button></figure>
+<div class="tree reveal"><div class="nodes" aria-label="Base folder tree"><p class="root">ma-base/</p><button class="node d0" type="button" data-i="0"><span class="nm">AGENTS.md</span></button><button class="node d0 folder" type="button" data-i="1" aria-expanded="true"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="nm">raw/</span></button><div class="kids"><div class="kin"><button class="node d1" type="button" data-i="2"><span class="nm">articles/</span></button><button class="node d1" type="button" data-i="3"><span class="nm">data/</span></button><button class="node d1" type="button" data-i="4"><span class="nm">clients/</span></button><button class="node d1" type="button" data-i="5"><span class="nm">notes/</span></button></div></div><button class="node d0 folder" type="button" data-i="6" aria-expanded="true"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="nm">wiki/</span></button><div class="kids"><div class="kin"><button class="node d1" type="button" data-i="7"><span class="nm">index.md</span></button><button class="node d1" type="button" data-i="8"><span class="nm">log.md</span></button><button class="node d1" type="button" data-i="9"><span class="nm">hypotheses.md</span></button><button class="node d1" type="button" data-i="10"><span class="nm">sources/</span></button><button class="node d1" type="button" data-i="11"><span class="nm">entities/</span></button><button class="node d1" type="button" data-i="12"><span class="nm">concepts/</span></button><button class="node d1" type="button" data-i="13"><span class="nm">queries/</span></button></div></div></div><div class="panes" aria-live="polite"><p class="pick">Click a folder or a file.</p><div class="pane" id="p0" hidden><p class="pn">AGENTS.md</p><p class="pd">the configuration, read at each session</p><p class="exl">Excerpt from my base (in French)</p><pre>## 3. Architecture — 3 couches
+
+raw/    ← sources immuables (lecture seule pour l'agent)
+wiki/   ← domaine de l'agent (écriture exclusive)
+
+**Règle d'or** : `raw/` est immuable. L'agent lit, ne modifie jamais.
+
+## 5.4 Citations et sourcing (DOCTRINE)
+
+- **Toute donnée chiffrée a une source** : [[sources/...]]
+- **Pas de source = pas d'affirmation**
+- Quand une source est vague, marquer `confidence: low`
+- Jamais d'invention de chiffres, benchmarks ou pourcentages</pre></div><div class="pane" id="p1" hidden><p class="pn">raw/</p><p class="pd">your sources, IMMUTABLE</p></div><div class="pane" id="p2" hidden><p class="pn">articles/</p><p class="pd">monitoring, web clippings</p></div><div class="pane" id="p3" hidden><p class="pn">data/</p><p class="pd">Search Console exports, crawls</p></div><div class="pane" id="p4" hidden><p class="pn">clients/</p><p class="pd">client notes, briefs received</p></div><div class="pane" id="p5" hidden><p class="pn">notes/</p><p class="pd">your notes, your call transcripts</p></div><div class="pane" id="p6" hidden><p class="pn">wiki/</p><p class="pd">the agent's domain</p></div><div class="pane" id="p7" hidden><p class="pn">index.md</p><p class="pd">the catalog of all pages</p><p class="exl">Excerpt from my base (in French)</p><pre>- [[sources/2026-04-25-organikk-reddit-pour-geo]] — Reddit pour citations IA
+  sans ban (ratio 9-1-1, 44 % citations sociales AI Overviews)
+- [[sources/2026-05-08-organikk-ranker-chatgpt-2026]] — Ranker dans ChatGPT :
+  cite humains+sources, décisionnel d'abord (900M WAU)
+- [[sources/2026-05-13-algorithme-process-verifier-indexation]] — Audit
+  indexation piloté par skill Claude, 9 points/URL, sans outil payant</pre></div><div class="pane" id="p8" hidden><p class="pn">log.md</p><p class="pd">the log, append-only</p><p class="exl">Excerpt from my base (in French)</p><pre>## [2026-06-19] ingest | Playbook Reddit (SEO + GEO)
+- source_type: doctrine
+- source: [[sources/2026-06-19-playbook-reddit-seo-geo]]
+- entities touchées: 2 (création [[entities/reddit]], maj [[entities/perplexity]])
+- concepts touchés: 1 (création [[concepts/parasite-seo]])
+- pages créées: 3 / mises à jour: 2 (perplexity + index)
+- contradictions: N
+- angle SEO identifié: priorité GEO &gt; parasite SEO &gt; insights ; trou FR
+  (pas de communauté SEO FR, pas d'étude de cas FR chiffrée) = cible étude
+  first-party</pre></div><div class="pane" id="p9" hidden><p class="pn">hypotheses.md</p><p class="pd">the convictions not proven yet</p><p class="exl">Excerpt from my base (in French)</p><pre>H-001 | Google Search utilise en prod une mémoire type Titans / MIRAS
+      | statut : heuristique
+      | contre-argument : papier de recherche DeepMind, pas une confirmation
+        de prod. Transfert non observable de l'extérieur.
+
+H-004 | Une page « style wiki » est mieux citée en SGE qu'une page statique
+      | statut : ouvert
+      | contre-argument : à chercher (prochaine revue mensuelle)</pre></div><div class="pane" id="p10" hidden><p class="pn">sources/</p><p class="pd">one sheet per ingested source</p></div><div class="pane" id="p11" hidden><p class="pn">entities/</p><p class="pd">the named objects: algorithms, tools, players</p><p class="exl">Excerpt from my base (in French)</p><pre>wiki/entities/perplexity.md
+
+## Pages liées
+… [[sources/2026-04-13-call-04]] · [[sources/2026-06-19-playbook-reddit-seo-geo]]
+  · [[concepts/aeo]] · [[concepts/data-proprietaire]] · [[entities/reddit]]
+  · [[entities/chatgpt-search]] · [[entities/google-ai-mode]]</pre></div><div class="pane" id="p12" hidden><p class="pn">concepts/</p><p class="pd">the ideas and the mechanics</p><p class="exl">Excerpt from my base (in French)</p><pre>---
+type: concept
+title: Wiki persistant vs RAG
+aliases: [wiki-vs-rag]
+tags: [pattern-kb, rag, meta]
+created: 2026-04-11
+updated: 2026-08-07
+sources: 1
+confidence: high
+status: stable
+---</pre></div><div class="pane" id="p13" hidden><p class="pn">queries/</p><p class="pd">the questions filed as pages</p><p class="exl">Excerpt from my base (in French)</p><pre>wiki/queries/2026-04-12-wiki-pattern-vs-grounding-score.md
+
+---
+type: query
+sources: 8
+confidence: medium
+status: stable
+---
+
+# Le pattern wiki persistant optimise-t-il structurellement le Grounding Score ?
+
+**Réponse courte.** Oui, mais de façon indirecte et non validée empiriquement.</pre></div></div></div>
+<p>The principle comes from Andrej Karpathy.</p>
+<p>The idea:</p>
+<p>the LLM writes and maintains its own wiki.</p>
+<p>In each new conversation, it can start again from what it has already learned and written.</p>
+<p>My Obsidian space is split into two parts.</p>
+<h4 class="dir">raw/</h4>
+<p>That's where I keep all the raw sources:</p>
+<ul>
+<li>client calls;</li>
+<li>Search Console exports;</li>
+<li>articles;</li>
+<li>other original data.</li>
+</ul>
+<p>Claude never modifies this folder.</p>
+<h4 class="dir">wiki/</h4>
+<p>That's the part organized by Claude, which connects the different sources from the different /raw folders</p>
+<h2 id="s4" class="reveal">THE SYSTEM IN 4 ADVANTAGES</h2>
+<p class="b">1. You have permanent memory:</p>
+<p>Claude forgets the context → you need a local system with Obsidian</p>
+<p class="b">2. The system is an exponential model:</p>
+<p>Tomorrow companies will buy your SEO system, and will stop paying a day rate</p>
+<p class="b">3. Fight technical isolation:</p>
+<p>New models every day, you no longer know what to try. Here, you keep the same base and you iterate with structural updates, without ever starting again from 0</p>
+<p class="b">4. Huge efficiency gain:</p>
+<p>No memory and no Obsidian → massive productivity loss, because you have no standardized process for your audits, keyword research, etc.</p>
+<figure class="shot" style="max-width:62%"><button class="zoom" type="button" aria-label="Enlarge the image"><img src="images/07-message-client.png" alt="" loading="lazy"></button></figure>
+<h2 id="s5" class="reveal">CLAUDE x OBSIDIAN: keywords</h2>
+<p>How the system thinks about keywords:</p>
+<ul>
+<li>Don't look for keywords eaten by LLMs, look for the ones your user will click on.</li>
+<li>80% of keyword research is commodity → AI will do it as well as or better than any tool</li>
+<li>20% is the real work: go and look on Reddit, on X, look for real expertise and real experience</li>
+<li>Drop the paid tools: keywords obviously, but semantics too</li>
+<li>Stop selling traffic → sell leads by finding business keywords</li>
+<li>Build corpora / databases per client for each keyword research, so the system goes and picks the information straight from them</li>
+<li>One SEO base shared by all your SEO projects holds all your strategies, thinking, studies and stats for future research</li>
+<li>Keywords must be researched with the client context: expertise, tone, point of view → no copy-paste from a classic SEO tool</li>
+</ul>
+<h4>The mission</h4>
+<p>Sort keywords by business interest and decide what to push, create, consolidate or discard</p>
+<h4>Output</h4>
+<ul>
+<li>purchase intents;</li>
+<li>opportunities with no page created yet;</li>
+<li>underperforming pages;</li>
+<li>discarded queries;</li>
+<li>3 actions maximum</li>
+</ul>
+<h4>Full skill</h4>
+<section class="skillbox" id="skill1" data-name="seo-mots-cles-business"><div class="sbar"><span class="sname">seo-mots-cles-business</span><span class="smeta">58 lines</span><button class="btn dl" type="button" aria-label=".md seo-mots-cles-business"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7.5 11l4.5 4.5 4.5-4.5"/><path d="M5 20h14"/></svg><span>.md</span></button><button class="btn copy" type="button" data-copy="Copy" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy</span></button></div><div class="chips" aria-label="Skill sections"><button class="chipb" type="button" data-t="skill1h0">What you give Claude</button><button class="chipb" type="button" data-t="skill1h1">Instruction</button><button class="chipb" type="button" data-t="skill1h2">Steps</button><button class="chipb" type="button" data-t="skill1h3">Observed demand</button><button class="chipb" type="button" data-t="skill1h4">Output</button><button class="chipb" type="button" data-t="skill1h5">Rules</button></div><div class="swrap"><pre id="skill1pre"><span class="k">name:</span> seo-mots-cles-business
+
+<span class="k">description:</span> Sorts a site's keywords by business intent, with or without Search Console. Three gates, five decisions, no invented volume. Triggers: "business keywords", "which keywords to target", "what should my site fight for".
+
+<span class="h"># Business keywords</span>
+
+<span class="h" id="skill1h0">## What you give Claude</span>
+
+<span class="m">- </span>The offer and the conversion point (quote, appointment, purchase).
+<span class="m">- </span>The target, the market, the language.
+<span class="m">- </span>The URLs of the offer pages.
+<span class="m">- </span>The Search Console export, Queries + Pages, 3 to 6 months, if you have it.
+<span class="m">- </span>Client verbatims, if you have any.
+
+<span class="h" id="skill1h1">## Instruction</span>
+
+<span class="q">&gt; Run seo-mots-cles-business on [URL]. Offer: [...], target: [...], conversion: [...], market: [...].</span>
+
+<span class="h" id="skill1h2">## Steps</span>
+
+<span class="m">1. </span>List the non-brand queries. Group the variants of one need into one intent. Flag each merge.
+
+<span class="m">2. </span>Without Search Console, collect Google Suggest, web search and verbatims. Two queries that share the same top 10 go on one page.
+
+<span class="m">3. </span>Discard what an AI answers without a click: definition, "how to", single fact. Keep purchase, price, comparison, reviews, local.
+
+<span class="m">4. </span>Run each intent through the three gates:
+<span class="m">- </span>Matches the offer? Yes / No.
+<span class="m">- </span>Business intent? Strong / Medium / Weak, read from the modifiers, never from the volume.
+<span class="m">- </span>Demonstrated opportunity? Already captured / New / Not demonstrated.
+
+<span class="m">5. </span>Decide: PUSH, CREATE, CONSOLIDATE, DISCARD or TO VALIDATE.
+
+<span class="h" id="skill1h3">## Observed demand</span>
+
+Write Weak / Medium / Strong, with the signals named next to it.
+
+Strong: 5 Suggest variants or more, 7 mentions in calls or more.
+
+Only 20 Search Console impressions or more confirm the demand.
+
+<span class="h" id="skill1h4">## Output</span>
+
+<span class="m">- </span>Diagnosis in one sentence.
+<span class="m">- </span>3 to 5 figures, with source and period.
+<span class="m">- </span>Four tables: captured intents, opportunities with no page, underperforming pages, discarded queries with their reason.
+<span class="m">- </span>3 actions maximum, each justified by its gate.
+<span class="m">- </span>What the data does not allow you to conclude.
+
+<span class="h" id="skill1h5">## Rules</span>
+
+<span class="m">- </span>No invented volume, position or CPC.
+<span class="m">- </span>No score out of 10.
+<span class="m">- </span>A high-volume query outside the offer ends up DISCARDED, reason written.
+<span class="m">- </span>Search Console does not show the whole market.
+<span class="m">- </span>No page created by reflex. First look for an existing URL or existing content.
+
+Save the output in <span class="c">`YYYY-MM-DD-&lt;site&gt;-mots-cles-business.md`</span>.</pre></div><button class="more" type="button" aria-expanded="false" aria-controls="skill1pre" data-show="Show the full skill" data-hide="Collapse the skill">Show the full skill</button><div class="try"><p class="tl">Your instruction</p><div class="crow"><p class="cons">Run seo-mots-cles-business on <input class="fill" type="text" data-ph="[URL]" data-k="skill1-0-0" placeholder="URL" aria-label="URL" size="4" autocomplete="off" autocapitalize="off" spellcheck="false">. Offer: <input class="fill" type="text" data-ph="[...]" data-k="skill1-0-1" placeholder="Offer" aria-label="Offer" size="5" autocomplete="off" autocapitalize="off" spellcheck="false">, target: <input class="fill" type="text" data-ph="[...]" data-k="skill1-0-2" placeholder="target" aria-label="target" size="6" autocomplete="off" autocapitalize="off" spellcheck="false">, conversion: <input class="fill" type="text" data-ph="[...]" data-k="skill1-0-3" placeholder="conversion" aria-label="conversion" size="10" autocomplete="off" autocapitalize="off" spellcheck="false">, market: <input class="fill" type="text" data-ph="[...]" data-k="skill1-0-4" placeholder="market" aria-label="market" size="6" autocomplete="off" autocapitalize="off" spellcheck="false">.</p><button class="btn copyc" type="button" data-copy="Copy the instruction" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy the instruction</span></button></div><button class="btn play" type="button"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5.5v13l10.500-6.500z"/></svg><span>See the output</span></button><div class="term" hidden data-out="[&quot;Diagnosis in one sentence.&quot;, &quot;3 to 5 figures, with source and period.&quot;, &quot;Four tables: captured intents, opportunities with no page, underperforming pages, discarded queries with their reason.&quot;, &quot;3 actions maximum, each justified by its gate.&quot;, &quot;What the data does not allow you to conclude.&quot;]" data-file="YYYY-MM-DD-&lt;site&gt;-mots-cles-business.md"><div class="tbar">skill output</div><pre aria-live="polite"></pre></div></div></section>
+<h2 id="s6" class="reveal">CLAUDE x OBSIDIAN: SEO audit and pre-audit</h2>
+<ul>
+<li>The indexing audit: no need to go to Search Console by hand, the system does it on its own</li>
+<li>The PageSpeed audit: the system checks whether your pages are fast, you don't need to do it yourself</li>
+<li>Audits no longer sell → stop billing them separately, they must be included or automated</li>
+<li>With a system: you no longer need to run the audit by hand for each client</li>
+<li>The audit enriches the site's memory → with each audit you feed the site's history for the system</li>
+<li>Automation must not remove the manual check, which lets you sense trends and weak signals, in Search Console in particular</li>
+<li>The audit without a CMS is simpler and faster, you run it straight from Claude</li>
+</ul>
+<h4>The mission</h4>
+<p>Analyze indexing, speed, content, cannibalization, internal linking, structured data and business keywords.</p>
+<h4>Output</h4>
+<ul>
+<li>full diagnosis;</li>
+<li>priority business angle;</li>
+<li>overall SEO scoring;</li>
+<li>90-day roadmap;</li>
+<li>indexing</li>
+<li>Hn structure</li>
+<li>items to fix</li>
+</ul>
+<h3>Pre-audit before a call</h3>
+<p>The pre-audit is separate from the full audit.</p>
+<h4>The mission</h4>
+<p>Prepare an SEO pre-audit before a call, from the URL alone and from public data.</p>
+<h4>Output</h4>
+<ul>
+<li>Summary: 3 to 5 sentences.</li>
+<li>Diagnosis.</li>
+<li>Angle.</li>
+<li>Dated SEO state.</li>
+<li>Prioritized page templates.</li>
+<li>90-day roadmap.</li>
+<li>Call notes.</li>
+<li>To verify.</li>
+</ul>
+<h4>Full pre-audit skill</h4>
+<section class="skillbox" id="skill2" data-name="seo-pre-audit"><div class="sbar"><span class="sname">seo-pre-audit</span><span class="smeta">54 lines</span><button class="btn dl" type="button" aria-label=".md seo-pre-audit"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7.5 11l4.5 4.5 4.5-4.5"/><path d="M5 20h14"/></svg><span>.md</span></button><button class="btn copy" type="button" data-copy="Copy" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy</span></button></div><div class="chips" aria-label="Skill sections"><button class="chipb" type="button" data-t="skill2h0">What you give Claude</button><button class="chipb" type="button" data-t="skill2h1">Instruction</button><button class="chipb" type="button" data-t="skill2h2">Hard rule</button><button class="chipb" type="button" data-t="skill2h3">Public collection</button><button class="chipb" type="button" data-t="skill2h4">The 7 questions</button><button class="chipb" type="button" data-t="skill2h5">Output</button></div><div class="swrap"><pre id="skill2pre"><span class="k">name:</span> seo-pre-audit
+
+<span class="k">description:</span> Prepares an SEO pre-audit before a call, from the URL alone and from public data. Triggers: "prepare the pre-call", "run a pre-audit", "pre-call on [site]".
+
+<span class="h"># Pre-audit before a call</span>
+
+<span class="h" id="skill2h0">## What you give Claude</span>
+
+<span class="m">- </span>The site URL.
+<span class="m">- </span>The offer, the target and the goal, if you know them. Otherwise Claude infers them and marks them "to confirm on the call".
+
+<span class="h" id="skill2h1">## Instruction</span>
+
+<span class="q">&gt; Run a pre-audit on https://mysite.com. It sells [offer] to [target], the goal is [goal].</span>
+
+<span class="h" id="skill2h2">## Hard rule</span>
+
+No invented volume, position or traffic.
+
+An unverified figure carries <span class="c">`[TO SOURCE]`</span> or "to collect on the call".
+
+<span class="h" id="skill2h3">## 1. Public collection</span>
+
+<span class="m">- </span>Identity: age, size, offers, who decides.
+<span class="m">- </span>Model: who pays, sales cycle, conversion point.
+<span class="m">- </span>SEO: sitemap, useful pages, geo or decision pages, lastmod, redesign.
+<span class="m">- </span>AI: queries absorbed by AI, or decision queries.
+<span class="m">- </span>Proprietary data: client cases, method, internal figures.
+<span class="m">- </span>To ask on the call: Search Console access, weight of each offer in revenue.
+
+<span class="h" id="skill2h4">## 2. The 7 questions</span>
+
+<span class="m">1. </span>Defensible niche: where to attack first.
+<span class="m">2. </span>Pain that costs money.
+<span class="m">3. </span>Page templates: 4 to 6.
+<span class="m">4. </span>Path to the lead.
+<span class="m">5. </span>Timing: why now.
+<span class="m">6. </span>Objections.
+<span class="m">7. </span>Call outcome: 90-day roadmap and proposal.
+
+Settle 2 or 3 of these questions. The others become questions for the call.
+
+<span class="h" id="skill2h5">## 3. Output</span>
+
+<span class="m">- </span>Summary: 3 to 5 sentences.
+<span class="m">- </span>Diagnosis.
+<span class="m">- </span>Angle.
+<span class="m">- </span>Dated SEO state.
+<span class="m">- </span>Prioritized page templates.
+<span class="m">- </span>90-day roadmap.
+<span class="m">- </span>Call notes.
+<span class="m">- </span>To verify.
+
+No "visibility": talk about positions, AI citations, leads.</pre></div><button class="more" type="button" aria-expanded="false" aria-controls="skill2pre" data-show="Show the full skill" data-hide="Collapse the skill">Show the full skill</button><div class="try"><p class="tl">Your instruction</p><div class="crow"><p class="cons">Run a pre-audit on <input class="fill" type="text" data-ph="https://mysite.com" data-k="skill2-0-0" placeholder="https://mysite.com" aria-label="https://mysite.com" size="18" autocomplete="off" autocapitalize="off" spellcheck="false">. It sells <input class="fill" type="text" data-ph="[offer]" data-k="skill2-0-1" placeholder="offer" aria-label="offer" size="5" autocomplete="off" autocapitalize="off" spellcheck="false"> to <input class="fill" type="text" data-ph="[target]" data-k="skill2-0-2" placeholder="target" aria-label="target" size="6" autocomplete="off" autocapitalize="off" spellcheck="false">, the goal is <input class="fill" type="text" data-ph="[goal]" data-k="skill2-0-3" placeholder="goal" aria-label="goal" size="4" autocomplete="off" autocapitalize="off" spellcheck="false">.</p><button class="btn copyc" type="button" data-copy="Copy the instruction" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy the instruction</span></button></div><button class="btn play" type="button"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5.5v13l10.500-6.500z"/></svg><span>See the output</span></button><div class="term" hidden data-out="[&quot;Summary: 3 to 5 sentences.&quot;, &quot;Diagnosis.&quot;, &quot;Angle.&quot;, &quot;Dated SEO state.&quot;, &quot;Prioritized page templates.&quot;, &quot;90-day roadmap.&quot;, &quot;Call notes.&quot;, &quot;To verify.&quot;]" data-file=""><div class="tbar">skill output</div><pre aria-live="polite"></pre></div></div></section>
+<h2 id="s7" class="reveal">The technical agents</h2>
+<h3>1.1 internal linking agent:</h3>
+<ul>
+<li>A skill knows the site's history and runs semantic calculations → it gives you the right page pairings</li>
+<li>The system suggests the right internal links so you don't have to look for them by hand</li>
+<li>The goal: avoid having only pages that go round in circles on informational content</li>
+<li>With internal linking automated by the system: one click and it's done</li>
+<li>Internal linking belongs to the technical part that is 80% automated (audit, keyword research, internal linking, technical fixes)</li>
+</ul>
+<h4>The mission</h4>
+<p>The system suggests the right internal links so you don't have to look for them by hand.</p>
+<h4>Output</h4>
+<ul>
+<li>pillars and hubs;</li>
+<li>orphan pages;</li>
+<li>inbound / outbound;</li>
+<li>source and target of each link;</li>
+<li>passage;</li>
+<li>anchors;</li>
+<li>justification;</li>
+<li>3 priority actions.</li>
+</ul>
+<h4>Full skill</h4>
+<section class="skillbox" id="skill3" data-name="maillage-systeme"><div class="sbar"><span class="sname">maillage-systeme</span><span class="smeta">73 lines</span><button class="btn dl" type="button" aria-label=".md maillage-systeme"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7.5 11l4.5 4.5 4.5-4.5"/><path d="M5 20h14"/></svg><span>.md</span></button><button class="btn copy" type="button" data-copy="Copy" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy</span></button></div><div class="chips" aria-label="Skill sections"><button class="chipb" type="button" data-t="skill3h0">What you give Claude</button><button class="chipb" type="button" data-t="skill3h1">Instruction</button><button class="chipb" type="button" data-t="skill3h2">Step 0: crawl</button><button class="chipb" type="button" data-t="skill3h3">Steps</button><button class="chipb" type="button" data-t="skill3h4">Criteria for an anchor</button><button class="chipb" type="button" data-t="skill3h5">Output</button><button class="chipb" type="button" data-t="skill3h6">Before adding the links</button><button class="chipb" type="button" data-t="skill3h7">Rules</button></div><div class="swrap"><pre id="skill3pre"><span class="k">name:</span> maillage-systeme
+
+<span class="k">description:</span> Audits and builds a site's internal linking without Search Console. Triggers: "audit the internal linking", "orphan pages", "linking plan".
+
+<span class="h"># Internal linking</span>
+
+<span class="h" id="skill3h0">## What you give Claude</span>
+
+<span class="m">- </span>The sitemap URL, or the list of articles.
+<span class="m">- </span>Your 3 to 5 pillar keywords.
+<span class="m">- </span>Your offer pages: audit, contact, quote, tool.
+
+<span class="h" id="skill3h1">## Instruction</span>
+
+<span class="q">&gt; Audit the internal linking of mysite.com. My offer pages: [URL].</span>
+
+<span class="h" id="skill3h2">## Step 0: crawl</span>
+
+python3 ~/.claude/skills/maillage-systeme/scripts/crawl_graph.py https://mysite.com/sitemap.xml -o ./maillage-data
+
+Only <span class="c">`index.json`</span> enters the conversation.
+
+A link present on 80% of pages or more is a template link. It doesn't count.
+
+<span class="h" id="skill3h3">## Steps</span>
+
+<span class="m">1. </span>Classify each page: Know or Do.
+
+<span class="m">2. </span>Group into pillars of 3 pages minimum, with one hub each.
+
+<span class="m">3. </span>Count body links by distinct source pages. Spot orphans and dead ends.
+
+<span class="m">4. </span>For each link to create: passage and 3 anchors (exact, partial, semantic).
+
+<span class="m">5. </span>Rank them:
+<span class="m">- </span>orphan offer page;
+<span class="m">- </span>Know to Do link;
+<span class="m">- </span>hub to satellite;
+<span class="m">- </span>orphan outside the offer;
+<span class="m">- </span>link between pillars.
+
+<span class="h" id="skill3h4">## Criteria for an anchor</span>
+
+<span class="m">- </span>It says what the target promises.
+<span class="m">- </span>The sentence still reads well without the link.
+<span class="m">- </span>It is not already used toward the same target.
+<span class="m">- </span>The 5 words around it are about the target's topic.
+
+One failed criterion: the anchor is rejected.
+
+<span class="h" id="skill3h5">## Output</span>
+
+<span class="m">- </span>Pillars and hubs.
+<span class="m">- </span>Table: page, inbound, outbound, status.
+<span class="m">- </span>Link plan: source, target, passage, anchors, justification.
+<span class="m">- </span>Diagnosis in one sentence, 3 P1 actions maximum.
+<span class="m">- </span>What the data does not allow you to conclude.
+
+<span class="h" id="skill3h6">## Before adding the links</span>
+
+<span class="m">- </span>Read each passage out loud without the link.
+<span class="m">- </span>Insert in batches of 10 to 20.
+<span class="m">- </span>Rerun the crawl after each batch.
+<span class="m">- </span>End criterion: zero orphan offer pages.
+
+<span class="h" id="skill3h7">## Rules</span>
+
+<span class="m">- </span>No numeric score.
+<span class="m">- </span>An orphan legal page is not a problem.
+<span class="m">- </span>Links in the text, never in a "See also".
+<span class="m">- </span>Never a link to the homepage from the content.
+
+Save the output in <span class="c">`YYYY-MM-DD-&lt;site&gt;-maillage.md`</span>.</pre></div><button class="more" type="button" aria-expanded="false" aria-controls="skill3pre" data-show="Show the full skill" data-hide="Collapse the skill">Show the full skill</button><div class="try"><p class="tl">Your instruction</p><div class="crow"><p class="cons">Audit the internal linking of <input class="fill" type="text" data-ph="mysite.com" data-k="skill3-0-0" placeholder="mysite.com" aria-label="mysite.com" size="10" autocomplete="off" autocapitalize="off" spellcheck="false">. My offer pages: <input class="fill" type="text" data-ph="[URL]" data-k="skill3-0-1" placeholder="URL" aria-label="URL" size="4" autocomplete="off" autocapitalize="off" spellcheck="false">.</p><button class="btn copyc" type="button" data-copy="Copy the instruction" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy the instruction</span></button></div><button class="btn play" type="button"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5.5v13l10.500-6.500z"/></svg><span>See the output</span></button><div class="term" hidden data-out="[&quot;Pillars and hubs.&quot;, &quot;Table: page, inbound, outbound, status.&quot;, &quot;Link plan: source, target, passage, anchors, justification.&quot;, &quot;Diagnosis in one sentence, 3 P1 actions maximum.&quot;, &quot;What the data does not allow you to conclude.&quot;]" data-file="YYYY-MM-DD-&lt;site&gt;-maillage.md"><div class="tbar">skill output</div><pre aria-live="polite"></pre></div></div></section>
+<h3>1.2 structured data agent:</h3>
+<h4>The mission</h4>
+<p>Check that the information in the JSON-LD matches what the page displays.</p>
+<h4>Output</h4>
+<ul>
+<li>markup present;</li>
+<li>inconsistent values;</li>
+<li>schemas to add or remove;</li>
+<li>JSON-LD validation.</li>
+</ul>
+<h4>Full skill</h4>
+<section class="skillbox" id="skill4" data-name="seo-donnees-structurees"><div class="sbar"><span class="sname">seo-donnees-structurees</span><span class="smeta">63 lines</span><button class="btn dl" type="button" aria-label=".md seo-donnees-structurees"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7.5 11l4.5 4.5 4.5-4.5"/><path d="M5 20h14"/></svg><span>.md</span></button><button class="btn copy" type="button" data-copy="Copy" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy</span></button></div><div class="chips" aria-label="Skill sections"><button class="chipb" type="button" data-t="skill4h0">What you give Claude</button><button class="chipb" type="button" data-t="skill4h1">Instruction</button><button class="chipb" type="button" data-t="skill4h2">Three rules</button><button class="chipb" type="button" data-t="skill4h3">What each signal triggers</button><button class="chipb" type="button" data-t="skill4h4">Procedure</button><button class="chipb" type="button" data-t="skill4h5">Audit: three checks</button><button class="chipb" type="button" data-t="skill4h6">Forbidden</button></div><div class="swrap"><pre id="skill4pre"><span class="k">name:</span> seo-donnees-structurees
+
+<span class="k">description:</span> Sets up or audits a site's JSON-LD structured data, derived from the content of each page. Triggers: "structured data", "JSON-LD", "schema.org", "rich results", "markup".
+
+<span class="h"># JSON-LD structured data</span>
+
+<span class="h" id="skill4h0">## What you give Claude</span>
+
+<span class="m">- </span>Access to the site's code.
+<span class="m">- </span>The URLs of the pages to check.
+<span class="m">- </span>The real identity: name, logo, founder, social profiles.
+
+<span class="h" id="skill4h1">## Instruction</span>
+
+<span class="q">&gt; Set up JSON-LD structured data on this project.</span>
+
+<span class="q">&gt; Check that the markup of [URL] matches what the page displays.</span>
+
+<span class="h" id="skill4h2">## Three rules</span>
+
+<span class="m">1. </span>One source. All the JSON-LD comes from one module (<span class="c">`lib/schema.ts`</span>).
+
+<span class="m">2. </span>One entity, referenced by <span class="c">`@id`</span>. Organization, WebSite and Person are emitted once.
+
+<span class="m">3. </span>Derived from the content. A field typed by hand goes out of sync at the first edit.
+
+<span class="h" id="skill4h3">## What each signal triggers</span>
+
+<span class="t">| Signal in the page | Schema |</span>
+<span class="t">|---|---|</span>
+<span class="t">| Article | `Article` |</span>
+<span class="t">| Any page | `BreadcrumbList` |</span>
+<span class="t">| Real FAQ block | `FAQPage` |</span>
+<span class="t">| YouTube video | `VideoObject` |</span>
+<span class="t">| Numbered steps | `HowTo` |</span>
+<span class="t">| Displayed price | `Product` / `Offer` |</span>
+
+Never ask "which schema do you want". Read the page, emit what it proves.
+
+<span class="h" id="skill4h4">## Procedure</span>
+
+<span class="m">1. </span>Identify the framework and its version.
+<span class="m">2. </span>Find where the data lives.
+<span class="m">3. </span>Create <span class="c">`lib/schema.ts`</span>.
+<span class="m">4. </span>Emit the site graph in the root layout.
+<span class="m">5. </span>Emit one JSON-LD array per page.
+<span class="m">6. </span>Delete the old redeclared blocks.
+<span class="m">7. </span>Validate with the Google and schema.org tools.
+
+<span class="h" id="skill4h5">## Audit: three checks</span>
+
+<span class="m">- </span>The JSON is valid.
+<span class="m">- </span>Each marked-up value exists as is on the page.
+<span class="m">- </span>The markup serves a real Google feature.
+
+<span class="h" id="skill4h6">## Forbidden</span>
+
+<span class="m">- </span><span class="c">`FAQPage`</span> or <span class="c">`HowTo`</span> "just in case".
+<span class="m">- </span><span class="c">`aggregateRating`</span>, reviews or prices that can't be verified.
+<span class="m">- </span>Author and publisher redeclared on each page.
+<span class="m">- </span>Hard-coded <span class="c">`wordCount`</span> or dates.
+
+Ask for your approval before each write to the code.</pre></div><button class="more" type="button" aria-expanded="false" aria-controls="skill4pre" data-show="Show the full skill" data-hide="Collapse the skill">Show the full skill</button><div class="try"><p class="tl">Your instruction</p><div class="crow"><p class="cons">Set up JSON-LD structured data on this project.</p><button class="btn copyc" type="button" data-copy="Copy the instruction" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy the instruction</span></button></div><div class="crow"><p class="cons">Check that the markup of <input class="fill" type="text" data-ph="[URL]" data-k="skill4-1-0" placeholder="URL" aria-label="URL" size="4" autocomplete="off" autocapitalize="off" spellcheck="false"> matches what the page displays.</p><button class="btn copyc" type="button" data-copy="Copy the instruction" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy the instruction</span></button></div></div></section>
+<h3>1.3 Indexing agent</h3>
+<h4>The mission</h4>
+<p>Check whether pages are indexed, redirected, unknown or not testable.</p>
+<h4>Output</h4>
+<ul>
+<li>HTTP (404/500, redirects)</li>
+<li>non-blocking robots.txt</li>
+<li>No noindex (HTML + header)</li>
+<li>Sitemap (presence, freshness)</li>
+<li>Sitemap ↔ source consistency</li>
+<li>Internal linking: how many inbound links per URL (crawl + hubs)?</li>
+<li>Content length (thin proxy)</li>
+<li>Estimated Google indexing (site:) or Search Console API</li>
+<li>Markdown report</li>
+</ul>
+<h4>Skill:</h4>
+<section class="skillbox" id="skill5" data-name="indexing-agent"><div class="sbar"><span class="sname">indexing-agent</span><span class="smeta">65 lines</span><button class="btn dl" type="button" aria-label=".md indexing-agent"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7.5 11l4.5 4.5 4.5-4.5"/><path d="M5 20h14"/></svg><span>.md</span></button><button class="btn copy" type="button" data-copy="Copy" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy</span></button></div><div class="swrap"><pre id="skill5pre">You are an SEO auditor specialized in indexing. Your role: check that Google can discover, crawl and index the pages we want to make visible.
+
+What you are given
+
+Domain: [site.com]
+
+List of URLs: public sitemap.xml or urls.txt (one per line)
+
+Priority pages: the 5-30 offer pages (business-critical)
+
+Hub pages: / , /blog , footer, categories (for internal linking)
+
+The 9 checks to run (read-only)
+
+TECHNICAL (causes):
+
+HTTP: final codes + redirects (301/302/200)?
+
+robots.txt: does it block Googlebot or * on these URLs?
+
+noindex: present in a meta tag or in an HTTP header?
+
+Sitemap: present, consistent, lastmod &lt; 6 months?
+
+Consistency: sitemap URLs = given list? Orphans?
+
+Internal linking: how many inbound links per URL (crawl + hubs)?
+
+Content: length per URL (&lt; 300 words = short, dig further)
+
+GOOGLE (observation): 8. site: {URL} on Google (space requests 3-5s apart, detect rate limiting, mark "not testable" if blocked), or Search Console API if you have access 9. Soft 404: test 3 nonexistent URLs, record their title and canonical
+
+Mandatory report
+
+Markdown format with:
+
+Summary: X/N pages with no confirmed defect
+
+Key figures: table of the 9 checks
+
+What blocks: max 3 problems, each = Observation + Proof + Impact + Action + Priority/Effort/Confidence
+
+What works: what is working (avoid negative bias)
+
+Google inspection: table of the URLs inspected one by one
+
+Limits: what we could not test and why
+
+Pre-decision (mandatory): diagnosis (1 sentence) → figures (3-5) → State (Critical/To improve/Healthy) → Problems + Actions P1-P3 → What we cannot conclude
+
+Guardrails
+
+Read-only: no Search Console submit, no forcing
+
+Never: HTTP 200 = indexed, outside sitemap = problem, 1 link = not discovered
+
+Always: "not testable" ≠ "not indexed"
+
+Prioritize offer pages and real anomalies (accidental noindex, 404)
+
+No extrapolation: N URLs tested ≠ whole cluster
+
+Trigger
+
+"Indexing audit of [domain], sitemap: [URL]"</pre></div><button class="more" type="button" aria-expanded="false" aria-controls="skill5pre" data-show="Show the full skill" data-hide="Collapse the skill">Show the full skill</button><div class="try"><p class="tl">Your instruction</p><div class="crow"><p class="cons">Indexing audit of <input class="fill" type="text" data-ph="[domain]" data-k="skill5-0-0" placeholder="domain" aria-label="domain" size="6" autocomplete="off" autocapitalize="off" spellcheck="false">, sitemap: <input class="fill" type="text" data-ph="[URL]" data-k="skill5-0-1" placeholder="URL" aria-label="URL" size="4" autocomplete="off" autocapitalize="off" spellcheck="false"></p><button class="btn copyc" type="button" data-copy="Copy the instruction" data-copied="Copied"><span class="ic"><svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9"/></svg><svg class="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="lbl">Copy the instruction</span></button></div><button class="btn play" type="button"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5.5v13l10.500-6.500z"/></svg><span>See the output</span></button><div class="term" hidden data-out="[&quot;Summary: X/N pages with no confirmed defect&quot;, &quot;Key figures: table of the 9 checks&quot;, &quot;What blocks: max 3 problems, each = Observation + Proof + Impact + Action + Priority/Effort/Confidence&quot;, &quot;What works: what is working (avoid negative bias)&quot;, &quot;Google inspection: table of the URLs inspected one by one&quot;, &quot;Limits: what we could not test and why&quot;, &quot;Pre-decision (mandatory): diagnosis (1 sentence) → figures (3-5) → State (Critical/To improve/Healthy) → Problems + Actions P1-P3 → What we cannot conclude&quot;]" data-file=""><div class="tbar">skill output</div><pre aria-live="polite"></pre></div></div></section>
+<h2 id="s8" class="reveal">I'm adding a layer with a new model: JEV</h2>
+<figure class="shot"><button class="zoom" type="button" aria-label="Enlarge the image"><img src="images/08-jev.png" alt="" loading="lazy"></button></figure>
+<p>Trying not to get too technical about Jev (but it's important to talk about it), it's a model used to verify, classify and score, not to write.</p>
+<p>It receives a closed question, picks among several possible answers and gives its confidence level.</p>
+<p>In my system, I use it mostly with three scripts: verifier.py to check whether each sentence is backed by the sources, liens.py to check the relevance of internal links, and matiere.py to detect proof or real data.</p>
+<p>Its main interest is speed: about 0.8 second per call. Jev sorts the information, but doesn't make the final decisions.</p>
+<p>In short, an assistant that answers fast, that can settle a question with a yes or a no, that can score an analysis, and that uses far, far fewer tokens.</p>
+<h4>The mission</h4>
+<p>JEV is there to sort and verify, not to write content for example.</p>
+<p>verifier: looks at each sentence and checks where it comes from: a source, a deduction, nowhere, or filler.</p>
+<figure class="jev reveal"><div class="stack" role="img" aria-label="193"><span class="seg ja" style="flex:71"></span><span class="seg jb" style="flex:58"></span><span class="seg jc" style="flex:58"></span><span class="seg jd" style="flex:6"></span></div><ul><li><span class="dot ja"></span><b>71</b> Backed</li><li><span class="dot jb"></span><b>58</b> Deduced</li><li><span class="dot jc"></span><b>58</b> Absent from the corpus</li><li><span class="dot jd"></span><b>6</b> Outside the sources</li></ul><p class="jl"><b>19</b> of which filler · Score <b>16</b>/100</p><figcaption>verifier.py on a 193-sentence draft, 2026-09-21</figcaption></figure>
+<p>liens: spots the internal links that are useful and discards vague or misleading anchors.</p>
+<p>matiere: looks for the solid proof available: figures, facts, client quotes or opinions.</p>
+<p>calibrer: compares JEV's choices with mine. No automation until we reach 80% agreement on at least 30 cases.</p>
+<p>The rule stays simple:</p>
+<p>JEV sorts, but the final decision is always mine.</p>
+<h4>What we give it</h4>
+<ul>
+<li>a draft;</li>
+<li>the sources: calls, tickets, site pages;</li>
+<li>the opportunities detected;</li>
+<li>my previous validations.</li>
+</ul>
+<h4>Output</h4>
+<ul>
+<li>the unsourced or useless sentences</li>
+<li>the internal links to keep for internal linking</li>
+<li>the best proof available in my Obsidian on a given topic</li>
+<li>a history of decisions to improve the system</li>
+</ul>
+<section class="qcard panel reveal"><p class="qt">Where is your system at?</p><p class="qn" data-base="9 questions · Yes / No">9 questions · Yes / No</p><button class="qopen" type="button"><span>Take the test</span><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button></section>
+  </article>
+</div>
+<footer class="end panel"><div class="in"><h2>An SEO agent that watches your site 24/7:</h2><a class="cta" href="https://organikk.co/agent-seo/"><span>organikk.co/agent-seo</span><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a><svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="currentColor"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="currentColor"/></svg></div></footer>
+<button class="pill" type="button" aria-label="Go to the next skill to copy"><b></b> skills copied</button>
+<div class="resume" hidden><button class="go" type="button"><span class="rl">Resume reading</span><span class="rs"></span></button><button class="rx" type="button" aria-label="Close"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
+<dialog class="sheet" aria-label="Contents"><div class="sh"><p>Contents</p><button class="sx" type="button" aria-label="Close"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div><ol><li><a href="#s1">ARGUMENT 1: The system is meant to replace all your SEO tools</a></li><li><a href="#s2">ARGUMENT 2: To win the SEO game, you will have to dominate the proprietary data game.</a></li><li><a href="#s3">THE SETUP</a></li><li><a href="#s4">THE SYSTEM IN 4 ADVANTAGES</a></li><li><a href="#s5">CLAUDE x OBSIDIAN: keywords</a></li><li><a href="#s6">CLAUDE x OBSIDIAN: SEO audit and pre-audit</a></li><li><a href="#s7">The technical agents</a></li><li><a href="#s8">I'm adding a layer with a new model: JEV</a></li></ol></dialog>
+<dialog class="quiz" aria-label="Test: where is your system at">
+  <div class="qhead"><button class="qback" type="button" aria-label="Previous question" hidden><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button><span class="qstep" aria-live="polite"></span><button class="qx" type="button" aria-label="Close"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button></div>
+  <div class="qbar" aria-hidden="true"><i></i></div>
+  <div class="qbody">
+    <div class="qq"><p class="qtext"></p><div class="qans"><button class="qyes" type="button">Yes</button><button class="qno" type="button">No</button></div></div>
+    <div class="qres" hidden><div class="qscore panel"><p><b></b><span></span></p><div class="qmeter" aria-hidden="true"><i></i></div><p class="qmsg"></p></div>
+      <div class="qnext"><p class="ql">Your next step</p><a class="qgo" href="#"></a></div>
+      <div class="qalso"><p class="ql">To set up after that</p><ul></ul></div>
+      <div class="qtips"><p class="ql">Advice from my base</p><ul></ul></div>
+      <div class="qend"><a class="cta qcta" href="#"></a><button class="btn qagain" type="button">Retake the test</button></div></div>
+  </div>
+</dialog>
+<dialog class="lightbox" aria-label="Enlarge the image"><button class="lx" type="button" aria-label="Close"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button><img alt=""></dialog>
+<script>window.GUIDE={"zip": "seo-skills.zip", "quiz": [["Do you keep your raw sources (client calls, Search Console exports, articles) in a raw/ folder in Obsidian?", "s3"], ["Does Claude write and maintain a wiki/ that connects these sources?", "s3"], ["Do you build a corpus or a database per client for your keyword research?", "s5"], ["Does a skill sort your keywords by business intent?", "skill1"], ["Does a skill prepare your pre-audit before a call, from the URL alone?", "skill2"], ["Does the system suggest internal links, so you no longer look for them by hand?", "skill3"], ["Does a skill check that your JSON-LD matches what the page displays?", "skill4"], ["Does a skill check whether your pages are indexed?", "skill5"], ["Does a model like Jev sort and verify your drafts before you review them?", "s8"]], "tiers": [[34, "You’re starting. Set up the base first: raw/ and wiki/."], [67, "The base is set. Move on to the skills."], [100, "Your system runs. {n} left to cover."], [101, "Everything is in place."]], "tips": [[{"c": "Create your base folder with raw/, wiki/, index.md and log.md before you open Obsidian.", "p": "An answer that stays in the chat, you ask for it again six weeks later. I created an empty folder and an AGENTS.md file in April 2026. On September 23, 2026, that folder holds 692 markdown files in raw/ and 502 pages in wiki/, written and maintained by Claude.", "s": ["Allow fifteen minutes. In the terminal: `npm install -g @anthropic-ai/claude-code`, then `mkdir my-base && cd my-base`.", "Create the folders: `mkdir -p raw/articles raw/data raw/clients raw/notes` then `mkdir -p wiki/sources wiki/entities wiki/concepts wiki/queries`.", "Create the empty files right away, then version them: `touch AGENTS.md wiki/index.md wiki/log.md` and `git init && git add . && git commit -m \"bootstrap\"`.", "In Obsidian, open the my-base folder. Run `claude` in that folder."]}, {"c": "Write in AGENTS.md that raw/ is immutable: Claude reads it and never writes in it.", "p": "Claude reads AGENTS.md at the start of each session. The day the agent rewrites a source to make it clearer, you lose track of what the author wrote: you can no longer quote it or verify it. It is the only rule I have not relaxed in five months.", "s": ["Open AGENTS.md and set six sections: the mission, your doctrine, the folder tree, the page types, the conventions, the workflows.", "In the architecture section, write: \"raw/ is immutable. The agent reads it and never writes in it. Everything it produces goes in wiki/.\"", "In the doctrine section, write: \"No source = no claim. No invented figure.\"", "Each time a session goes off track, add a line to AGENTS.md."]}, {"c": "Ingest one source to start, the one that matters, and correct Claude's reading before it writes.", "p": "A wrong reading spreads into several files. My ingest of June 19, 2026 touched 8 files and added 305 lines, and my ingests range from 4 to 15 pages depending on how dense the document is. The first one takes longer than the next ones, because you correct what Claude understood.", "s": ["Drop a call transcript, a Search Console export or your best audit into raw/.", "Type to Claude: \"ingest raw/notes/my-best-audit.md\".", "Claude reads the whole file, summarizes the points and asks which angle to dig into. At this stage it has written nothing in the wiki. Correct its summary, give the angle.", "Then check that it created the sheet in wiki/sources/, updated index.md and added a line to log.md."]}, {"c": "Ask your base its first question and refuse any claim without a wikilink.", "p": "Without the link, you cannot verify the claim, so you cannot put it in a client deliverable. If Claude makes claims without linking, your doctrine is not strict enough, or your base is still empty.", "s": ["Type to Claude: \"what do we already know about [your topic]? cite your pages.\"", "Look at the wikilinks in the answer. A claim without a link: tighten the doctrine in AGENTS.md.", "If the answer is reusable, ask Claude to save it as a page in wiki/queries/.", "Ingest a second source: the network starts at the second source."]}], [{"c": "Write no volume, position or CPC that you have not measured.", "p": "\"No invented volume\" does not mean \"no demand signal\": a high-intent query can be searched by 5 people or by 500. Without data, write an observed demand of Weak, Medium or Strong, with its signals named next to it. Only Search Console impressions prove that a query is typed, from 20 impressions over 90 days.", "s": ["Give Claude your offer, your conversion point, your target, your market, the URLs of your offer pages, and your client verbatims if you have any.", "Type: \"Run seo-mots-cles-business on [URL]. Offer: [...], target: [...], conversion: [...], market: [...].\"", "Apply the Strong scale: 5 Google Suggest variants or more, 7 client calls or messages or more, 20 Search Console impressions or more.", "Write \"not measured\" for a missing signal, and \"demand to confirm\" when intent is strong with no signal at all, with a measurement in Search Console at 90 days."]}, {"c": "Discard a high-volume query that does not match your offer, and write the reason in the deliverable.", "p": "On organikk.co, \"agence seo\" showed 18,100 searches per month in Keyword Planner on 2026-09-25 and ended up discarded, with this reason: \"the site positions itself against the agency\". On 2026-09-30, out of 20 intents, the 4 discarded ones weighed 181 Google suggestions and the 16 kept ones 123.", "s": ["Run each intent through the first gate: does it match what the site sells or lets people do? Yes or No.", "If it is No, the decision is DISCARD and the two other gates are not scored.", "Put the query in the table of discarded queries, with its reason written.", "Read business intent from the query's modifiers (purchase, price, comparison, reviews, local), never from the volume."]}, {"c": "Never discard an intent because it is missing from your Search Console export.", "p": "Search Console does not represent the whole market: some queries are anonymized and the tables do not return every row. On organikk.co, from June 24 to September 21, 2026, the API returned 74 visible queries for 1,296 impressions. Google anonymizes the rest.", "s": ["Give Claude the Search Console export, Queries and Pages tabs, over 3 to 6 months, with the URLs of your offer pages.", "Even with the export, run the web search for the intents the site does not cover.", "Write your conclusions at the scale of the data: \"on the 40 queries in the export\", never \"on the site\"."]}, {"c": "Prepare each call with a pre-audit built from the URL alone and public data, and mark every unverified figure.", "p": "The prospect's Search Console is almost never available before the call: it becomes a question to ask, you never guess it. An invented figure in a pre-audit means credibility lost at the first check.", "s": ["Give Claude the site URL, then the offer, the target and the goal if you know them. Otherwise Claude infers them and marks them \"to confirm on the call\".", "Type: \"Run a pre-audit on https://mysite.com. It sells [offer] to [target], the goal is [goal].\"", "Mark every unverified figure `[TO SOURCE]` or \"to collect on the call\".", "Settle 2 or 3 of the 7 questions. The others become questions for the call, along with Search Console access and the weight of each offer in revenue."]}], [{"c": "Link your orphan offer pages first, in batches of 10 to 20 links.", "p": "On organikk.co, the reading of 2026-09-23 counts 9 sitemap URLs out of 29 with no inbound internal link, 5 of them commercial pages. These are the pages that carry the offer, and they receive nothing from internal linking.", "s": ["Run the crawl: `python3 ~/.claude/skills/maillage-systeme/scripts/crawl_graph.py https://mysite.com/sitemap.xml -o ./maillage-data`. A link present on 80% of pages or more is a template link, it doesn't count.", "Rank the links to create: orphan offer page, Know to Do link, hub to satellite, orphan outside the offer, link between pillars. No numeric score.", "Read each passage out loud without the link. If the sentence stumbles, the anchor is rejected.", "Insert in batches of 10 to 20 and rerun the crawl after each batch. End criterion: zero orphan offer pages."]}, {"c": "Check that each value in your JSON-LD exists as is on the page.", "p": "A field typed by hand goes out of sync at the first edit.", "s": ["Give Claude the instruction: \"Check that the markup of [URL] matches what the page displays.\"", "Run the three checks: the JSON is valid, each marked-up value exists as is on the page, the markup serves a real Google feature.", "Remove `FAQPage` or `HowTo` added \"just in case\", `aggregateRating`, reviews or prices that can't be verified, hard-coded `wordCount` and dates.", "Validate with the Google and schema.org tools."]}, {"c": "Keep the \"not tested\" status for any URL you have not inspected.", "p": "The site: query is a non-exhaustive hint: an absence does not prove the page is not indexed. On organikk.co on 2026-09-22, the API inspected 12 URLs out of 141. The other 129 stayed \"not tested\".", "s": ["Connect the Search Console URL Inspection API. Setup: about 30 minutes. Limit: 2,000 inspections per day per property.", "Inspect the uninspected sitemap URLs first, at least the ones your report cites.", "Write the source, the date and the scope in the report: N URLs tested.", "If nothing is demonstrated, write \"No indexing defect confirmed on the N pages inspected\". \"Nothing confirmed\" is an allowed answer."]}, {"c": "Have a model like Jev sort your drafts, and review everything while its agreement with you stays under 80%.", "p": "Jev does not generate text: it answers closed questions with a confidence level, and it sorts before you review. One call takes 0.8 s. Eight in parallel: a 190-sentence page in 30 s. Claude pre-decides, you decide.", "s": ["Give it the draft and the sources: calls, tickets, site pages.", "It returns the sentences absent from the sources, deduced, or filler, with a score.", "Write your own verdict on the same sentences and compute the agreement between it and you.", "Under 80% agreement or under 30 scored cases, you review everything it sorted."]}], [{"c": "Run an audit of your base once a week, and sort what it reports yourself.", "p": "My report of September 20, 2026: 1,669 files scanned, 11,684 wikilinks, 167 broken targets, that is 1.97%. Of these 167, only 59 are referenced from wiki/, and the audit found a category of error I was not seeing.", "s": ["Run the audit every week. It produces a report and repairs nothing on its own.", "Have it check pages that contradict each other, claims without a source, orphan entities and invalid frontmatter.", "Set to `stale` any source older than 12 months on a volatile SEO topic.", "Sort before you repair. I accept leaving broken links in the folders that are not the wiki."]}, {"c": "Write your own verdicts next to those of your sorting model before you hand it an automatic action.", "p": "In my system, a Jev use only becomes an automatic action after calibration: at least 80% agreement on at least 30 of my verdicts. Before that threshold, Jev sorts and I decide.", "s": ["Record each verdict of the model in an append-only log.", "On an exact sentence, write your own verdict.", "Compute the agreement between the model and you.", "Under 80% agreement or under 30 cases, the use stays a sort for review."]}, {"c": "Open a proof sheet for each published piece of content, and validate a hypothesis only on a measurement.", "p": "In my base, a hypothesis only moves to \"validated\" or \"invalidated\" through a proof sheet backed by real data. My measurement at D+30 on 3 URLs published on July 7, 2026 gives 5 impressions and 0 clicks: the sheet is classed \"noisy\" and the hypothesis stays \"open\".", "s": ["At publication, create the sheet: the hypothesis tested, the prediction with a figure, the baseline.", "Fill in the real measurement at D+30 and D+90, from a Search Console export.", "Before moving a status forward, look for the strongest counter-argument. An unrefuted counter-argument blocks the move to \"validated\".", "Review the hypothesis register once a month. Without data, the hypothesis stays \"open\"."]}, {"c": "Keep a register of your corrections, and turn the one that comes back twice into a rule.", "p": "A correction given in a session lives in Claude's memory, which is never checked mechanically. On September 11, 2026, my register records a rule already set that relapsed five times in four months.", "s": ["Add one line per correction, with a short, stable theme, reused if the topic comes back.", "A single occurrence triggers nothing.", "At the second occurrence of the same theme, mark it \"recurring\" and propose hardening it at your weekly review: audit rule, skill constraint or clause in AGENTS.md.", "Never let the agent write on its own in a skill or in AGENTS.md. It prepares the proposal, you validate. Allow about 15 minutes per week."]}]], "pt": ["point", "points"], "inplace": "in place"}</script>
+<script>(function(){
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var KEY='guide-systeme-seo:v1',state={copied:{},fields:{},pos:0,sec:'',mode:'read'};
+  try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);for(var k in o)state[k]=o[k]}}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var saved={pos:state.pos,sec:state.sec},hold=false;
+
+  /* progression, section en cours, temps restant */
+  var bar=$('.progress i'),cur=$('.where .cur'),startLabel=cur.textContent,timeB=$('.time b'),article=$('article');
+  var links=$$('nav.toc a'),sheetLinks=$$('.sheet a'),heads=links.map(function(a){return document.getElementById(a.hash.slice(1))});
+  var words=0;$$('article>p,article>ul,article>h2,article>h3,article>h4').forEach(function(n){words+=n.textContent.trim().split(/\s+/).length});
+  var total=Math.max(1,Math.round(words/200)),tick=false,last=0;
+  function onScroll(){
+    tick=false;
+    var h=document.documentElement,max=h.scrollHeight-h.clientHeight,r=max>0?Math.min(1,h.scrollTop/max):0;
+    bar.style.transform='scaleX('+r+')';
+    var a=article.getBoundingClientRect(),ar=Math.min(1,Math.max(0,(innerHeight*0.4-a.top)/a.height));
+    timeB.textContent=Math.max(0,Math.round(total*(1-ar)));
+    var idx=-1;heads.forEach(function(el,i){if(el.offsetParent!==null&&el.getBoundingClientRect().top<=140)idx=i});
+    [links,sheetLinks].forEach(function(set){set.forEach(function(l,i){l.classList.toggle('on',i===idx);if(i===idx)l.setAttribute('aria-current','true');else l.removeAttribute('aria-current')})});
+    cur.textContent=idx<0?startLabel:links[idx].textContent;
+    var now=Date.now();if(!hold&&now-last>600){last=now;state.pos=r;state.sec=idx<0?'':links[idx].textContent;save()}
+  }
+  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});
+
+  /* apparition au premier passage */
+  var revs=$$('.reveal');
+  if('IntersectionObserver' in window&&!reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('seen');io.unobserve(en.target);if(en.target.classList.contains('scoring'))countUp(en.target);if(en.target.classList.contains('tree'))unfold()}})},{rootMargin:'0px 0px -12% 0px'});
+    revs.forEach(function(el){io.observe(el)});
+  }else revs.forEach(function(el){el.classList.add('seen')});
+  function countUp(box){
+    $$('.num[data-v]',box).forEach(function(td,i){
+      var v=+td.dataset.v,t0=performance.now()+i*90,d=900;td.textContent='0';
+      (function step(t){var p=Math.min(1,Math.max(0,(t-t0)/d)),q=1-Math.pow(1-p,3);td.textContent=Math.round(v*q);if(p<1)requestAnimationFrame(step)})(performance.now());
+    });
+  }
+
+  /* sommaire mobile */
+  var sheet=$('.sheet');
+  $('.where').addEventListener('click',function(){sheet.showModal()});
+  $('.sx').addEventListener('click',function(){sheet.close()});
+  sheet.addEventListener('click',function(ev){if(ev.target===sheet||ev.target.closest('a'))sheet.close()});
+
+  /* mode lecture / skills */
+  var modeBtns=$$('.seg2 button');
+  function setMode(m,scroll){
+    state.mode=m;save();document.body.classList.toggle('tools',m==='tools');
+    modeBtns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===m)});
+    if(scroll)$('.wrap').scrollIntoView({block:'start'});
+    onScroll();
+  }
+  modeBtns.forEach(function(b){b.addEventListener('click',function(){setMode(b.dataset.mode,true)})});
+  if(state.mode==='tools')setMode('tools',false);
+
+  /* copie */
+  function copyText(text,btn,done){
+    var ok=function(){var l=$('.lbl',btn);btn.classList.add('ok');l.textContent=btn.dataset.copied;setTimeout(function(){btn.classList.remove('ok');l.textContent=btn.dataset.copy},1600);if(done)done()};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(ok,function(){fallback(text);ok()});else{fallback(text);ok()}
+  }
+  function fallback(text){var a=document.createElement('textarea');a.value=text;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+
+  /* skills */
+  var skills=$$('.skillbox'),pill=$('.pill');
+  function count(){$('b',pill).textContent=skills.filter(function(s){return state.copied[s.id]}).length+' / '+skills.length}
+  function filled(row){var out='';$('.cons',row).childNodes.forEach(function(n){out+=n.nodeType===3?n.textContent:(n.value.trim()||n.dataset.ph)});return out}
+  function download(name,blob){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000)}
+  skills.forEach(function(s){
+    var more=$('.more',s),wrap=$('.swrap',s),pre=$('pre',wrap);
+    function toggle(open){
+      if(open===s.classList.contains('open'))return;
+      var from=wrap.offsetHeight;
+      if(open){s.classList.add('open');var to=wrap.scrollHeight;wrap.style.height=from+'px';wrap.offsetHeight;wrap.style.height=to+'px'}
+      else{wrap.style.height=from+'px';wrap.offsetHeight;wrap.style.height='190px'}
+      var end=function(){wrap.removeEventListener('transitionend',end);if(!open)s.classList.remove('open');wrap.style.height=''};
+      if(reduce)end();else wrap.addEventListener('transitionend',end);
+      more.setAttribute('aria-expanded',open);more.textContent=open?more.dataset.hide:more.dataset.show;
+      if(!open)s.scrollIntoView({block:'nearest'});
+    }
+    more.addEventListener('click',function(){toggle(!s.classList.contains('open'))});
+    $('.copy',s).addEventListener('click',function(){copyText(pre.textContent,this,function(){state.copied[s.id]=1;save();count()})});
+    $('.dl',s).addEventListener('click',function(){download(s.dataset.name+'.md',new Blob([pre.textContent+'\n'],{type:'text/markdown'}))});
+    $$('.chipb',s).forEach(function(c){c.addEventListener('click',function(){var t=document.getElementById(c.dataset.t);t.scrollIntoView({block:'start'});t.classList.add('flash');setTimeout(function(){t.classList.remove('flash')},1200)})});
+    $$('.fill',s).forEach(function(inp){
+      var fit=function(){inp.size=Math.max(4,(inp.value||inp.placeholder).length)};
+      if(state.fields[inp.dataset.k]){inp.value=state.fields[inp.dataset.k]}fit();
+      inp.addEventListener('input',function(){state.fields[inp.dataset.k]=inp.value;save();fit()});
+    });
+    $$('.crow',s).forEach(function(row){$('.copyc',row).addEventListener('click',function(){copyText(filled(row),this)})});
+    var play=$('.play',s),term=$('.term',s);
+    if(play)play.addEventListener('click',function(){
+      var out=JSON.parse(term.dataset.out),file=term.dataset.file,tp=$('pre',term),cmd='> '+filled($('.crow',s));
+      term.hidden=false;tp.innerHTML='';play.disabled=true;
+      var first=document.createElement('span');first.className='c caret line';tp.appendChild(first);
+      var lines=out.map(function(l){return '<span class="g">✓</span> '+esc(l)});if(file)lines.push('<span class="d">→ '+esc(file)+'</span>');
+      function rest(){first.classList.remove('caret');var i=0;(function next(){if(i>=lines.length){play.disabled=false;return}var sp=document.createElement('span');sp.className='line';sp.innerHTML=lines[i++];tp.appendChild(sp);setTimeout(next,reduce?0:130)})()}
+      if(reduce){first.textContent=cmd;rest();return}
+      var n=0,stepSize=Math.max(1,Math.ceil(cmd.length/70));
+      (function type(){n=Math.min(cmd.length,n+stepSize);first.textContent=cmd.slice(0,n);if(n<cmd.length)setTimeout(type,16);else setTimeout(rest,250)})();
+    });
+  });
+  function md(s){return esc(s).replace(/`([^`]+)`/g,'<code>$1</code>')}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  pill.addEventListener('click',function(){var t=skills.filter(function(s){return !state.copied[s.id]})[0]||skills[0];if(!document.body.classList.contains('tools')&&t.offsetParent===null)setMode('tools');t.scrollIntoView({block:'start'})});
+  count();
+
+  /* zip sans dépendance (méthode « stored ») */
+  var crcT=(function(){var t=[],c,n,k;for(n=0;n<256;n++){c=n;for(k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+  function crc(b){var c=-1;for(var i=0;i<b.length;i++)c=crcT[(c^b[i])&255]^(c>>>8);return (c^-1)>>>0}
+  function zip(files){
+    var enc=new TextEncoder(),parts=[],central=[],off=0;
+    files.forEach(function(f){
+      var name=enc.encode(f.name),data=enc.encode(f.text),c=crc(data),h=new DataView(new ArrayBuffer(30));
+      h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint32(14,c,true);h.setUint32(18,data.length,true);h.setUint32(22,data.length,true);h.setUint16(26,name.length,true);
+      parts.push(h,name,data);
+      var d=new DataView(new ArrayBuffer(46));
+      d.setUint32(0,0x02014b50,true);d.setUint16(4,20,true);d.setUint16(6,20,true);d.setUint16(8,0x0800,true);d.setUint32(16,c,true);d.setUint32(20,data.length,true);d.setUint32(24,data.length,true);d.setUint16(28,name.length,true);d.setUint32(42,off,true);
+      central.push(d,name);off+=30+name.length+data.length;
+    });
+    var size=central.reduce(function(s,p){return s+p.byteLength},0),e=new DataView(new ArrayBuffer(22));
+    e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,size,true);e.setUint32(16,off,true);
+    return new Blob(parts.concat(central,[e]),{type:'application/zip'});
+  }
+  $('.dlall').addEventListener('click',function(){download(window.GUIDE.zip,zip(skills.map(function(s){return {name:s.dataset.name+'/SKILL.md',text:$('.swrap pre',s).textContent+'\n'}})))});
+
+  /* arborescence */
+  var nodes=$$('.node'),pick=$('.pick'),folders=$$('.node.folder'),unfolded=false;
+  function setFolder(f,open){f.setAttribute('aria-expanded',open);var k=f.nextElementSibling;if(open)k.removeAttribute('inert');else k.setAttribute('inert','')}
+  function select(n){nodes.forEach(function(x){if(x===n)x.setAttribute('aria-current','true');else x.removeAttribute('aria-current')});$$('.pane').forEach(function(p){p.hidden=p.id!=='p'+n.dataset.i});if(pick)pick.hidden=true}
+  nodes.forEach(function(n){n.addEventListener('click',function(){
+    if(n.classList.contains('folder')){var isCur=n.getAttribute('aria-current')==='true',open=n.getAttribute('aria-expanded')==='true';setFolder(n,isCur?!open:true)}
+    select(n);
+  })});
+  if(!reduce&&'IntersectionObserver' in window)folders.forEach(function(f){setFolder(f,false)});
+  function unfold(){if(unfolded)return;unfolded=true;folders.forEach(function(f,i){setTimeout(function(){setFolder(f,true)},300+i*350)})}
+
+  /* images agrandies */
+  var box=$('.lightbox'),big=$('img',box);
+  $$('.zoom').forEach(function(z){z.addEventListener('click',function(){big.src=$('img',z).src;box.showModal()})});
+  box.addEventListener('click',function(){box.close()});
+
+  /* reprise de lecture */
+  var res=$('.resume');
+  if(saved.pos>0.08&&saved.pos<0.97&&scrollY<200){
+    $('.rs',res).textContent=saved.sec||Math.round(saved.pos*100)+' %';res.hidden=false;hold=true;
+    $('.go',res).addEventListener('click',function(){var h=document.documentElement;scrollTo({top:saved.pos*(h.scrollHeight-h.clientHeight)});res.hidden=true;hold=false});
+    $('.rx',res).addEventListener('click',function(){res.hidden=true;hold=false});
+    addEventListener('scroll',function hide(){if(scrollY>innerHeight){res.hidden=true;hold=false;removeEventListener('scroll',hide)}},{passive:true});
+  }
+  /* test de fin */
+  var quiz=$('.quiz'),Q=window.GUIDE.quiz,ans=state.quiz||[],qi=0,endCta=$('.end .cta');
+  function label(id){var el=document.getElementById(id);return el.dataset.name||el.textContent}
+  function go(id){quiz.close();if(document.body.classList.contains('tools')&&id.charAt(1)!=='k')setMode('read');var el=document.getElementById(id);setTimeout(function(){el.scrollIntoView({block:'start'})},60)}
+  function showQ(){
+    $('.qq',quiz).hidden=false;$('.qres',quiz).hidden=true;$('.qback',quiz).hidden=qi===0;
+    $('.qstep',quiz).textContent=(qi+1)+' / '+Q.length;$('.qbar i',quiz).style.transform='scaleX('+qi/Q.length+')';
+    var q=$('.qq',quiz);q.style.animation='none';q.offsetHeight;q.style.animation='';$('.qtext',quiz).textContent=Q[qi][0];
+  }
+  function showR(){
+    $('.qq',quiz).hidden=true;$('.qres',quiz).hidden=false;$('.qback',quiz).hidden=true;$('.qstep',quiz).textContent='';$('.qbar i',quiz).style.transform='scaleX(1)';
+    var yes=ans.filter(Boolean).length,miss=[];Q.forEach(function(q,i){if(!ans[i]&&miss.indexOf(q[1])<0)miss.push(q[1])});
+    var pct=Math.round(yes/Q.length*100),left=Q.length-yes,G=window.GUIDE,tier=G.tiers.filter(function(t){return pct<t[0]})[0];
+    $('.qscore span',quiz).textContent=yes+' / '+Q.length+' '+G.inplace;
+    $('.qmsg',quiz).textContent=tier[1].replace('{n}',left+' '+G.pt[left>1?1:0]);
+    var sb=$('.qscore b',quiz),mt=$('.qmeter i',quiz);
+    if(reduce){sb.textContent=pct+' %';mt.style.transform='scaleX('+pct/100+')'}
+    else{mt.style.transform='scaleX(0)';mt.offsetHeight;mt.style.transform='scaleX('+pct/100+')';var t0=performance.now();(function st(t){var k=Math.min(1,(t-t0)/900),q=1-Math.pow(1-k,3);sb.textContent=Math.round(pct*q)+' %';if(k<1)requestAnimationFrame(st)})(t0)}
+    var tu=$('.qtips ul',quiz);tu.innerHTML='';G.tips[G.tiers.indexOf(tier)].forEach(function(t,i){
+      var li=document.createElement('li'),b=document.createElement('button'),d=document.createElement('div'),id='qtd'+i;
+      b.className='qtip';b.type='button';b.setAttribute('aria-expanded',i===0);b.setAttribute('aria-controls',id);
+      b.innerHTML='<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span>'+md(t.c)+'</span>';
+      d.className='qtd';d.id=id;d.innerHTML='<div><p class="why">'+md(t.p)+'</p><ol>'+t.s.map(function(x){return '<li>'+md(x)+'</li>'}).join('')+'</ol></div>';
+      if(i!==0)d.firstChild.setAttribute('inert','');
+      b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);if(o)d.firstChild.removeAttribute('inert');else d.firstChild.setAttribute('inert','')});
+      li.appendChild(b);li.appendChild(d);tu.appendChild(li);
+    });
+    card(pct,yes);
+    var nx=$('.qnext',quiz),al=$('.qalso',quiz),ul=$('ul',al);ul.innerHTML='';nx.hidden=!miss.length;al.hidden=miss.length<2;
+    if(miss.length){var g=$('.qgo',quiz);g.textContent=label(miss[0]);g.href='#'+miss[0];g.onclick=function(ev){ev.preventDefault();go(miss[0])}}
+    miss.slice(1).forEach(function(id){var li=document.createElement('li'),a=document.createElement('a');a.href='#'+id;a.textContent=label(id);a.addEventListener('click',function(ev){ev.preventDefault();go(id)});li.appendChild(a);ul.appendChild(li)});
+    var c=$('.qcta',quiz);c.href=endCta.href;c.innerHTML=endCta.innerHTML;
+  }
+  function card(pct,yes){var n=$('.qcard .qn');n.textContent=pct===null?n.dataset.base:pct+' % · '+yes+' / '+Q.length+' '+window.GUIDE.inplace}
+  if(state.quizDone&&ans.length===Q.length){var y0=ans.filter(Boolean).length;card(Math.round(y0/Q.length*100),y0)}
+  function answer(v){ans[qi]=v;state.quiz=ans;save();qi++;if(qi<Q.length)showQ();else{state.quizDone=1;save();showR()}}
+  $('.qopen').addEventListener('click',function(){if(state.quizDone&&ans.length===Q.length)showR();else{qi=Math.min(ans.length,Q.length-1);showQ()}quiz.showModal()});
+  $('.qyes',quiz).addEventListener('click',function(){answer(true)});
+  $('.qno',quiz).addEventListener('click',function(){answer(false)});
+  $('.qback',quiz).addEventListener('click',function(){if(qi>0){qi--;showQ()}});
+  $('.qx',quiz).addEventListener('click',function(){quiz.close()});
+  $('.qagain',quiz).addEventListener('click',function(){ans=[];state.quiz=ans;state.quizDone=0;save();qi=0;showQ();card(null)});
+  quiz.addEventListener('click',function(ev){if(ev.target===quiz)quiz.close()});
+  onScroll();
+})();
+</script>
+</body>
+</html>

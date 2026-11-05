@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le maillage interne avec Claude · Guide</title>
+<style>
+  :root{
+    --paper:#fbfaf6;
+    --paper-2:#f4f1e8;
+    --ink:#1a1a1a;
+    --ink-2:#3a3a3a;
+    --muted:#6f6c63;
+    --line:#e2dfd4;
+    --line-2:#d3cfc1;
+    --amber:#c79a3b;
+    --amber-bg:#faf4e2;
+    --blue:#3a4a6b;
+    --blue-bg:#eef0f5;
+    --green:#2e7d4f;
+    --green-bg:#eaf4ee;
+    --red:#b3463a;
+    --red-bg:#f8ede9;
+    --claude:#D97757;
+    --claude-deep:#C15F3C;
+    --serif:'Geist', system-ui, sans-serif;
+    --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:#e9e6dc;
+    color:var(--ink);
+    font-family:'Geist', system-ui, -apple-system, sans-serif;
+    font-size:18px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .sheet{
+    max-width:760px;
+    margin:32px auto;
+    background:var(--paper);
+    padding:88px 84px;
+    box-shadow:0 1px 4px rgba(0,0,0,.08);
+  }
+  p{margin:0 0 20px;}
+  .ch-body > p{text-align:justify;-webkit-hyphens:auto;hyphens:auto;}
+  .ch-body .box p,.ch-body blockquote p,.ch-body figcaption{text-align:left;-webkit-hyphens:manual;hyphens:manual;}
+  h1,h2,h3,h4{font-weight:600;line-height:1.2;color:var(--ink);}
+  a{color:var(--blue);text-decoration:none;border-bottom:1px solid var(--line-2);}
+  .brandlink{color:inherit;border-bottom:1px solid currentColor;text-decoration:none;}
+  .brandlink:hover{color:var(--claude);}
+
+  /* Cover */
+  .cover{
+    min-height:760px;
+    display:flex;flex-direction:column;justify-content:center;
+    background:var(--paper-2);
+    margin:-88px -84px 0;
+    padding:120px 84px;
+    border-bottom:none;
+  }
+  .cover .kicker{font-family:'Geist Mono', ui-monospace, monospace;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);}
+  .cover h1{
+    font-family:'Geist', system-ui, -apple-system, sans-serif;
+    font-size:40px;line-height:1.08;letter-spacing:-.02em;
+    margin:32px 0 0;
+    color:var(--claude);
+  }
+  .cover .rule{height:3px;background:var(--claude);margin:36px 0 32px;width:68px;border-radius:8px;}
+  .cover .lead{font-style:italic;font-size:18px;line-height:1.45;color:var(--ink-2);margin:0;max-width:520px;}
+  .cover .author{font-family:'Geist Mono', ui-monospace, monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:132px;padding-top:24px;border-top:1px solid var(--line-2);display:inline-block;}
+
+  /* Section heads */
+  .doc-title{font-family:'Geist', system-ui, -apple-system, sans-serif;font-size:40px;margin:0 0 8px;color:var(--claude);}
+  .doc-title + .hr{height:2px;background:var(--ink);margin:0 0 40px;}
+
+  .chapter{page-break-before:always;break-before:page;padding-top:40px;}
+  .chapter .ch-kicker{font-family:'Geist Mono', ui-monospace, monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--claude-deep);}
+  .chapter h2.ch-title{font-family:'Geist', system-ui, -apple-system, sans-serif;font-size:40px;line-height:1.08;letter-spacing:-.02em;margin:16px 0 24px;color:var(--claude);}
+  .chapter .ch-lead{font-style:italic;font-size:18px;color:var(--ink-2);max-width:600px;margin:0 0 8px;}
+  .chapter .ch-body{margin-top:140px;}
+  .chapter.tight .ch-body{margin-top:48px;}
+
+  h3.sec{font-size:28px;font-family:'Geist', system-ui, -apple-system, sans-serif;margin:48px 0 16px;}
+  h4.sub{font-size:18px;margin:32px 0 12px;}
+
+  /* Sommaire */
+  .toc-item{display:block;margin:0 0 24px;color:var(--ink);text-decoration:none;border:none;}
+  .toc-item .t{font-weight:600;font-size:18px;transition:color .12s;}
+  .toc-item .d{font-style:italic;color:var(--muted);font-size:16px;margin-top:4px;}
+  .toc-item:hover .t{color:var(--claude);}
+  .toc-rule{height:1px;background:var(--line);margin:8px 0 28px;}
+
+  /* Lists */
+  ul,ol{margin:0 0 20px;padding-left:24px;}
+  li{margin:0 0 8px;}
+  ul.tight li,ol.tight li{margin:0 0 4px;}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px;}
+  th,td{border:none;border-bottom:1px solid var(--line);padding:12px 20px 12px 0;text-align:left;vertical-align:top;}
+  th{font-weight:600;color:var(--ink);border-bottom:2px solid var(--ink-2);}
+  td:last-child,th:last-child{padding-right:0;}
+  tbody tr:last-child td{border-bottom:none;}
+
+  /* Code / SKILL.md */
+  pre{
+    background:var(--paper-2);
+    border:1px solid var(--line-2);
+    border-radius:8px;
+    padding:20px 24px;
+    font-family:'Geist Mono', ui-monospace, monospace;
+    font-size:12px;
+    line-height:1.55;
+    overflow-x:auto;
+    white-space:pre-wrap;
+    color:var(--ink-2);
+    margin:20px 0;
+  }
+  code{font-family:'Geist Mono', ui-monospace, monospace;font-size:14px;background:var(--paper-2);padding:0px 8px;border-radius:8px;}
+  pre code{background:none;padding:0;font-size:inherit;}
+
+  /* Callouts */
+  .box{padding:20px 24px;margin:28px 0;background:#1F1F1E;color:#C3C2B7;font-size:16px;border-radius:8px;}
+  .box p{color:#C3C2B7;margin-bottom:16px;}
+  .box p:last-child{margin-bottom:0;}
+  .box .label{font-weight:700;color:#C3C2B7;}
+  .box code{background:rgba(255,255,255,.09);color:#C3C2B7;}
+  .box a{color:var(--claude);border-bottom:1px solid rgba(217,119,87,.55);font-family:'Geist Mono', ui-monospace, monospace;font-size:14px;}
+  .box.cta{text-align:center;}
+  .box.cta .label{font-family:'Geist Mono', ui-monospace, monospace;letter-spacing:.06em;font-size:14px;text-transform:uppercase;}
+  .box.cta p{font-family:'Geist', system-ui, -apple-system, sans-serif;}
+  blockquote{margin:28px 0;padding:0;font-style:italic;color:var(--claude);font-size:16px;}
+  blockquote p{margin:0 0 8px;}
+
+  /* Diagrams */
+  figure{margin:36px 0;}
+  .diagram{
+    background:var(--paper);
+    border:1px solid var(--line-2);
+    border-radius:8px;
+    padding:28px 24px;
+    font-family:'Geist Mono', ui-monospace, monospace;
+    font-size:12px;
+    line-height:1.7;
+    white-space:pre;
+    overflow-x:auto;
+    color:var(--ink-2);
+    box-shadow:0 1px 2px rgba(0,0,0,.04);
+  }
+  figcaption{font-style:italic;color:var(--muted);font-size:14px;text-align:center;margin-top:12px;max-width:560px;margin-left:auto;margin-right:auto;}
+
+  .end-note{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font-style:italic;color:var(--muted);font-size:14px;text-align:center;}
+
+  @media print{
+    body{background:#fff;font-size:11.5pt;}
+    .sheet{box-shadow:none;margin:0;max-width:none;padding:0 14mm;}
+    .cover{margin:0 -14mm;padding:80mm 14mm;min-height:auto;height:247mm;}
+    pre,.diagram{font-size:8.4pt;}
+    a{color:var(--ink);border:none;}
+    .box a{color:#D97757!important;border-bottom:1px solid #D97757!important;}
+    .brandlink{color:inherit!important;border-bottom:1px solid currentColor!important;}
+    .chapter{padding-top:0;}
+    .chapter .ch-body{margin-top:60mm;}
+    .chapter.tight .ch-body{margin-top:14mm;}
+    table,pre,figure,.box,blockquote{page-break-inside:avoid;}
+    h3.sec,h4.sub{page-break-after:avoid;}
+    @page{size:A4;margin:18mm 0;}
+  }
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..700&display=swap" rel="stylesheet">
+
+<style>/* Audit typo : resets Geist */
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+code,pre,kbd,samp{font-family:'Geist Mono',ui-monospace,monospace}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- ============ COUVERTURE ============ -->
+  <section class="cover">
+    <div class="kicker"><a class="brandlink" href="https://organikk.co/">Organikk.co</a> · Guide SEO</div>
+    <h1>Le maillage interne<br>avec Claude</h1>
+    <div class="rule"></div>
+    <p class="lead">La méthode complète pour construire, auditer et maintenir le maillage interne d'un site avec Claude. Architecture en piliers, ancres, priorisation, gouvernance. Deux skills inclus, prêts à copier.</p>
+    <div class="author">Timothée Boussardon · <a class="brandlink" href="https://organikk.co/">Organikk.co</a></div>
+  </section>
+
+  <!-- ============ SOMMAIRE ============ -->
+  <section class="chapter tight" id="sommaire">
+    <div class="ch-body">
+    <h2 class="doc-title">Sommaire</h2>
+    <div class="hr"></div>
+
+    <a class="toc-item" href="#intro"><div class="t">Introduction</div><div class="d">Pour qui, ce que tu sauras à la fin, le guide en résumé.</div></a>
+    <div class="toc-rule"></div>
+    <a class="toc-item" href="#ch1"><div class="t">Chapitre 1 · Le maillage interne est un système</div><div class="d">Les 3 signaux d'un lien, l'ancre comme promesse, le PageRank interne, Know vers Do.</div></a>
+    <a class="toc-item" href="#ch2"><div class="t">Chapitre 2 · Les deux skills à installer</div><div class="d">maillage-systeme (sans GSC) et maillage-interne-gsc (avec data). Quand utiliser lequel.</div></a>
+    <a class="toc-item" href="#ch3"><div class="t">Chapitre 3 · Le workflow de A à Z</div><div class="d">Les 8 étapes dans l'ordre, avec un livrable et un critère de passage à chaque fois.</div></a>
+    <a class="toc-item" href="#ch4"><div class="t">Chapitre 4 · Préparer la donnée</div><div class="d">Crawl du site, exports GSC, ou simple liste d'articles. La règle du contexte léger.</div></a>
+    <a class="toc-item" href="#ch5"><div class="t">Chapitre 5 · L'architecture en piliers</div><div class="d">Classifier chaque page par intention, former 3 à 5 piliers, désigner les hubs.</div></a>
+    <a class="toc-item" href="#ch6"><div class="t">Chapitre 6 · L'audit du graphe</div><div class="d">Pages orphelines, pages dead-end, hubs sous-maillés. Le tableau qui dit tout.</div></a>
+    <a class="toc-item" href="#ch7"><div class="t">Chapitre 7 · Les ancres</div><div class="d">Exact, partial, sémantique. Les 5 critères et le test à voix haute.</div></a>
+    <a class="toc-item" href="#ch8"><div class="t">Chapitre 8 · Prioriser et dérouler le plan</div><div class="d">Le score d'urgence, l'ordre des 4 priorités, le format de chaque lien proposé.</div></a>
+    <a class="toc-item" href="#ch9"><div class="t">Chapitre 9 · Gouvernance et cas particuliers</div><div class="d">La checklist de publication, le site neuf, la refonte, le pSEO à grande échelle.</div></a>
+    <a class="toc-item" href="#ch10"><div class="t">Chapitre 10 · Les règles non négociables</div><div class="d">Sept règles à garder ouvertes pendant tout le chantier.</div></a>
+    <a class="toc-item" href="#ch11"><div class="t">Chapitre 11 · Les deux SKILL.md complets</div><div class="d">Les fichiers intégraux, prêts à copier dans ton dossier skills.</div></a>
+    <a class="toc-item" href="#faq"><div class="t">FAQ · Les questions qui reviennent</div><div class="d">Densité, position des liens, gros sites, plugins de maillage automatique.</div></a>
+    <div class="toc-rule"></div>
+    <a class="toc-item" href="#going-further"><div class="t">Aller plus loin</div><div class="d">Bootcamp et accompagnement.</div></a>
+    </div>
+  </section>
+
+  <!-- ============ INTRODUCTION ============ -->
+  <section class="chapter tight" id="intro">
+    <div class="ch-body">
+    <h2 class="doc-title">Introduction</h2>
+    <div class="hr"></div>
+
+    <p>Ce guide t'apprend à faire le maillage interne d'un site avec Claude, de la donnée brute au plan de liens exécuté. C'est le levier SEO que je vois le plus négligé en audit : des sites avec 80 articles corrects, zéro architecture, des pages orphelines partout, et un formulaire de contact que personne ne lie. Le contenu existe, la structure n'existe pas.</p>
+
+    <p>Le maillage interne, c'est le seul levier SEO entièrement sous ton contrôle. Pas d'algorithme à convaincre, pas de site tiers à solliciter, pas de budget. Juste des décisions d'architecture que tu peux prendre aujourd'hui et livrer cette semaine. Et c'est exactement le type de tâche où Claude excelle : lire un graphe, détecter les trous, proposer des liens justifiés, rédiger des ancres. Toi, tu arbitres.</p>
+
+    <div class="box rule">
+      <p><span class="label">⚠ À lire avant de commencer.</span> Ce guide suppose que Claude connaît ton site : ta doctrine SEO, tes mots-clés piliers, tes pages business, ton secteur. C'est le système SEO décrit dans le guide <em>De 0 à 1</em> (dossier de contexte ou vault Obsidian). Sans ce système, la méthode tourne quand même, mais elle perd beaucoup en efficacité et elle produit des erreurs : Claude choisit les hubs sur des critères génériques, propose des ancres plausibles au lieu d'ancres alignées sur ta stratégie de mots-clés, se trompe de pilier, et peut proposer des liens vers des pages qui n'existent pas. Avec le système, ton vault décide, Claude exécute. Si tu n'as pas encore de système, pose au minimum un fichier de contexte avant l'étape 1 : ton offre, tes 3 à 5 mots-clés piliers, la liste de tes pages Do.</p>
+    </div>
+
+    <figure>
+      <svg viewBox="0 0 660 290" style="width:100%;height:auto;display:block;background:var(--paper-2);border:1px solid var(--line-2);border-radius:8px;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Claude sans contexte : des pages isolées et des liens hasardeux. Claude branché sur ton système : un graphe dense autour du vault.">
+        <style>
+          .gl-title{font:600 11px 'Geist Mono',ui-monospace,monospace;fill:#6f6c63;letter-spacing:.14em;}
+          .gl-lab{font:500 10.5px 'Geist',system-ui,sans-serif;fill:#3a3a3a;}
+          .gl-lab-m{font:500 10.5px 'Geist',system-ui,sans-serif;fill:#6f6c63;}
+          .gl-err{font:700 12px 'Geist Mono',ui-monospace,monospace;fill:#b3463a;}
+          .gl-edge{stroke:#d3cfc1;stroke-width:1.4;}
+          .gl-edge-strong{stroke:#c9b8a4;stroke-width:1.4;}
+          .gl-edge-bad{stroke:#b3463a;stroke-width:1.2;stroke-dasharray:4 4;}
+          .gl-node{fill:#a8a396;}
+          .gl-node-o{fill:#D97757;}
+        </style>
+        <text x="80" y="34" class="gl-title">CLAUDE SANS CONTEXTE</text>
+        <line x1="72" y1="102" x2="146" y2="84" class="gl-edge"/>
+        <line x1="186" y1="212" x2="248" y2="200" class="gl-edge"/>
+        <line x1="228" y1="120" x2="272" y2="72" class="gl-edge-bad"/>
+        <circle cx="72" cy="102" r="6" class="gl-node"/>
+        <circle cx="146" cy="84" r="6" class="gl-node"/>
+        <circle cx="228" cy="120" r="6" class="gl-node"/>
+        <circle cx="96" cy="182" r="6" class="gl-node"/>
+        <circle cx="186" cy="212" r="6" class="gl-node"/>
+        <circle cx="248" cy="200" r="6" class="gl-node"/>
+        <circle cx="130" cy="252" r="6" class="gl-node"/>
+        <circle cx="272" cy="72" r="8" fill="none" stroke="#b3463a" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="268" y="77" class="gl-err">?</text>
+        <text x="60" y="124" class="gl-lab-m">pages isolées</text>
+        <text x="140" y="48" class="gl-lab-m">lien vers une page</text>
+        <text x="140" y="61" class="gl-lab-m">qui n'existe pas</text>
+        <text x="160" y="234" class="gl-lab-m">ancres génériques</text>
+
+        <line x1="330" y1="18" x2="330" y2="272" stroke="#d3cfc1" stroke-width="1"/>
+
+        <text x="392" y="34" class="gl-title">CLAUDE + TON SYSTÈME</text>
+        <line x1="497" y1="152" x2="416" y2="86" class="gl-edge-strong"/>
+        <line x1="497" y1="152" x2="580" y2="88" class="gl-edge-strong"/>
+        <line x1="497" y1="152" x2="606" y2="176" class="gl-edge-strong"/>
+        <line x1="497" y1="152" x2="566" y2="240" class="gl-edge-strong"/>
+        <line x1="497" y1="152" x2="428" y2="236" class="gl-edge-strong"/>
+        <line x1="497" y1="152" x2="392" y2="166" class="gl-edge-strong"/>
+        <line x1="416" y1="86" x2="580" y2="88" class="gl-edge"/>
+        <line x1="580" y1="88" x2="606" y2="176" class="gl-edge"/>
+        <line x1="428" y1="236" x2="566" y2="240" class="gl-edge"/>
+        <line x1="392" y1="166" x2="416" y2="86" class="gl-edge"/>
+        <circle cx="497" cy="152" r="10" class="gl-node-o"/>
+        <circle cx="416" cy="86" r="6" class="gl-node"/>
+        <circle cx="580" cy="88" r="6" class="gl-node"/>
+        <circle cx="606" cy="176" r="6" class="gl-node"/>
+        <circle cx="566" cy="240" r="6" class="gl-node"/>
+        <circle cx="428" cy="236" r="6" class="gl-node"/>
+        <circle cx="392" cy="166" r="6" class="gl-node"/>
+        <text x="470" y="140" class="gl-lab" style="font-weight:600;">ton vault</text>
+        <text x="376" y="74" class="gl-lab">doctrine SEO</text>
+        <text x="545" y="76" class="gl-lab">mots-clés piliers</text>
+        <text x="586" y="196" class="gl-lab">pages Do</text>
+        <text x="540" y="260" class="gl-lab">data GSC</text>
+        <text x="400" y="256" class="gl-lab">articles</text>
+        <text x="352" y="186" class="gl-lab">secteur</text>
+      </svg>
+      <figcaption>À gauche, Claude raisonne sur le texte seul : pages isolées, ancres génériques, liens hasardeux. À droite, chaque décision de maillage s'appuie sur ton système : doctrine, mots-clés piliers, pages business, data.</figcaption>
+    </figure>
+
+    <h3 class="sec">Pour qui</h3>
+    <p>Consultants SEO, freelances, marketers in-house, éditeurs de sites. Le guide suppose que tu utilises déjà Claude (Cowork ou Claude Code) et que ton site a du contenu à mailler : au minimum une quinzaine de pages. Si tu pars de zéro côté système, lis d'abord le guide <em>De 0 à 1 pour faire son SEO sur Claude</em>, disponible sur la même page.</p>
+
+    <h3 class="sec">Ce que tu sauras à la fin</h3>
+    <ul>
+      <li>Pourquoi un lien interne se juge sur 3 signaux (topique, intention, autorité) et jamais sur un seul</li>
+      <li>Installer les deux skills maillage et savoir lequel déclencher selon ta situation</li>
+      <li>Dérouler le workflow complet en 8 étapes, avec un livrable et un critère de passage à chaque étape</li>
+      <li>Préparer la donnée sans saturer le contexte de Claude (la règle de l'index)</li>
+      <li>Construire une architecture en 3 à 5 piliers avec un hub par pilier</li>
+      <li>Auditer le graphe existant : orphelines, dead-ends, hubs sous-maillés</li>
+      <li>Écrire des ancres qui passent les 5 critères, avec la bonne répartition exact / partial / sémantique</li>
+      <li>Prioriser les liens à créer avec un score, et dérouler le plan lien par lien</li>
+      <li>Tenir le maillage dans le temps avec une checklist à chaque publication</li>
+    </ul>
+
+    <h3 class="sec">Le guide en résumé</h3>
+    <p>Le maillage interne est un système, pas une passe de fin de chantier. Tu classifies chaque page par intention (Know ou Do). Tu regroupes en 3 à 5 piliers, chacun avec un hub. Tu audites le graphe : chaque page doit recevoir au moins 1 lien entrant et contenir au moins 2 liens sortants. Tu crées les liens dans cet ordre : hub vers satellites, Know vers Do, ponts entre piliers, sauvetage des orphelines. Chaque lien reçoit une ancre qui passe le test à voix haute, avec un seul exact match par page cible. Densité plafonnée à 5 liens internes pour 1000 mots. Et à chaque nouvelle publication, la checklist du chapitre 9 tourne. Claude propose tout ça, tu décides.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 1 ============ -->
+  <section class="chapter" id="ch1">
+    <div class="ch-kicker">Chapitre 1</div>
+    <h2 class="ch-title">Le maillage interne est un système</h2>
+    <p class="ch-lead">Un lien interne n'est pas une case à cocher dans une checklist d'optimisation. C'est une déclaration que Google lit, que les LLM vectorisent, et que ton lecteur suit ou ignore.</p>
+
+    <div class="ch-body">
+    <h3 class="sec">Ce qu'un lien interne déclare, exactement</h3>
+    <p>Quand tu poses un lien de la page A vers la page B, tu déclares trois choses en même temps. Un, ces deux pages parlent du même sujet : c'est le signal topique, celui qui construit tes clusters sémantiques. Deux, le lecteur de A a une raison d'aller sur B maintenant : c'est le signal d'intention, celui qui construit ton funnel. Trois, A transmet une part de son autorité à B : c'est le signal d'autorité, le PageRank interne. Un bon lien coche les trois. Un lien posé « parce qu'il fallait un lien » n'en coche souvent aucun.</p>
+
+    <table>
+      <thead><tr><th>Signal</th><th>Ce que le lien déclare</th><th>Ce que ça construit</th></tr></thead>
+      <tbody>
+        <tr><td>Topique</td><td>« Ces deux pages traitent du même sujet »</td><td>Tes clusters sémantiques</td></tr>
+        <tr><td>Intention</td><td>« Le lecteur de A veut aller sur B maintenant »</td><td>Ton funnel de conversion</td></tr>
+        <tr><td>Autorité</td><td>« A transmet une part de son poids à B »</td><td>Le PageRank de tes pages business</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sec">L'ancre est une promesse de continuité</h3>
+    <p>Une ancre, ce n'est pas un mot-clé glissé dans une phrase. C'est une promesse : « si tu cliques, tu trouves ça ». Google la lit comme un descripteur de la page cible. Les LLM la vectorisent avec ses mots environnants. L'humain la lit comme une raison de cliquer ou de passer. Trois lecteurs, une seule chaîne de caractères. C'est pour ça que le chapitre 7 est le plus exigeant du guide.</p>
+
+    <h3 class="sec">Le PageRank interne se dilue</h3>
+    <p>Chaque page dispose d'un poids qu'elle répartit entre tous ses liens sortants. Google pondère chaque lien par 1/N, où N est le nombre total de liens de la page. Une page avec 12 liens internes transmet à chacun un signal plus faible qu'une page qui en contient 4. Conséquence directe : chaque lien inutile affaiblit tous les autres. C'est la base mathématique de la règle de densité du chapitre 7 (2 à 5 liens internes pour 1000 mots, jamais plus).</p>
+
+    <h3 class="sec">Le maillage Know vers Do passe en premier</h3>
+    <p>Tes pages se rangent en deux familles. Les pages Know expliquent : guides, définitions, comparatifs, articles de blog. Les pages Do font agir : outil, simulateur, audit, page de contact, page tarifs. Le réflexe de la plupart des rédacteurs est de lier les pages Know entre elles, parce que c'est facile et que les sujets se touchent. Le maillage qui rapporte est ailleurs : chaque page Know doit pointer vers la page Do qui permet d'exécuter ce qu'elle explique. Un guide sur le prix d'une prestation pointe vers la page tarifs. Un article méthode pointe vers l'outil. C'est ce maillage-là qui transforme du trafic informationnel en demandes entrantes.</p>
+
+    <div class="box tim">
+      <p><span class="label">Ma position.</span> Je le répète en audit depuis des années : le bloc « Voir aussi » en bas d'article, c'est du maillage de remplissage. Trois liens empilés hors contexte, sans phrase porteuse, que personne ne clique. Google y voit un pattern de gabarit, ton lecteur un cul-de-sac. Les liens qui comptent sont dans le corps du texte, portés par une phrase qui parle vraiment du sujet de la cible. Un lien contextuel in-body vaut plus que dix liens en pied de page.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 2 ============ -->
+  <section class="chapter" id="ch2">
+    <div class="ch-kicker">Chapitre 2</div>
+    <h2 class="ch-title">Les deux skills à installer</h2>
+    <p class="ch-lead">Un skill pour l'architecture éditoriale, un skill pour la donnée comportementale. Les deux fichiers complets sont au chapitre 11, prêts à copier.</p>
+
+    <div class="ch-body">
+    <p>J'utilise deux skills distincts pour le maillage, parce que les deux situations de départ sont distinctes. Soit tu raisonnes sur la structure du contenu (site neuf, refonte, contenu planifié, pas d'accès GSC) : c'est <code>maillage-systeme</code>. Soit tu as 3 à 6 mois de données Search Console et tu veux que la donnée réelle guide les liens : c'est <code>maillage-interne-gsc</code>. Ils ne se remplacent pas, ils se chaînent.</p>
+
+    <table>
+      <thead><tr><th></th><th>maillage-systeme</th><th>maillage-interne-gsc</th></tr></thead>
+      <tbody>
+        <tr><td>Point de départ</td><td>Le contenu (liste d'articles ou crawl)</td><td>Les exports GSC (Pages + Requêtes)</td></tr>
+        <tr><td>GSC requise</td><td>Non</td><td>Oui, 3 à 6 mois de données</td></tr>
+        <tr><td>Livrables</td><td>Architecture en piliers, plan d'ancres, audit du graphe</td><td>Hiérarchie mère/fille/petite-fille, liens priorisés par la data</td></tr>
+        <tr><td>Cas d'usage</td><td>Site neuf, refonte, contenu planifié, audit structurel</td><td>Site vivant avec historique, arbitrages sur données réelles</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sec">Lequel déclencher</h3>
+    <p>Site de moins de 3 mois, ou pas d'accès à la GSC du client : <code>maillage-systeme</code> seul. Le skill remplace la donnée manquante par un proxy business (une page Do pèse plus qu'une page Know dans le scoring). Site vivant avec historique : les deux, dans l'ordre. <code>maillage-systeme</code> pose l'architecture, <code>maillage-interne-gsc</code> injecte les impressions et positions réelles pour trancher les priorités. Le chapitre 9 détaille ce chaînage.</p>
+
+    <h3 class="sec">Installation en 2 minutes</h3>
+    <p>Sur Claude Code : crée un dossier par skill dans <code>~/.claude/skills/</code> (Mac et Linux) ou <code>%USERPROFILE%\.claude\skills\</code> (Windows), soit <code>maillage-systeme/</code> et <code>maillage-interne-gsc/</code>. Colle dans chacun le fichier <code>SKILL.md</code> correspondant du chapitre 11. Relance Claude Code, vérifie avec <code>/skills</code>. Sur Claude Cowork : Paramètres, Capacités, Compétences, puis glisse-dépose le dossier du skill. Encore plus simple, demande à Claude de poser le skill pour toi en lui collant le contenu du chapitre 11.</p>
+
+    <p>Une fois installés, tu n'as plus à y penser. Tu dis « audite le maillage de monsite.fr » ou « voilà mon export GSC, construis le plan de maillage », et le bon skill se déclenche seul.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 3 ============ -->
+  <section class="chapter" id="ch3">
+    <div class="ch-kicker">Chapitre 3</div>
+    <h2 class="ch-title">Le workflow de A à Z</h2>
+    <p class="ch-lead">Huit étapes, dans l'ordre. Chaque étape produit un livrable et se ferme sur un critère de passage. Tant que le critère n'est pas rempli, tu ne passes pas à la suivante.</p>
+
+    <div class="ch-body">
+    <p>Ce chapitre est ta feuille de route. Tu peux dérouler tout le chantier depuis cette seule page : chaque étape renvoie au chapitre qui la détaille et au prompt à copier. Pour un site de 50 à 100 pages éditoriales, compte une demi-journée pour les étapes 1 à 7, validation comprise. Et une règle avant de démarrer : tout le chantier se fait dans une seule conversation Claude. L'index, l'architecture, l'audit, le plan, les ancres : tout s'accumule dans le même fil, chaque étape nourrit la suivante.</p>
+
+    <figure>
+      <div class="diagram">  Le workflow complet
+  ─────────────────────────────────────────────────────
+   Étape 1 ─ Installer les 2 skills        chap. 2 + 11
+       │
+       ▼
+   Étape 2 ─ Construire l'inventaire       chap. 4
+       │     (index + graphe de liens)
+       ▼
+   Étape 3 ─ Poser l'architecture          chap. 5
+       │     (3-5 piliers, 1 hub chacun)
+       ▼
+   Étape 4 ─ Auditer le graphe             chap. 6
+       │     (orphelines, dead-ends)
+       ▼
+   Étape 5 ─ Demander le plan priorisé     chap. 8
+       │     (10-20 liens, format complet)
+       ▼
+   Étape 6 ─ Valider lien par lien         chap. 7
+       │     (test à voix haute, 1 ancre/3)
+       ▼
+   Étape 7 ─ Insérer et relire             chap. 8
+       │
+       ▼
+   Étape 8 ─ Gouvernance permanente        chap. 9
+             (checklist à chaque publication)</div>
+      <figcaption>Les 8 étapes du chantier. Les étapes 1 à 7 se font une fois, l'étape 8 tourne à chaque nouvelle publication.</figcaption>
+    </figure>
+
+    <h4 class="sub">Étape 1 · Installe les deux skills</h4>
+    <p>Copie les deux fichiers du chapitre 11 dans ton dossier skills (méthode au chapitre 2). Cinq minutes, une seule fois.<br>
+    <strong>Livrable :</strong> les deux skills installés.<br>
+    <strong>Critère de passage :</strong> <code>/skills</code> liste <code>maillage-systeme</code> et <code>maillage-interne-gsc</code>.</p>
+
+    <h4 class="sub">Étape 2 · Construis l'inventaire</h4>
+    <p>Site en ligne : lance le prompt de crawl du chapitre 4 sur ton sitemap. Avec GSC : donne les exports Pages et Requêtes. Contenu planifié : fournis ta liste titre + slug + mots-clés + extrait.<br>
+    <strong>Livrable :</strong> un index (une ligne par page) et un graphe (chaque lien avec son ancre).<br>
+    <strong>Critère de passage :</strong> chaque page a ses compteurs de liens entrants et sortants, liens de gabarit exclus. Si le menu compte comme maillage, l'inventaire est faux : recommence.</p>
+
+    <h4 class="sub">Étape 3 · Fais poser l'architecture</h4>
+    <p>Lance le prompt piliers du chapitre 5 sur l'index. Claude classifie (Know / Do), regroupe, propose les hubs. Toi, tu valides ou corriges chaque hub : c'est une décision business, pas une décision de modèle.<br>
+    <strong>Livrable :</strong> l'arborescence piliers, hubs, satellites avec leur intention.<br>
+    <strong>Critère de passage :</strong> 3 à 5 piliers, chaque page affectée à un pilier ou un sous-cluster, un hub justifié en une phrase par pilier.</p>
+
+    <h4 class="sub">Étape 4 · Audite le graphe</h4>
+    <p>Lance le prompt d'audit du chapitre 6. Trois anomalies à sortir : orphelines, dead-ends, hubs sous-maillés.<br>
+    <strong>Livrable :</strong> le tableau page / entrants / sortants / statut.<br>
+    <strong>Critère de passage :</strong> les anomalies sont classées par gravité, pages Do sous-maillées en tête. C'est cette liste qui pilote l'étape suivante.</p>
+
+    <h4 class="sub">Étape 5 · Demande le plan de liens priorisé</h4>
+    <p>Claude croise l'architecture (étape 3) et l'audit (étape 4), applique l'ordre des 4 priorités du chapitre 8 : hub vers satellites, Know vers Do, ponts entre piliers, orphelines. Exige le format complet pour chaque lien : source, cible, passage rédigé, 3 ancres, justification. Limite le lot à 10-20 liens.<br>
+    <strong>Livrable :</strong> le plan priorisé, lien par lien.<br>
+    <strong>Critère de passage :</strong> chaque lien a son passage rédigé avec les mots avant et après. Un lien sans passage n'est pas exécutable : renvoie-le.</p>
+
+    <h4 class="sub">Étape 6 · Valide lien par lien</h4>
+    <p>Pour chaque lien : lis le passage à voix haute sans le lien (chapitre 7). La phrase tombe juste : tu choisis une ancre parmi les 3. Elle clopine : tu fais réécrire la phrase ou tu rejettes le lien. C'est l'étape où tu es manager : Claude a proposé, tu décides.<br>
+    <strong>Livrable :</strong> la liste des liens validés, une ancre choisie chacun.<br>
+    <strong>Critère de passage :</strong> un seul exact match par page cible sur tout le lot, et aucun lien accepté « parce qu'il fallait bien ».</p>
+
+    <h4 class="sub">Étape 7 · Insère et relis</h4>
+    <p>Site en fichiers (markdown, repo Git) : Claude insère le lot validé, tu relis le diff. CMS en ligne : tu insères à la main depuis le plan.<br>
+    <strong>Livrable :</strong> les liens en production.<br>
+    <strong>Critère de passage :</strong> tu relances l'audit de l'étape 4. Zéro orpheline restante, densité sous 5 liens pour 1000 mots sur chaque page modifiée.</p>
+
+    <h4 class="sub">Étape 8 · Passe en gouvernance</h4>
+    <p>Le chantier ponctuel est fini, le système commence. À chaque nouvelle publication, la checklist du chapitre 9 tourne : 3 liens entrants depuis l'existant, 3 sortants, 1 vers une page Do, 1 vers un autre pilier. Et tu relances l'audit complet après chaque lot de publications.<br>
+    <strong>Livrable :</strong> un maillage qui ne se dégrade plus.<br>
+    <strong>Critère de passage :</strong> il n'y en a pas. Cette étape ne se termine jamais, c'est le principe.</p>
+
+    <div class="box tim">
+      <p><span class="label">Où ça bloque en vrai.</span> Jamais aux étapes 2 à 5 : Claude les déroule sans toi ou presque. Ça bloque à l'étape 6, parce que valider 15 liens un par un est moins gratifiant que d'en générer 60 d'un coup. C'est pourtant exactement là que se joue la différence entre un maillage éditorial et un maillage généré. Si tu ne dois être exigeant qu'à un seul endroit du workflow, c'est celui-là.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 4 ============ -->
+  <section class="chapter" id="ch4">
+    <div class="ch-kicker">Chapitre 4</div>
+    <h2 class="ch-title">Préparer la donnée</h2>
+    <p class="ch-lead">La qualité du plan de maillage dépend de la qualité de l'inventaire. Et la qualité du raisonnement de Claude dépend de ce que tu ne mets PAS dans son contexte.</p>
+
+    <div class="ch-body">
+    <h3 class="sec">La règle du contexte léger</h3>
+    <p>C'est la règle la plus contre-intuitive du guide, et la plus importante. Le contenu intégral du site n'entre jamais d'un bloc dans la conversation. La qualité de raisonnement d'un LLM se dégrade quand sa fenêtre de contexte se remplit : si tu colles 50 pages HTML avant de demander le plan, tu obtiens un plan médiocre produit par un modèle saturé. Claude doit raisonner sur un index léger (une ligne par page), et n'ouvrir le contenu intégral que page par page, au moment de proposer une ancre précise.</p>
+
+    <figure>
+      <div class="diagram">  La règle du contexte léger
+  ─────────────────────────────────────────────────
+  ❌ 50 pages HTML collées        ✅ un index, une ligne par page
+     dans la conversation
+                                     index.json
+     [contexte saturé]               ├─ URL, title, H1
+     [raisonnement dégradé]          ├─ meta description
+     [plan médiocre]                 ├─ liens entrants (nb)
+                                     └─ liens sortants (nb)
+
+                                     graph.json
+                                     └─ chaque lien + son ancre
+
+  Le raisonnement se fait sur l'index.
+  Le contenu intégral s'ouvre page par page,
+  seulement pour rédiger les ancres.</div>
+      <figcaption>Claude raisonne sur l'index, jamais sur le site entier. Le contenu ne s'ouvre qu'au moment de rédiger une ancre.</figcaption>
+    </figure>
+
+    <h3 class="sec">Situation 1 · Le site est en ligne</h3>
+    <p>Tu fais construire l'index par Claude à partir du sitemap. Le prompt à copier :</p>
+    <pre>Crawle mon site depuis le sitemap : https://monsite.fr/sitemap.xml
+
+Construis deux fichiers :
+1. index.json : une ligne par page avec URL, title, H1, meta
+   description, nombre de liens internes entrants et sortants
+   comptés dans le corps de page uniquement.
+2. graph.json : chaque lien interne avec sa page source, sa page
+   cible et son ancre exacte.
+
+Exclus du comptage : les liens de navigation, header, footer,
+sidebar, et tout lien identique présent sur plus de 80 % des
+pages (liens de gabarit).
+
+Ne me montre pas le HTML. Montre-moi l'index et la liste des
+pages à 0 lien entrant.</pre>
+    <p>L'exclusion des liens de gabarit est le point que tout le monde rate. Le lien « Blog » de ton menu apparaît sur toutes les pages : il ne compte pas comme maillage éditorial. Si tu le comptes, toutes tes pages semblent maillées et l'audit ne détecte plus rien.</p>
+
+    <h3 class="sec">Situation 2 · Tu as la GSC</h3>
+    <p>Exporte deux rapports depuis Search Console, sur 3 à 6 mois : le rapport Pages (URL, clics, impressions, CTR, position) et le rapport Requêtes filtré par page pour tes 20 à 30 URLs principales. Le premier export est obligatoire, le second te donne les requêtes secondaires de chaque page, la matière première des futures pages filles. Tu donnes les deux fichiers à Claude, le skill <code>maillage-interne-gsc</code> fait le reste.</p>
+
+    <h3 class="sec">Situation 3 · Le contenu est planifié, rien n'est publié</h3>
+    <p>Le minimum viable est une liste : titre, slug prévu, mots-clés cibles, un extrait ou un résumé par page. Sans le contenu intégral, Claude produit l'architecture complète (piliers, hubs, plan de liens) mais pas les ancres précises, qui viendront à la rédaction. C'est le bon moment pour faire ce travail : mailler un site avant sa publication coûte dix fois moins cher que le remailler après.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 5 ============ -->
+  <section class="chapter" id="ch5">
+    <div class="ch-kicker">Chapitre 5</div>
+    <h2 class="ch-title">L'architecture en piliers</h2>
+    <p class="ch-lead">Trois à cinq piliers, un hub par pilier, des satellites autour. Le cocon est la conséquence de ta stratégie de mots-clés, jamais l'inverse.</p>
+
+    <div class="ch-body">
+    <h3 class="sec">Étape 1 · Classifier chaque page par intention</h3>
+    <p>Avant de regrouper quoi que ce soit, chaque page reçoit une intention dominante. Trois catégories suffisent.</p>
+    <table>
+      <thead><tr><th>Intention</th><th>Description</th><th>Signaux typiques</th></tr></thead>
+      <tbody>
+        <tr><td>Know-Simple</td><td>Définition courte, réponse directe</td><td>Titre en « Qu'est-ce que », « C'est quoi »</td></tr>
+        <tr><td>Know</td><td>Guide approfondi, méthode, comparatif</td><td>Titre en « Comment », « Pourquoi », « Guide »</td></tr>
+        <tr><td>Do</td><td>Outil, simulateur, formulaire, démo, tarifs</td><td>URL en <code>/outils/</code>, <code>/audit</code>, <code>/contact</code>, <code>/tarifs</code></td></tr>
+      </tbody>
+    </table>
+    <p>Cette classification pilote tout le reste : le scoring du chapitre 8 donne un poids de 1.0 aux pages Do et de 0.5 aux pages Know. Une page peut porter une intention secondaire, note les deux.</p>
+
+    <h3 class="sec">Étape 2 · Former 3 à 5 piliers</h3>
+    <p>Tu regroupes les pages par cohérence sémantique, pas par catégorie technique de ton CMS. Tes catégories WordPress ne sont pas tes piliers. Un vrai pilier remplit trois critères : au moins 3 articles dans le groupe, un mot-clé business central qui revient dans les titres ou les extraits, et une page-hub naturelle. Un groupe de moins de 3 articles devient un sous-cluster d'un pilier existant, pas un pilier de plus. Cible 3 à 5 piliers maximum : au-delà, tu dilues ; en dessous de 3, tu n'as pas d'architecture, tu as un tas.</p>
+
+    <h3 class="sec">Étape 3 · Désigner le hub de chaque pilier</h3>
+    <p>Le hub n'est pas une page catégorie. C'est l'article le plus stratégique du pilier : le plus complet (ou prévu pour l'être), celui qui définit le vocabulaire du sujet, idéalement positionné sur le mot-clé pilier exact. Le hub reçoit des liens entrants de tous ses satellites, au moins 5. Et il redistribue vers eux via des liens contextuels dans son propre corps de texte, pas via une liste de liens en fin de page.</p>
+
+    <figure>
+      <div class="diagram">  Architecture cible d'un pilier
+  ─────────────────────────────────────────────
+  PILIER — mot-clé business central
+  │
+  ├── HUB : l'article le plus stratégique
+  │         ≥ 5 liens entrants depuis les satellites
+  │         redistribue en contextuel dans son corps
+  │
+  ├── Satellite (Know)   ──→ hub, ──→ page Do
+  ├── Satellite (Know)   ──→ hub, ──→ page Do
+  ├── Satellite (Know)   ──→ hub, ──→ autre pilier
+  └── Satellite (Do)     ←── reçoit les liens Know→Do
+
+  Version GSC : Mère (mot-clé principal business)
+  ├── Fille (requête secondaire transactionnelle)
+  │   ├── Petite-fille (longue traîne)
+  │   └── Petite-fille (micro-intention)
+  └── Fille 2</div>
+      <figcaption>Un pilier avec son hub et ses satellites. En version GSC, la même structure se lit mère / fille / petite-fille, tirée des requêtes réelles.</figcaption>
+    </figure>
+
+    <p>Le prompt à copier une fois l'index prêt :</p>
+    <pre>Voici l'index de mes pages [index.json ou liste].
+
+1. Classifie chaque page : Know-Simple, Know ou Do
+   (+ intention secondaire si pertinente).
+2. Regroupe par cohérence sémantique en 3 à 5 piliers maximum.
+   Un pilier = minimum 3 pages + un mot-clé business central.
+   Les groupes de moins de 3 pages deviennent des sous-clusters.
+3. Pour chaque pilier, désigne la page-hub et justifie en une
+   phrase pourquoi c'est elle.
+
+Sors l'architecture en arborescence : pilier, hub, satellites
+avec leur intention.</pre>
+
+    <div class="box tim">
+      <p><span class="label">Le hub n'est pas figé.</span> Si un satellite devient plus complet que le hub historique, tu bascules le hub. La structure suit le contenu, jamais l'inverse. Je vois trop de sites verrouillés sur une page hub choisie il y a deux ans, devenue la plus faible du pilier, et qui continue de recevoir tous les liens par habitude.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 6 ============ -->
+  <section class="chapter" id="ch6">
+    <div class="ch-kicker">Chapitre 6</div>
+    <h2 class="ch-title">L'audit du graphe</h2>
+    <p class="ch-lead">Trois anomalies à détecter : la page que personne ne lie, la page qui ne lie personne, le hub que ses satellites ignorent.</p>
+
+    <div class="ch-body">
+    <h3 class="sec">Les trois anomalies</h3>
+    <p>Une page orpheline reçoit 0 lien entrant éditorial. Pour Google, elle n'existe qu'à travers le sitemap : aucun signal interne ne dit qu'elle compte. Une page dead-end contient 0 lien sortant éditorial : le lecteur arrive, lit, repart du site. Le PageRank qu'elle a accumulé ne circule plus. Un hub sous-maillé reçoit moins de 5 liens entrants depuis ses propres satellites : l'architecture existe sur le papier, pas dans le graphe. Les trois se détectent en une passe sur l'index du chapitre 4.</p>
+
+    <table>
+      <thead><tr><th>Page</th><th>Entrants</th><th>Sortants</th><th>Statut</th></tr></thead>
+      <tbody>
+        <tr><td>/guide-principal</td><td>7</td><td>5</td><td>OK (hub actif)</td></tr>
+        <tr><td>/methode-detaillee</td><td>3</td><td>4</td><td>OK</td></tr>
+        <tr><td>/cas-client-2026</td><td>0</td><td>2</td><td><strong>ORPHELINE</strong></td></tr>
+        <tr><td>/comparatif-solutions</td><td>5</td><td>0</td><td><strong>DEAD-END</strong></td></tr>
+        <tr><td>/tarifs</td><td>1</td><td>1</td><td><strong>Do sous-maillée</strong></td></tr>
+      </tbody>
+    </table>
+    <p>La dernière ligne du tableau est le cas le plus coûteux et le plus fréquent : la page business qui ne reçoit qu'un lien. Toute l'autorité du site circule entre les articles de blog, et la page qui convertit reste à l'écart du graphe.</p>
+
+    <h3 class="sec">Les seuils de conservation</h3>
+    <ul class="tight">
+      <li>Chaque page reçoit au moins 1 lien entrant éditorial (zéro orpheline)</li>
+      <li>Chaque page contient au moins 2 liens sortants éditoriaux (zéro dead-end)</li>
+      <li>Chaque hub reçoit au moins 5 liens entrants depuis ses satellites</li>
+      <li>En version GSC : une page mère « active » vise 10 citations entrantes</li>
+    </ul>
+
+    <p>Le prompt à copier :</p>
+    <pre>Sur la base de l'index et du graphe de liens :
+
+1. Liste les pages orphelines (0 entrant éditorial).
+2. Liste les pages dead-end (0 sortant éditorial).
+3. Pour chaque hub désigné au chapitre précédent, compte ses
+   liens entrants depuis ses propres satellites. Signale ceux
+   sous 5.
+4. Liste les pages Do avec moins de 3 liens entrants.
+
+Sors un tableau : page, entrants, sortants, statut. Classe les
+anomalies par gravité : pages Do sous-maillées d'abord, puis
+orphelines, puis dead-ends.</pre>
+
+    <div class="box rule">
+      <p><span class="label">La profondeur de clic n'est pas un critère.</span> Tu croiseras des audits qui recommandent « aucune page à plus de 3 clics de la home ». Je ne la mesure pas et je ne la corrige pas. Le signal qui compte, c'est le nombre et la qualité des liens éditoriaux qui pointent vers la page, pas sa distance théorique à la home.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 7 ============ -->
+  <section class="chapter" id="ch7">
+    <div class="ch-kicker">Chapitre 7</div>
+    <h2 class="ch-title">Les ancres</h2>
+    <p class="ch-lead">Cinq liens entrants vers la même page = cinq ancres différentes. Un seul exact match. Et chaque ancre passe le test à voix haute avant d'être posée.</p>
+
+    <div class="ch-body">
+    <h3 class="sec">Les trois familles d'ancres</h3>
+    <p>Pour chaque lien à créer, Claude propose 3 ancres classées, tu en choisis une. L'exact match reproduit le mot-clé pilier de la cible : un seul par page cible, sur la première mention, jamais plus. Le partial match est une variation autour du mot-clé : c'est la famille majoritaire, 60 à 70 % des liens entrants d'une cible. La sémantique étendue reformule la promesse de la page cible sans utiliser son mot-clé : c'est elle qui rend un profil d'ancres naturel.</p>
+    <p>Pourquoi cette répartition : si les 8 liens qui pointent vers ta page tarifs portent tous l'ancre « tarifs formation SEO », le pattern est mécanique et Google le lit comme tel. La diversification n'est pas une coquetterie, c'est ce qui distingue un maillage éditorial d'un maillage généré.</p>
+
+    <h3 class="sec">Les 5 critères d'une ancre</h3>
+    <table>
+      <thead><tr><th>Critère</th><th>La question à se poser</th></tr></thead>
+      <tbody>
+        <tr><td>Promesse de la cible</td><td>L'ancre reflète-t-elle ce que le lecteur va trouver, pas juste le H1 de la cible ?</td></tr>
+        <tr><td>Phrase porteuse</td><td>La phrase reste-t-elle fluide à voix haute si on retire le lien ?</td></tr>
+        <tr><td>Diversification</td><td>Cette ancre existe-t-elle déjà vers la même cible depuis une autre page ?</td></tr>
+        <tr><td>Position</td><td>L'ancre porte-t-elle le substantif central ou le verbe d'action, pas un mot de liaison ?</td></tr>
+        <tr><td>Contexte</td><td>Les 5 mots avant et après parlent-ils du sujet de la cible ?</td></tr>
+      </tbody>
+    </table>
+    <p>Une ancre qui rate un seul critère est rejetée. Le critère le plus discriminant est le deuxième, le test à voix haute : tu lis la phrase sans le lien. Si elle tombe juste, l'ancre est intégrée. Si elle clopine, l'ancre est plaquée et c'est la phrase entière qu'il faut réécrire, pas l'ancre qu'il faut ajuster.</p>
+
+    <h3 class="sec">La densité</h3>
+    <p>2 à 5 liens internes pour 1000 mots. Jamais plus. La raison est au chapitre 1 : chaque lien pèse 1/N du poids de la page, chaque lien ajouté affaiblit les autres. Au-delà de 5 pour 1000 mots, tu n'ajoutes plus de signal, tu en retires. Et les FAQ en bas de page sont une source d'ancres sous-exploitée : chaque réponse qui mentionne un sujet déjà traité ailleurs lie naturellement, avec un contexte parfait.</p>
+
+    <p>Le prompt à copier, pour un lot de liens validés :</p>
+    <pre>Pour chaque lien du plan [source → cible], ouvre la page source
+et propose :
+
+1. Le passage exact où insérer le lien (la phrase complète,
+   avec les mots avant et après).
+2. Trois ancres classées : [exact] / [partial] / [sémantique].
+   Vérifie dans le graphe qu'aucune n'est déjà utilisée vers
+   cette cible depuis une autre page.
+3. Si aucune phrase existante ne porte le lien naturellement,
+   propose une phrase à AJOUTER au texte, et signale-le.
+
+Contraintes : un seul exact match par page cible sur tout le
+site. Maximum 5 liens internes pour 1000 mots sur la page
+source. Ne réécris jamais un paragraphe entier sans me le dire.</pre>
+
+    <div class="box tim">
+      <p><span class="label">Le contexte vaut plus que l'ancre.</span> Une ancre parfaite dans une phrase qui parle d'autre chose, c'est un lien faible. Les mots qui entourent le lien sont vectorisés avec lui. Si ta phrase parle de délais de livraison et que l'ancre pointe vers la page tarifs, le signal est brouillé. Dans ce cas tu réécris la phrase, ou tu déplaces le lien.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 8 ============ -->
+  <section class="chapter" id="ch8">
+    <div class="ch-kicker">Chapitre 8</div>
+    <h2 class="ch-title">Prioriser et dérouler le plan</h2>
+    <p class="ch-lead">Tu ne crées pas 60 liens d'un coup. Tu crées les 15 qui comptent, dans l'ordre, avec une justification par lien.</p>
+
+    <div class="ch-body">
+    <h3 class="sec">L'ordre des 4 priorités</h3>
+    <p>Le plan se déroule dans un ordre fixe. Un, les liens manquants hub vers satellites à l'intérieur de chaque pilier : c'est ce qui active le cocon. Deux, les liens Know vers Do : c'est ce qui oriente le funnel vers tes pages business. Trois, les ponts entre piliers : au moins 1 lien sortant par pilier vers un autre pilier, pour éviter que tes clusters vivent en silos étanches. Quatre, le sauvetage des orphelines détectées au chapitre 6. Cet ordre n'est pas négociable : un cocon actif et un funnel orienté rapportent plus que dix orphelines sauvées.</p>
+
+    <h3 class="sec">Le score d'urgence</h3>
+    <p>Quand deux liens se disputent la priorité, le score tranche. Sans GSC : poids d'intention de la cible (Do = 1.0, Know décisionnel = 0.8, Know = 0.5, Know-Simple = 0.3), bonus si la source est un hub. Avec GSC, la formule du skill <code>maillage-interne-gsc</code> : impressions × 0.4 + potentiel de position × 0.4 + valeur business × 0.2. Dans les deux cas, la logique est la même : la donnée et l'intention décident, pas l'intuition.</p>
+
+    <h3 class="sec">Le format de sortie, lien par lien</h3>
+    <p>Chaque lien proposé par Claude arrive dans ce format, et pas un format plus court :</p>
+    <figure>
+      <div class="diagram">  PRIORITÉ : HAUTE
+  ─────────────────────────────────────────────
+  SOURCE   : Guide « Combien coûte une formation
+             SEO » (Know)
+  CIBLE    : Page /tarifs (Do)
+  NATURE   : Know → Do (orientation funnel)
+  PILIER   : Formation
+
+  PASSAGE PROPOSÉ :
+  « ...les fourchettes varient selon le format :
+  notre grille de tarifs par format détaille les
+  trois options et ce qu'elles incluent... »
+
+  ANCRES (choisir 1) :
+    [exact]     tarifs formation SEO
+    [partial]   grille de tarifs par format
+    [sémant.]   ce que chaque format inclut
+
+  JUSTIFICATION : la page Do la plus rentable du
+  pilier ne reçoit qu'un lien entrant.</div>
+      <figcaption>Le format complet d'un lien proposé : passage, trois ancres, justification. Sans le passage exact, la proposition n'est pas exécutable.</figcaption>
+    </figure>
+    <p>Le passage proposé est la partie qui rend le plan exécutable. Un plan qui dit « lier A vers B avec l'ancre X » te laisse tout le travail. Un plan qui donne la phrase complète avec les mots avant et après, tu l'exécutes en copiant-collant, ou tu le rejettes en connaissance de cause.</p>
+
+    <h3 class="sec">Qui insère les liens</h3>
+    <p>Claude propose, tu arbitres, puis l'insertion dépend de ton setup. Sur Claude Code avec un site en markdown ou un CMS accessible en fichiers, Claude insère lui-même les liens validés, page par page, et tu relis le diff. Sur un CMS en ligne sans accès fichiers, tu insères à la main depuis le plan. Dans les deux cas, la validation humaine passe avant l'insertion : une ancre forcée détruit le naturel d'un texte, et c'est toi qui portes la responsabilité éditoriale du site.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 9 ============ -->
+  <section class="chapter" id="ch9">
+    <div class="ch-kicker">Chapitre 9</div>
+    <h2 class="ch-title">Gouvernance et cas particuliers</h2>
+    <p class="ch-lead">Un maillage se dégrade à chaque publication non maillée. La checklist ci-dessous transforme la passe unique en système permanent.</p>
+
+    <div class="ch-body">
+    <h3 class="sec">La checklist à chaque nouvelle publication</h3>
+    <div class="box rule">
+      <p><span class="label">À vérifier avant de publier chaque nouvel article :</span></p>
+      <p>1. Le nouvel article reçoit au moins 3 liens entrants depuis 3 articles existants (tu retournes dans l'existant, oui, à chaque fois).<br>
+      2. Il contient au moins 3 liens sortants vers des articles existants.<br>
+      3. Au moins 1 lien sortant pointe vers une page Do.<br>
+      4. Au moins 1 lien sortant pointe vers un autre pilier.<br>
+      5. Aucune ancre exacte n'est dupliquée vers la même cible.<br>
+      6. Tous les liens sont dans le corps du texte, aucun en bloc « Voir aussi ».</p>
+    </div>
+    <p>Le point 1 est celui que tout le monde saute, parce qu'il oblige à rouvrir des articles publiés. C'est pourtant lui qui empêche la création d'orphelines : un article publié sans liens entrants naît orphelin, et le reste. Donne cette checklist à Claude dans ton skill de rédaction, et chaque brief sortira avec ses liens entrants et sortants déjà proposés.</p>
+
+    <h3 class="sec">Cas particulier · Site neuf, pas de GSC</h3>
+    <p>Toute la méthode tient sans Search Console : le scoring remplace les impressions par le poids d'intention (chapitre 8). Le plan reste valable tel quel, et tu le réajustes avec la donnée réelle dès que la GSC a 3 mois d'historique. Mailler avant les premières données, c'est le bon ordre : la structure n'attend pas la mesure.</p>
+
+    <h3 class="sec">Cas particulier · Refonte d'un site avec historique</h3>
+    <p>Tu chaînes les deux skills : <code>maillage-systeme</code> définit l'architecture cible, <code>maillage-interne-gsc</code> injecte la donnée réelle. Deux règles de prudence. Les pages qui rankent déjà sur un mot-clé pilier sont candidates naturelles au poste de hub, même si ce n'était pas le plan initial. Et les liens existants qui fonctionnent se préservent : une refonte de maillage n'est pas une remise à zéro, c'est un diff.</p>
+
+    <h3 class="sec">Cas particulier · pSEO à grande échelle</h3>
+    <p>Au-delà de 300 à 500 pages issues d'un même gabarit (un lexique, des fiches, des pages par ville), le raisonnement page par page ne tient plus, ni pour Claude ni pour personne. À cette échelle, le maillage se calcule depuis un signal présent dans la donnée elle-même : une cooccurrence, un attribut partagé, une référence croisée entre les lignes de ta table. Cas réel : sur un de mes projets, 13 622 pages de lexique sont maillées par un comptage de cooccurrence des termes dans le corpus, calculé une fois par un script, et rendu dans un bloc « termes liés » templaté. Claude définit la règle (quel signal, combien de liens, quel rendu), il ne juge jamais les pages une par une. Sous ce seuil, la méthode des chapitres 5 à 8 s'applique normalement.</p>
+
+    <div class="box tim">
+      <p><span class="label">Le vrai sujet.</span> Les plugins de maillage automatique posent des liens sur des correspondances de mots, sans lire ni la page source ni la cible. Résultat : le même mot-clé lié 40 fois avec la même ancre, des liens topiques sans intention, et un profil d'ancres mécanique. Le maillage part de ta stratégie de mots-clés, le cocon en est la conséquence. Un outil qui n'a pas ta stratégie ne peut produire que du remplissage. Claude n'échappe pas à la règle : sans ton architecture en piliers, il pose des liens plausibles, c'est tout. Si t'es pas bon en maillage, Claude ne sera pas bon.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 10 ============ -->
+  <section class="chapter" id="ch10">
+    <div class="ch-kicker">Chapitre 10</div>
+    <h2 class="ch-title">Les règles non négociables</h2>
+    <p class="ch-lead">Sept règles à garder ouvertes pendant tout le chantier. Quand tu doutes sur un lien, tu reviens à cette page.</p>
+
+    <div class="ch-body">
+    <div class="box rule"><p><span class="label">Règle 1. Un seul exact match par page cible.</span> Sur tout le site, une seule ancre reproduit le mot-clé pilier exact de la cible. Le reste est partial (60-70 %) ou sémantique. Cinq liens entrants = cinq ancres différentes.</p></div>
+    <div class="box rule"><p><span class="label">Règle 2. Liens in-body uniquement.</span> Pas de bloc « Voir aussi », pas de « Articles similaires » généré. Un lien vit dans une phrase qui parle du sujet de sa cible. Cette règle vise le contenu éditorial : un bloc templaté sur 10 000 pages pSEO est un autre régime (chapitre 9).</p></div>
+    <div class="box rule"><p><span class="label">Règle 3. Jamais de lien vers la home depuis le contenu.</span> La home concentre déjà l'autorité du site, elle n'a pas besoin d'un lien de plus. Chaque lien vers la home est un lien retiré à une page business qui en avait besoin.</p></div>
+    <div class="box rule"><p><span class="label">Règle 4. Densité plafonnée à 5 liens pour 1000 mots.</span> Chaque lien pèse 1/N du poids de la page. Au-delà du plafond, chaque lien ajouté retire du signal à tous les autres.</p></div>
+    <div class="box rule"><p><span class="label">Règle 5. Le test à voix haute tranche.</span> Tu lis la phrase sans le lien. Elle tombe juste : l'ancre est bonne. Elle clopine : tu réécris la phrase, pas l'ancre.</p></div>
+    <div class="box rule"><p><span class="label">Règle 6. Le maillage Know vers Do passe avant le maillage Know vers Know.</span> Chaque page qui explique un concept pointe vers la page qui permet de l'exécuter. C'est le maillage qui convertit, l'autre est du confort.</p></div>
+    <div class="box rule"><p><span class="label">Règle 7. Claude propose, l'humain décide.</span> Aucun lien ne s'insère sans validation. Le maillage à 100 % automatisé produit le profil mécanique que la règle 1 combat. Sois manager, tiens tes positions.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPITRE 11 ============ -->
+  <section class="chapter" id="ch11">
+    <div class="ch-kicker">Chapitre 11</div>
+    <h2 class="ch-title">Les deux SKILL.md complets</h2>
+    <p class="ch-lead">Les fichiers intégraux. Un dossier par skill dans ton dossier skills, un fichier SKILL.md par dossier, et c'est installé.</p>
+
+    <div class="ch-body">
+    <h3 class="sec">Skill 1 · maillage-systeme</h3>
+    <p>À coller dans <code>~/.claude/skills/maillage-systeme/SKILL.md</code> :</p>
+    <pre>---
+name: maillage-systeme
+description: Maillage interne stratégique d'un site (blog, catalogue,
+  doc) sans dépendre de la Search Console. Architecture en piliers,
+  classification hub/satellite, sélection d'ancres avec
+  diversification, détection des pages orphelines et dead-end, audit
+  complet du graphe interne. TOUJOURS utiliser quand l'utilisateur
+  mentionne : architecture de maillage, piliers de blog, hub et
+  satellite, ancres internes, audit maillage, orphan pages, pages
+  dead-end, structurer le maillage d'un nouveau site, plan de cocon,
+  ou uploade une liste d'articles/URLs pour un plan de maillage.
+---
+
+# Skill — Maillage Interne : Architecture, Ancres et Audit
+
+## Rôle
+
+Construire et auditer le graphe de liens internes d'un site à
+partir du contenu existant ou planifié, sans dépendre de la Search
+Console. Trois livrables : une architecture en piliers, un plan
+d'ancres diversifiées par lien, un rapport d'audit des trous
+structurels. L'objectif n'est pas de générer des liens à la
+chaîne : chaque lien est justifié par trois signaux (topique,
+intention, autorité).
+
+## Réflexion appliquée
+
+- Le maillage interne est un système, pas une passe.
+- Une ancre est une promesse de continuité entre deux pages, lue
+  par Google, par les LLM (en vecteur) et par l'humain.
+- 5 ancres vers la même page = 5 ancres différentes. Un seul
+  exact match.
+- Test à voix haute : si la phrase tombe juste sans le lien,
+  l'ancre est bien intégrée.
+- Le maillage Know→Do passe avant le maillage Know→Know.
+- Pas de « Voir aussi » en bas d'article. Liens contextuels
+  in-body uniquement.
+- Une page hub n'est pas un titre de catégorie : c'est l'article
+  le plus stratégique du pilier.
+- 1 lien sortant par pilier pointe vers un autre pilier
+  (cross-pillar), pour éviter la siloïsation.
+
+## Données requises
+
+- Liste des URLs/articles : titre, slug, catégorie, extrait,
+  mots-clés cibles (obligatoire)
+- Contenu intégral markdown ou HTML (recommandé, pour les ancres)
+- Mots-clés piliers 3-5 (recommandé)
+- Pages Do identifiées : outils, audits, formulaires (recommandé)
+
+Minimum viable : la liste avec titre + extrait + mots-clés. Sans
+contenu intégral : architecture oui, ancres précises non.
+
+## Étape 0 — Ingestion (site en ligne)
+
+Règle de contexte : le contenu intégral du site n'entre JAMAIS
+d'un bloc dans le contexte principal. Construire d'abord un index
+(une ligne légère par page : URL, title, H1, meta, compteurs de
+liens entrants/sortants éditoriaux) et un graphe (chaque lien
+interne avec son ancre exacte, hors nav/header/footer et hors
+liens de gabarit présents sur ≥ 80 % des pages). Le raisonnement
+se fait sur l'index. Le contenu s'ouvre page par page, uniquement
+pour proposer les ancres (étape 5), 2-3 pages à la fois.
+
+## Raisonnement (étapes obligatoires, dans l'ordre)
+
+### Étape 1 — Classifier chaque page en intention
+Know-Simple (définition courte) / Know (guide, méthode,
+comparatif) / Do (outil, formulaire, démo, tarifs). Une intention
+dominante + une secondaire éventuelle.
+
+### Étape 2 — Identifier les piliers
+Regrouper par cohérence sémantique, pas par catégorie CMS. 3 à 5
+piliers max. Un pilier = ≥ 3 articles + un mot-clé business
+central + une page-hub naturelle. Moins de 3 articles = un
+sous-cluster, pas un pilier.
+
+### Étape 3 — Désigner le hub de chaque pilier
+L'article le plus complet et le plus stratégique, idéalement
+positionné sur le mot-clé pilier exact. Le hub reçoit les liens de
+tous les satellites et redistribue en contextuel (pas en liste).
+
+### Étape 4 — Cartographier les liens existants
+Pour chaque page : liens entrants et sortants éditoriaux.
+Anomalies : orphelines (0 entrant), dead-ends (0 sortant), hubs
+sous-maillés (&lt; 5 entrants depuis les satellites). La profondeur
+de clic n'est PAS un critère.
+
+### Étape 5 — Sélectionner les ancres
+Pour chaque lien source → cible, 3 propositions classées :
+[exact] (1 max par cible, première mention), [partial] (60-70 %
+des entrants d'une cible), [sémantique] (reformule la promesse
+sans le mot-clé). Chaque ancre passe 5 critères : promesse de la
+cible, phrase porteuse (test à voix haute), diversification (pas
+déjà utilisée vers cette cible), position (substantif central ou
+verbe d'action), contexte (les 5 mots avant/après parlent du
+sujet de la cible). Une ancre qui rate un critère est rejetée.
+
+### Étape 6 — Prioriser les liens à créer
+Score = (impressions cible × poids_intention)
+        + (gain_autorité × 0.4)
+poids_intention : Do 1.0 / Know décisionnel 0.8 / Know 0.5 /
+Know-Simple 0.3. gain_autorité : 1 si la source est un hub,
+0.5 si satellite maillé, 0.2 sinon. Sans GSC : remplacer les
+impressions par le poids business de la cible.
+Ordre : 1) hub → satellites manquants 2) Know → Do
+3) cross-pillar (1 par pilier min) 4) orphelines.
+
+### Étape 7 — Vérifier les règles de conservation
+Zéro orpheline (≥ 1 entrant par page), zéro dead-end (≥ 2
+sortants), chaque hub ≥ 5 entrants, aucune ancre dupliquée vers
+une même cible, densité 2 à 5 liens internes / 1000 mots.
+
+## Format de sortie obligatoire
+
+Bloc 1 : architecture en arborescence (pilier, hub, satellites
+avec intention). Bloc 2 : tableau d'audit (page, entrants,
+sortants, statut). Bloc 3 : plan de liens priorisé — pour chaque
+lien : priorité, source (+intention), cible (+intention), nature,
+passage proposé (phrase complète), 3 ancres, justification en une
+phrase. Bloc 4 : checklist de gouvernance à chaque publication
+(≥ 3 entrants depuis l'existant, ≥ 3 sortants, ≥ 1 vers une page
+Do, ≥ 1 cross-pillar, pas d'ancre exacte dupliquée, tout in-body).
+
+## Points de vigilance
+
+- Ne pas tout automatiser : le skill propose, l'humain décide.
+- Le contexte vaut plus que l'ancre : si la phrase parle d'autre
+  chose, réécrire la phrase.
+- Le hub n'est pas figé : si un satellite devient plus complet,
+  basculer le hub.
+- Cross-pillar ≠ lien hors-sujet : il faut une vraie passerelle
+  conceptuelle.
+- Jamais de lien vers la home depuis le contenu.
+- Les FAQ sont une source d'ancres à haute densité naturelle.
+- Densité plafonnée : au-delà de 5 liens / 1000 mots, Google
+  pondère chaque ancre par 1/N et le signal se dilue.
+
+## Cas particuliers
+
+- Site sans GSC : scoring par poids business (Do 1.0 /
+  Know décisionnel 0.7 / Know 0.5 / Know-Simple 0.3), plan
+  réajusté quand la donnée arrive.
+- Refonte avec ≥ 6 mois de GSC : chaîner avec
+  maillage-interne-gsc ; promouvoir hub les pages qui rankent
+  déjà ; préserver les liens existants qui marchent.
+- Lots pSEO de 300-500+ pages issues d'un même gabarit : ne pas
+  appliquer les étapes 1-7 page par page. Utiliser un signal de
+  données calculé une fois pour tout le lot (cooccurrence,
+  attribut partagé, référence croisée ; sinon embedding + kNN),
+  rendu dans un bloc templaté. L'agent définit la règle, jamais
+  le lien page par page.</pre>
+
+    <h3 class="sec">Skill 2 · maillage-interne-gsc</h3>
+    <p>À coller dans <code>~/.claude/skills/maillage-interne-gsc/SKILL.md</code> :</p>
+    <pre>---
+name: maillage-interne-gsc
+description: Analyse et optimisation du maillage interne depuis les
+  données Search Console. Hiérarchie page mère/fille/petite-fille,
+  priorisation par impressions et positions réelles. TOUJOURS
+  utiliser quand l'utilisateur fournit un export GSC (Pages ou
+  Requêtes) en demandant un plan de maillage, ou mentionne :
+  maillage depuis la GSC, pages mères, cocon depuis la data.
+---
+
+# Skill — Maillage Interne GSC
+
+## Philosophie
+
+- Page mère = au moins 5 citations depuis des pages filles et
+  petites-filles. Une page mère « active » en vise 10.
+- Le maillage part de la stratégie de mots-clés. Le cocon est la
+  conséquence, jamais le point de départ.
+- Priorité : transactionnel &gt; décisionnel &gt; informationnel.
+- Maillage par intention (Know → Do) en plus du maillage
+  sémantique.
+
+## Input requis
+
+- Export GSC Pages : URL, clics, impressions, CTR, position
+  (obligatoire)
+- Export GSC Requêtes par page (recommandé)
+- Période 3 à 6 mois (recommandé)
+
+## Pipeline (5 étapes)
+
+1. Récupérer les données : export Pages + Requêtes par URL.
+2. Diagnostiquer la structure :
+   - pages mères potentielles : impressions élevées, position
+     4-15, requête transactionnelle
+   - pages sous-maillées : bonne position mais CTR faible
+   - pages orphelines : aucune thématique secondaire dans la GSC
+3. Construire le plan : hiérarchie mère / fille / petite-fille
+   + règle Know → Do (chaque page Know pointe vers ≥ 1 page Do
+   thématiquement reliée).
+4. Prioriser : score urgence = (impressions × 0.4) + (potentiel
+   de position × 0.4) + (valeur business × 0.2).
+5. Générer les recommandations : page source + page destination
+   + ancre + contexte d'insertion + priorité.
+
+## Structure hiérarchique
+
+Page Mère (mot-clé principal business)
+├── Page Fille 1 (requête secondaire transactionnelle)
+│   ├── Petite-Fille A (longue traîne / micro-intention)
+│   └── Petite-Fille B
+└── Page Fille 2
+
+## Output obligatoire (pour chaque action)
+
+- Page source (intention Know / Do / Know+Do)
+- Page destination + intention
+- Nature du lien (sémantique ou intentionnel Know → Do)
+- Ancre recommandée (jamais « cliquez ici »)
+- Contexte d'insertion
+- Priorité (Haute / Moyenne / Faible)
+
+## Règles absolues
+
+- Ne pas automatiser à 100 % : le maillage part de la stratégie,
+  pas des outils.
+- Ne pas mailler sans tenir compte de l'intention (sémantique
+  ≠ intentionnel).
+- Ne pas répéter la même ancre sur toutes les pages filles.
+- 10 citations entrantes minimum pour une page mère « active ».</pre>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="chapter" id="faq">
+    <div class="ch-kicker">FAQ</div>
+    <h2 class="ch-title">Les questions qui reviennent</h2>
+    <p class="ch-lead">Celles que j'entends en bootcamp et en accompagnement dès qu'on ouvre le chantier maillage.</p>
+
+    <div class="ch-body">
+    <h4 class="sub">Combien de liens internes par article, concrètement ?</h4>
+    <p>2 à 5 pour 1000 mots, comptés dans le corps du texte. Un article de 2000 mots porte donc 4 à 10 liens internes, jamais plus. Si tu as plus de liens légitimes que le plafond n'en autorise, c'est le signe que l'article couvre trop de sujets : le découpage en deux pages est la vraie réponse, pas le dépassement du plafond.</p>
+
+    <h4 class="sub">Je mets les liens où dans la page ?</h4>
+    <p>Là où la phrase les porte naturellement, et le test à voix haute décide. Un point d'attention quand même : un lien dans le premier tiers de la page est vu par plus de lecteurs qu'un lien en toute fin. Pour ton lien prioritaire (le Know vers Do du chapitre 8), vise une phrase du premier tiers. Pour les autres, la qualité du contexte prime sur la position.</p>
+
+    <h4 class="sub">Claude peut-il insérer les liens tout seul ?</h4>
+    <p>Techniquement oui, si ton site est en fichiers accessibles (markdown, repo Git, CMS headless). En pratique, tu valides chaque lien avant insertion, puis tu laisses Claude exécuter le lot validé et tu relis le diff. La règle 7 du chapitre 10 n'est pas une précaution décorative : un maillage inséré sans validation dérive vers le profil mécanique en quelques semaines.</p>
+
+    <h4 class="sub">Mon site a 5 000 pages, la méthode tient ?</h4>
+    <p>La méthode des chapitres 5 à 8 tient pour la partie éditoriale de ton site (le blog, les guides, les pages business), qui dépasse rarement quelques centaines de pages. Si les 5 000 pages viennent d'un gabarit pSEO, c'est le régime du chapitre 9 : un signal calculé dans la donnée, un bloc templaté, et Claude qui définit la règle une fois au lieu de juger 5 000 fois.</p>
+
+    <h4 class="sub">Je n'ai pas accès à la GSC de mon client, je fais quoi ?</h4>
+    <p>Tu déroules <code>maillage-systeme</code> seul : toute l'architecture et tout l'audit tiennent sans Search Console, le scoring bascule sur le poids business des cibles. Et tu demandes l'accès GSC en parallèle (un accès en lecture suffit) : le jour où il arrive, le plan se réajuste sur la donnée réelle sans repartir de zéro.</p>
+
+    <h4 class="sub">Et les plugins WordPress de maillage automatique ?</h4>
+    <p>Ils posent des liens sur des correspondances de mots, sans stratégie, sans intention, avec des ancres répétées. Tout ce que ce guide construit (un seul exact match, diversification, Know vers Do, phrases porteuses), un plugin de correspondance lexicale le défait. Si tu en as un d'actif, désactive l'insertion automatique avant de dérouler le plan, sinon tu audites un graphe qui bouge sous tes pieds.</p>
+
+    <h4 class="sub">Combien de temps pour voir un effet ?</h4>
+    <p>Google recrawle et repondère à son rythme, et aucun chiffre universel n'existe : ça dépend de la fréquence de crawl de ton site et de l'ampleur du chantier. Ce que tu peux mesurer sans attendre : le nombre d'orphelines restantes (objectif zéro dès la livraison), puis les positions des pages Do renforcées, à comparer dans la GSC sur les semaines qui suivent. Mesure l'avant/après sur ces pages précises, pas sur le trafic global.</p>
+    </div>
+  </section>
+
+  <!-- ============ ALLER PLUS LOIN ============ -->
+  <section class="chapter tight" id="going-further">
+    <div class="ch-body">
+    <h2 class="doc-title">Aller plus loin</h2>
+    <div class="hr"></div>
+
+    <p>Ce guide te donne la méthode complète et les deux skills. Ce qu'il ne peut pas te donner, c'est l'arbitrage sur ton site précis : quel article mérite le poste de hub quand deux candidats se valent, quelle page Do prioriser quand le funnel en compte quatre, quand casser un pilier en deux. Ces décisions demandent de connaître ton business, et c'est exactement la partie qui ne se délègue pas à Claude.</p>
+    <p><strong>Bootcamp SEO + IA.</strong> Sessions live en groupe, cas pratiques sur tes propres exports GSC, accès WhatsApp 30 jours. On construit ton système SEO complet avec données propriétaires, skills calibrés sur ton secteur et automatisations.</p>
+    <p><strong>Accompagnement 1:1.</strong> Pour les entreprises B2B qui veulent un système SEO performant avec un appui continu et un calibrage progressif.</p>
+
+    <div class="box cta">
+      <p><span class="label">Construire votre agent SEO</span></p>
+      <p>Un agent qui surveille votre site 24h/24, vous alerte, travaille pour vous et vous aide à mieux ranker sur Google, et les IA.</p>
+      <p><a href="https://qadence.io">Découvrir Qadence</a></p>
+    </div>
+
+    <div class="box cta">
+      <p><span class="label">Accompagnement 1:1</span></p>
+      <p>Besoin de placer votre site sur Google&nbsp;? Discutons-en.</p>
+      <p><a href="https://organikk.co/accompagnement-1-1-30-jours/">organikk.co/accompagnement-1-1-30-jours</a></p>
+    </div>
+
+    <div class="end-note">Contenu : Timothée Boussardon, <a class="brandlink" href="https://organikk.co/">Organikk.co</a>. Guide rédigé en août 2026.</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

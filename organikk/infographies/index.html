@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Système SEO KB : 3 variantes</title>
+<style>
+body{margin:0;background:#F5F5F5;font-family:Inter,system-ui,sans-serif;color:#0B0B0F}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #E5E5E5;padding:14px 24px;display:flex;gap:18px;font-weight:600}
+nav a{color:#333;text-decoration:none}nav a.on{color:#244BFF}
+section{max-width:1200px;margin:32px auto;padding:0 16px}
+h2{font-size:18px;margin:0 0 10px}img{width:100%;display:block;background:#fff;border:1px solid #E5E5E5}
+</style></head><body>
+<nav><a href="?v=a">A · barres</a><a href="?v=b">B · cycle</a><a href="?v=c">C · frise</a><a href="?">les trois</a></nav>
+<section id="a"><h2>A · Ce que contient le vault (barres, chiffres comptés)</h2><img src="systeme-seo-kb-a-barres.png" alt=""></section>
+<section id="b"><h2>B · Le cycle, de la source à la preuve</h2><img src="systeme-seo-kb-b-cycle.png" alt=""></section>
+<section id="c"><h2>C · La semaine, un seul moment de décision</h2><img src="systeme-seo-kb-c-semaine.png" alt=""></section>
+<script>
+const v=new URLSearchParams(location.search).get('v');
+if(v){document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==v);document.querySelector(`nav a[href="?v=${v}"]`)?.classList.add('on')}
+</script></body></html>

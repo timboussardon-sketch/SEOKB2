@@ -1,0 +1,341 @@
+{
+  "_sources": "Conseils du test de fin, un tableau par palier (moins de 34 %, 34-66 %, 67-99 %, 100 %). Tirés de raw/notes/guide-wiki-llm-obsidian.md, AGENTS.md (§3, §6, §14), wiki/moc/doctrine-seo-reference.md, raw/guide-seo-obsidian-claude/ (skills et matiere-par-section.md), jev/README.md, wiki/audit/2026-09-22 et 2026-09-23 (organikk.co), wiki/keywords/2026-09-23-organikk-search-console.md, wiki/preuves/index.md, wiki/hypotheses.md, wiki/corrections-recurrentes.md.",
+  "fr": [
+    [
+      {
+        "c": "Crée le dossier de ta base avec raw/, wiki/, index.md et log.md avant d'ouvrir Obsidian.",
+        "p": "Une réponse qui reste dans le chat, tu la redemandes dans six semaines. J'ai créé un dossier vide et un fichier AGENTS.md en avril 2026. Au 23 septembre 2026, ce dossier contient 692 fichiers markdown dans raw/ et 502 pages dans wiki/, écrites et tenues à jour par Claude.",
+        "s": [
+          "Compte quinze minutes. Dans le terminal : `npm install -g @anthropic-ai/claude-code`, puis `mkdir ma-base && cd ma-base`.",
+          "Crée les dossiers : `mkdir -p raw/articles raw/data raw/clients raw/notes` puis `mkdir -p wiki/sources wiki/entities wiki/concepts wiki/queries`.",
+          "Crée les fichiers vides tout de suite, puis versionne : `touch AGENTS.md wiki/index.md wiki/log.md` et `git init && git add . && git commit -m \"bootstrap\"`.",
+          "Dans Obsidian, ouvre le dossier ma-base. Lance `claude` dans ce dossier."
+        ]
+      },
+      {
+        "c": "Écris dans AGENTS.md que raw/ est immuable : Claude y lit, il n'y écrit jamais.",
+        "p": "Claude lit AGENTS.md au démarrage de chaque session. Le jour où l'agent reformule une source pour la rendre plus claire, tu perds la trace de ce que l'auteur avait écrit : tu ne peux plus le citer ni le vérifier. C'est la seule règle que je n'ai pas assouplie en cinq mois.",
+        "s": [
+          "Ouvre AGENTS.md et pose six sections : la mission, ta doctrine, l'arborescence, les types de pages, les conventions, les workflows.",
+          "Dans la section architecture, écris : « raw/ est immuable. L'agent lit, il n'écrit jamais dedans. Tout ce qu'il produit va dans wiki/. »",
+          "Dans la section doctrine, écris : « Pas de source = pas d'affirmation. Aucun chiffre inventé. »",
+          "Chaque fois qu'une session dérape, ajoute une ligne dans AGENTS.md."
+        ]
+      },
+      {
+        "c": "Ingère une seule source pour commencer, celle qui compte, et corrige la lecture de Claude avant qu'il écrive.",
+        "p": "Une lecture fausse part dans plusieurs fichiers. Mon ingest du 19 juin 2026 a touché 8 fichiers et ajouté 305 lignes, et mes ingests vont de 4 à 15 pages selon la densité du document. Le premier prend plus de temps que les suivants, parce que tu corriges ce que Claude a compris.",
+        "s": [
+          "Dépose dans raw/ un transcript de call, un export Search Console ou ton meilleur audit.",
+          "Tape à Claude : « ingère raw/notes/mon-meilleur-audit.md ».",
+          "Claude lit le fichier en entier, te résume les points et te demande quel angle creuser. À ce stade il n'a rien écrit dans le wiki. Corrige son résumé, donne l'angle.",
+          "Vérifie ensuite qu'il a créé la fiche dans wiki/sources/, mis à jour index.md et ajouté une ligne dans log.md."
+        ]
+      },
+      {
+        "c": "Pose ta première question à la base et refuse toute affirmation sans wikilink.",
+        "p": "Sans le lien, tu ne peux pas vérifier l'affirmation, donc tu ne peux pas la mettre dans un livrable client. Si Claude affirme sans lier, ta doctrine n'est pas assez dure, ou ta base est encore vide.",
+        "s": [
+          "Tape à Claude : « qu'est-ce qu'on sait déjà sur [ton sujet] ? cite tes pages. »",
+          "Regarde les wikilinks de la réponse. Une affirmation sans lien : durcis la doctrine dans AGENTS.md.",
+          "Si la réponse a une valeur réutilisable, demande à Claude de l'enregistrer en page dans wiki/queries/.",
+          "Ingère une deuxième source : le réseau commence à la deuxième source."
+        ]
+      }
+    ],
+    [
+      {
+        "c": "N'écris aucun volume, position ou CPC que tu n'as pas relevé.",
+        "p": "« Pas de volume inventé » ne veut pas dire « aucun signal de demande » : une requête à forte intention peut être cherchée par 5 personnes ou par 500. Sans donnée, note une demande observée Faible, Moyenne ou Forte, avec ses signaux nommés à côté. Seules les impressions Search Console prouvent qu'une requête est tapée, à partir de 20 impressions sur 90 jours.",
+        "s": [
+          "Donne à Claude ton offre, ton point de conversion, ta cible, ton marché, les URL de tes pages d'offre, et tes verbatims clients si tu en as.",
+          "Tape : « Lance seo-mots-cles-business sur [URL]. Offre : [...], cible : [...], conversion : [...], marché : [...]. »",
+          "Applique le barème Forte : 5 variantes Google Suggest ou plus, 7 appels ou messages clients ou plus, 20 impressions Search Console ou plus.",
+          "Écris « non mesuré » pour un signal absent, et « demande à confirmer » quand l'intention est forte sans aucun signal, avec une mesure dans Search Console à 90 jours."
+        ]
+      },
+      {
+        "c": "Écarte une requête à fort volume qui ne correspond pas à ton offre, et écris la raison dans le livrable.",
+        "p": "Sur organikk.co, « agence seo » affichait 18 100 recherches par mois dans Keyword Planner le 25/09/2026 et a fini écartée, avec ce motif : « le site se présente contre l'agence ». Le 30/09/2026, sur 20 intentions, les 4 écartées pesaient 181 suggestions Google et les 16 retenues 123.",
+        "s": [
+          "Fais passer chaque intention par la première porte : correspond-elle à ce que le site vend ou permet de faire ? Oui ou Non.",
+          "Si c'est Non, la décision est ÉCARTER et les deux autres portes ne sont pas notées.",
+          "Range la requête dans le tableau des requêtes écartées, avec sa raison écrite.",
+          "Lis l'intention business aux modificateurs de la requête (achat, prix, comparatif, avis, local), jamais au volume."
+        ]
+      },
+      {
+        "c": "N'écarte jamais une intention parce qu'elle est absente de ton export Search Console.",
+        "p": "La Search Console ne représente pas tout le marché : certaines requêtes sont anonymisées et les tableaux ne restituent pas toutes les lignes. Sur organikk.co, du 24 juin au 21 septembre 2026, l'API a rendu 74 requêtes visibles pour 1 296 impressions. Le reste est anonymisé par Google.",
+        "s": [
+          "Donne à Claude l'export Search Console, onglets Requêtes et Pages, sur 3 à 6 mois, avec les URL de tes pages d'offre.",
+          "Même avec l'export, fais tourner la recherche web des intentions que le site ne couvre pas.",
+          "Écris tes conclusions à la mesure des données : « sur les 40 requêtes de l'export », jamais « sur le site »."
+        ]
+      },
+      {
+        "c": "Prépare chaque call avec un pré-audit fait sur la seule URL et des données publiques, et marque chaque chiffre non vérifié.",
+        "p": "La Search Console du prospect est presque toujours indisponible avant le call : elle devient une question à poser, on ne la devine jamais. Un chiffre inventé dans un pré-audit, c'est la crédibilité perdue dès la première vérification.",
+        "s": [
+          "Donne à Claude l'URL du site, puis l'offre, la cible et l'objectif si tu les connais. Sinon Claude les déduit et les marque « à confirmer au call ».",
+          "Tape : « Fais un pré-audit sur https://monsite.fr. Il vend [offre] à [cible], l'objectif est [objectif]. »",
+          "Marque tout chiffre non vérifié `[À SOURCER]` ou « à récupérer au call ».",
+          "Tranche 2 ou 3 des 7 questions. Les autres deviennent des questions à poser au call, avec l'accès Search Console et le poids de chaque offre dans le CA."
+        ]
+      }
+    ],
+    [
+      {
+        "c": "Maille d'abord tes pages d'offre orphelines, par lots de 10 à 20 liens.",
+        "p": "Sur organikk.co, le relevé du 23/09/2026 compte 9 URL du sitemap sur 29 sans aucun lien interne entrant, dont 5 pages commerciales. Ce sont les pages qui portent l'offre, et elles ne reçoivent rien du maillage.",
+        "s": [
+          "Lance le crawl : `python3 ~/.claude/skills/maillage-systeme/scripts/crawl_graph.py https://monsite.fr/sitemap.xml -o ./maillage-data`. Un lien présent sur 80 % des pages ou plus est un lien de gabarit, il ne compte pas.",
+          "Classe les liens à créer par rang : page d'offre orpheline, lien Know vers Do, hub vers satellite, orpheline hors offre, lien entre piliers. Aucun score numérique.",
+          "Lis chaque passage à voix haute sans le lien. Si la phrase boite, l'ancre est rejetée.",
+          "Insère par lots de 10 à 20 et relance le crawl après chaque lot. Critère de fin : zéro page d'offre orpheline."
+        ]
+      },
+      {
+        "c": "Vérifie que chaque valeur de ton JSON-LD existe telle quelle sur la page.",
+        "p": "Un champ tapé à la main se désynchronise au premier edit.",
+        "s": [
+          "Donne la consigne à Claude : « Vérifie que le balisage de [URL] correspond à ce que la page affiche. »",
+          "Passe les trois contrôles : le JSON est valide, chaque valeur balisée existe telle quelle sur la page, le balisage sert une fonctionnalité Google réelle.",
+          "Retire les `FAQPage` ou `HowTo` posés « au cas où », les `aggregateRating`, avis ou prix invérifiables, les `wordCount` et dates codés en dur.",
+          "Valide avec les outils Google et schema.org."
+        ]
+      },
+      {
+        "c": "Garde le statut « non testée » pour toute URL que tu n'as pas inspectée.",
+        "p": "La requête site: est un indice non exhaustif : une absence ne prouve pas une non-indexation. Sur organikk.co le 22/09/2026, 12 URL sur 141 ont été inspectées par l'API. Les 129 autres sont restées « non testé ».",
+        "s": [
+          "Branche l'API URL Inspection de la Search Console. Mise en place : environ 30 minutes. Limite : 2 000 inspections par jour et par propriété.",
+          "Inspecte d'abord les URL du sitemap non inspectées, au moins celles que ton rapport cite.",
+          "Écris dans le rapport la source, la date et la portée : N URL testées.",
+          "Si rien n'est démontré, écris « Aucun défaut d'indexation confirmé sur les N pages inspectées ». « Rien de confirmé » est une réponse autorisée."
+        ]
+      },
+      {
+        "c": "Fais trier tes brouillons par un modèle comme Jev, et relis tout tant que son accord avec toi reste sous 80 %.",
+        "p": "Jev ne génère pas de texte : il répond à des questions fermées avec une confiance, et sert à trier avant relecture. Un appel prend 0,8 s. Huit en parallèle : une page de 190 phrases en 30 s. Claude pré-décide, tu décides.",
+        "s": [
+          "Donne-lui le brouillon et les sources : calls, tickets, pages du site.",
+          "Il sort les phrases absentes des sources, déduites ou de remplissage, avec un score.",
+          "Note ton propre verdict sur les mêmes phrases et calcule l'accord entre lui et toi.",
+          "Sous 80 % d'accord ou sous 30 cas notés, tu relis tout ce qu'il a trié."
+        ]
+      }
+    ],
+    [
+      {
+        "c": "Fais tourner un audit de ta base une fois par semaine, et trie toi-même ce qu'il remonte.",
+        "p": "Mon rapport du 20 septembre 2026 : 1 669 fichiers scannés, 11 684 wikilinks, 167 cibles cassées, soit 1,97 %. Sur ces 167, 59 seulement sont référencées depuis wiki/, et l'audit a trouvé une catégorie d'erreur que je ne voyais pas.",
+        "s": [
+          "Lance l'audit chaque semaine. Il sort un rapport et ne répare rien tout seul.",
+          "Fais-lui vérifier les pages qui se contredisent, les affirmations sans source, les entités orphelines et le frontmatter invalide.",
+          "Passe en `stale` toute source de plus de 12 mois sur un sujet SEO volatil.",
+          "Trie avant de réparer. J'accepte de laisser des liens cassés dans les dossiers qui ne sont pas le wiki."
+        ]
+      },
+      {
+        "c": "Note tes propres verdicts à côté de ceux de ton modèle de tri avant de lui confier une action automatique.",
+        "p": "Chez moi, un usage de Jev ne passe en action automatique qu'après calibration : accord d'au moins 80 % sur au moins 30 de mes verdicts. Avant ce seuil, Jev trie et je décide.",
+        "s": [
+          "Enregistre chaque verdict du modèle dans un registre en ajout seul.",
+          "Sur une phrase exacte, note ton propre verdict.",
+          "Calcule l'accord entre le modèle et toi.",
+          "Sous 80 % d'accord ou sous 30 cas, l'usage reste un tri pour relecture."
+        ]
+      },
+      {
+        "c": "Ouvre une fiche preuve à chaque contenu publié, et ne valide une hypothèse que sur une mesure.",
+        "p": "Dans ma base, une hypothèse ne passe « validé » ou « invalidé » que par une fiche preuve adossée à de la data réelle. Ma mesure à J+30 sur 3 URL publiées le 7 juillet 2026 donne 5 impressions et 0 clic : la fiche est classée « bruitée » et l'hypothèse reste « ouvert ».",
+        "s": [
+          "À la publication, crée la fiche : l'hypothèse testée, la prédiction chiffrée, la baseline.",
+          "Remplis la mesure réelle à J+30 et à J+90, depuis un export Search Console.",
+          "Avant de faire avancer un statut, cherche le contre-argument le plus solide. Un contre-argument non réfuté bloque le passage à « validé ».",
+          "Revois le registre des hypothèses une fois par mois. Sans data, l'hypothèse reste « ouvert »."
+        ]
+      },
+      {
+        "c": "Tiens un registre de tes corrections, et transforme en règle celle qui revient deux fois.",
+        "p": "Une correction donnée en session vit dans la mémoire de Claude, qui n'est jamais vérifiée mécaniquement. Mon registre relève au 11 septembre 2026 une règle déjà posée qui a rechuté cinq fois en quatre mois.",
+        "s": [
+          "Ajoute une ligne par correction, avec un thème court et stable, réutilisé si le sujet revient.",
+          "Une occurrence isolée ne déclenche rien.",
+          "À la deuxième occurrence du même thème, passe-la en « récurrente » et propose son durcissement à ta revue de la semaine : règle d'audit, contrainte de skill ou clause dans AGENTS.md.",
+          "Ne laisse jamais l'agent écrire seul dans un skill ou dans AGENTS.md. Il prépare la proposition, tu valides. Compte environ 15 minutes par semaine."
+        ]
+      }
+    ]
+  ],
+  "en": [
+    [
+      {
+        "c": "Create your base folder with raw/, wiki/, index.md and log.md before you open Obsidian.",
+        "p": "An answer that stays in the chat, you ask for it again six weeks later. I created an empty folder and an AGENTS.md file in April 2026. On September 23, 2026, that folder holds 692 markdown files in raw/ and 502 pages in wiki/, written and maintained by Claude.",
+        "s": [
+          "Allow fifteen minutes. In the terminal: `npm install -g @anthropic-ai/claude-code`, then `mkdir my-base && cd my-base`.",
+          "Create the folders: `mkdir -p raw/articles raw/data raw/clients raw/notes` then `mkdir -p wiki/sources wiki/entities wiki/concepts wiki/queries`.",
+          "Create the empty files right away, then version them: `touch AGENTS.md wiki/index.md wiki/log.md` and `git init && git add . && git commit -m \"bootstrap\"`.",
+          "In Obsidian, open the my-base folder. Run `claude` in that folder."
+        ]
+      },
+      {
+        "c": "Write in AGENTS.md that raw/ is immutable: Claude reads it and never writes in it.",
+        "p": "Claude reads AGENTS.md at the start of each session. The day the agent rewrites a source to make it clearer, you lose track of what the author wrote: you can no longer quote it or verify it. It is the only rule I have not relaxed in five months.",
+        "s": [
+          "Open AGENTS.md and set six sections: the mission, your doctrine, the folder tree, the page types, the conventions, the workflows.",
+          "In the architecture section, write: \"raw/ is immutable. The agent reads it and never writes in it. Everything it produces goes in wiki/.\"",
+          "In the doctrine section, write: \"No source = no claim. No invented figure.\"",
+          "Each time a session goes off track, add a line to AGENTS.md."
+        ]
+      },
+      {
+        "c": "Ingest one source to start, the one that matters, and correct Claude's reading before it writes.",
+        "p": "A wrong reading spreads into several files. My ingest of June 19, 2026 touched 8 files and added 305 lines, and my ingests range from 4 to 15 pages depending on how dense the document is. The first one takes longer than the next ones, because you correct what Claude understood.",
+        "s": [
+          "Drop a call transcript, a Search Console export or your best audit into raw/.",
+          "Type to Claude: \"ingest raw/notes/my-best-audit.md\".",
+          "Claude reads the whole file, summarizes the points and asks which angle to dig into. At this stage it has written nothing in the wiki. Correct its summary, give the angle.",
+          "Then check that it created the sheet in wiki/sources/, updated index.md and added a line to log.md."
+        ]
+      },
+      {
+        "c": "Ask your base its first question and refuse any claim without a wikilink.",
+        "p": "Without the link, you cannot verify the claim, so you cannot put it in a client deliverable. If Claude makes claims without linking, your doctrine is not strict enough, or your base is still empty.",
+        "s": [
+          "Type to Claude: \"what do we already know about [your topic]? cite your pages.\"",
+          "Look at the wikilinks in the answer. A claim without a link: tighten the doctrine in AGENTS.md.",
+          "If the answer is reusable, ask Claude to save it as a page in wiki/queries/.",
+          "Ingest a second source: the network starts at the second source."
+        ]
+      }
+    ],
+    [
+      {
+        "c": "Write no volume, position or CPC that you have not measured.",
+        "p": "\"No invented volume\" does not mean \"no demand signal\": a high-intent query can be searched by 5 people or by 500. Without data, write an observed demand of Weak, Medium or Strong, with its signals named next to it. Only Search Console impressions prove that a query is typed, from 20 impressions over 90 days.",
+        "s": [
+          "Give Claude your offer, your conversion point, your target, your market, the URLs of your offer pages, and your client verbatims if you have any.",
+          "Type: \"Run seo-mots-cles-business on [URL]. Offer: [...], target: [...], conversion: [...], market: [...].\"",
+          "Apply the Strong scale: 5 Google Suggest variants or more, 7 client calls or messages or more, 20 Search Console impressions or more.",
+          "Write \"not measured\" for a missing signal, and \"demand to confirm\" when intent is strong with no signal at all, with a measurement in Search Console at 90 days."
+        ]
+      },
+      {
+        "c": "Discard a high-volume query that does not match your offer, and write the reason in the deliverable.",
+        "p": "On organikk.co, \"agence seo\" showed 18,100 searches per month in Keyword Planner on 2026-09-25 and ended up discarded, with this reason: \"the site positions itself against the agency\". On 2026-09-30, out of 20 intents, the 4 discarded ones weighed 181 Google suggestions and the 16 kept ones 123.",
+        "s": [
+          "Run each intent through the first gate: does it match what the site sells or lets people do? Yes or No.",
+          "If it is No, the decision is DISCARD and the two other gates are not scored.",
+          "Put the query in the table of discarded queries, with its reason written.",
+          "Read business intent from the query's modifiers (purchase, price, comparison, reviews, local), never from the volume."
+        ]
+      },
+      {
+        "c": "Never discard an intent because it is missing from your Search Console export.",
+        "p": "Search Console does not represent the whole market: some queries are anonymized and the tables do not return every row. On organikk.co, from June 24 to September 21, 2026, the API returned 74 visible queries for 1,296 impressions. Google anonymizes the rest.",
+        "s": [
+          "Give Claude the Search Console export, Queries and Pages tabs, over 3 to 6 months, with the URLs of your offer pages.",
+          "Even with the export, run the web search for the intents the site does not cover.",
+          "Write your conclusions at the scale of the data: \"on the 40 queries in the export\", never \"on the site\"."
+        ]
+      },
+      {
+        "c": "Prepare each call with a pre-audit built from the URL alone and public data, and mark every unverified figure.",
+        "p": "The prospect's Search Console is almost never available before the call: it becomes a question to ask, you never guess it. An invented figure in a pre-audit means credibility lost at the first check.",
+        "s": [
+          "Give Claude the site URL, then the offer, the target and the goal if you know them. Otherwise Claude infers them and marks them \"to confirm on the call\".",
+          "Type: \"Run a pre-audit on https://mysite.com. It sells [offer] to [target], the goal is [goal].\"",
+          "Mark every unverified figure `[TO SOURCE]` or \"to collect on the call\".",
+          "Settle 2 or 3 of the 7 questions. The others become questions for the call, along with Search Console access and the weight of each offer in revenue."
+        ]
+      }
+    ],
+    [
+      {
+        "c": "Link your orphan offer pages first, in batches of 10 to 20 links.",
+        "p": "On organikk.co, the reading of 2026-09-23 counts 9 sitemap URLs out of 29 with no inbound internal link, 5 of them commercial pages. These are the pages that carry the offer, and they receive nothing from internal linking.",
+        "s": [
+          "Run the crawl: `python3 ~/.claude/skills/maillage-systeme/scripts/crawl_graph.py https://mysite.com/sitemap.xml -o ./maillage-data`. A link present on 80% of pages or more is a template link, it doesn't count.",
+          "Rank the links to create: orphan offer page, Know to Do link, hub to satellite, orphan outside the offer, link between pillars. No numeric score.",
+          "Read each passage out loud without the link. If the sentence stumbles, the anchor is rejected.",
+          "Insert in batches of 10 to 20 and rerun the crawl after each batch. End criterion: zero orphan offer pages."
+        ]
+      },
+      {
+        "c": "Check that each value in your JSON-LD exists as is on the page.",
+        "p": "A field typed by hand goes out of sync at the first edit.",
+        "s": [
+          "Give Claude the instruction: \"Check that the markup of [URL] matches what the page displays.\"",
+          "Run the three checks: the JSON is valid, each marked-up value exists as is on the page, the markup serves a real Google feature.",
+          "Remove `FAQPage` or `HowTo` added \"just in case\", `aggregateRating`, reviews or prices that can't be verified, hard-coded `wordCount` and dates.",
+          "Validate with the Google and schema.org tools."
+        ]
+      },
+      {
+        "c": "Keep the \"not tested\" status for any URL you have not inspected.",
+        "p": "The site: query is a non-exhaustive hint: an absence does not prove the page is not indexed. On organikk.co on 2026-09-22, the API inspected 12 URLs out of 141. The other 129 stayed \"not tested\".",
+        "s": [
+          "Connect the Search Console URL Inspection API. Setup: about 30 minutes. Limit: 2,000 inspections per day per property.",
+          "Inspect the uninspected sitemap URLs first, at least the ones your report cites.",
+          "Write the source, the date and the scope in the report: N URLs tested.",
+          "If nothing is demonstrated, write \"No indexing defect confirmed on the N pages inspected\". \"Nothing confirmed\" is an allowed answer."
+        ]
+      },
+      {
+        "c": "Have a model like Jev sort your drafts, and review everything while its agreement with you stays under 80%.",
+        "p": "Jev does not generate text: it answers closed questions with a confidence level, and it sorts before you review. One call takes 0.8 s. Eight in parallel: a 190-sentence page in 30 s. Claude pre-decides, you decide.",
+        "s": [
+          "Give it the draft and the sources: calls, tickets, site pages.",
+          "It returns the sentences absent from the sources, deduced, or filler, with a score.",
+          "Write your own verdict on the same sentences and compute the agreement between it and you.",
+          "Under 80% agreement or under 30 scored cases, you review everything it sorted."
+        ]
+      }
+    ],
+    [
+      {
+        "c": "Run an audit of your base once a week, and sort what it reports yourself.",
+        "p": "My report of September 20, 2026: 1,669 files scanned, 11,684 wikilinks, 167 broken targets, that is 1.97%. Of these 167, only 59 are referenced from wiki/, and the audit found a category of error I was not seeing.",
+        "s": [
+          "Run the audit every week. It produces a report and repairs nothing on its own.",
+          "Have it check pages that contradict each other, claims without a source, orphan entities and invalid frontmatter.",
+          "Set to `stale` any source older than 12 months on a volatile SEO topic.",
+          "Sort before you repair. I accept leaving broken links in the folders that are not the wiki."
+        ]
+      },
+      {
+        "c": "Write your own verdicts next to those of your sorting model before you hand it an automatic action.",
+        "p": "In my system, a Jev use only becomes an automatic action after calibration: at least 80% agreement on at least 30 of my verdicts. Before that threshold, Jev sorts and I decide.",
+        "s": [
+          "Record each verdict of the model in an append-only log.",
+          "On an exact sentence, write your own verdict.",
+          "Compute the agreement between the model and you.",
+          "Under 80% agreement or under 30 cases, the use stays a sort for review."
+        ]
+      },
+      {
+        "c": "Open a proof sheet for each published piece of content, and validate a hypothesis only on a measurement.",
+        "p": "In my base, a hypothesis only moves to \"validated\" or \"invalidated\" through a proof sheet backed by real data. My measurement at D+30 on 3 URLs published on July 7, 2026 gives 5 impressions and 0 clicks: the sheet is classed \"noisy\" and the hypothesis stays \"open\".",
+        "s": [
+          "At publication, create the sheet: the hypothesis tested, the prediction with a figure, the baseline.",
+          "Fill in the real measurement at D+30 and D+90, from a Search Console export.",
+          "Before moving a status forward, look for the strongest counter-argument. An unrefuted counter-argument blocks the move to \"validated\".",
+          "Review the hypothesis register once a month. Without data, the hypothesis stays \"open\"."
+        ]
+      },
+      {
+        "c": "Keep a register of your corrections, and turn the one that comes back twice into a rule.",
+        "p": "A correction given in a session lives in Claude's memory, which is never checked mechanically. On September 11, 2026, my register records a rule already set that relapsed five times in four months.",
+        "s": [
+          "Add one line per correction, with a short, stable theme, reused if the topic comes back.",
+          "A single occurrence triggers nothing.",
+          "At the second occurrence of the same theme, mark it \"recurring\" and propose hardening it at your weekly review: audit rule, skill constraint or clause in AGENTS.md.",
+          "Never let the agent write on its own in a skill or in AGENTS.md. It prepares the proposal, you validate. Allow about 15 minutes per week."
+        ]
+      }
+    ]
+  ]
+}

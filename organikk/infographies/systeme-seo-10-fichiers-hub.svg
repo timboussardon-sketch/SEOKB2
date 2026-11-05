@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1200" viewBox="0 0 2000 1200">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.h{font-size:40px;font-weight:700;fill:#0B0B0F;letter-spacing:-1.2px}
+.sub{font-size:20px;fill:#333}
+.t{font-size:24px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.5px}
+.s{font-size:17px;fill:#333}
+.a{font-size:15px;font-weight:500;fill:#777}
+.big{font-size:150px;font-weight:700;fill:#0B0B0F;letter-spacing:-6px}
+.v{font-size:17px;font-weight:700;fill:#0B0B0F}
+.line{fill:none;stroke:#0B0B0F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thin{fill:none;stroke:#0B0B0F;stroke-width:1;stroke-linecap:round}
+</style>
+<linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset=".45" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient>
+<filter id="on" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="m"/><feComponentTransfer in="m" result="a"><feFuncA type="linear" slope=".6"/></feComponentTransfer><feComposite in="a" in2="SourceGraphic" operator="in" result="c"/><feBlend in="SourceGraphic" in2="c" mode="overlay"/></filter>
+<marker id="p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#0B0B0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<style>
+.ct{font-size:30px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.8px}
+.cs{font-size:19px;fill:#333}
+.li{font-size:17px;fill:#0B0B0F}
+.lg{font-size:16px;fill:#777}
+.n{font-size:22px;font-weight:700;fill:#FFF}
+.num{font-size:54px;font-weight:700;fill:#0B0B0F;letter-spacing:-2px}
+.ic{fill:none;stroke:#0B0B0F;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mono{font-size:16px;fill:#0B0B0F;font-family:"SF Mono",Menlo,monospace}
+.lb{font-size:17px;font-weight:500;fill:#0B0B0F}
+</style><radialGradient id="dg" cx=".32" cy=".38" r=".78"><stop offset="0" stop-color="#3a5cff"/><stop offset=".35" stop-color="#2341e0"/><stop offset=".7" stop-color="#12249a"/><stop offset="1" stop-color="#070f4d"/></radialGradient>
+<filter id="dn" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="arithmetic" k1="0" k2="1" k3=".62" k4="-.31" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in"/></filter></defs>
+<rect width="100%" height="100%" fill="#FFF"/>
+<path d="M30 42 Q30 30 42 30 H166 Q174 30 180 38 L190 50 Q193 54 200 54 H478 Q490 54 490 66 V378 Q490 390 478 390 H42 Q30 390 30 378 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="54" y="48" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">01</text>
+<text class="ct" x="70" y="96">CLAUDE.md</text>
+<text class="cs" x="70" y="124">Le premier fichier lu</text>
+<rect x="70" y="230" width="120" height="48" rx="8" fill="none" stroke="#0B0B0F" stroke-width="1.6"/>
+<text class="lb" x="130" y="260" text-anchor="middle">Claude</text>
+<path d="M190 254 H220 V180 H245" fill="none" stroke="#0B0B0F" stroke-opacity=".5" stroke-width="1.4"/>
+<path class="ic" d="M259 170h9l6 6v14h-15z M268 170v6h6"/>
+<text class="li" x="288" y="186">où sont les règles</text>
+<path d="M190 254 H220 V255 H245" fill="none" stroke="#0B0B0F" stroke-opacity=".5" stroke-width="1.4"/>
+<path class="ic" d="M259 245h9l6 6v14h-15z M268 245v6h6"/>
+<text class="li" x="288" y="261">où sont les méthodes</text>
+<path d="M190 254 H220 V330 H245" fill="none" stroke="#0B0B0F" stroke-opacity=".5" stroke-width="1.4"/>
+<path class="ic" d="M259 320h9l6 6v14h-15z M268 320v6h6"/>
+<text class="li" x="288" y="336">où sont les instructions</text>
+<path d="M523 42 Q523 30 535 30 H659 Q667 30 673 38 L683 50 Q686 54 693 54 H971 Q983 54 983 66 V378 Q983 390 971 390 H535 Q523 390 523 378 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="547" y="48" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">02</text>
+<text class="ct" x="563" y="96">AGENTS.md</text>
+<text class="cs" x="563" y="124">Les règles communes</text>
+<circle cx="574" cy="174" r="11" fill="#0B0B0F"/><path d="M569 174l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="607" y="180">Utiliser les données</text>
+<circle cx="574" cy="222" r="11" fill="#0B0B0F"/><path d="M569 222l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="607" y="228">Vérifier les informations</text>
+<circle cx="574" cy="270" r="11" fill="#0B0B0F"/><path d="M569 270l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="607" y="276">Présenter les résultats</text>
+<circle cx="574" cy="318" r="11" fill="#0B0B0F"/><path d="M569 318l3.5 3.5 6.5-7" fill="none" stroke="#FFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="li" x="607" y="324">Valider avant de modifier un site</text>
+<path d="M1016 42 Q1016 30 1028 30 H1152 Q1160 30 1166 38 L1176 50 Q1179 54 1186 54 H1464 Q1476 54 1476 66 V378 Q1476 390 1464 390 H1028 Q1016 390 1016 378 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="1040" y="48" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">03</text>
+<text class="ct" x="1056" y="96">client.md</text>
+<text class="cs" x="1056" y="124">La fiche de ton client</text>
+<text class="lg" x="1056" y="180">Ce qu'il vend</text>
+<line x1="1256" y1="182" x2="1436" y2="182" stroke="#0B0B0F" stroke-opacity=".25" stroke-width="1.2"/>
+<text class="lg" x="1056" y="228">À qui</text>
+<line x1="1256" y1="230" x2="1436" y2="230" stroke="#0B0B0F" stroke-opacity=".25" stroke-width="1.2"/>
+<text class="lg" x="1056" y="276">Sur quel marché</text>
+<line x1="1256" y1="278" x2="1436" y2="278" stroke="#0B0B0F" stroke-opacity=".25" stroke-width="1.2"/>
+<text class="lg" x="1056" y="324">Ce qui le différencie</text>
+<line x1="1256" y1="326" x2="1436" y2="326" stroke="#0B0B0F" stroke-opacity=".25" stroke-width="1.2"/>
+<path d="M1509 42 Q1509 30 1521 30 H1645 Q1653 30 1659 38 L1669 50 Q1672 54 1679 54 H1957 Q1969 54 1969 66 V378 Q1969 390 1957 390 H1521 Q1509 390 1509 378 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="1533" y="48" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">04</text>
+<text class="ct" x="1549" y="96">conversions.md</text>
+<text class="cs" x="1549" y="124">Les objectifs commerciaux</text>
+<rect x="1557" y="174" width="170" height="40" rx="20" fill="none" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="lb" x="1642" y="200" text-anchor="middle">Devis</text>
+<rect x="1747" y="174" width="170" height="40" rx="20" fill="none" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="lb" x="1832" y="200" text-anchor="middle">Appels</text>
+<rect x="1557" y="244" width="170" height="40" rx="20" fill="none" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="lb" x="1642" y="270" text-anchor="middle">Inscriptions</text>
+<rect x="1747" y="244" width="170" height="40" rx="20" fill="none" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="lb" x="1832" y="270" text-anchor="middle">Achats</text>
+<text class="lg" x="1549" y="346">Les actions qui peuvent générer des clients</text>
+<path d="M1509 432 Q1509 420 1521 420 H1645 Q1653 420 1659 428 L1669 440 Q1672 444 1679 444 H1957 Q1969 444 1969 456 V768 Q1969 780 1957 780 H1521 Q1509 780 1509 768 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="1533" y="438" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">05</text>
+<text class="ct" x="1549" y="486">search-console.csv</text>
+<text class="cs" x="1549" y="514">Les données réelles de Google</text>
+<text class="lb" x="1549" y="570">Pages</text>
+<text class="lb" x="1699" y="570">Clics</text>
+<text class="lb" x="1784" y="570">Impr.</text>
+<text class="lb" x="1869" y="570">Position</text>
+<line x1="1549" y1="586" x2="1929" y2="586" stroke="#0B0B0F" stroke-width="1.2"/>
+<rect x="1549" y="610" width="110" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1699" y="610" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1784" y="610" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1869" y="610" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1549" y="648" width="98" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1699" y="648" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1784" y="648" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1869" y="648" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1549" y="686" width="86" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1699" y="686" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1784" y="686" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1869" y="686" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1549" y="724" width="74" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1699" y="724" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1784" y="724" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<rect x="1869" y="724" width="44" height="10" rx="5" fill="#E6E6E6"/>
+<path d="M1509 822 Q1509 810 1521 810 H1645 Q1653 810 1659 818 L1669 830 Q1672 834 1679 834 H1957 Q1969 834 1969 846 V1158 Q1969 1170 1957 1170 H1521 Q1509 1170 1509 1158 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="1533" y="828" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">06</text>
+<text class="ct" x="1549" y="876">methodes.md</text>
+<text class="cs" x="1549" y="904">Tes méthodes SEO</text>
+<rect class="ic" x="1551" y="945" width="18" height="18" rx="3"/>
+<text class="li" x="1593" y="960">Recherche de mots-clés</text>
+<path class="ic" d="M1558 1006a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5 M1562 1002a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/>
+<text class="li" x="1593" y="1010">Stratégie</text>
+<path class="ic" d="M1553 1044h9l6 6v14h-15z M1562 1044v6h6"/>
+<text class="li" x="1593" y="1060">Audit</text>
+<path class="ic" d="M1551 1096h15v17h-13a2 2 0 0 1-2-2z M1566 1101h3v10a2 2 0 0 1-2 2 M1555 1101h7 M1555 1105h7 M1555 1109h4"/>
+<text class="li" x="1593" y="1110">Contenu</text>
+<path d="M1016 822 Q1016 810 1028 810 H1152 Q1160 810 1166 818 L1176 830 Q1179 834 1186 834 H1464 Q1476 834 1476 846 V1158 Q1476 1170 1464 1170 H1028 Q1016 1170 1016 1158 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="1040" y="828" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">07</text>
+<text class="ct" x="1056" y="876">wiki.md</text>
+<text class="cs" x="1056" y="904">La base de connaissances</text>
+<rect x="1056" y="940" width="364" height="46" rx="6" fill="#F5F5F5" stroke="#0B0B0F" stroke-opacity=".3"/>
+<text class="li" x="1084" y="969">Méthodes</text>
+<rect x="1070" y="1002" width="336" height="46" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".3"/>
+<text class="li" x="1098" y="1031">Observations</text>
+<rect x="1084" y="1064" width="308" height="46" rx="6" fill="#F5F5F5" stroke="#0B0B0F" stroke-opacity=".3"/>
+<text class="li" x="1112" y="1093">Enseignements des missions</text>
+<path d="M523 822 Q523 810 535 810 H659 Q667 810 673 818 L683 830 Q686 834 693 834 H971 Q983 834 983 846 V1158 Q983 1170 971 1170 H535 Q523 1170 523 1158 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="547" y="828" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">08</text>
+<text class="ct" x="563" y="876">workflow.md</text>
+<text class="cs" x="563" y="904">Les étapes, dans l'ordre</text>
+<line x1="585" y1="950" x2="585" y2="1126" stroke="#0B0B0F" stroke-opacity=".3" stroke-width="1.4"/>
+<circle cx="585" cy="950" r="14" fill="#F5F5F5" stroke="#0B0B0F" stroke-opacity=".3"/><text class="lg" x="585" y="955" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">1</text>
+<text class="li" x="615" y="956">Comprendre l'offre</text>
+<circle cx="585" cy="994" r="14" fill="#F5F5F5" stroke="#0B0B0F" stroke-opacity=".3"/><text class="lg" x="585" y="999" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">2</text>
+<text class="li" x="615" y="1000">Mots-clés</text>
+<circle cx="585" cy="1038" r="14" fill="#F5F5F5" stroke="#0B0B0F" stroke-opacity=".3"/><text class="lg" x="585" y="1043" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">3</text>
+<text class="li" x="615" y="1044">Intentions</text>
+<circle cx="585" cy="1082" r="14" fill="#F5F5F5" stroke="#0B0B0F" stroke-opacity=".3"/><text class="lg" x="585" y="1087" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">4</text>
+<text class="li" x="615" y="1088">Préparer les pages</text>
+<circle cx="585" cy="1126" r="14" fill="#F5F5F5" stroke="#0B0B0F" stroke-opacity=".3"/><text class="lg" x="585" y="1131" text-anchor="middle" style="fill:#0B0B0F;font-weight:500">5</text>
+<text class="li" x="615" y="1132">Mesurer</text>
+<path d="M30 822 Q30 810 42 810 H166 Q174 810 180 818 L190 830 Q193 834 200 834 H478 Q490 834 490 846 V1158 Q490 1170 478 1170 H42 Q30 1170 30 1158 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="54" y="828" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">09</text>
+<text class="ct" x="70" y="876">SKILL.md</text>
+<text class="cs" x="70" y="904">Une tâche précise, réutilisable</text>
+<text class="mono" x="78" y="970">.claude/</text>
+<path d="M90 984 V1008 H108" fill="none" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.3"/>
+<text class="mono" x="114" y="1014">skills/</text>
+<path d="M126 1028 V1052 H144" fill="none" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.3"/>
+<text class="mono" x="150" y="1058">audit-seo/</text>
+<path d="M162 1072 V1096 H180" fill="none" stroke="#0B0B0F" stroke-opacity=".4" stroke-width="1.3"/>
+<text class="mono" x="186" y="1102" style="font-weight:700">SKILL.md</text>
+<text class="lg" x="70" y="1140">Un fichier par skill</text>
+<path d="M30 432 Q30 420 42 420 H166 Q174 420 180 428 L190 440 Q193 444 200 444 H478 Q490 444 490 456 V768 Q490 780 478 780 H42 Q30 780 30 768 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="54" y="438" style="font-size:14px;font-weight:700;fill:#0B0B0F;letter-spacing:.5px">10</text>
+<text class="ct" x="70" y="486">suivi.md</text>
+<text class="cs" x="70" y="514">La trace du travail</text>
+<text class="li" x="70" y="580" style="font-weight:400">Actions proposées</text>
+<path d="M90 592 L90 620" class="line" stroke-width="1.6" marker-end="url(#p)"/>
+<text class="li" x="70" y="644" style="font-weight:400">Corrections validées</text>
+<path d="M90 656 L90 684" class="line" stroke-width="1.6" marker-end="url(#p)"/>
+<text class="li" x="70" y="708" style="font-weight:700">Résultats obtenus</text>
+<path d="M260 390 L260 405 L700 405 L700 490" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="257" y="387" width="6" height="6" fill="#2341e0"/>
+<path d="M753 390 L753 490" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="750" y="387" width="6" height="6" fill="#2341e0"/>
+<path d="M1246 390 L1246 490" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="1243" y="387" width="6" height="6" fill="#2341e0"/>
+<path d="M1739 390 L1739 405 L1300 405 L1300 490" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="1736" y="387" width="6" height="6" fill="#2341e0"/>
+<path d="M1509 600 L1340 600" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="1506" y="597" width="6" height="6" fill="#2341e0"/>
+<path d="M1739 834 L1739 795 L1300 795 L1300 700" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="1736" y="831" width="6" height="6" fill="#2341e0"/>
+<path d="M1246 834 L1246 700" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="1243" y="831" width="6" height="6" fill="#2341e0"/>
+<path d="M753 834 L753 700" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="750" y="831" width="6" height="6" fill="#2341e0"/>
+<path d="M260 834 L260 795 L700 795 L700 700" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="257" y="831" width="6" height="6" fill="#2341e0"/>
+<path d="M490 600 L660 600" fill="none" stroke="#2341e0" stroke-width="1.5"/><rect x="487" y="597" width="6" height="6" fill="#2341e0"/>
+<g fill="url(#dg)" filter="url(#dn)"><path d="M640 470 Q640 452 658 452 H846 Q854 452 860 460 L870 476 Q873 480 880 480 H1342 Q1360 480 1360 498 V702 Q1360 720 1342 720 H658 Q640 720 640 702 Z"/></g>
+<text x="688" y="572" style="font-size:42px;font-weight:700;fill:#FFF;letter-spacing:-1.2px">Ton système SEO</text>
+<text x="688" y="610" style="font-size:21px;fill:#FFF">avec Claude Code, en 10 fichiers</text>
+<text x="688" y="666" style="font-size:18px;fill:#FFF;opacity:.85">Tu ne redonnes plus tes méthodes à chaque conversation.</text>
+<text x="688" y="692" style="font-size:18px;fill:#FFF;opacity:.85">Claude les retrouve et les applique.</text>
+</svg>

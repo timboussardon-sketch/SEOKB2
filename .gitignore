@@ -1,0 +1,42 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Obsidian
+.obsidian/
+.obsidian.broken/
+
+# Claude Code runtime logs (regenerated daily)
+.claude/logs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Temp
+*.swp
+*~
+.tmp/
+
+# Sub-repo: revue de presse synced via routine cloud + GitHub
+raw/revue-de-presse/
+
+# GSC service account credential (jamais committer)
+*service-account*.json
+.venv/
+.claude/vector-store/
+.claude/index/embed_mtime.json
+
+# Supabase CLI cache
+supabase/.temp/
+
+# SyntheticBrain run lock (jamais committé)
+agent-synthetic/run.lock
+
+# Transcripts Claude : jamais committer (contiennent secrets + donnees clients)
+.claude/transcripts-archive/
+
+# Secrets locaux (clés API) : jamais committer
+.env.local
+.env*.local

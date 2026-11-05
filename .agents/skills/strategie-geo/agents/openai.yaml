@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stratégie GEO — AI Search Growth System"
+  short_description: "Acquisition SEO et IA, des offres aux clients"
+  default_prompt: "Utilise $strategie-geo pour construire la stratégie d’acquisition SEO et IA de cette entreprise, avec validation humaine à chaque phase."

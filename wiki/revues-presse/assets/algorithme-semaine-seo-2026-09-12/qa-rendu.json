@@ -1,0 +1,15 @@
+{
+  "desktop": {
+    "width": 1440,
+    "scrollWidth": 1440,
+    "brokenImages": []
+  },
+  "mobile": {
+    "width": 390,
+    "scrollWidth": 390,
+    "brokenImages": []
+  },
+  "errors": [],
+  "zoom": "opens and closes with Escape",
+  "checkedAt": "2026-09-12T12:07:51.750Z"
+}

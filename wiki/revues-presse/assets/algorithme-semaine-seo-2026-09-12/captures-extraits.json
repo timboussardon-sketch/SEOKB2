@@ -1,0 +1,74 @@
+[
+  {
+    "id": "arxiv-titre",
+    "url": "https://arxiv.org/abs/2602.18455",
+    "text": "Impact of AI Search Summaries",
+    "tag": "h1",
+    "capturedAt": "2026-09-12T11:59:35.169Z",
+    "finalUrl": "https://arxiv.org/abs/2602.18455",
+    "clip": {
+      "x": 0,
+      "y": 106.109375,
+      "width": 840.796875,
+      "height": 56
+    },
+    "file": "capture-arxiv-titre.png",
+    "method": "Chrome screenshot, original DOM, cropped to the cited heading or condition"
+  },
+  {
+    "id": "le-monde-titre",
+    "url": "https://www.influencia.net/louis-dreyfus-nous-navons-pas-constate-dimpact-dai-overviews-sur-nos-audiences/",
+    "text": "Louis Dreyfus",
+    "tag": "h1",
+    "capturedAt": "2026-09-12T11:59:36.869Z",
+    "finalUrl": "https://www.influencia.net/louis-dreyfus-nous-navons-pas-constate-dimpact-dai-overviews-sur-nos-audiences/",
+    "clip": {
+      "x": 22.984375,
+      "y": 367,
+      "width": 679.34375,
+      "height": 72
+    },
+    "file": "capture-le-monde-titre.png",
+    "method": "Chrome screenshot, original DOM, cropped to the cited heading or condition"
+  },
+  {
+    "id": "api-condition",
+    "url": "https://developers.google.com/web-search-service/overview",
+    "text": "Client ID:",
+    "tag": "li",
+    "capturedAt": "2026-09-12T11:59:37.755Z",
+    "finalUrl": "https://developers.google.com/web-search-service/overview",
+    "clip": {
+      "x": 343,
+      "y": 656,
+      "width": 693,
+      "height": 24
+    },
+    "file": "capture-api-condition.png",
+    "method": "Chrome screenshot, original DOM, cropped to the cited heading or condition"
+  },
+  {
+    "id": "tailwind-titre",
+    "url": "https://tailwindcss.com/blog/tailwind-is-joining-shopify",
+    "text": "Tailwind Labs is joining Shopify",
+    "tag": "h1",
+    "capturedAt": "2026-09-12T11:59:38.445Z",
+    "finalUrl": "https://tailwindcss.com/blog/tailwind-is-joining-shopify",
+    "clip": {
+      "x": 144,
+      "y": 149,
+      "width": 782,
+      "height": 120
+    },
+    "file": "capture-tailwind-titre.png",
+    "method": "Chrome screenshot, original DOM, cropped to the cited heading or condition"
+  },
+  {
+    "id": "google-image-officielle",
+    "url": "https://developers.google.com/static/search/docs/images/aggregator-unit.png",
+    "file": "google-aggregator-officiel.png",
+    "capturedAt": "2026-09-12T11:59:38.982Z",
+    "status": 200,
+    "method": "Original asset downloaded from the official Google documentation"
+  }
+]

@@ -1,0 +1,125 @@
+<title>Brèves Search 25 septembre v2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap">
+<style>
+  :root{
+    --bg:#fbfbfa; --ink:#15171c; --ink-2:#4b5060; --ink-3:#8a8f9e;
+    --rule:#e4e5ea; --accent:#2f4fe0; --accent-soft:#eef1fd;
+    --warn:#b7791f; --wrap:68ch;
+  }
+  html{color-scheme:light}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Geist",system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.6;padding-block:56px 96px;padding-inline:clamp(16px,5vw,48px)}
+  main{max-width:var(--wrap);margin:0 auto}
+  .mono{font-family:"Geist Mono",ui-monospace,SFMono-Regular,monospace;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+  h1{font-size:34px;font-weight:600;line-height:1.15;letter-spacing:-.02em;margin:12px 0 28px;text-wrap:balance}
+  .lede{color:var(--ink-2);margin:0;font-size:16px}
+  .fil{margin:48px 0 0;padding:20px 24px;background:var(--accent-soft);border-radius:8px;color:var(--ink);font-size:16px}
+  .fil b{color:var(--accent);font-weight:600}
+  section{margin-top:80px}
+  section > .mono{display:block}
+  h2{font-size:24px;font-weight:600;line-height:1.25;letter-spacing:-.015em;margin:8px 0 28px;text-wrap:balance}
+  p{margin:0 0 18px}
+  .why{margin-top:24px;padding-left:18px;border-left:3px solid var(--accent)}
+  .why b{font-weight:600}
+  .badge{display:inline-block;font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.04em;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);vertical-align:middle;margin-left:8px;white-space:nowrap}
+  .badge.warn{background:#fbf3e3;color:var(--warn)}
+  .src{font-size:14px;color:var(--ink-3);margin-top:18px;overflow-wrap:anywhere}
+  .stat{font-size:64px;font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;margin:0 0 20px}
+  ol{list-style:none;padding:0;margin:0;display:grid;gap:36px}
+  ol li{padding-top:28px;border-top:1px solid var(--rule)}
+  ol li b{font-weight:600}
+  ol li ul{margin:10px 0 14px;padding-left:22px}
+  ol li ul li{padding:0;border:0}
+  .illu{display:block;width:100%;max-width:320px;height:auto;margin:0 0 24px}
+  ol li .illu{max-width:200px;margin-bottom:18px}
+  footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-2)}
+  @media (max-width:480px){h1{font-size:28px}.stat{font-size:48px}}
+</style>
+
+<main>
+  <span class="mono">Revue Search / SEO / IA · 25 septembre 2026 · v2 · draft</span>
+  <h1>Qui a le droit d'accéder au contenu, et à quelles conditions</h1>
+  <p class="lede">Deux passes d'exploration fusionnées, cinq sujets retenus sur vingt-cinq candidats. Sources primaires remontées et vérifiées. Rien n'est envoyé.</p>
+
+  <p class="fil"><b>Fil du jour.</b> Cloudflare formalise le tri entre crawlers de recherche et d'entraînement, Amazon ferme la porte aux agents d'achat, et Reddit montre qu'un robots.txt suffit à sortir d'un moteur génératif.</p>
+
+  <section>
+    <span class="mono">01 · L'info du jour</span>
+    <svg class="illu" role="img" aria-label="Une page web avec deux portillons : recherche ouvert, entraînement barré" viewBox="0 0 320 200" fill="none" stroke="#15171c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(5 5)"><path d="M40 30 C90 26 150 28 200 27 L203 150 C150 152 90 151 42 153 Z"/></g>
+<path d="M40 30 C90 26 150 28 200 27 L203 150 C150 152 90 151 42 153 Z"/>
+<path d="M40 52 C90 50 150 51 201 50" opacity=".6" stroke-width="2.5"/>
+<path d="M60 75 C100 73 140 74 180 73 M60 95 C95 94 130 96 170 94 M60 115 C90 113 120 114 150 113" opacity=".55" stroke-width="2.5"/>
+<g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(4 4)"><path d="M230 60 L232 120 M270 58 L272 121"/><rect x="228" y="58" width="44" height="64" rx="4"/></g>
+<path d="M230 60 C231 80 230 100 232 120 M270 58 C271 80 270 100 272 121 M230 60 C245 58 258 59 270 58 M232 120 C246 121 258 120 272 121"/>
+<path d="M238 58 C238 45 262 44 262 58" />
+<path d="M245 150 C246 170 246 185 247 195 M285 150 C286 170 286 185 287 195 M245 150 C258 149 272 150 285 150"/>
+<path d="M240 158 C270 160 296 178 300 192" stroke-width="5"/>
+<path d="M240 192 C266 176 288 162 300 156" stroke-width="5"/>
+<text x="228" y="40" font-family="Geist Mono,monospace" font-size="12" fill="#15171c" stroke="none">search</text>
+<text x="222" y="145" font-family="Geist Mono,monospace" font-size="12" fill="#15171c" stroke="none">training</text></svg>
+    <h2>Bloquer l'entraînement IA sans perdre son référencement : Google, Apple et Microsoft s'y engagent par écrit <span class="badge">Confirmé</span></h2>
+    <p>Le 15 septembre 2026, Cloudflare a ajouté un réglage « Disallow AI Training » qui bloque les crawlers d'entraînement tout en laissant passer l'indexation. Le point nouveau n'est pas le bouton, c'est ce qui l'accompagne : Cloudflare publie les engagements des trois opérateurs de crawlers mixtes. Google écrit que Google-Extended « n'affecte pas l'inclusion d'un site dans Google Search et n'est pas utilisé comme signal de classement ». Apple écrit que refuser l'entraînement « n'affecte pas le classement ». Microsoft confirme que les pages en NOCACHE ou NOARCHIVE restent dans ses résultats. Amazon, Anthropic, Meta et OpenAI sont listés à part, avec des crawlers de recherche et d'entraînement déjà distincts.</p>
+    <p>Les chiffres Cloudflare donnent l'échelle du non-dit : 17 % des sites du réseau bloquent l'entraînement d'une manière ou d'une autre, moins de 1 % bloquent les robots de recherche.</p>
+    <div class="why"><b>Pourquoi c'est important.</b> Jusqu'ici, recommander à un client de bloquer Google-Extended ou Applebot-Extended reposait sur une lecture de la documentation, pas sur un engagement contractualisé. Un consultant peut désormais séparer trois politiques (recherche, entraînement, agents) et justifier chacune avec une phrase signée par l'opérateur. Ce qu'il faut arrêter de croire : que bloquer l'entraînement expose au déréférencement.</div>
+    <p class="src">Sources : https://blog.cloudflare.com/accountable-mixed-use-ai-crawlers/</p>
+  </section>
+
+  <section>
+    <span class="mono">02 · La stat du jour</span>
+    <svg class="illu" role="img" aria-label="Un camembert presque entier, avec une part minuscule détachée" viewBox="0 0 320 200" fill="none" stroke="#15171c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(6 5)"><path d="M160 100 L160 30 A70 70 0 1 1 155 30.2 Z"/></g>
+<path d="M160 100 L162 30 C200 28 230 62 229 100 C230 140 198 172 160 170 C120 172 90 138 91 100 C90 64 118 32 155 30.2"/>
+<path d="M160 100 L155 30.2" />
+<g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(3 3)"><path d="M148 22 L150 8 L156 9 L154 22 Z"/></g>
+<path d="M148 22 C149 17 149 12 150 8 C152 8.5 154 9 156 9 C155.5 13 155 18 154 22"/>
+<path d="M110 120 C125 116 140 121 155 118 M108 132 C120 129 132 134 145 131" opacity=".55" stroke-width="2.5"/>
+<text x="236" y="50" font-family="Geist Mono,monospace" font-size="13" fill="#15171c" stroke="none">0,32 %</text>
+<path d="M232 52 C210 50 190 45 165 25" opacity=".6" stroke-width="2.5"/></svg>
+    <p class="stat">0,32 %</p>
+    <p>C'est la part du trafic référent venant de ChatGPT, mesurée par Ahrefs sur environ 75 000 sites. ChatGPT « porte à lui seul la quasi-totalité de la catégorie IA ». Sur la même période, la requête « generative engine optimization » atteint 7 200 recherches mensuelles aux États-Unis, en hausse de 84 % sur un an, et « AI visibility tools » progresse de 266 %. La demande d'outils GEO croît plus vite que le trafic qu'ils mesurent. Dans la même cohorte, la part de Google dans le trafic référent est passée de 35 % à 24 % en un an. <span class="badge">Confirmé</span></p>
+    <p class="src">Sources : https://ahrefs.com/blog/ai-marketing-trends/ · cohorte Ahrefs Web Analytics, ~75 000 sites ; volumes issus de Keywords Explorer.</p>
+  </section>
+
+  <section>
+    <span class="mono">03 · Les autres infos en bref</span>
+    <ol>
+      <li><svg class="illu" role="img" aria-label="Un caddie arrêté par une main levée" viewBox="0 0 320 200" fill="none" stroke="#15171c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(5 5)"><path d="M60 70 L180 72 L170 130 L75 128 Z"/></g>
+<path d="M40 50 C48 50 55 51 60 70 C100 71 140 72 180 72 C177 92 174 112 170 130 C140 129 105 129 75 128 C70 110 65 90 60 70"/>
+<path d="M78 90 C110 91 140 91 172 91 M76 110 C105 111 135 111 168 111" opacity=".55" stroke-width="2.5"/>
+<path d="M85 150 C88 143 96 143 98 150 C96 157 87 157 85 150 Z M150 151 C153 144 161 144 163 151 C161 158 152 158 150 151 Z"/>
+<path d="M40 50 C34 50 30 51 26 51" />
+<g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(4 4)"><path d="M232 110 C228 90 230 70 234 60 C238 55 244 58 244 66 C243 52 254 50 255 62 C258 48 268 50 267 64 C272 56 280 58 279 70 L280 120 C278 140 262 150 246 146 C236 143 230 128 232 110 Z"/></g>
+<path d="M232 110 C228 90 230 70 234 60 C238 55 244 58 244 66 C243 52 254 50 255 62 C258 48 268 50 267 64 C272 56 280 58 279 70 C280 90 280 105 280 120 C278 140 262 150 246 146 C236 143 230 128 232 110 Z"/>
+<path d="M244 66 C245 80 245 90 246 98 M255 62 C256 78 256 88 257 98 M267 64 C268 78 268 88 268 98" opacity=".6" stroke-width="2.5"/>
+<path d="M195 100 C205 100 215 99 225 100" stroke-width="5"/></svg><b>Amazon ferme sa boutique aux agents d'achat, et change d'arme juridique.</b> <span class="badge">Confirmé</span><br>Depuis la nuit du 21 septembre, l'agent Muse de Meta, lancé le 8 septembre, reçoit sur Amazon.com un message : « Continued access by an unauthorized AI agent violates Amazon's Conditions of Use ». Amazon reproche à Muse de naviguer sans s'identifier comme tiers et de stocker des identifiants clients. Meta répond que Muse « n'a aucune visibilité sur les mots de passe ni les moyens de paiement ». Amazon s'appuie sur ses conditions d'utilisation, pas sur la loi anti-intrusion CFAA, après avoir perdu en août son injonction contre Perplexity ; contre Perplexity, Amazon a déposé le 21 septembre une plainte amendée qui accuse l'agent Comet de se faire passer pour un humain. Le 23 septembre, Meta annonçait Best Buy, Walmart, Sephora, Wayfair et le catalogue Shopify comme partenaires de Muse.
+        <p class="src">Sources : https://www.geekwire.com/2026/amazon-blocks-metas-muse-ai-assistant-in-new-standoff-over-agentic-shopping/ · https://thenextweb.com/news/amazon-blocks-muse-perplexity-amended-complaint · https://www.mlex.com/mlex/articles/2527900/amazon-files-amended-us-claims-against-perplexity-over-ai-agents</p></li>
+
+      <li><svg class="illu" role="img" aria-label="Un fichier robots.txt et un maillon de chaîne coupé" viewBox="0 0 320 200" fill="none" stroke="#15171c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(5 5)"><path d="M50 30 L150 28 L175 55 L177 170 L52 172 Z"/></g>
+<path d="M50 30 C85 29 118 29 150 28 C158 37 166 46 175 55 C176 95 176 135 177 170 C135 171 93 171 52 172 C51 125 50 78 50 30 Z"/>
+<path d="M150 28 C151 38 151 47 152 56 C160 56 168 55 175 55" />
+<text x="66" y="88" font-family="Geist Mono,monospace" font-size="13" fill="#15171c" stroke="none">robots.txt</text>
+<path d="M66 110 C95 109 120 110 150 109 M66 128 C90 127 110 128 135 127 M66 146 C85 145 100 146 118 145" opacity=".55" stroke-width="2.5"/>
+<g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(4 4)"><rect x="205" y="70" width="40" height="26" rx="13"/><rect x="262" y="105" width="40" height="26" rx="13"/></g>
+<path d="M206 70 C220 69 232 69 244 70 C250 78 250 88 244 96 C232 97 220 97 206 96 C200 88 200 78 206 70 Z" transform="rotate(-35 225 83)"/>
+<path d="M263 105 C277 104 289 104 301 105 C307 113 307 123 301 131 C289 132 277 132 263 131 C257 123 257 113 263 105 Z" transform="rotate(-35 282 118)"/>
+<path d="M240 100 C243 96 246 93 249 90 M250 108 C253 104 256 101 259 98" stroke-width="3" opacity=".8"/></svg><b>Reddit est passé de 17,2 % à 0 % des citations ChatGPT en deux semaines sur un panel Éducation.</b> <span class="badge warn">Témoignage</span><br>BrightEdge suit un panel fixe de prompts : Reddit pesait 17,2 % des citations ChatGPT des semaines 28 à 33, 3,3 % en semaine 34, 0 % à partir de la semaine 35. La rupture tombe la semaine où Reddit a modifié son robots.txt, mi-août. BrightEdge écrit que la coïncidence « soutient le mécanisme, elle ne le prouve pas ». Sur la même période, la présence de Reddit recule de 86 % dans ChatGPT, de 31 % dans AI Mode et de 11 % dans AI Overviews. Les domaines qui prennent la place : state.gov, asu.edu, apa.org.
+        <p class="src">Sources : https://www.brightedge.com/resources/weekly-ai-search-insights/reddit-chatgpt-collapse-education</p></li>
+
+      <li><svg class="illu" role="img" aria-label="Une loupe posée sur une photo de paysage" viewBox="0 0 320 200" fill="none" stroke="#15171c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(5 5)"><path d="M40 40 L200 38 L202 150 L42 152 Z"/></g>
+<path d="M40 40 C95 39 148 39 200 38 C201 76 201 113 202 150 C148 151 95 151 42 152 C41 115 41 78 40 40 Z"/>
+<path d="M58 132 C80 110 95 100 112 118 C128 96 145 82 168 108 C178 118 186 128 190 134" />
+<path d="M150 62 C160 56 172 62 170 72 C168 82 152 82 148 72 C147 68 148 64 150 62 Z" opacity=".7" stroke-width="3"/>
+<g fill="#2f4fe0" opacity=".85" stroke="none" transform="translate(4 4)"><circle cx="215" cy="110" r="42"/></g>
+<path d="M215 68 C240 67 258 88 257 110 C258 134 238 153 215 152 C190 153 172 132 173 110 C172 87 191 67 215 68 Z" stroke-width="5"/>
+<path d="M246 142 C260 156 274 170 288 184" stroke-width="7"/>
+<path d="M190 92 C196 84 206 80 216 82" opacity=".55" stroke-width="2.5"/></svg><b>Search Console mesure désormais les recherches par image.</b> <span class="badge">Confirmé</span><br>Depuis le 24 septembre, un nouveau filtre « multimodal » apparaît dans :
+        <ul><li>le rapport Performance ;</li><li>le rapport Generative AI features.</li></ul>
+        Google y regroupe notamment :
+        <ul><li>Google Lens</li><li>Circle to Search</li><li>Upload d'image dans Google Search</li><li>« Rechercher cette image » dans Chrome</li></ul>
+        Le déploiement est mondial et les données peuvent être exportées. Pour les sites e-commerce, voyage, immobilier, mode ou produit, c'est potentiellement une nouvelle couche de données à intégrer dans les analyses Search Console.
+        <p class="src">Source primaire : https://developers.google.com/search/blog/2026/09/web-multimodal-in-sc</p></li>
+    </ol>
+  </section>
+
+  <footer>
+    <b>Note de fiabilité.</b> Info du jour, stat et brève 1 vérifiées sur des sources primaires ou plusieurs médias indépendants (Cloudflare, Ahrefs, GeekWire, TNW, MLex). Brève 2 en Témoignage : source unique BrightEdge, corrélation temporelle assumée comme telle par l'auteur, Reddit n'a pas confirmé. Brève 3 : source officielle Google Search Central. Retiré : les chiffres de sessions de la plainte Amazon contre Perplexity, absents de l'article ouvert. Écartés par le score : spam update de septembre, pilote de rémunération des éditeurs, ferme de contenu Anthropic, sondage Semrush, référents IA Similarweb, méta-étude de 9 249 cas SEO (retirée à la relecture). Rien n'a été envoyé, draft.
+  </footer>
+</main>

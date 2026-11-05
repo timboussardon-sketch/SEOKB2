@@ -1,0 +1,11 @@
+# Sorties du relevé : régénérables, et ce sont des instantanés de data client.
+mesures.json
+sitemaps.json
+score-*.json
+requetes-*.json
+indexation-*.json
+*.html
+*.log
+*.png
+*.xml
+*.txt

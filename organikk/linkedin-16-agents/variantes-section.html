@@ -1,0 +1,49 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Section agents, 3 variantes</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--grad:linear-gradient(135deg,#2f4fe0 0%,#7fa0ff 100%);--grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");--ink:#15171f;--muted:#6b7084;--blue:#2f4fe0;--smoke:radial-gradient(circle at 30% 25%,#fff 0%,rgba(255,255,255,0) 42%),radial-gradient(circle at 72% 72%,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 46%),radial-gradient(circle at 55% 40%,#f7f8ff 0%,#e3e8fb 65%,#cfd8f7 100%)}
+body{margin:0;background:#fff;color:var(--ink);font-family:Geist,system-ui,sans-serif}
+section{max-width:1200px;margin:0 auto;padding:80px 24px 40px}
+h2{text-align:center;font-size:clamp(36px,4.2vw,60px);line-height:1.05;letter-spacing:-.03em;font-weight:500;margin:0}
+h2 span{color:var(--blue)}
+.lab{text-align:center;font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.av{border-radius:16px;overflow:hidden;position:relative;isolation:isolate;background:var(--smoke);box-shadow:0 1px 4px rgba(17,24,39,.12);border:3px solid #fff;flex:none}
+.av::after{content:"";position:absolute;inset:0;z-index:1;opacity:.5;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.av img{position:relative;z-index:2;width:100%;height:100%;object-fit:cover;display:block}
+hr{border:0;border-top:1px solid #e4e6ee;margin:40px 0 0}
+/* V1 cartes de verre */
+.v1wrap{position:relative;margin-top:44px}
+.v1wrap::before{content:"";position:absolute;left:50%;top:50%;width:70%;height:70%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(127,160,255,.45),rgba(47,79,224,.12) 55%,transparent 72%);filter:blur(40px);z-index:0}
+.grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);backdrop-filter:blur(18px);box-shadow:0 20px 50px -30px rgba(33,55,157,.35),inset 0 1px 0 #fff;transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-4px);box-shadow:0 30px 60px -30px rgba(33,55,157,.5),0 0 0 2px rgba(127,160,255,.8)}
+.card .av{width:64px;height:64px}
+.card b{display:block;font-weight:600;font-size:15px}
+.card small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.card .go{margin-left:auto;font-size:12px;color:var(--blue);background:#eef1ff;padding:5px 10px;border-radius:999px;white-space:nowrap}
+/* V2 orbite */
+.ring{position:relative;width:min(720px,90vw);aspect-ratio:1;margin:12px auto 0}
+.ring::before{content:"";position:absolute;inset:6%;border-radius:50%;border:1px dashed rgba(47,79,224,.35)}
+.ring::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(127,160,255,.35),transparent 60%);filter:blur(30px);z-index:0}
+.ring h2{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60%;z-index:1;font-size:clamp(28px,3.4vw,44px)}
+.orb{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2;font-size:12.5px;color:var(--muted);text-align:center;width:110px;cursor:pointer}
+.orb .av{width:76px;height:76px;transition:transform .18s,box-shadow .18s}
+.orb:hover .av{transform:scale(1.1);box-shadow:0 0 0 3px rgba(127,160,255,.9),0 14px 30px rgba(47,79,224,.3)}
+.orb:hover{color:var(--ink)}
+/* V3 panneau outremer, tuiles en quinconce */
+.panel{position:relative;isolation:isolate;overflow:hidden;margin-top:36px;padding:56px 40px 44px;border-radius:28px;background:var(--grad);color:#fff}
+.panel::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.55;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.panel h2{color:#fff}.panel h2 span{color:#fff;opacity:.75}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:64px}
+.tile{position:relative;padding:48px 14px 16px;border-radius:18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(14px);text-align:center;transition:background .18s,transform .18s}
+.tile:nth-child(n+6){transform:translateX(50%)}
+.tile:hover{background:rgba(255,255,255,.26)}
+.tile .av{position:absolute;left:50%;top:-38px;transform:translateX(-50%);width:76px;height:76px;box-shadow:0 14px 30px -10px rgba(10,20,90,.5)}
+.tile b{display:block;font-weight:600;font-size:14px}
+.tile small{display:block;font-size:12px;opacity:.82;margin-top:3px}
+.tiles .tile:nth-child(n+6){margin-top:34px}
+</style></head><body>
+<section><p class="lab">Variante 1 · cartes de verre, le rôle sous le nom</p><h2><span>De quel agent</span> auriez-vous besoin ?</h2><div class="v1wrap"><div class="grid"><div class="card"><div class="av"><img src="avatars/bot01.webp" alt=""></div><div><b>Agent audit</b><small>Audit complet, 9 phases</small></div><span class="go">Ouvrir</span></div><div class="card"><div class="av"><img src="avatars/bot02.webp" alt=""></div><div><b>Agent indexation</b><small>9 points par URL</small></div><span class="go">Ouvrir</span></div><div class="card"><div class="av"><img src="avatars/bot03.webp" alt=""></div><div><b>Agent Web Vitals</b><small>LCP, CLS, TBT via Lighthouse</small></div><span class="go">Ouvrir</span></div><div class="card"><div class="av"><img src="avatars/bot04.webp" alt=""></div><div><b>Agent GEO</b><small>7 scores pour les moteurs génératifs</small></div><span class="go">Ouvrir</span></div><div class="card"><div class="av"><img src="avatars/bot05.webp" alt=""></div><div><b>Agent gains rapides</b><small>Positions 3 à 12, CTR sous la référence</small></div><span class="go">Ouvrir</span></div><div class="card"><div class="av"><img src="avatars/bot06.webp" alt=""></div><div><b>Agent maillage</b><small>Mère, fille, petite-fille</small></div><span class="go">Ouvrir</span></div><div class="card"><div class="av"><img src="avatars/bot07.webp" alt=""></div><div><b>Agent mots-clés</b><small>De la thématique à la liste</small></div><span class="go">Ouvrir</span></div><div class="card"><div class="av"><img src="avatars/bot08.webp" alt=""></div><div><b>Agent brief</b><small>Brief et structure Hn</small></div><span class="go">Ouvrir</span></div><div class="card"><div class="av"><img src="avatars/bot09.webp" alt=""></div><div><b>Agent pré-audit</b><small>Un prospect, une URL, zéro outil</small></div><span class="go">Ouvrir</span></div></div></div></section><hr>
+<section><p class="lab">Variante 2 · orbite, le titre au centre</p><div class="ring"><h2><span>De quel agent</span> auriez-vous besoin ?</h2><div class="orb" style="left:50.0%;top:6.0%"><div class="av"><img src="avatars/bot01.webp" alt=""></div><span>Agent audit</span></div><div class="orb" style="left:78.3%;top:16.3%"><div class="av"><img src="avatars/bot02.webp" alt=""></div><span>Agent indexation</span></div><div class="orb" style="left:93.3%;top:42.4%"><div class="av"><img src="avatars/bot03.webp" alt=""></div><span>Agent Web Vitals</span></div><div class="orb" style="left:88.1%;top:72.0%"><div class="av"><img src="avatars/bot04.webp" alt=""></div><span>Agent GEO</span></div><div class="orb" style="left:65.0%;top:91.3%"><div class="av"><img src="avatars/bot05.webp" alt=""></div><span>Agent gains rapides</span></div><div class="orb" style="left:35.0%;top:91.3%"><div class="av"><img src="avatars/bot06.webp" alt=""></div><span>Agent maillage</span></div><div class="orb" style="left:11.9%;top:72.0%"><div class="av"><img src="avatars/bot07.webp" alt=""></div><span>Agent mots-clés</span></div><div class="orb" style="left:6.7%;top:42.4%"><div class="av"><img src="avatars/bot08.webp" alt=""></div><span>Agent brief</span></div><div class="orb" style="left:21.7%;top:16.3%"><div class="av"><img src="avatars/bot09.webp" alt=""></div><span>Agent pré-audit</span></div></div></section><hr>
+<section><p class="lab">Variante 3 · panneau outremer, tuiles en quinconce, le robot sort de la tuile</p><div class="panel"><h2><span>De quel agent</span> auriez-vous besoin ?</h2><div class="tiles"><div class="tile"><div class="av"><img src="avatars/bot01.webp" alt=""></div><b>Agent audit</b><small>Audit complet, 9 phases</small></div><div class="tile"><div class="av"><img src="avatars/bot02.webp" alt=""></div><b>Agent indexation</b><small>9 points par URL</small></div><div class="tile"><div class="av"><img src="avatars/bot03.webp" alt=""></div><b>Agent Web Vitals</b><small>LCP, CLS, TBT via Lighthouse</small></div><div class="tile"><div class="av"><img src="avatars/bot04.webp" alt=""></div><b>Agent GEO</b><small>7 scores pour les moteurs génératifs</small></div><div class="tile"><div class="av"><img src="avatars/bot05.webp" alt=""></div><b>Agent gains rapides</b><small>Positions 3 à 12, CTR sous la référence</small></div><div class="tile"><div class="av"><img src="avatars/bot06.webp" alt=""></div><b>Agent maillage</b><small>Mère, fille, petite-fille</small></div><div class="tile"><div class="av"><img src="avatars/bot07.webp" alt=""></div><b>Agent mots-clés</b><small>De la thématique à la liste</small></div><div class="tile"><div class="av"><img src="avatars/bot08.webp" alt=""></div><b>Agent brief</b><small>Brief et structure Hn</small></div><div class="tile"><div class="av"><img src="avatars/bot09.webp" alt=""></div><b>Agent pré-audit</b><small>Un prospect, une URL, zéro outil</small></div></div></div></section>
+</body></html>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+<defs><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.num{font-size:15px;font-weight:700;fill:#0B0B0F;letter-spacing:.6px}
+.nm{font-size:29px;font-weight:700;fill:#0B0B0F;letter-spacing:-.7px}
+.d{font-size:19px;fill:#333}
+.code{font-size:17px;fill:#0B0B0F;font-family:"SF Mono",Menlo,monospace}
+</style>
+<radialGradient id="dg" cx=".32" cy=".38" r=".78"><stop offset="0" stop-color="#3a5cff"/><stop offset=".35" stop-color="#2341e0"/><stop offset=".7" stop-color="#12249a"/><stop offset="1" stop-color="#070f4d"/></radialGradient>
+<filter id="dn" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="arithmetic" k1="0" k2="1" k3=".62" k4="-.31" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in"/></filter>
+</defs>
+<rect width="1080" height="1350" fill="#FFF"/>
+<g fill="url(#dg)" filter="url(#dn)"><path d="M48 52 Q48 40 60 40 H234 Q242 40 248 48 L258 62 Q261 66 268 66 H1020 Q1032 66 1032 78 V242 Q1032 254 1020 254 H60 Q48 254 48 242 Z"/></g>
+<text x="88" y="140" style="font-size:52px;font-weight:700;fill:#FFF;letter-spacing:-1.6px">Ton agent SEO en local</text>
+<text x="88" y="180" style="font-size:24px;fill:#FFF">8 notions à connaître pour le construire</text>
+<text x="88" y="224" style="font-size:19px;fill:#FFF;opacity:.88">Du terminal à la boucle : la structure, dans l’ordre.</text>
+<path d="M48 292 Q48 284 56 284 H146 Q154 284 160 292 L170 302 Q173 306 180 306 H520 Q528 306 528 314 V515 Q528 523 520 523 H56 Q48 523 48 515 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="70" y="300">01</text>
+<text class="nm" x="76" y="356">Claude Code</text>
+<text class="d" x="76" y="400">La version de Claude qui travaille</text>
+<text class="d" x="76" y="430">dans ton terminal : lit, crée des</text>
+<text class="d" x="76" y="460">fichiers, lance des commandes.</text>
+<path d="M552 292 Q552 284 560 284 H650 Q658 284 664 292 L674 302 Q677 306 684 306 H1024 Q1032 306 1032 314 V515 Q1032 523 1024 523 H560 Q552 523 552 515 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="574" y="300">02</text>
+<text class="nm" x="580" y="356">Terminal</text>
+<text class="d" x="580" y="400">Une application de ton ordinateur</text>
+<text class="d" x="580" y="430">qui permet d'exécuter des</text>
+<text class="d" x="580" y="460">commandes.</text>
+<path d="M48 551 Q48 543 56 543 H146 Q154 543 160 551 L170 561 Q173 565 180 565 H520 Q528 565 528 573 V774 Q528 782 520 782 H56 Q48 782 48 774 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="70" y="559">03</text>
+<text class="nm" x="76" y="615">Obsidian</text>
+<text class="d" x="76" y="659">Une application gratuite pour</text>
+<text class="d" x="76" y="689">consulter et organiser tes notes,</text>
+<text class="d" x="76" y="719">pratique pour une base de connaissances.</text>
+<path d="M552 551 Q552 543 560 543 H650 Q658 543 664 551 L674 561 Q677 565 684 565 H1024 Q1032 565 1032 573 V774 Q1032 782 1024 782 H560 Q552 782 552 774 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="574" y="559">04</text>
+<text class="nm" x="580" y="615">Vault</text>
+<text class="d" x="580" y="659">Un dossier contenant tes notes.</text>
+<text class="d" x="580" y="689">Le nom d'un espace de travail</text>
+<text class="d" x="580" y="719">Obsidian.</text>
+<path d="M48 810 Q48 802 56 802 H146 Q154 802 160 810 L170 820 Q173 824 180 824 H520 Q528 824 528 832 V1033 Q528 1041 520 1041 H56 Q48 1041 48 1033 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="70" y="818">05</text>
+<text class="nm" x="76" y="874">Skill</text>
+<text class="d" x="76" y="918">Une tâche que tu transformes en</text>
+<text class="d" x="76" y="948">instructions réutilisables</text>
+<text class="d" x="76" y="978">par Claude.</text>
+<path d="M552 810 Q552 802 560 802 H650 Q658 802 664 810 L674 820 Q677 824 684 824 H1024 Q1032 824 1032 832 V1033 Q1032 1041 1024 1041 H560 Q552 1041 552 1033 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="574" y="818">06</text>
+<text class="nm" x="580" y="874">Workflow</text>
+<text class="d" x="580" y="918">Plusieurs tâches enchaînées</text>
+<text class="d" x="580" y="948">dans un ordre précis.</text>
+<path d="M48 1069 Q48 1061 56 1061 H146 Q154 1061 160 1069 L170 1079 Q173 1083 180 1083 H520 Q528 1083 528 1091 V1292 Q528 1300 520 1300 H56 Q48 1300 48 1292 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="70" y="1077">07</text>
+<text class="nm" x="76" y="1133">Routine</text>
+<text class="d" x="76" y="1177">Une tâche qui se déclenche</text>
+<text class="d" x="76" y="1207">automatiquement, par exemple</text>
+<text class="d" x="76" y="1237">tous les lundis.</text>
+<path d="M552 1069 Q552 1061 560 1061 H650 Q658 1061 664 1069 L674 1079 Q677 1083 684 1083 H1024 Q1032 1083 1032 1091 V1292 Q1032 1300 1024 1300 H560 Q552 1300 552 1292 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="574" y="1077">08</text>
+<text class="nm" x="580" y="1133">Boucle</text>
+<text class="d" x="580" y="1177">Un mécanisme qui récupère les résultats</text>
+<text class="d" x="580" y="1207">et les corrections pour améliorer</text>
+<text class="d" x="580" y="1237">ton système.</text>
+</svg>

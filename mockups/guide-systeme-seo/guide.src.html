@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude × Obsidian · Guide organikk.co</title>
+<style>
+@font-face{font-family:"Geist";src:url(__FONT_GEIST__) format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Geist Mono";src:url(__FONT_MONO__) format("woff2");font-weight:100 900;font-display:block}
+
+:root{
+  --ink:#2b2b30; --ink-2:#6f6f78; --line:#e8e6e6; --paper:#fff;
+  --c-top:#2f4fe0; --c-bottom:#7fa0ff; --shadow-rgb:33,55,157;
+  --wash:#f7f9ff; --tint:#e8eeff;
+  --grad:linear-gradient(160deg,var(--c-top) 0%,var(--c-top) 45%,var(--c-bottom) 100%);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --grad-text:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='240' preserveAspectRatio='none'><defs><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0' result='m'/><feComponentTransfer in='m' result='a'><feFuncA type='linear' slope='.7'/></feComponentTransfer><feComposite in='a' in2='SourceGraphic' operator='in' result='c'/><feBlend in='SourceGraphic' in2='c' mode='overlay'/></filter></defs><rect width='100%' height='100%' fill='%232f4fe0' filter='url(%23n)'/></svg>");
+}
+
+@page{size:A4;margin:20mm 18mm 18mm}
+@page bleed{size:A4;margin:0}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Geist",system-ui,-apple-system,sans-serif;
+  font-size:10.6pt;line-height:1.62;font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+p{margin:0 0 11pt}
+strong{font-weight:600}
+a{color:inherit;text-decoration:none;border-bottom:.5pt solid rgba(47,79,224,.4)}
+.mono{font-family:"Geist Mono",ui-monospace,monospace}
+
+/* ---------- panneaux dégradés grainés ---------- */
+.panel{position:relative;isolation:isolate;background:var(--grad);color:#fff;overflow:hidden}
+.panel::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.panel > *{position:relative;z-index:1}
+
+/* ---------- couverture ---------- */
+.cover{page:bleed;margin:0;padding:32mm 24mm 24mm;width:210mm;height:297mm;display:flex;flex-direction:column;justify-content:space-between;break-after:page}
+.cover .mark{width:15mm;height:15mm}
+.cover .kicker{font-family:"Geist Mono",monospace;font-size:8pt;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.82);margin:0 0 9mm}
+.cover h1{font-size:34pt;line-height:1.04;letter-spacing:-.025em;font-weight:600;margin:0;max-width:150mm}
+.cover .sub{font-size:14pt;line-height:1.3;color:rgba(255,255,255,.88);margin:7mm 0 0;font-weight:400;max-width:120mm}
+.cover .lead{font-size:11pt;line-height:1.5;color:rgba(255,255,255,.86);margin:10mm 0 0;max-width:112mm}
+.cover .foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+
+/* ---------- titres ---------- */
+h2.grad,h3.grad{color:var(--c-top)}
+.section-title{font-size:22pt;line-height:1.1;letter-spacing:-.02em;font-weight:600;margin:0 0 8mm}
+
+/* ---------- sommaire ---------- */
+.toc{break-after:page}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{display:flex;gap:8mm;align-items:baseline;padding:3.4mm 0;border-bottom:.5pt solid var(--line)}
+.toc li:last-child{border-bottom:none}
+.toc .n{font-family:"Geist Mono",monospace;font-size:8.5pt;color:var(--c-top);letter-spacing:.1em;flex:0 0 20mm}
+.toc .t{font-weight:500;font-size:11pt}
+.toc .d{color:var(--ink-2);font-size:9.5pt;margin-left:auto;text-align:right;max-width:78mm}
+
+/* ---------- ouverture de phase ---------- */
+.phase{break-before:page}
+.ph-open{margin:0 0 9mm}
+.ph-open .num{font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.26em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 4mm}
+.ph-open h2{font-size:26pt;line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0}
+.ph-open .obj{font-size:11.5pt;line-height:1.45;color:var(--ink-2);margin:5mm 0 0;max-width:130mm}
+.ph-open .rule{height:1.4pt;background:var(--c-top);width:16mm;border-radius:2pt;margin:7mm 0 0}
+
+h3.sec{font-size:14pt;line-height:1.2;font-weight:600;letter-spacing:-.01em;margin:9mm 0 4mm;break-after:avoid}
+h4.sub{font-size:11pt;font-weight:600;margin:6mm 0 2.5mm;break-after:avoid}
+
+/* ---------- listes ---------- */
+ul,ol{margin:0 0 11pt;padding-left:5.5mm}
+li{margin:0 0 4pt;padding-left:1mm}
+li::marker{color:var(--c-top)}
+ul.defs{list-style:none;padding:0}
+ul.defs li{display:block;padding:2.6mm 0;border-bottom:.5pt solid var(--line);margin:0}
+ul.defs li:last-child{border-bottom:none}
+ul.defs b{font-weight:600}
+
+/* ---------- encart résumé ---------- */
+.resume{border-radius:5mm;padding:11mm 12mm;margin:9mm 0}
+.resume .k{font-family:"Geist Mono",monospace;font-size:8pt;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.8);margin:0 0 5mm}
+.resume p{font-size:11.5pt;line-height:1.55;margin:0;color:#fff}
+
+/* ---------- règle dure ---------- */
+.hard{border-left:1.6pt solid var(--c-top);background:var(--wash);padding:5mm 7mm;margin:7mm 0;border-radius:0 3mm 3mm 0;break-inside:avoid}
+.hard p{margin:0}
+.hard .k{font-family:"Geist Mono",monospace;font-size:7.5pt;letter-spacing:.22em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 2mm}
+
+/* ---------- code ---------- */
+pre{background:var(--wash);border:.5pt solid var(--tint);border-radius:3mm;padding:6mm 7mm;font-family:"Geist Mono",ui-monospace,monospace;font-size:7.6pt;line-height:1.55;white-space:pre;overflow:visible;margin:6mm 0;break-inside:avoid;color:#3a3a44}
+
+/* ---------- tableaux ---------- */
+table{width:100%;border-collapse:collapse;margin:6mm 0;font-size:9.5pt;break-inside:avoid}
+th,td{text-align:left;vertical-align:top;padding:3mm 6mm 3mm 0;border-bottom:.5pt solid var(--line)}
+th{font-weight:600;font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:var(--c-top);border-bottom:1pt solid var(--c-top);font-family:"Geist Mono",monospace}
+td:last-child,th:last-child{padding-right:0}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-family:"Geist Mono",monospace;color:var(--c-top);white-space:nowrap}
+
+/* ---------- erreurs numérotées ---------- */
+ol.errs{list-style:none;padding:0;counter-reset:e}
+ol.errs li{counter-increment:e;display:flex;gap:6mm;padding:4mm 0;border-bottom:.5pt solid var(--line);margin:0;break-inside:avoid}
+ol.errs li:last-child{border-bottom:none}
+ol.errs li::before{content:counter(e,decimal-leading-zero);font-family:"Geist Mono",monospace;font-size:9pt;color:var(--c-top);flex:0 0 10mm}
+
+/* ---------- page finale ---------- */
+.final{page:bleed;break-before:page;margin:0;padding:44mm 24mm 24mm;width:210mm;height:297mm;display:flex;flex-direction:column;justify-content:space-between}
+.final h2{font-size:28pt;line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0 0 8mm;max-width:130mm}
+.final p{font-size:11.5pt;line-height:1.55;color:rgba(255,255,255,.9);max-width:120mm}
+.final .cta{display:inline-block;margin:6mm 0 0;background:#fff;color:var(--c-top);font-weight:600;font-size:11pt;padding:4.5mm 8mm;border-radius:3mm;border:none;text-decoration:none}
+.final .cta .u{display:block;font-family:"Geist Mono",monospace;font-size:8pt;letter-spacing:.08em;color:var(--ink-2);font-weight:400;margin-top:1.5mm}
+.final .foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.final .mark{width:13mm;height:13mm}
+
+code{font-family:"Geist Mono",ui-monospace,monospace;font-size:9pt;background:var(--wash);border-radius:1mm;padding:.3mm 1.2mm;color:#3a3a44}
+pre code{background:none;padding:0;font-size:inherit}
+
+/* ---------- ouvertures de section (variables) ---------- */
+.part{break-before:page}
+.sec-open{margin:0 0 8mm}
+.sec-open h2{font-size:26pt;line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0;max-width:150mm}
+.sec-open .kick{font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.26em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 4mm}
+.sec-open .lead{font-size:11.5pt;line-height:1.45;color:var(--ink-2);margin:5mm 0 0;max-width:132mm}
+
+/* ---------- compteurs ---------- */
+.stats{display:flex;flex-wrap:wrap;margin:0}
+.stats div{flex:0 0 50%;padding:5.5mm 0;border-bottom:.5pt solid rgba(255,255,255,.2)}
+.stats .n{font-size:25pt;font-weight:600;letter-spacing:-.025em;line-height:1}
+.stats .l{font-family:"Geist Mono",monospace;font-size:7.5pt;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:2.5mm}
+.strip{margin:9mm 0 0}
+.strip .k{font-family:"Geist Mono",monospace;font-size:7.5pt;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);margin:0 0 4mm}
+.strip ol{list-style:none;margin:0;padding:0;columns:2;column-gap:10mm}
+.strip li{font-size:9.5pt;color:rgba(255,255,255,.92);margin:0 0 2.6mm;break-inside:avoid}
+
+/* ---------- terminal ---------- */
+.term{background:#1b1d24;border-radius:3mm;margin:6mm 0;overflow:hidden;break-inside:avoid}
+.term .bar{font-family:"Geist Mono",monospace;font-size:7pt;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.48);padding:3.2mm 6mm;border-bottom:.5pt solid rgba(255,255,255,.1)}
+.term pre{background:none;border:none;border-radius:0;margin:0;padding:5mm 6mm;color:#d5d8e0;font-size:7.2pt;line-height:1.62}
+.term .c{color:#93a9ff}
+.term .d{color:#787e93}
+.term .g{color:#8ed3a6}
+
+/* ---------- panneau fichier ---------- */
+.file{border:.5pt solid var(--tint);border-radius:3mm;margin:6mm 0;overflow:hidden;break-inside:avoid}
+.file .bar{font-family:"Geist Mono",monospace;font-size:7.2pt;letter-spacing:.1em;color:var(--c-top);background:var(--wash);padding:3mm 6mm;border-bottom:.5pt solid var(--tint)}
+.file pre{background:none;border:none;border-radius:0;margin:0;padding:5mm 6mm;font-size:7.3pt;line-height:1.6}
+.file .body{padding:5mm 6mm;font-size:9pt;line-height:1.55}
+.file .body p{margin:0 0 5pt}
+.file .body h4{font-size:9.5pt;font-weight:600;margin:4mm 0 2mm}
+.wl{color:var(--c-top)}
+
+/* ---------- diff ---------- */
+.diffbox{border:.5pt solid var(--tint);border-radius:3mm;margin:6mm 0;overflow:hidden;break-inside:avoid}
+.diffbox .bar{font-family:"Geist Mono",monospace;font-size:7.2pt;letter-spacing:.1em;color:var(--c-top);background:var(--wash);padding:3mm 6mm;border-bottom:.5pt solid var(--tint)}
+.diffbox pre{background:none;border:none;border-radius:0;margin:0;padding:4mm 0;font-size:7.3pt;line-height:1.7}
+.diffbox i{font-style:normal;display:block;padding:0 6mm}
+.diffbox i.add{color:#166b3d;background:#edf9f2}
+.diffbox i.del{color:#9c3131;background:#fdf1f1}
+.diffbox i.ctx{color:#7b7f8c}
+
+/* ---------- Obsidian ---------- */
+.ob{display:flex;border:.5pt solid var(--tint);border-radius:3mm;overflow:hidden;margin:6mm 0;break-inside:avoid}
+.ob .side{flex:0 0 50mm;background:var(--wash);border-right:.5pt solid var(--tint);padding:4.5mm 5mm;font-family:"Geist Mono",monospace;font-size:6.8pt;line-height:2;color:var(--ink-2)}
+.ob .side b{color:var(--ink);font-weight:600}
+.ob .side .on{color:var(--c-top)}
+.ob .note{flex:1;padding:5mm 6mm;font-size:8.8pt;line-height:1.58}
+.ob .note h4{font-size:11pt;font-weight:600;margin:0 0 3mm}
+.ob .note p{margin:0 0 4pt}
+
+/* ---------- conversation ---------- */
+.chat{margin:6mm 0;break-inside:avoid}
+.chat .you{font-family:"Geist Mono",monospace;font-size:8.2pt;line-height:1.55;background:var(--tint);border-radius:2.5mm;padding:3.5mm 5mm;color:#27325c}
+.chat .cl{border-left:1.6pt solid var(--c-top);padding:1mm 0 1mm 6mm;margin:4.5mm 0 0;font-size:9.2pt;line-height:1.55}
+.chat .cl .who{font-family:"Geist Mono",monospace;font-size:7pt;letter-spacing:.2em;text-transform:uppercase;color:var(--c-top);display:block;margin-bottom:2.5mm}
+.chat .cl p{margin:0 0 4pt}
+
+/* ---------- citation verbatim ---------- */
+.cite{border-left:1.6pt solid var(--tint);padding:1mm 0 1mm 6mm;margin:6mm 0;break-inside:avoid}
+.cite p{margin:0;font-size:11pt;line-height:1.5}
+.cite .src{display:block;font-family:"Geist Mono",monospace;font-size:7.2pt;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);margin-top:2.5mm}
+
+/* ---------- graphe ---------- */
+.graph{margin:7mm 0;break-inside:avoid}
+.graph svg{width:100%;height:auto;display:block}
+.graph .cap{font-family:"Geist Mono",monospace;font-size:7.2pt;letter-spacing:.12em;color:var(--ink-2);margin:3mm 0 0}
+
+/* ---------- ajouts guide système ---------- */
+.mission{background:var(--wash);border-radius:4mm;padding:7mm 8mm;margin:7mm 0;break-inside:avoid}
+.mission .k{font-family:"Geist Mono",monospace;font-size:7.5pt;letter-spacing:.22em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 3mm}
+.mission p{margin:0;font-size:11pt;line-height:1.5}
+.out{margin:6mm 0;break-inside:avoid}
+.out .k{font-family:"Geist Mono",monospace;font-size:7.5pt;letter-spacing:.22em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 3mm}
+.out ul{margin:0;padding:0;list-style:none;columns:2;column-gap:8mm}
+.out li{padding:2.2mm 0;border-bottom:.5pt solid var(--line);margin:0;break-inside:avoid;font-size:9.8pt}
+.skill{border:.5pt solid var(--tint);border-radius:3mm;margin:7mm 0 0;overflow:hidden}
+.skill .bar{font-family:"Geist Mono",monospace;font-size:7.2pt;letter-spacing:.1em;color:var(--c-top);background:var(--wash);padding:3mm 6mm;border-bottom:.5pt solid var(--tint);display:flex;justify-content:space-between}
+.skill pre{background:none;border:none;border-radius:0;margin:0;padding:5mm 6mm;font-size:7.3pt;line-height:1.6;white-space:pre-wrap;break-inside:auto}
+.skill .body{padding:5mm 6mm;font-size:9pt;line-height:1.55}
+.skill .body p{margin:0 0 5pt}
+.skill .body h4{font-size:9.5pt;font-weight:600;margin:4mm 0 2mm}
+.skill .body ul,.skill .body ol{margin:0 0 6pt}
+.adv{list-style:none;padding:0;margin:6mm 0;counter-reset:a}
+.adv li{counter-increment:a;display:flex;gap:6mm;padding:4.5mm 0;border-bottom:.5pt solid var(--line);margin:0;break-inside:avoid}
+.adv li:last-child{border-bottom:none}
+.adv li::before{content:counter(a,decimal-leading-zero);font-family:"Geist Mono",monospace;font-size:9pt;color:var(--c-top);flex:0 0 10mm;padding-top:.6mm}
+.adv b{display:block;font-weight:600;margin:0 0 1.5mm}
+.facts{list-style:none;padding:0;margin:6mm 0}
+.facts li{padding:3mm 0 3mm 6mm;border-left:1.6pt solid var(--tint);margin:0 0 3mm;break-inside:avoid}
+.facts .src{display:block;font-family:"Geist Mono",monospace;font-size:7pt;letter-spacing:.12em;color:var(--ink-2);margin-top:1.5mm}
+h3.sub3{font-size:16pt;line-height:1.15;font-weight:600;letter-spacing:-.015em;margin:12mm 0 5mm;break-after:avoid}
+.chat .you{font-size:8.6pt}
+</style>
+</head>
+<body>
+
+<!-- ================= COUVERTURE ================= -->
+<div class="cover panel">
+  <svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="#ffffff"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="#ffffff"/></svg>
+  <div>
+    <p class="kicker">Guide organikk.co</p>
+    <h1>Claude × Obsidian</h1>
+    <p class="sub">Arrête de chatter dans Claude. Mets en place un système : mots-clés, audit, maillage, données structurées, indexation, Jev.</p>
+    <p class="lead">Les skills complets sont dans le guide, prêts à copier. Les chiffres viennent de ma base, relevés le 30 septembre 2026.</p>
+  </div>
+  <div class="foot"><span>Timothée Boussardon</span><span>organikk.co</span></div>
+</div>
+
+<!-- ================= OUVERTURE ================= -->
+<section>
+  <header class="sec-open">
+    <h2 class="grad">D'abord, il y a un problème</h2>
+  </header>
+  <p>Je vais te donner des arguments solides pour te vendre l'intérêt de mettre en place un système et d'arrêter de chatter dans Claude ou ChatGPT.</p>
+  <p>Mais d'abord, il y a un problème.</p>
+  <p>On vous apprend souvent quoi faire : fais ci, fais ça.</p>
+  <p>Mais beaucoup plus rarement pourquoi le faire, sur quelles données s'appuyer, et dans quel cas ça vaut vraiment le coup.</p>
+  <p>Par exemple, tout le monde vous dit qu'il faut être cité par les IA. C'est un mauvais angle. L'enjeu, c'est de tout faire pour trouver des mots-clés qui ne seront pas mangés par les LLM dans les 5 prochaines années.</p>
+  <p>Autre exemple : on vous vend des courbes de trafic pour vous montrer à quel point la stratégie SEO en question était bonne. En 2026, c'est difficilement acceptable. Il faut désormais trouver des mots-clés business et arrêter de poursuivre le trafic comme un KPI intéressant.</p>
+  <p>C'est pareil pour le volume des mots-clés : la plupart des mots-clés qui ramènent des clients n'existent pas dans les outils SEO classiques. Littéralement indétectables. Eh bien, vous devez les trouver. Voici votre mission en tant que consultant !</p>
+  <p>Il n'y a aucun hack ou secret pour attaquer ce GEO ou SEO IA. C'est ta data qui fera la différence. On entre dans un jeu de data, et rien d'autre.</p>
+  <p>Sauf qu'aujourd'hui, tu ne peux pas en profiter, parce que tu n'as pas de système. Et que tu n'as pas de mémoire permanente.</p>
+  <p>Ah oui, ce n'est pas juste apprendre à faire des skills, c'est avoir un système complet qui peut agir comme un assistant. Comme un consultant junior.</p>
+  <p>Par exemple, tu peux lui demander ça :</p>
+
+  <div class="chat">
+    <div class="you">&gt; Lis mon texte et, en fonction de mes critères GEO, score chaque paragraphe.</div>
+  </div>
+
+  <p>C'est une mission que j'ai confiée à mon agent de scoring.</p>
+  <p>Il va lire mon texte et, en fonction de mes critères GEO, scorer chaque paragraphe.</p>
+  <p>Ça permet de réduire le risque de rédiger pour rien.</p>
+  <p>Mais tu peux aussi lui demander de modéliser tes données Google Search Console, comme on l'a fait avec Seocity.app.</p>
+
+  <div class="file">
+    <div class="bar">seocity.app — score de santé, méthode Organikk</div>
+    <div class="body">
+      <p>Les données Search Console d'un site deviennent une ville. Le rapport porte un score de santé en quatre dimensions :</p>
+      <p><b>Rendement</b> · <b>Concentration</b> · <b>Renouvellement</b> · <b>Tenue</b></p>
+      <p>Il finit sur une section « À faire ensuite ».</p>
+    </div>
+  </div>
+
+  <p>La seule limite du système, c'est ta capacité à te projeter sur le projet et à être force de proposition.</p>
+  <p>Bref, les arguments.</p>
+</section>
+
+<!-- ================= ARGUMENTS ================= -->
+<section style="margin-top:14mm">
+  <header class="sec-open">
+    <span class="kick">Argument 1</span>
+    <h2 class="grad">Le système a vocation à remplacer tous tes outils SEO</h2>
+  </header>
+  <ul class="facts">
+    <li>Obsidian est gratuit. Claude coûte environ 20&nbsp;€ par mois. Un SaaS SEO coûte plutôt 50 à 300&nbsp;€ par mois.<span class="src">Relevé avril 2026</span></li>
+    <li>L'audit d'indexation tourne avec un skill Claude : 9 points par URL, sans outil payant.</li>
+    <li>Le pré-audit part de la seule URL, sur des données 100&nbsp;% publiques. Aucune Search Console, aucun outil payant.</li>
+    <li>Ma recherche de mots-clés du 30/09 sur organikk.co : 1 377 requêtes Google Suggest, 26 transcripts de calls, les pages du site et le sitemap.</li>
+  </ul>
+
+  <header class="sec-open" style="break-before:page">
+    <span class="kick">Argument 2</span>
+    <h2 class="grad">Pour remporter le jeu du SEO, il va falloir dominer celui de la data propriétaire</h2>
+  </header>
+  <div class="cite">
+    <p>« La vitesse n'est pas un avantage compétitif quand tout le monde a le même outil. »</p>
+    <span class="src">organikk.co · 12 avril 2026</span>
+  </div>
+  <p>L'outil est accessible à tous. Le corpus, lui, s'accumule projet après projet.</p>
+  <ul class="facts">
+    <li>Sur organikk.co, le mot « freelance » revient dans 14 de mes calls. Cette donnée n'existe que dans mes transcripts.<span class="src">Recherche de mots-clés, 30/09/2026</span></li>
+    <li>Dans ma base, la page « data propriétaire » est citée par 268&nbsp;fichiers. C'est le concept le plus relié de tout le wiki.<span class="src">Relevé du 23/09/2026</span></li>
+  </ul>
+</section>
+
+<!-- ================= SETUP ================= -->
+<section class="part">
+  <header class="sec-open">
+    <h2 class="grad">Le setup</h2>
+  </header>
+  <p>Il ne faut jamais passer sur Obsidian sans implémenter le modèle LLM wiki.</p>
+
+  <div class="ob">
+    <div class="side">
+      <b>seo-kb</b><br>
+      &nbsp;&nbsp;├ AGENTS.md<br>
+      &nbsp;&nbsp;├ <b>raw</b><br>
+      &nbsp;&nbsp;│ ├ transcripts<br>
+      &nbsp;&nbsp;│ ├ data<br>
+      &nbsp;&nbsp;│ ├ articles<br>
+      &nbsp;&nbsp;│ └ journal<br>
+      &nbsp;&nbsp;└ <b>wiki</b><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;├ sources<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;├ entities<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;├ <span class="on">concepts</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;├ audit<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;├ keywords<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;├ index.md<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;└ log.md
+    </div>
+    <div class="note">
+      <h4>Au 30 septembre 2026</h4>
+      <p><b>2 143</b> fichiers markdown</p>
+      <p><b>713</b> dans <span class="mono">raw/</span>, <b>657</b> dans <span class="mono">wiki/</span></p>
+      <p><b>1 886</b> commits depuis le 1<sup>er</sup> mai</p>
+      <p style="margin-top:4mm">Plus gros dossiers de <span class="mono">wiki/</span> : sources 144, keywords 106, entities 79, concepts 70, audit 62.</p>
+    </div>
+  </div>
+
+  <p>Le principe vient d'Andrej Karpathy.</p>
+  <p>L'idée est simple : le LLM écrit et maintient son propre wiki.</p>
+  <p>À chaque nouvelle conversation, il peut repartir de ce qui a déjà été appris et écrit auparavant.</p>
+  <p>Mon espace Obsidian est séparé en deux parties.</p>
+
+  <h3 class="sec"><code class="mono">raw/</code></h3>
+  <p>C'est là que je garde toutes les sources brutes :</p>
+  <ul>
+    <li>appels clients ;</li>
+    <li>exports Search Console ;</li>
+    <li>articles ;</li>
+    <li>autres données originales.</li>
+  </ul>
+  <p>Claude ne modifie jamais ce dossier.</p>
+
+  <h3 class="sec"><code class="mono">wiki/</code></h3>
+  <p>C'est la partie organisée par Claude, qui vient connecter les différentes sources des différents <code class="mono">raw/</code>.</p>
+
+  <h3 class="sub3 grad">Le système en 4 avantages sur une approche classique ou outil</h3>
+  <ol class="adv">
+    <li><div><b>Tu as une mémoire permanente</b>Claude oublie le contexte → besoin d'un système en local avec Obsidian.</div></li>
+    <li><div><b>Le système est un modèle exponentiel</b>Demain les boîtes achèteront ton système SEO, et ne paieront plus au TJM.</div></li>
+    <li><div><b>Combattre l'isolement technique</b>Des nouveaux modèles tous les jours, on ne sait plus quoi essayer. Là, tu gardes une même base et tu itères avec des mises à jour structurelles, sans jamais recommencer à 0.</div></li>
+    <li><div><b>Gain d'efficacité énorme</b>Sans mémoire ni Obsidian → perte massive de productivité, car pas de process standardisé pour tes audits, recherches de mots-clés, etc.</div></li>
+  </ol>
+</section>
+
+<!-- ================= COMMENT ÇA MARCHE ================= -->
+<section class="part">
+  <header class="sec-open">
+    <h2 class="grad">Comment ça marche</h2>
+  </header>
+  <p>Je dépose un fichier dans <code class="mono">raw/</code> et je demande à Claude de l'ingérer.</p>
+  <ol class="errs">
+    <li><div>Claude lit le fichier en entier.</div></li>
+    <li><div>Il me résume les points et me demande quel angle creuser. À ce stade, il n'a rien écrit.</div></li>
+    <li><div>Il crée la fiche source dans <code class="mono">wiki/sources/</code>.</div></li>
+    <li><div>Il met à jour chaque entité et chaque concept cités, ou les crée.</div></li>
+    <li><div>Il met à jour <code class="mono">index.md</code> et ajoute une ligne dans <code class="mono">log.md</code>.</div></li>
+  </ol>
+  <p>Un fichier <code class="mono">AGENTS.md</code> fixe ces règles. Claude le relit à chaque session.</p>
+  <p>Premier ingest : 18&nbsp;fichiers bruts ont donné 28 sources, 32 entités et 27 concepts reliés entre eux.</p>
+  <p>Pour retrouver une information, une commande interroge un index local et gratuit, découpé par section.</p>
+
+  <div class="term">
+    <div class="bar">~/Code/seo-kb · recherche sémantique locale</div>
+<pre><span class="c">$ ./kb search "pourquoi un wiki plutôt que du RAG" --k 5</span>
+
+<span class="g">1. [0.716]</span> Wiki persistant vs RAG  §Relation à d'autres concepts
+   <span class="d">wiki/concepts/persistent-wiki-vs-rag.md  (concept)</span>
+
+<span class="g">2. [0.708]</span> Wiki persistant vs RAG  §Argument d'échelle
+   <span class="d">wiki/concepts/persistent-wiki-vs-rag.md  (concept)</span>
+   <span class="d">&gt; [[entities/karpathy]] affirme que pour ~100 sources, un simple index.md
+   &gt; suffit pour router</span></pre>
+  </div>
+
+  <p>Quatre boucles tournent : ce qui reste à traiter dans <code class="mono">raw/</code>, les hypothèses à valider par la donnée, le contenu publié mesuré à J+30 et J+90, les corrections qui reviennent deux fois.</p>
+  <p>Le vendredi, une revue tranche 8 décisions. L'agent propose, je décide.</p>
+</section>
+
+<!-- ================= MOTS-CLÉS ================= -->
+<section class="part">
+  <header class="sec-open">
+    <span class="kick">Opus 5.5 × Obsidian</span>
+    <h2 class="grad">Mots-clés</h2>
+  </header>
+  <p>La réflexion du système autour des mots-clés :</p>
+  <ul>
+    <li>Ne pas chercher des mots-clés mangés par les LLM, chercher ceux sur lesquels ton utilisateur va cliquer.</li>
+    <li>80&nbsp;% de la recherche de mots-clés est de la commodité → l'IA va le faire aussi bien ou mieux que n'importe quel outil.</li>
+    <li>20&nbsp;%, c'est le vrai travail : aller regarder sur Reddit, sur X, chercher l'expertise et l'expérience réelle.</li>
+    <li>Élimine les outils payants : mots-clés évidemment, mais aussi sémantique.</li>
+    <li>Arrête de vendre du trafic → vends des leads en trouvant des mots-clés business.</li>
+    <li>Construis des corpus / bases de données par client pour chaque recherche de mots-clés, pour que le système aille directement piocher ces infos dedans.</li>
+    <li>Une base SEO commune à tous tes projets SEO contient toutes tes stratégies, réflexions, études, stats pour les futures recherches.</li>
+    <li>Les mots-clés doivent être cherchés avec le contexte client : expertise, ton, point de vue → pas de copier-coller d'outil SEO classique.</li>
+  </ul>
+
+  <div class="mission">
+    <span class="k">La mission</span>
+    <p>Trie les mots-clés selon leur intérêt business et décide quoi pousser, créer, consolider ou écarter.</p>
+  </div>
+  <div class="out">
+    <span class="k">Sortie</span>
+    <ul>
+      <li>intentions déjà captées</li>
+      <li>opportunités sans page</li>
+      <li>pages qui sous-performent</li>
+      <li>requêtes écartées</li>
+      <li>3 actions maximum</li>
+    </ul>
+  </div>
+
+  <div class="skill">
+    <div class="bar"><span>Skill complet · seo-mots-cles-business/SKILL.md</span><span>à copier</span></div>
+<pre>---
+name: seo-mots-cles-business
+description: Trie les mots-clés d'un site par intention business, avec ou sans Search Console. Trois portes, cinq décisions, aucun volume inventé. Déclencheurs : "mots-clés business", "quels mots-clés cibler", "sur quoi mon site doit se battre".
+---
+
+# Mots-clés business
+
+## Ce que tu donnes à Claude
+
+- L'offre et le point de conversion (devis, rendez-vous, achat).
+- La cible, le marché, la langue.
+- Les URL des pages d'offre.
+- L'export Search Console Requêtes + Pages, 3 à 6&nbsp;mois, si tu l'as.
+- Des verbatims clients, si tu en as.
+
+## Consigne
+
+> Lance seo-mots-cles-business sur [URL]. Offre : [...], cible : [...], conversion : [...], marché : [...].
+
+## Étapes
+
+1. Liste les requêtes hors marque. Regroupe les variantes d'un même besoin en une intention. Signale chaque fusion.
+2. Sans Search Console, collecte Google Suggest, recherche web et verbatims. Deux requêtes qui partagent le même top 10 vont sur une seule page.
+3. Écarte ce qu'une IA répond sans clic : définition, « comment », fait unique. Garde achat, prix, comparatif, avis, local.
+4. Passe chaque intention aux trois portes :
+   - Correspond à l'offre ? Oui / Non.
+   - Intention business ? Forte / Moyenne / Faible, lue aux modificateurs, jamais au volume.
+   - Opportunité démontrée ? Déjà captée / Nouvelle / Non démontrée.
+5. Décide : POUSSER, CRÉER, CONSOLIDER, ÉCARTER ou À VALIDER.
+
+## Demande observée
+
+Écris Faible / Moyenne / Forte, avec les signaux nommés à côté.
+
+Forte : 5 variantes Suggest ou plus, 7 mentions en calls ou plus.
+
+Seules 20 impressions Search Console ou plus confirment la demande.
+
+## Sortie
+
+- Diagnostic en une phrase.
+- 3 à 5 chiffres, avec source et période.
+- Quatre tableaux : intentions captées, opportunités sans page, pages qui sous-performent, requêtes écartées avec leur raison.
+- 3 actions maximum, chacune justifiée par sa porte.
+- Ce que les données ne permettent pas de conclure.
+
+## Règles
+
+- Aucun volume, position ou CPC inventé.
+- Aucun score sur 10.
+- Une requête à fort volume hors offre finit ÉCARTÉE, raison écrite.
+- La Search Console ne montre pas tout le marché.
+- Aucune page créée par automatisme. Cherche d'abord une URL ou un contenu existant.
+
+Enregistre la sortie dans `AAAA-MM-JJ-&lt;site&gt;-mots-cles-business.md`.</pre>
+  </div>
+</section>
+
+<!-- ================= AUDIT ================= -->
+<section class="part">
+  <header class="sec-open">
+    <span class="kick">Opus 5.5 × Obsidian</span>
+    <h2 class="grad">Audit</h2>
+  </header>
+  <ul>
+    <li>L'audit d'indexation : pas besoin d'aller sur Search Console manuellement, le système le fait tout seul.</li>
+    <li>L'audit PageSpeed : le système regarde si tes pages sont rapides, tu n'as pas besoin de le faire toi-même.</li>
+    <li>Les audits ne se vendent plus → arrête de les facturer à part, ils doivent être inclus ou automatisés.</li>
+    <li>Avec un système, tu n'as plus besoin de faire l'audit à la main pour chaque client.</li>
+    <li>L'audit enrichit la mémoire du site → à chaque audit, tu alimentes l'historique du site pour le système.</li>
+    <li>L'automatisation ne doit pas supprimer le check manuel pour sentir des tendances, des signaux faibles, notamment sur la Search Console.</li>
+    <li>L'audit sans CMS est 10 fois mieux : directement depuis Claude sur ton téléphone, tu demandes au système « fais un audit » et il le sort.</li>
+  </ul>
+
+  <div class="mission">
+    <span class="k">La mission</span>
+    <p>Analyse indexation, vitesse, contenu, cannibalisation, maillage, données structurées et mots-clés business.</p>
+  </div>
+  <div class="out">
+    <span class="k">Sortie</span>
+    <ul>
+      <li>diagnostic complet</li>
+      <li>angle business prioritaire</li>
+      <li>scoring SEO global</li>
+      <li>roadmap 90&nbsp;jours</li>
+      <li>indexation</li>
+      <li>structure Hn</li>
+      <li>éléments à corriger</li>
+    </ul>
+  </div>
+
+  <h3 class="sub3 grad" style="break-before:page;margin-top:0">Pré-audit avant un call</h3>
+  <p>Le pré-audit est séparé de l'audit complet.</p>
+  <div class="mission">
+    <span class="k">La mission</span>
+    <p>Prépare un pré-audit SEO avant un call, à partir de la seule URL et de données publiques.</p>
+  </div>
+  <div class="out">
+    <span class="k">Sortie</span>
+    <ul>
+      <li>En résumé : 3 à 5 phrases</li>
+      <li>Diagnostic</li>
+      <li>Angle</li>
+      <li>État SEO daté</li>
+      <li>Modèles de pages priorisés</li>
+      <li>Roadmap 90&nbsp;jours</li>
+      <li>Notes de call</li>
+      <li>À vérifier</li>
+    </ul>
+  </div>
+
+  <div class="skill">
+    <div class="bar"><span>Skill pré-audit complet · seo-pre-audit/SKILL.md</span><span>à copier</span></div>
+<pre>---
+name: seo-pre-audit
+description: Prépare un pré-audit SEO avant un call, à partir de la seule URL et de données publiques. Déclencheurs : "prépare le pré-call", "fais un pré-audit", "pré-call sur [site]".
+---
+
+# Pré-audit avant call
+
+## Ce que tu donnes à Claude
+
+- L'URL du site.
+- L'offre, la cible et l'objectif, si tu les connais. Sinon Claude les déduit et les marque « à confirmer au call ».
+
+## Consigne
+
+> Fais un pré-audit sur https://monsite.fr. Il vend [offre] à [cible], l'objectif est [objectif].
+
+## Règle dure
+
+Aucun volume, position ou trafic inventé.
+
+Un chiffre non vérifié porte `[À SOURCER]` ou « à récupérer au call ».
+
+## 1. Collecte publique
+
+- Identité : ancienneté, taille, offres, qui décide.
+- Modèle : qui paie, cycle de vente, point de conversion.
+- SEO : sitemap, pages utiles, pages géo ou décisionnelles, lastmod, refonte.
+- IA : requêtes absorbées par l'IA ou décisionnelles.
+- Données propriétaires : cas clients, méthode, chiffres internes.
+- À demander au call : accès Search Console, poids de chaque offre dans le CA.
+
+## 2. Les 7 questions
+
+1. Niche défendable : où attaquer en premier.
+2. Douleur qui coûte.
+3. Modèles de pages : 4 à 6.
+4. Chemin vers le lead.
+5. Moment : pourquoi maintenant.
+6. Objections.
+7. Sortie de call : roadmap 90&nbsp;jours et proposition.
+
+Tranche 2 ou 3 de ces questions. Les autres deviennent des questions au call.
+
+## 3. Sortie
+
+- En résumé : 3 à 5 phrases.
+- Diagnostic.
+- Angle.
+- État SEO daté.
+- Modèles de pages priorisés.
+- Roadmap 90&nbsp;jours.
+- Notes de call.
+- À vérifier.
+
+Pas de « visibilité » : parle de positions, citations IA, leads.</pre>
+  </div>
+</section>
+
+<!-- ================= MAILLAGE ================= -->
+<section class="part">
+  <header class="sec-open">
+    <span class="kick">Agents techniques · 3.1</span>
+    <h2 class="grad">Le maillage interne</h2>
+  </header>
+  <ul>
+    <li>Un skill connaît l'historique du site et fait des calculs sémantiques → il te donne le rapprochement des pages qui va bien.</li>
+    <li>Le système te propose les bons liens internes plutôt que de les chercher manuellement.</li>
+    <li>L'objectif : éviter de faire des pages qui tournent en rond sur de l'informationnel.</li>
+    <li>Avec le maillage automatisé par le système, tu mets juste un clic et c'est fait.</li>
+    <li>Le maillage interne fait partie de la partie technique à 80&nbsp;% automatisée (audit, recherche de mots-clés, maillage, correction technique).</li>
+  </ul>
+
+  <div class="mission">
+    <span class="k">La mission</span>
+    <p>Le système te propose les bons liens internes plutôt que de les chercher manuellement.</p>
+  </div>
+  <div class="out">
+    <span class="k">Sortie</span>
+    <ul>
+      <li>piliers et hubs</li>
+      <li>pages orphelines</li>
+      <li>entrants / sortants</li>
+      <li>source et cible de chaque lien</li>
+      <li>passage</li>
+      <li>ancres</li>
+      <li>justification</li>
+      <li>3 actions prioritaires</li>
+    </ul>
+  </div>
+
+  <div class="skill">
+    <div class="bar"><span>Skill complet · maillage-systeme/SKILL.md</span><span>à copier</span></div>
+<pre>---
+name: maillage-systeme
+description: Audite et construit le maillage interne d'un site sans Search Console. Déclencheurs : "audite le maillage", "pages orphelines", "plan de maillage".
+---
+
+# Maillage interne
+
+## Ce que tu donnes à Claude
+
+- L'URL du sitemap, ou la liste des articles.
+- Tes 3 à 5 mots-clés piliers.
+- Tes pages d'offre : audit, contact, devis, outil.
+
+## Consigne
+
+> Audite le maillage de monsite.fr. Mes pages d'offre : [URL].
+
+## Étape 0 : crawl
+
+python3 ~/.claude/skills/maillage-systeme/scripts/crawl_graph.py https://monsite.fr/sitemap.xml -o ./maillage-data
+
+Seul `index.json` entre dans la conversation.
+
+Un lien présent sur 80&nbsp;% des pages ou plus est un lien de gabarit. Il ne compte pas.
+
+## Étapes
+
+1. Classe chaque page : Know ou Do.
+2. Regroupe en piliers de 3 pages minimum, avec un hub chacun.
+3. Compte les liens du corps par pages sources distinctes. Repère orphelines et impasses.
+4. Pour chaque lien à créer : passage et 3 ancres (exacte, partielle, sémantique).
+5. Classe par rang :
+   - page d'offre orpheline ;
+   - lien Know vers Do ;
+   - hub vers satellite ;
+   - orpheline hors offre ;
+   - lien entre piliers.
+
+## Critères d'une ancre
+
+- Elle dit ce que la cible promet.
+- La phrase reste fluide sans le lien.
+- Elle n'est pas déjà utilisée vers la même cible.
+- Les 5 mots autour parlent du sujet de la cible.
+
+Un critère raté : l'ancre est rejetée.
+
+## Sortie
+
+- Piliers et hubs.
+- Tableau : page, entrants, sortants, statut.
+- Plan de liens : source, cible, passage, ancres, justification.
+- Diagnostic en une phrase, 3 actions P1 maximum.
+- Ce que les données ne permettent pas de conclure.
+
+## Avant d'ajouter les liens
+
+- Lis chaque passage à voix haute sans le lien.
+- Insère par lots de 10 à 20.
+- Relance le crawl après chaque lot.
+- Critère de fin : zéro page d'offre orpheline.
+
+## Règles
+
+- Aucun score numérique.
+- Une page légale orpheline n'est pas un problème.
+- Liens dans le texte, jamais en « Voir aussi ».
+- Jamais de lien vers l'accueil depuis le contenu.
+
+Enregistre la sortie dans `AAAA-MM-JJ-&lt;site&gt;-maillage.md`.</pre>
+  </div>
+</section>
+
+<!-- ================= DONNÉES STRUCTURÉES ================= -->
+<section class="part">
+  <header class="sec-open">
+    <span class="kick">Agents techniques · 3.2</span>
+    <h2 class="grad">Données structurées</h2>
+  </header>
+  <div class="mission">
+    <span class="k">La mission</span>
+    <p>Vérifie que les informations présentes dans le JSON-LD correspondent réellement à ce que la page affiche.</p>
+  </div>
+  <div class="out">
+    <span class="k">Sortie</span>
+    <ul>
+      <li>balisages présents</li>
+      <li>valeurs incohérentes</li>
+      <li>schemas à ajouter ou retirer</li>
+      <li>validation du JSON-LD</li>
+    </ul>
+  </div>
+
+  <div class="skill">
+    <div class="bar"><span>Skill complet · seo-donnees-structurees/SKILL.md</span><span>à copier</span></div>
+<pre>---
+name: seo-donnees-structurees
+description: Met en place ou audite les données structurées JSON-LD d'un site, dérivées du contenu de chaque page. Déclencheurs : "données structurées", "JSON-LD", "schema.org", "rich results", "balisage".
+---
+
+# Données structurées JSON-LD
+
+## Ce que tu donnes à Claude
+
+- L'accès au code du site.
+- L'URL des pages à contrôler.
+- L'identité réelle : nom, logo, fondateur, profils sociaux.
+
+## Consigne
+
+> Mets en place les données structurées JSON-LD sur ce projet.
+
+> Vérifie que le balisage de [URL] correspond à ce que la page affiche.
+
+## Trois règles
+
+1. Une seule source. Tout le JSON-LD vient d'un module (`lib/schema.ts`).
+2. Une entité, référencée par `@id`. Organization, WebSite et Person sont émis une fois.
+3. Dérivé du contenu. Un champ tapé à la main se désynchronise au premier edit.
+
+## Ce que chaque signal déclenche
+
+| Signal dans la page | Schema             |
+|---------------------|--------------------|
+| Article             | `Article`          |
+| Toute page          | `BreadcrumbList`   |
+| Bloc FAQ réel       | `FAQPage`          |
+| Vidéo YouTube       | `VideoObject`      |
+| Étapes numérotées   | `HowTo`            |
+| Prix affiché        | `Product` / `Offer`|
+
+Ne demande jamais « quel schema veux-tu ». Lis la page, émets ce qu'elle prouve.
+
+## Procédure
+
+1. Identifie le framework et sa version.
+2. Repère où vivent les données.
+3. Crée `lib/schema.ts`.
+4. Émets le graphe du site dans le layout racine.
+5. Émets un tableau JSON-LD par page.
+6. Supprime les anciens blocs redéclarés.
+7. Valide avec les outils Google et schema.org.
+
+## Audit : trois contrôles
+
+- Le JSON est valide.
+- Chaque valeur balisée existe telle quelle sur la page.
+- Le balisage sert une fonctionnalité Google réelle.
+
+## Interdits
+
+- `FAQPage` ou `HowTo` « au cas où ».
+- `aggregateRating`, avis ou prix invérifiables.
+- Auteur et éditeur redéclarés sur chaque page.
+- `wordCount` ou dates codés en dur.
+
+Demande ton accord avant chaque écriture dans le code.</pre>
+  </div>
+</section>
+
+<!-- ================= INDEXATION ================= -->
+<section class="part">
+  <header class="sec-open">
+    <span class="kick">Agents techniques · 3.3</span>
+    <h2 class="grad">Indexation</h2>
+  </header>
+  <div class="mission">
+    <span class="k">La mission</span>
+    <p>Vérifie si les pages sont réellement indexées, redirigées, inconnues ou non testables.</p>
+  </div>
+  <div class="out">
+    <span class="k">Sortie : 9 contrôles</span>
+    <ul>
+      <li>HTTP (404/500, redirections)</li>
+      <li>robots.txt non bloquant</li>
+      <li>Pas de noindex (HTML + en-tête)</li>
+      <li>Sitemap (présence, fraîcheur)</li>
+      <li>Cohérence sitemap ↔ source</li>
+      <li>Maillage : liens entrants par URL</li>
+      <li>Longueur du contenu (proxy thin)</li>
+      <li>Indexation Google (site: ou API Search Console)</li>
+      <li>Rapport markdown</li>
+    </ul>
+  </div>
+
+  <div class="skill">
+    <div class="bar"><span>Skill · indexation</span><span>à copier</span></div>
+    <div class="body">
+      <p>Tu es un auditeur SEO spécialisé en indexation. Ton rôle : vérifier que Google peut découvrir, explorer et indexer les pages qu'on souhaite rendre visibles.</p>
+      <h4>Ce qu'on te donne</h4>
+      <ul>
+        <li>Domaine : [site.fr]</li>
+        <li>Liste d'URL : sitemap.xml public ou urls.txt (une par ligne)</li>
+        <li>Pages prioritaires : les 5 à 30 pages d'offre (business-critical)</li>
+        <li>Pages hubs : /, /blog, footer, catégories (pour le maillage)</li>
+      </ul>
+      <h4>Les 9 contrôles à faire (lecture seule)</h4>
+      <p><b>Technique (causes)</b></p>
+      <ol>
+        <li>HTTP : codes finaux + redirections (301/302/200) ?</li>
+        <li>robots.txt : bloque-t-il Googlebot ou * sur ces URL ?</li>
+        <li>noindex : présent en meta ou en en-tête HTTP ?</li>
+        <li>Sitemap : présent, cohérent, lastmod de moins de 6&nbsp;mois ?</li>
+        <li>Cohérence : URL du sitemap = liste donnée ? Orphelines ?</li>
+        <li>Maillage : combien de liens entrants par URL (crawl + hubs) ?</li>
+        <li>Contenu : longueur par URL (moins de 300 mots = court, à creuser)</li>
+      </ol>
+      <p><b>Google (observation)</b></p>
+      <ol start="8">
+        <li><code class="mono">site:{URL}</code> sur Google (espacer de 3 à 5&nbsp;s, détecter le rate-limit, marquer « non testable » si bloqué), ou API Search Console si accès.</li>
+        <li>Soft 404 : tester 3 URL inexistantes, relever leur title et leur canonical.</li>
+      </ol>
+      <h4>Rapport obligatoire</h4>
+      <p>Format markdown avec :</p>
+      <ul>
+        <li>Synthèse : X/N pages sans défaut confirmé</li>
+        <li>Chiffres clés : tableau des 9 contrôles</li>
+        <li>Ce qui bloque : 3 problèmes maximum, chacun = Observation + Preuve + Impact + Action + Priorité / Effort / Confiance</li>
+        <li>Ce qui va bien : ce qui fonctionne (éviter le biais négatif)</li>
+        <li>Inspection Google : tableau des URL inspectées individuellement</li>
+        <li>Limites : ce qu'on n'a pas pu tester et pourquoi</li>
+      </ul>
+      <p><b>Pré-décision (obligatoire)</b> : diagnostic (1 phrase) → chiffres (3 à 5) → état (Critique / À améliorer / Sain) → problèmes + actions P1-P3 → ce qu'on ne peut pas conclure.</p>
+      <h4>Garde-fous</h4>
+      <ul>
+        <li>Lecture seule : pas de soumission Search Console, pas de forçage.</li>
+        <li>Jamais : HTTP 200 = indexée, hors sitemap = problème, 1 lien = pas découverte.</li>
+        <li>Toujours : « non testable » ≠ « non indexée ».</li>
+        <li>Priorise les pages d'offre et les vraies anomalies (noindex accidentel, 404).</li>
+        <li>Extrapolation interdite : N URL testées ≠ cluster entier.</li>
+      </ul>
+      <h4>Déclenchement</h4>
+      <p><code class="mono">« Audit indexation de [domaine], sitemap : [URL] »</code></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= JEV ================= -->
+<section class="part">
+  <header class="sec-open">
+    <span class="kick">Une couche en plus</span>
+    <h2 class="grad">J'ajoute une couche d'un nouveau modèle : Jev</h2>
+  </header>
+  <p>En essayant de ne pas être trop technique sur Jev (mais c'est important d'en parler), c'est un modèle utilisé pour vérifier, classer et scorer, pas pour rédiger.</p>
+  <p>Il reçoit une question fermée, choisit parmi plusieurs réponses possibles et indique son niveau de confiance.</p>
+  <p>Dans mon système, je l'utilise surtout avec trois scripts : <code class="mono">verifier.py</code> pour contrôler si chaque phrase est appuyée par les sources, <code class="mono">liens.py</code> pour vérifier la pertinence des liens internes, et <code class="mono">matiere.py</code> pour détecter les preuves ou données réelles.</p>
+  <p>Son intérêt principal est la vitesse : environ 0,8 seconde par appel. Jev trie l'information, mais ne prend pas les décisions finales.</p>
+  <p>En gros, un assistant qui répond rapidement, qui est capable de trancher par oui ou non, de scorer une analyse, et qui utilise beaucoup, mais alors beaucoup moins de tokens.</p>
+
+  <div class="term">
+    <div class="bar">~/Code/seo-kb/jev · les commandes</div>
+<pre><span class="c">$ python3 jev/verifier.py DRAFT --corpus …</span>        <span class="d"># chaque phrase appuyée par le corpus ?</span>
+<span class="c">$ python3 jev/liens.py FICHIER</span>                   <span class="d"># la cible aide-t-elle le lecteur ?</span>
+<span class="c">$ python3 jev/matiere.py "sujet" --corpus …</span>      <span class="d"># ce passage porte-t-il une preuve ?</span>
+<span class="c">$ python3 jev/calibrer.py --noter verifier "la phrase exacte" ko</span>
+<span class="c">$ python3 jev/calibrer.py</span>                        <span class="d"># accord Jev / Tim</span></pre>
+  </div>
+
+  <div class="mission">
+    <span class="k">La mission</span>
+    <p>Jev sert à trier et vérifier, pas à rédiger un contenu par exemple.</p>
+  </div>
+  <ul class="defs">
+    <li><b>verifier</b> : regarde chaque phrase et vérifie d'où elle vient : d'une source, d'une déduction, de nulle part, ou simplement du remplissage.</li>
+    <li><b>liens</b> : repère les liens internes vraiment utiles et écarte les ancres vagues ou trompeuses.</li>
+    <li><b>matiere</b> : cherche les preuves solides disponibles : chiffres, faits, phrases de clients ou opinions.</li>
+    <li><b>calibrer</b> : compare les choix de Jev avec les miens. Aucune automatisation tant qu'on n'atteint pas 80&nbsp;% d'accord sur au moins 30 cas.</li>
+  </ul>
+
+  <div class="hard">
+    <span class="k">La règle reste simple</span>
+    <p>Jev trie, mais la décision finale me revient toujours.</p>
+  </div>
+
+  <div class="out">
+    <span class="k">Ce qu'on lui donne</span>
+    <ul>
+      <li>un brouillon</li>
+      <li>les sources : calls, tickets, pages du site</li>
+      <li>les opportunités détectées</li>
+      <li>mes validations précédentes</li>
+    </ul>
+  </div>
+  <div class="out">
+    <span class="k">Sortie</span>
+    <ul>
+      <li>les phrases non sourcées ou inutiles</li>
+      <li>les liens internes à garder pour le maillage</li>
+      <li>les meilleures preuves de mon Obsidian sur un sujet</li>
+      <li>un historique des décisions pour améliorer le système</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= PAGE FINALE ================= -->
+<section class="final panel">
+  <div>
+    <h2>On regarde tes process ensemble ?</h2>
+    <p>Trente minutes en visio.</p>
+    <p>Tu me montres comment tu travailles aujourd'hui : ce que tu fais à la main, ce que tu répètes pour chaque client et la liste interminable d'outils que tu utilises :)</p>
+    <p>On regarde ensemble ce que tu peux automatiser avec Obsidian, quelles tâches transformer en skills, et par où commencer pour ne pas procrastiner.</p>
+    <a class="cta" href="https://cal.com/tim-boussardon-yzrrb1/30min">Réserver le créneau<span class="u">cal.com/tim-boussardon-yzrrb1/30min</span></a>
+  </div>
+  <div class="foot">
+    <svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="#ffffff"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="#ffffff"/></svg>
+    <span>organikk.co</span>
+  </div>
+</section>
+
+</body>
+</html>

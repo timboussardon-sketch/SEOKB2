@@ -1,0 +1,4 @@
+interface:
+  display_name: "Roadmap SEO du site"
+  short_description: "Priorités, responsables, blocages et avancement SEO"
+  default_prompt: "Utilise $roadmap-seo pour lancer une stratégie indépendante pour chacun des mots-clés importants du site puis consolider les résultats validés dans une seule roadmap."

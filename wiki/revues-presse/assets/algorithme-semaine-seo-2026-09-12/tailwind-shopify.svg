@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 270" role="img" aria-labelledby="title"><title id="title">Illustration : une interface de boutique avec son code de mise en page.</title><rect width="360" height="270" fill="#e9f3f1"/><g font-family="Avenir Next, Avenir, Arial, sans-serif" fill="#193761">
+<rect x="56" y="37" width="260" height="195" rx="8" fill="white"/>
+<path d="M56 73h260" stroke="#b7d9d9" stroke-width="2"/>
+<circle cx="72" cy="55" r="4" fill="#4c898e"/><circle cx="87" cy="55" r="4" fill="#94bbbb"/>
+<path d="M96 155v-44h55v44" fill="#bfdcda"/>
+<path d="M119 111v-11a6 6 0 0112 0v11" fill="none" stroke="#193761" stroke-width="3"/>
+<rect x="178" y="100" width="91" height="58" rx="6" fill="#ecda93"/>
+<path d="M211 141v-30m-12 0h24" stroke="#193761" stroke-width="3"/>
+<path d="M92 177h64m22 0h91m-177 18h46m40 0h61" stroke="#89aaaa" stroke-width="6"/>
+<rect x="23" y="197" width="133" height="48" rx="7" fill="#193761"/>
+<text x="89" y="228" font-size="21" text-anchor="middle" fill="white">&lt; / &gt;</text>
+</g></svg>

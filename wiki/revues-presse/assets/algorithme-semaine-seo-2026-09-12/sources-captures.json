@@ -1,0 +1,143 @@
+[
+  {
+    "id": "arxiv",
+    "url": "https://arxiv.org/abs/2602.18455",
+    "status": 200,
+    "title": "[2602.18455] Impact of AI Search Summaries on Website Traffic: Evidence from Google AI Overviews and Wikipedia",
+    "h1": [
+      "Computer Science > Computers and Society",
+      "Impact of AI Search Summaries on Website Traffic: Evidence from Google AI Overviews and Wikipedia",
+      "Bibliographic and Citation Tools",
+      "Code, Data and Media Associated with this Article",
+      "Demos",
+      "Recommenders and Search Tools",
+      "arXivLabs: experimental projects with community collaborators"
+    ],
+    "text": "Skip to main content\nSearch\nSubmit\nDonate\nLog in\nComputer Science > Computers and Society\n[Submitted on 5 Feb 2026 (v1), last revised 2 Sep 2026 (this version, v6)]\nImpact of AI Search Summaries on Website Traffic: Evidence from Google AI Overviews and Wikipedia\nMehrzad Khosravi, Hema Yoganarasimhan\nSearch engines increasingly display AI-generated answers above organic links, potentially displacing traffic to upstream publishers. We estimate the impact of Google's AI Overviews (AIO) on Wikipedia's search traffic using AIO's staggered geographic rollout and Wikipedia's multilingual structure. Our difference-in-differences design compares monthly external-search referrals to English Wikipedia articles with referrals to the same articles in German and French, and finds that default AIO availability reduced English search traffic by 5.45% and 4.82%, respectively. Our results suggest that answer-producing digital intermediaries can materially reallocate attention away from informational publishers, with implications for content monetization, search platform design, and policy.\nSubjects:\tComputers and Society (cs.CY); Artificial Intelligence (cs.AI)\nCite as:\tarXiv:2602.18455 [cs.CY]\n \t(or arXiv:2602.18455v6 [cs.CY] for this version)\n \t\nhttps://doi.org/10.48550/arXiv.2602.18455\nFocus to learn more\nSubmission history\nFrom: Mehrzad Khosravi [view email]\n[v1] Thu, 5 Feb 2026 01:31:44 UTC (1,474 KB)\n[v2] Thu, 26 Mar 2026 01:10:28 UTC (1 KB) (withdrawn)\n[v3] Fri, 17 Apr 2026 20:18:13 UTC (1,488 KB)\n[v4] Tue, 12 May 2026 07:35:59 UTC (1,488 KB)\n[v5] Wed, 26 Aug 2026 07:40:54 UTC (51 KB)\n[v6] Wed, 2 Sep 2026 20:53:31 UTC (1,812 KB)\n\nAccess Paper:\nView PDF\nHTML (experimental)\nTeX Source\nview license\nCurrent browse context:\ncs.CY\n< prev   |   next >\n\nnew | recent | 2026-02\nChange to br",
+    "images": [
+      {
+        "src": "https://arxiv.org/static/base/1.0.1/images/arxiv-logo-primary-light.svg",
+        "alt": "archive"
+      },
+      {
+        "src": "https://arxiv.org/static/browse/0.3.4/images/icons/social/bibsonomy.png",
+        "alt": "BibSonomy"
+      },
+      {
+        "src": "https://arxiv.org/static/browse/0.3.4/images/icons/social/reddit.png",
+        "alt": "Reddit"
+      },
+      {
+        "src": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation.png",
+        "alt": "Simons Foundation"
+      },
+      {
+        "src": "https://arxiv.org/static/base/1.0.1/images/funders/simons-foundation-international.png",
+        "alt": "Simons Foundation International"
+      },
+      {
+        "src": "https://arxiv.org/static/base/1.0.1/images/funders/schmidt-sciences.png",
+        "alt": "Schmidt Sciences"
+      }
+    ]
+  },
+  {
+    "id": "le-monde",
+    "url": "https://www.influencia.net/louis-dreyfus-nous-navons-pas-constate-dimpact-dai-overviews-sur-nos-audiences/",
+    "status": 200,
+    "title": "Louis Dreyfus : «Nous n’avons pas constaté d’impact d’AI Overviews sur nos audiences» - Influencia",
+    "h1": [
+      "Louis Dreyfus : «Nous n’avons pas constaté d’impact d’AI Overviews sur nos audiences»"
+    ],
+    "text": "MENU\nGROUPE INFLUENCIA\nNEWSLETTERS\nÉDITIONS\nNOS ÉVÉNEMENTS\nMEDIAS & COM\nMEDIA\nAI Overviews\nGoogle\nIA\nLe Monde\n\n8 septembre 2026\n\nTemps de lecture : 7 min\n\nLouis Dreyfus : «Nous n’avons pas constaté d’impact d’AI Overviews sur nos audiences»\nLoin d’être impacté par le déploiement d’AI Overviews, Le Monde enregistre même une progression record du nombre de ses abonnés assure Louis Dreyfus. Le directeur général du groupe évoque aussi sa stratégie pour toucher de nouvelles audiences, les accords passés avec OpenAI, Meta et Perplexity, ou la diversification sur Snapchat et YouTube, sans oublier les apps mobiles qui pèsent 36 % du trafic total du groupe.\n \n \n \n\nLouis Dreyfus, directeur général du groupe Le Monde © Edouard Caupeil\n\nDepuis le lancement d’AI Overviews sur le marché français le 22 juillet 2026, Louis Dreyfus, directeur général du Monde, n’a pour l’instant pas constaté d’impact sur ses audiences de ces résumés générés par IA, qui s’affichent directement en réponse à une requête sur Google Search.\n\nLoin des craintes de l’Alliance de la presse d’information générale (APIG), faut-il y voir les conséquences de la puissance de la marque Le Monde ? Ou le fait que l’actualité chaude est encore relativement épargnée par AI Overviews ?\n\nSi la réponse n’est sans doute pas unique, Louis Dreyfus y voit également le résultat de la qualité de l’information produite par ses rédactions, auxquelles les récents partenariats passés avec OpenAI, Meta ou encore Perplexity donnent une visibilité et des moyens supplémentaires.\n\nC’est aussi l’occasion d’évoquer les stratégies de préservation et de conquête de nouvelles audiences mises en place par Le Monde, tant via le développement des applications mobiles qui représentent désormais 36 % du trafic du groupe, que sur Snapchat, TikTok ou ",
+    "images": []
+  },
+  {
+    "id": "google-comparateurs",
+    "url": "https://developers.google.com/search/docs/appearance/aggregator-unit?hl=fr",
+    "status": 200,
+    "title": "Unité d'agrégation dans la recherche Google | Google Search Central  |  Documentation  |  Google for Developers",
+    "h1": [
+      "Unité d'agrégation dans la recherche Google"
+    ],
+    "text": "Passer au contenu principal\nSearch Central\nDocumentation\nAssistance\nBlog\nNouveautés\nÉvénements\nÉtudes de cas\nDocumentation\nSearch Console\nPrésentation\nEssentiels de la recherche\nPrincipes de base du SEO\nExploration et indexation\nClassement et apparence dans les résultats de recherche\nSurveillance et débogage\nGuides spécifiques au site\nAccueil\nSearch Central\nDocumentation\nEnvoyer des commentaires\nUnité d'agrégation dans la recherche Google\n\nLes personnes situées dans les pays de l'Espace économique européen (EEE) qui recherchent des termes tels que \"hôtels à proximité\" peuvent remarquer que l'expérience a changé. Ces expériences incluent les unités d'agrégation et les unités de fournisseur. Cette page explique comment fonctionne l'unité d'agrégation et comment les entreprises qui s'adressent aux utilisateurs de l'EEE peuvent manifester leur intérêt pour cette unité.\n\nFonctionnement de l'unité d'agrégation\n\nL'unité d'agrégation est une fonctionnalité multi-fournisseur conçue pour les services de recherche verticale (VSS), y compris les agences de voyages en ligne, les services de comparateur de prix, les moteurs de métarecherche et les annuaires. Grâce à ces unités, les utilisateurs peuvent voir plus facilement les résultats des agrégateurs pour les requêtes liées aux hôtels, aux vols, aux trains longue distance et aux produits.\n\nDans cette unité, les agrégateurs éligibles insèrent des résultats pertinents pour la requête de l'utilisateur. Les résultats du fournisseur le mieux classé sont développés par défaut. Par exemple, si un utilisateur recherche \"hôtels à Paris\", il peut voir une liste des hôtels les mieux classés avec des photos, des prix ou des notes d'un fournisseur éligible. Les clics de l'utilisateur dans l'unité redirigent ce dernier directement vers le site W",
+    "images": [
+      {
+        "src": "https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=fr",
+        "alt": "Google Search Central"
+      },
+      {
+        "src": "https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=fr",
+        "alt": "Google Search Central"
+      },
+      {
+        "src": "https://developers.google.com/static/search/docs/images/aggregator-unit.png?hl=fr",
+        "alt": "Unité d'agrégation dans la recherche Google"
+      },
+      {
+        "src": "https://developers.google.com/static/search/images/li.png?hl=fr",
+        "alt": "LinkedIn"
+      },
+      {
+        "src": "https://developers.google.com/static/homepage-assets/images/yt.svg?hl=fr",
+        "alt": "YouTube"
+      },
+      {
+        "src": "https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/rss_feed/default/24px.svg",
+        "alt": "Blog"
+      },
+      {
+        "src": "https://developers.google.com/static/search/images/search-off-the-record-podcast-logo.png?hl=fr",
+        "alt": "Podcast"
+      },
+      {
+        "src": "https://developers.google.com/static/homepage-assets/images/x.svg?hl=fr",
+        "alt": "X (Twitter)"
+      },
+      {
+        "src": "https://www.gstatic.com/devrel-devsite/prod/veec7311b6c5f99ef32994eb65aab7022195f72bfa4f3d934bdc7556da7fa7c3b/developers/images/lockup-google-for-developers.svg",
+        "alt": "Google Developers"
+      }
+    ]
+  },
+  {
+    "id": "google-api",
+    "url": "https://developers.google.com/web-search-service/overview",
+    "status": 200,
+    "title": "Web Search Service API  |  Google for Developers",
+    "h1": [
+      "Web Search Service API"
+    ],
+    "text": "Skip to main content\nGuides\nOverview\nIntroduction\nHow to Invoke the API\nReference\nREST Reference\nTopLevel\nRPC Reference\nOverview\ngoogle.search.wss.v1\nWeb Search Service API\n\nThe Web Search Service API allows programmatic partners to develop websites and applications that retrieve and display Google Search results.\n\nPartners can use REST or gRPC requests to retrieve search results in JSON format.\n\nData format\n\nThe Web Search Service API returns results in standard JSON format containing search result items, timing, and metadata.\n\nPrerequisites\n\nBefore querying the API, partners must complete the following setup:\n\nGoogle Cloud Project: An active Google Cloud project.\nAPI Key: An API key created in the Google Cloud Console to authenticate requests.\nClient ID: A designated client_id associated with the partner agreement.\nMonitoring\n\nMonitoring for the Web Search Service API is available natively through the Google Cloud Console's API Dashboard.\n\nExcept as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License, and code samples are licensed under the Apache 2.0 License. For details, see the Google Developers Site Policies. Java is a registered trademark of Oracle and/or its affiliates.\n\nLast updated 2026-09-09 UTC.\n\nEngage\nGoogle Developer Program\nGoogle Developer Groups\nGoogle Developer Experts\nAccelerators\nGoogle Cloud & NVIDIA\nConnect\nBlog\nBluesky\nInstagram\nLinkedIn\nX (Twitter)\nYouTube\nBuild\nAndroid\nChrome\nFirebase\nGoogle AI Studio\nGoogle Antigravity\nGoogle Cloud\nGoogle Play\nView all\nAndroid\nChrome\nFirebase\nGoogle Cloud Platform\nGoogle AI\nAll products\nTerms\nPrivacy",
+    "images": [
+      {
+        "src": "https://www.gstatic.com/devrel-devsite/prod/veec7311b6c5f99ef32994eb65aab7022195f72bfa4f3d934bdc7556da7fa7c3b/developers/images/lockup-new.svg",
+        "alt": "Google for Developers"
+      },
+      {
+        "src": "https://www.gstatic.com/devrel-devsite/prod/veec7311b6c5f99ef32994eb65aab7022195f72bfa4f3d934bdc7556da7fa7c3b/developers/images/lockup-new.svg",
+        "alt": "Google for Developers"
+      },
+      {
+        "src": "https://www.gstatic.com/devrel-devsite/prod/veec7311b6c5f99ef32994eb65aab7022195f72bfa4f3d934bdc7556da7fa7c3b/developers/images/lockup-google-for-developers.svg",
+        "alt": "Google Developers"
+      }
+    ]
+  },
+  {
+    "id": "tailwind",
+    "url": "https://tailwindcss.com/blog/tailwind-is-joining-shopify",
+    "status": 200,
+    "title": "Tailwind Labs is joining Shopify - Tailwind CSS",
+    "h1": [
+      "Tailwind Labs is joining Shopify"
+    ],
+    "text": "v4.3\n⌘K\nDocs\nPlay\nBlog\nShowcase\nPartners\nPlus\nSEPTEMBER 9, 2026\nTailwind Labs is joining Shopify\nAdam Wathan\n@adamwathan\n\nBig one today — Tailwind is joining Shopify.\n\nWhen I started working on Tailwind over nine years ago, my only goal was to create something that would make it easier to build beautiful interfaces for my own projects. Fast-forward to today and the framework is installed over 110 million times per week and is trusted by many of the world's biggest companies to style products like ChatGPT, X, Cloudflare, Reddit, and Shopify.\n\nWe're joining Shopify to give Tailwind a stable long-term home where it will be actively maintained for the millions of people who depend on it.\n\nWhy Shopify\n\nWe built a great little website template business around Tailwind over the years, but deep down I've always wanted the framework to be developed in service of a real product. A complex application solving important problems for real people, where we'd face the same challenges as our users, and could invent solutions that make the framework better for everyone.\n\nShopify provides an incredible surface area for us to do this work. Merchants need to be able to design and host beautiful custom storefronts, and manage sales and inventory in a powerful admin area. Their customers need delightful shopping and checkout experiences, and an intuitive way to keep track of their orders and discover new products through the Shop app. Shopify is also on the frontier of where user interfaces need to go next with their explorations into agentic commerce.\n\nShopify was also one of the very first companies operating at scale to see the potential in Tailwind CSS and start building with it, not only for themselves but betting on it for their customers too. Tailwind is a load-bearing very important ",
+    "images": [
+      {
+        "src": "https://tailwindcss.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fog-image.103kpqahmns2b.jpg&w=3840&q=75",
+        "alt": "Tailwind CSS and Shopify"
+      }
+    ]
+  }
+]

@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>16 agents SEO</title>
+<meta name="description" content="Seize agents SEO commandés depuis un chat : une conversation par agent, ce qu'il fait et comment le fabriquer.">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--panel:#f6f7fb;--line:#e4e6ee;--ink:#15171f;--muted:#6b7084;--acc:#2f4fe0;--acc2:#7fa0ff;--me:#e8edff;--them:#fff;--code:#f1f3f8}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Geist,system-ui,sans-serif;font-size:15px;line-height:1.5}
+.app{display:grid;grid-template-columns:340px 1fr;grid-template-rows:minmax(0,1fr);height:100vh}
+aside{border-right:1px solid var(--line);display:flex;flex-direction:column;background:var(--bg)}
+:root{--grad:linear-gradient(135deg,#2f4fe0 0%,#7fa0ff 100%);--grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.brand{position:relative;isolation:isolate;margin:12px;padding:22px 18px 18px;border-radius:16px;background:var(--grad);color:#fff;overflow:hidden}
+.brand::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.55;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.brand .k{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.18);padding:3px 9px;border-radius:999px;margin-bottom:12px}
+.brand h1{margin:0;font-size:26px;line-height:1.05;font-weight:600;letter-spacing:-.01em}
+.brand h1 span{display:block;font-size:13px;font-weight:400;opacity:.85;margin-top:6px;letter-spacing:0}
+.brand p{margin:12px 0 0;font-size:13px;line-height:1.45;opacity:.92}
+.brand .n{display:flex;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.28);font-size:12px}
+.brand .n b{display:block;font-size:18px;font-weight:600;line-height:1}
+.brand .n small{opacity:.85}
+.fam{padding:14px 8px 4px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.list{overflow-y:auto;overflow-x:hidden;flex:1;padding:4px 10px 24px}
+.conv{display:flex;gap:12px;align-items:center;padding:10px 14px;margin:2px 0;border-radius:16px;cursor:pointer;border:1px solid transparent}
+.conv:hover{background:var(--panel)}
+.conv.on{background:#eef1ff}
+.conv.pin{padding:14px;margin:4px 0 8px;border-radius:18px}
+.av{width:44px;height:44px;border-radius:50%;flex:none;overflow:hidden;position:relative;isolation:isolate;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,1) 0%,rgba(255,255,255,0) 42%),radial-gradient(circle at 72% 72%,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 46%),radial-gradient(circle at 55% 40%,#f7f8ff 0%,#e3e8fb 65%,#cfd8f7 100%);border:1px solid rgba(255,255,255,.8)}
+.av::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.av img{position:relative;z-index:2;width:100%;height:100%;object-fit:cover;display:block}
+.meta{min-width:0}
+.meta b{display:block;font-weight:500;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta small{display:block;color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+main{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--panel)}
+.head{display:flex;align-items:center;gap:12px;padding:12px 20px;background:var(--bg);border-bottom:1px solid var(--line)}
+.head .back{display:none;border:0;background:none;font-size:20px;cursor:pointer;padding:0 6px}
+.head b{font-weight:600;display:block}
+.head small{color:var(--muted);font-size:12.5px}
+.thread{flex:1;min-height:0;overflow:auto;padding:20px 20px 32px;display:flex;flex-direction:column;gap:6px}
+.day{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px;margin:18px 0 10px}
+.day:before,.day:after{content:"";flex:1;height:1px;background:var(--line)}
+.msg{max-width:min(620px,86%);padding:9px 13px;border-radius:14px;background:var(--them);border:1px solid var(--line);white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.me{align-self:flex-end;background:var(--me);border-color:#d6dcf7;border-bottom-right-radius:4px}
+.msg.them{align-self:flex-start;border-bottom-left-radius:4px}
+.msg.them+.msg.them{margin-top:-2px}
+.msg b{font-weight:600}
+.msg.code{font-family:"Geist Mono",ui-monospace,monospace;font-size:12.5px;background:var(--code);border-color:#dde1ec;max-width:min(680px,92%)}
+.msg .tag{display:inline-block;font-size:11px;color:var(--acc);background:#eef1ff;padding:1px 7px;border-radius:8px;margin-bottom:4px;letter-spacing:.03em}
+.empty{margin:auto;color:var(--muted);text-align:center;padding:16px}
+.foot{padding:10px 20px;background:var(--bg);border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+.foot code{font-family:"Geist Mono",monospace;background:var(--code);padding:1px 5px;border-radius:4px}
+@media (max-width:820px){
+  .app{grid-template-columns:1fr}
+  aside{display:flex}
+  main{display:none;height:100vh}
+  body.open aside{display:none}
+  body.open main{display:flex}
+  .head .back{display:block}
+  .thread{padding:16px}
+}
+/* 1. verrouillé : agents floutés, Le système lumineux */
+body.locked .conv:not(.pin){filter:blur(4px);opacity:.55;pointer-events:none;user-select:none}
+body.locked .fam{filter:blur(2px);opacity:.6}
+body.locked .conv.pin{position:relative;z-index:1;animation:glow 1.8s ease-in-out infinite;border-color:var(--acc)}
+@keyframes glow{0%,100%{box-shadow:0 0 0 1px rgba(47,79,224,.6),0 0 10px rgba(47,79,224,.45)}50%{box-shadow:0 0 0 2px rgba(127,160,255,.95),0 0 22px rgba(47,79,224,.8),0 0 44px rgba(127,160,255,.5)}}
+/* 2. choix : le fil est lu, les agents restent flous mais leurs têtes brillent, on clique l'une d'elles */
+body.choose .conv:not(.pin) .meta{filter:blur(4px);opacity:.55;user-select:none}
+body.choose .fam{filter:blur(2px);opacity:.6}
+body.choose .conv:not(.pin) .av{animation:glow 1.8s ease-in-out infinite;cursor:pointer}
+body.choose .conv:not(.pin){cursor:pointer}
+/* 3. débloqué */
+.conv .meta,.fam,.conv .av{transition:filter .6s,opacity .6s}
+body.unlocked .conv:not(.pin) .meta{animation:reveal .9s ease-out}
+@keyframes reveal{from{filter:blur(4px);opacity:.5}to{filter:none;opacity:1}}
+.msg.ask{align-self:center;background:var(--grad);color:#fff;border:0;font-weight:500;text-align:center;position:relative;isolation:isolate;overflow:hidden}
+.msg.ask::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.empty b{display:block;color:var(--ink);font-weight:500;margin-bottom:4px}
+/* modale de choix */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:50;background:rgba(246,247,251,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.modal.on{display:flex;animation:fade .35s ease-out}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 20px 22px;max-width:1000px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(21,23,31,.12);text-align:center;animation:pop .35s ease-out}
+@keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+.box h2{margin:0;font-size:24px;font-weight:600;letter-spacing:-.01em}
+.box p{margin:6px 0 20px;color:var(--muted)}
+.heads{display:flex;gap:4px;justify-content:center;overflow-x:auto;padding:12px 0 4px}
+.heads button{flex:none;width:56px;border:0;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;font:inherit;color:var(--muted);font-size:10.5px;line-height:1.15;text-align:center}
+.heads .av{width:44px;height:44px;transition:transform .18s ease,box-shadow .18s ease}
+.heads button:hover .av{transform:translateY(-8px) scale(1.08);box-shadow:0 0 0 2px rgba(127,160,255,.9),0 10px 24px rgba(47,79,224,.3)}
+.heads button:hover{color:var(--ink)}
+@media (max-width:820px){.heads{justify-content:flex-start}}
+.lock{display:block;margin:0 auto;animation:bob 2.4s ease-in-out infinite}
+body.locked #hav{display:none}
+.empty{margin:auto;padding:0;display:flex;align-items:center;justify-content:center;flex:1}
+body.locked .head{display:none}
+body.locked .thread{justify-content:center}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-3px) rotate(3deg)}}
+.cta{display:block;margin:16px 0 8px;padding:14px 16px;border-radius:16px;text-decoration:none;color:#fff;font-weight:500;font-size:14px;background:linear-gradient(135deg,rgba(47,79,224,.85),rgba(127,160,255,.85));position:relative;isolation:isolate;overflow:hidden}
+.cta::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.cta span{display:block;font-weight:400;font-size:12px;opacity:.85;margin-top:2px}
+body.locked .cta,body.choose .cta{filter:blur(3px);opacity:.6;pointer-events:none}
+/* mini-modale email, avant Le système */
+.mail{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60;background:rgba(246,247,251,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.mail.on{display:flex;animation:fade .3s ease-out}
+.mail .box{max-width:420px;text-align:left;padding:26px 24px 22px}
+.mail h2{font-size:22px}
+.mail p{margin:6px 0 16px}
+.mail form{display:flex;gap:8px}
+.mail input[type=email]{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);outline:none}
+.mail input[type=email]:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(47,79,224,.15)}
+.mail.bad input[type=email]{border-color:#d33;box-shadow:0 0 0 3px rgba(221,51,51,.15)}
+.mail button{font:inherit;font-weight:500;font-size:15px;padding:11px 16px;border:0;border-radius:12px;color:#fff;background:var(--grad);cursor:pointer;position:relative;isolation:isolate;overflow:hidden;white-space:nowrap}
+.mail button::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.mail small{display:block;margin-top:10px;color:var(--muted);font-size:12px}
+.mail .pot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.lock{cursor:pointer}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand"><span class="k">Organikk · doc gratuit</span><h1>16 agents SEO<span>commandés depuis un chat</span></h1><p>Je vous montre en détail ce que doit faire un bon agent SEO et comment le construire.</p><div class="n"><div><b>16</b><small>agents</small></div><div><b>1</b><small>système</small></div><div><b>0</b><small>outil payant</small></div></div></div>
+  <div class="list" id="list"></div>
+</aside>
+<main>
+  <div class="head"><button class="back" id="back" aria-label="Retour">‹</button><div class="av" id="hav"><img alt=""></div><div><b id="hname"></b><small id="hsub"></small></div></div>
+  <div class="thread" id="thread"><div class="empty"><svg class="lock" id="lock" viewBox="0 0 64 64" width="120" height="120" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient><linearGradient id="lh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient><filter id="lgrain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".45"/></feComponentTransfer><feBlend in2="SourceGraphic" mode="overlay"/></filter><filter id="lsh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#2f4fe0" flood-opacity=".35"/></filter><clipPath id="lc"><path d="M18 28h28a6 6 0 0 1 6 6v18a6 6 0 0 1-6 6H18a6 6 0 0 1-6-6V34a6 6 0 0 1 6-6z"/></clipPath></defs><g filter="url(#lsh)"><path d="M21 28v-7a11 11 0 0 1 22 0v7" fill="none" stroke="url(#lg)" stroke-width="6" stroke-linecap="round"/><path d="M21 28v-7a11 11 0 0 1 22 0v7" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round" transform="translate(-1.5 -1.5)"/><g clip-path="url(#lc)"><rect x="12" y="28" width="40" height="30" fill="url(#lg)"/><rect x="12" y="28" width="40" height="30" filter="url(#lgrain)" fill="url(#lg)" opacity=".9"/><rect x="12" y="28" width="40" height="14" fill="url(#lh)"/></g><circle cx="32" cy="42" r="3.4" fill="#fff" fill-opacity=".92"/><rect x="30.4" y="43" width="3.2" height="7" rx="1.6" fill="#fff" fill-opacity=".92"/></g></svg></div></div>
+  <div class="foot">Tous les agents suivent la même règle : un dossier dans <code>~/.claude/skills/</code>, un fichier <code>SKILL.md</code> dedans, et la phrase qui le déclenche écrite dans sa description.</div>
+</main>
+</div>
+<div class="modal" id="modal"><div class="box"><h2>Quel agent choisis-tu ?</h2><p>Clique sur une tête.</p><div class="heads" id="heads"></div></div></div>
+<div class="mail" id="mail"><div class="box"><h2>Ton email, et le doc est à toi.</h2><p>On déteste les spams, donc on ne le fera jamais.</p><form id="mailform" novalidate><span class="pot" aria-hidden="true"><input type="text" name="site" tabindex="-1" autocomplete="off"></span><input type="email" id="mailin" placeholder="ton@email.fr" autocomplete="email" spellcheck="false" aria-label="Ton adresse email"><button type="submit">Ouvrir le doc</button></form><small>Tu recevras aussi Algorithme, la newsletter SEO lue par 5 000+ lecteurs.</small></div></div>
+<script>
+const SK = (name, desc, triggers, sections) =>
+`---
+name: ${name}
+description: |
+  ${desc}
+  TOUJOURS utiliser ce skill quand l'utilisateur dit : ${triggers}.
+---
+
+${sections.map(s=>'## '+s).join('\n\n')}`;
+
+const SYSTEM={fam:"",id:"Le système",ini:"T",sub:"Claude Code, Obsidian, skills : comment tout tient",head:"avatars/tim-wa.webp",msgs:[
+[
+"me",
+"Comment le système est construit ?"
+],
+[
+"them",
+"Le système repose sur trois briques principales : Claude Code, les skills et Obsidian.\n\nClaude Code sert d'interface.\nLes skills donnent une méthode de travail aux agents.\nObsidian conserve toute la mémoire du projet."
+],
+[
+"them",
+"<b>1. Claude Code : le point d'entrée</b>\n\nClaude Code, c'est simplement le chat que j'utilise depuis le terminal.\n\nJe l'ouvre directement dans le dossier du client et je lui parle normalement, en français. Il n'y a pas besoin d'apprendre une liste de commandes."
+],
+[
+"them",
+"Au démarrage, Claude récupère notamment deux choses :\n\n• le fichier CLAUDE.md\n• les skills disponibles\n\nLe fichier CLAUDE.md contient toutes les règles que j'ai accumulées avec le temps : comment construire un audit, ce qu'on ne doit jamais écrire à un client, les mots à éviter, les formats à respecter ou encore une règle simple : aucun chiffre estimé.\n\nC'est ce qui permet de ne pas repartir de zéro à chaque nouvelle conversation."
+],
+[
+"them",
+"<b>2. Les skills : les méthodes des agents</b>\n\nUn skill est simplement un dossier placé dans :\n\n~/.claude/skills/\n\nÀ l'intérieur, on trouve un fichier SKILL.md.\n\nCe fichier explique à Claude :\n\n• ce que l'agent doit faire ;\n• quelles données il lui faut ;\n• les étapes à suivre ;\n• le résultat attendu ;\n• dans quelles situations utiliser ce skill."
+],
+[
+"them",
+"Par exemple, si j'écris :\n\naudit indexation de mon-site.fr\n\nClaude comprend qu'un skill correspond à cette demande et applique la procédure prévue.\n\nLe nom du dossier est important : je ne le change pas.\n\nEt si le skill n'est pas présent dans ~/.claude/skills/, Claude ne pourra pas l'utiliser.\n\nAprès avoir ajouté un nouveau skill, le plus simple est donc de fermer Claude Code et de le relancer."
+],
+[
+"them",
+"Certains skills sont très simples et tiennent uniquement dans un fichier Markdown.\n\nD'autres ont également un dossier scripts avec, par exemple, un crawler ou des scripts curl."
+],
+[
+"them",
+"<b>3. Obsidian : la mémoire permanente</b>\n\nChaque client possède son propre coffre Obsidian.\n\nC'est là que je centralise :\n\n• les exports Search Console ;\n• les transcriptions d'appels ;\n• les documents du client ;\n• les analyses ;\n• les rapports produits par les agents ;\n• les décisions prises sur le projet.\n\nJ'ai aussi une note de pilotage très simple avec trois colonnes :\n\nFait · En cours · À faire"
+],
+[
+"them",
+"Quand un agent termine une analyse, il écrit son rapport dans Obsidian.\n\nL'agent suivant peut ensuite relire ce travail avant de commencer le sien.\n\nC'est ce qui crée une vraie mémoire permanente.\n\nLa connaissance importante ne reste pas enfermée dans une conversation avec Claude. Elle est enregistrée dans des fichiers que je peux relire, modifier et réutiliser."
+],
+[
+"them",
+"À côté de ça, j'ai un coffre SEO commun à tous les projets.\n\nIl contient ma doctrine, mes méthodes et mes concepts SEO. Les coffres clients peuvent ensuite s'appuyer dessus."
+],
+[
+"them",
+"<b>4. Les données Google</b>\n\nPour Search Console, je peux commencer très simplement avec des exports CSV.\n\nPar exemple :\n\n• 3 mois de données pour travailler sur la cannibalisation ;\n• 6 mois pour analyser le maillage.\n\nJ'exporte les onglets Pages et Requêtes depuis Search Console et je dépose les fichiers directement dans le dossier du client.\n\nJe garde toujours les CSV d'origine : je ne les réenregistre pas depuis Excel ou Google Sheets, pour éviter de modifier la structure des colonnes."
+],
+[
+"them",
+"Pour la partie technique, j'utilise également :\n\n• Lighthouse en local pour les Web Vitals ;\n• les scripts des skills pour crawler le site ;\n• curl quand j'ai besoin de vérifier directement certaines réponses serveur."
+],
+[
+"them",
+"Ensuite, on peut aller plus loin et connecter Search Console directement à Claude Code via MCP.\n\nÀ ce moment-là, Claude peut interroger l'API Search Console lui-même : performances, inspection d'URL, sitemaps, etc.\n\nMais ce n'est absolument pas obligatoire pour commencer."
+],
+[
+"them",
+"<b>5. Les règles qui ne changent jamais</b>\n\nIl y a quelques garde-fous que je conserve partout.\n\nAucun agent ne publie ou ne modifie directement un site en production.\n\nAucun chiffre n'est inventé.\nSi une donnée manque, elle est indiquée comme :\n\n[À SOURCER]\n\nEt surtout, les agents ne prennent pas la décision finale.\n\nUn agent d'audit produit un rapport de pré-décision.\n\nEnsuite, c'est moi qui tranche."
+],
+[
+"day",
+"Par où commencer ?"
+],
+[
+"them",
+"1. Installe Claude Code.\n2. Crée le dossier ~/.claude/skills/.\n3. Ajoute un premier skill avec son fichier SKILL.md.\n\nJe conseille de commencer par un contrôle d'indexation : si les pages importantes ne peuvent pas être indexées, inutile d'aller beaucoup plus loin.\n\n4. Crée un coffre Obsidian pour ton premier client.\n5. Dépose ses données Search Console dedans.\n6. Ouvre Claude Code directement dans ce dossier.\n7. Écris simplement ce que tu veux faire."
+],
+[
+"them",
+"Ensuite, chaque nouveau besoin rencontré sur un projet peut devenir un nouveau skill.\n\nPetit à petit, tu ne construis plus seulement une collection de prompts.\n\nTu construis ton propre système SEO, avec tes méthodes, tes données et une mémoire qui reste d'un projet à l'autre."
+],
+["ask","Quel agent choisis-tu ? Clique sur une tête à gauche."]]};
+const AGENTS = [
+{fam:"Audit technique",id:"audit-complet-v2",nom:"AGENT audit complet",ini:"AC",sub:"Audit complet, 9 phases",msgs:[
+["me","Nouveau client, un installateur de pompes à chaleur en région lyonnaise, site WordPress de 140 pages. Son trafic stagne depuis janvier, il a un devis d'agence à 3 500 € pour un audit. J'ai l'accès Search Console et le sitemap. Fais l'audit SEO complet, je lui présente jeudi."],
+["them","<b>Enjeu business</b>\nSavoir quoi corriger en premier sur un site, sans payer un audit de 3 000 € ni un abonnement d'outil.\n\n<b>Situation déclenchante</b>\nUn nouveau client arrive, ou un site stagne depuis des mois et le client demande pourquoi.\n\n<b>Problème à résoudre</b>\nRassembler technique, contenu, maillage et Search Console dans un seul diagnostic lisible par quelqu'un qui n'est pas SEO.\n\n<b>Motivation profonde</b>\nNe plus livrer une liste de 80 points dont 75 ne changent rien. Trois problèmes, un plan 30 jours, et assumer ce que les données ne disent pas."],
+["them","Je suis le chef d'orchestre. Je ne contiens pas la méthode : je la lis dans un fichier de 9 phases et je lance les agents dédiés un par un, dans l'ordre."],
+["them","<b>Qui je lance</b>\n1. indexation-check\n2. seo-core-web-vitals\n3. seo-quick-win\n4. seo-structure-hn\n5. seo-contenu-pertinence\n6. seo-cannibalisation\n7. maillage-systeme et maillage-interne-gsc\n8. seo-top20-mots-cles-business"],
+["them","<b>Mes données</b>\nSearch Console, crawl du site, Lighthouse, CrUX (données terrain). Aucun outil payant, aucun chiffre estimé."],
+["them","Ma règle d'écriture : un fait mesuré n'est pas un frein SEO démontré. Chaque constat s'écrit en trois temps. Observation prouvée, conséquence justifiée, bénéfice attendu."],
+["them","<b>Ce que je rends</b>\nUn rapport de pré-décision : diagnostic principal, 3 à 5 chiffres, 3 problèmes maximum, plan 30 jours avec 3 P1 maximum, opportunités, et ce que les données ne permettent pas de conclure.\nPlus un tableau de bord HTML à 8 onglets."],
+["day","Comment reproduire le même agent ?"],
+["them","Mon fichier est un routeur. Il oblige à ouvrir le fichier de méthode et à passer les 9 phases dans l'ordre, chacune branchée sur un agent."],
+["code",SK("audit-complet-v2","Audit SEO complet d'un site en 9 phases, chacune branchée sur le skill dédié. 100 % données Google (GSC, crawl, Lighthouse, CrUX), aucun chiffre estimé.","\"audit SEO complet\", \"audite ce site\"",["Règle d'écriture : observation prouvée → conséquence justifiée → bénéfice attendu","Le squelette : phases, skills, onglets","Données et pré-requis","Orchestration (l'ordre des agents)","Sortie 1 — le rapport de pré-décision","Sortie 2 — le dashboard HTML (8 onglets)","Vérification finale (obligatoire)"])],
+["them","Fabrique d'abord les agents qu'il appelle. Lui en dernier."]
+]},
+{fam:"Audit technique",id:"indexation-check",nom:"AGENT indexation",ini:"IX",sub:"Indexation, 9 points par URL",msgs:[
+["me","Site d'un cabinet d'expertise comptable, 60 fiches métier publiées en juin. Quatre mois après, la moitié n'apparaît pas dans Google. Voilà le sitemap et la liste des 60 URL dans urls.txt. Vérifie l'indexation et dis-moi ce qui bloque, page par page."],
+["them","<b>Enjeu business</b>\nQue chaque page produite serve à quelque chose. Une page non indexée est un coût sans retour.\n\n<b>Situation déclenchante</b>\nDes pages publiées depuis des semaines n'apparaissent pas, ou un site passe de 50 à 500 pages.\n\n<b>Problème à résoudre</b>\nSavoir, URL par URL, ce qui bloque : code HTTP, robots, noindex, sitemap, zéro lien entrant, contenu trop court.\n\n<b>Motivation profonde</b>\nNe pas dire « Google met du temps » au client quand la cause est un noindex oublié dans le gabarit."],
+["them","Sans outil payant, sur des sites de 30 à 1 000 pages. Lecture seule : je ne force jamais une indexation."],
+["them","<b>Ce qu'il me faut</b>\nUne liste d'URL (urls.txt) ou le sitemap.xml public, et le domaine. Le reste se déduit.\nEn option : les pages hubs à crawler, et un compte de service Search Console pour fiabiliser."],
+["them","<b>Mes 9 points, par URL</b>\n1. Code HTTP et chaîne de redirections\n2. robots.txt non bloquant\n3. Pas de noindex, dans le HTML ni dans l'en-tête HTTP\n4. Présence dans le sitemap et lastmod\n5. Cohérence sitemap ↔ liste source\n6. Liens internes entrants (0 = orpheline, 1 = sous-maillée)\n7. Longueur de contenu (moins de 300 mots = à creuser)\n8. Statut d'indexation Google estimé\n9. Reporting"],
+["them","Je distingue « non indexée » et « non testable ». Quand Google limite les requêtes, je le dis, je n'invente pas."],
+["them","<b>Ce que je rends</b>\nAnomalies critiques en tête, anomalies mineures, recommandations priorisées. Et le rapport de pré-décision : diagnostic, preuves, état Critique / À améliorer / Sain, actions P1 à P3 avec confiance, effort et risque. Jamais de score affiché."],
+["them","Je tourne en ponctuel ou en routine mensuelle."],
+["day","Comment reproduire le même agent ?"],
+["them","Chaque point est une commande curl écrite dans le fichier, avec ce qu'elle attend et ce qu'elle signale. Exemple du point 1 :\ncurl -sIL -A \"Mozilla/5.0\" -o /dev/null -w \"%{http_code}|%{url_effective}\" URL\n200 attendu. Une 301 systématique vers 200 (slash final, http vers https) est une dette à signaler."],
+["code",SK("indexation-check","Audit d'indexation sans outil tiers payant. 9 points par URL : HTTP, blocages, noindex, sitemap, cohérence, maillage entrant, longueur, statut Google estimé, reporting. Distingue non indexée et non testable.","\"audit indexation\", \"mes pages sont-elles indexées\", ou dépôt d'un urls.txt / sitemap",["Quand déclencher","Input requis (tableau : source, obligatoire)","Architecture (3 couches : causes, statut, reporting)","Pipeline (9 checks, une commande par check)","Sortie de pré-décision (obligatoire)","Chiffres à retenir"])]
+]},
+{fam:"Audit technique",id:"seo-core-web-vitals",nom:"AGENT Web Vitals",ini:"WV",sub:"LCP, CLS, TBT via Lighthouse",msgs:[
+["me","Le client m'a envoyé une capture PageSpeed à 34 sur mobile et son développeur dit que c'est l'hébergement. Site e-commerce de 900 pages, sitemap https://site-exemple.fr/sitemap.xml. Lance l'audit Core Web Vitals sur un échantillon et trouve ce qui se répète sur tout le site."],
+["them","<b>Enjeu business</b>\nQue la vitesse ne soit pas le prétexte qui masque un vrai problème, ni le problème ignoré qui plombe tout le reste.\n\n<b>Situation déclenchante</b>\nUn score PageSpeed rouge envoyé par le client, ou une refonte à valider.\n\n<b>Problème à résoudre</b>\nMesurer LCP, CLS, TBT sur un échantillon représentatif, séparer données test et données terrain, trouver le motif qui se répète sur tout le site.\n\n<b>Motivation profonde</b>\nRépondre au développeur avec des mesures reproductibles, pas avec une capture d'écran de PageSpeed."],
+["them","Lighthouse en local, mobile d'abord. Je vérifie que lighthouse et jq sont installés avant de commencer. S'ils manquent, je te propose la commande et je m'arrête. Je n'installe rien en silence."],
+["them","<b>Ce qu'il me faut</b>\nL'URL du sitemap. Par défaut j'échantillonne 50 URL, les 50 premières du sitemap. Mode « all » pour tout passer."],
+["them","<b>Mes 5 étapes</b>\n1. Récupérer le sitemap (si c'est un index, je prends le premier enfant)\n2. Échantillonner\n3. Lancer Lighthouse mobile, 3 en parallèle\n4. Parser les résultats, détecter le motif « sitemap qui redirige », ajouter les données terrain LCP / INP / CLS au 75e percentile\n5. Écrire le rapport"],
+["them","<b>Ce que je rends</b>\nScores par URL, problèmes récurrents à l'échelle du site, plan de correction pour les 5 pires pages. Variance observée et mesures écartées sont écrites. Données test et données terrain restent séparées."],
+["day","Comment reproduire le même agent ?"],
+["them","Le fichier contient les commandes shell complètes, prêtes à exécuter. Un piège documenté : sur macOS, sed BSD ne lit pas \\? ; écrire sed -E 's|</?loc>||g', sinon les balises restent et rien ne prévient."],
+["code",SK("seo-core-web-vitals","Audit Core Web Vitals (LCP, CLS, TBT) via Lighthouse local sur un échantillon d'URL du sitemap. Mobile-first. Tableau par URL, problèmes site-wide, plan de correction pour les 5 pires pages.","\"audit Core Web Vitals\", \"score Lighthouse\", \"pourquoi mon site est lent en SEO\"",["Quand déclencher","Pré-requis (which lighthouse, which jq)","Input requis","Pipeline (5 étapes, commandes shell incluses)","Sortie de pré-décision (obligatoire)","Qualité de la mesure (variance, mesures écartées)","Pages à regarder en priorité"])]
+]},
+{fam:"Audit technique",id:"seo-geo-audit",nom:"AGENT GEO",ini:"GE",sub:"7 scores pour les moteurs génératifs",msgs:[
+["me","Voilà le texte de notre page « logiciel de gestion pour cabinet dentaire ». On est en position 4 sur Google, mais ChatGPT et Perplexity citent deux autres éditeurs et jamais nous. Audite ce texte pour les moteurs génératifs et dis-moi ce qui manque."],
+["them","<b>Enjeu business</b>\nÊtre cité par ChatGPT, Perplexity et AI Overview sur les requêtes où le trafic Google baisse.\n\n<b>Situation déclenchante</b>\nUn client montre que l'IA cite un autre site à sa place sur sa propre spécialité.\n\n<b>Problème à résoudre</b>\nSavoir pourquoi un texte donné n'a aucune raison d'être repris : rien de nouveau, rien de sourcé, rien d'actionnable.\n\n<b>Motivation profonde</b>\nAvoir une grille qui tient quand le client demande « et ça, c'est mesurable ? »."],
+["them","Je note un texte sur 7 scores, de 0 à 100, pour repérer ce que les moteurs génératifs (AI Overview, ChatGPT, Perplexity) n'ont aucune raison de citer."],
+["them","<b>Ce qu'il me faut</b>\nLe texte (100 caractères minimum), la requête cible. Secteur et type de page recommandés."],
+["them","<b>Les 7 scores</b>\n1. Surprise : ce qui ne se trouve pas ailleurs\n2. Grounding : l'ancrage factuel\n3. Content Effort : la preuve de travail humain\n4. Alignement RRF : couverture des angles de la requête\n5. RAG Structurer : lisibilité par une machine de récupération\n6. Freshness Guard : la récence\n7. Action Engine : utilité et conversion"],
+["them","<b>Mes 5 étapes</b>\nCadrer, noter les 7 scores avec chaque problème localisé (phrase + raison), calculer la moyenne, trier du score le plus bas au plus haut, écrire le plan de réécriture pour les 2 ou 3 scores les plus faibles."],
+["them","Aucune réécriture inventée. Une donnée ou une date qui manque s'écrit [À SOURCER]."],
+["day","Comment reproduire le même agent ?"],
+["code",SK("seo-geo-audit","Audit GEO d'une page : 7 scores (Surprise, Grounding, Content Effort, Alignement RRF, RAG Structurer, Freshness Guard, Action Engine), problèmes localisés, score global, corrections priorisées, plan de réécriture. Aucun chiffre inventé, [À SOURCER] obligatoire.","\"audit GEO\", \"mon texte est-il citable par l'IA\", \"pourquoi ChatGPT ne me cite pas\"",["Quand déclencher","Input requis","Les 7 scores GEO (un sous-titre par score, avec sa grille de lecture)","Pipeline (5 étapes)","Barème de lecture du score global","Règle anti-hallucination (absolue)","Vérification finale (obligatoire)"])],
+["them","La partie longue du fichier, c'est la grille de chaque score : ce qui vaut 0, ce qui vaut 100, et un exemple. Sans elle, les notes sont du hasard."]
+]},
+{fam:"Audit technique",id:"audit-report",nom:"AGENT rapport",ini:"RP",sub:"Le rapport à deux onglets",msgs:[
+["me","Tous les modules ont tourné sur le site du client : indexation, Web Vitals, cannibalisation, maillage, gains rapides, pré-audit. Les rapports sont dans le dossier de travail avec l'export Search Console et le sitemap. Écris le rapport d'audit, la restitution est dans deux jours, le client n'est pas SEO."],
+["them","<b>Enjeu business</b>\nUn rapport que le client lit jusqu'au bout et sur lequel il décide.\n\n<b>Situation déclenchante</b>\nLes modules ont tourné, les fichiers sont là, le rendez-vous de restitution est dans deux jours.\n\n<b>Problème à résoudre</b>\nTransformer six rapports techniques en un résumé : diagnostic, 4 chiffres, 3 priorités, plan 30 jours.\n\n<b>Motivation profonde</b>\nNe pas être le consultant dont le rapport finit dans un tiroir. Et ne jamais recommander une 301 qu'on n'a pas vérifiée."],
+["them","Je passe en dernier. Je lis les rapports des agents déjà passés dans le dossier de travail (indexation, Web Vitals, cannibalisation, maillage, gains rapides, pré-audit), l'export Search Console et le sitemap."],
+["them","Un agent qui n'a pas tourné s'écrit « non lancé » dans les limites. Jamais comblé par une estimation."],
+["them","<b>Mes 6 passes avant d'écrire</b>\nNormalisation, observations, regroupement, cause racine, priorisation, vérification. Sur des objets structurés, sans rédiger."],
+["them","<b>Ce que je rends</b>\nOnglet Résumé : diagnostic, 4 chiffres, 3 priorités, plan 30 jours, 3 opportunités.\nOnglet Analyse technique.\nPuis une porte qualité, puis une passe critique en relecteur. Je corrige avant de montrer."],
+["them","Jamais de note sur 10. Jamais de 301 ni de fusion décidée automatiquement."],
+["day","Comment reproduire le même agent ?"],
+["them","Deux fichiers dans le dossier : SKILL.md (35 lignes) et FORMAT.md, la structure exacte des deux onglets, section par section. Le premier dit de lire le second en entier avant de commencer."],
+["code",SK("audit-report","Rapport de pré-pré-décision de l'audit : transforme les sorties des modules en deux onglets, Résumé (diagnostic, 4 chiffres, 3 priorités, plan 30 jours, 3 opportunités) et Analyse technique. Six passes de raisonnement, porte qualité, passe critique. Jamais de score sur 10, jamais de 301 automatique.","\"écris le rapport d'audit\", ou en dernière étape de l'audit",["Input (les rapports des modules, l'export GSC, le sitemap)","Procedure (lire FORMAT.md, 6 passes, écrire, porte qualité, passe critique)","Output required (audit-report.md, les rapports de modules en annexes)","Vérification finale (obligatoire)"])]
+]},
+{fam:"Données Search Console",id:"seo-quick-win",nom:"AGENT gains rapides",ini:"QW",sub:"Positions 3 à 12, CTR sous la référence",msgs:[
+["me","Export Search Console des 90 derniers jours, onglet Pages, site d'un courtier en assurance pro. Le client veut voir quelque chose bouger avant de renouveler en décembre. Sors-moi les gains rapides sur l'existant, sans créer de page."],
+["them","<b>Enjeu business</b>\nDes résultats visibles dans le mois, sur ce qui existe déjà, avant de produire du neuf.\n\n<b>Situation déclenchante</b>\nUn client qui veut voir quelque chose bouger avant de prolonger le contrat.\n\n<b>Problème à résoudre</b>\nTrouver les pages en position 3 à 12 où un title ou une FAQ changent le CTR.\n\n<b>Motivation profonde</b>\nProuver qu'on sait lire une Search Console, sans annoncer des « clics perdus » qu'on ne peut pas démontrer."],
+["them","Je cherche les pages en position 3 à 12, beaucoup d'impressions, CTR sous la référence. Optimiser l'existant passe avant écrire du neuf."],
+["them","<b>Ce qu'il me faut</b>\nL'export Pages : URL, clics, impressions, CTR, position. 90 jours, 30 minimum."],
+["them","<b>Mes 6 étapes</b>\n1. Filtrer positions 3 à 15, hors requêtes sur le nom de l'entreprise et page d'accueil\n2. Trier par impressions\n3. Estimer l'écart de CTR\n4. Croiser avec l'intention : décisionnel P1, transactionnel P2, informationnel P3\n5. Prioriser\n6. Lister les leviers : balise title, meta description, H1, FAQ en haut de page, densification du passage qui répond"],
+["them","Sur l'étape 3 : le CTR de référence est une estimation. D'abord le CTR des pages du même site sur un segment comparable. Sinon une grille indicative (position 4 ≈ 7 %, 5 ≈ 5 %, 6 à 10 ≈ 2 à 3 %), présentée comme hypothèse avec sa source. J'écris « CTR inférieur à la référence », jamais « X clics perdus »."],
+["them","Sur l'étape 5 : le raisonnement business d'abord, l'écart de CTR ensuite, le volume en dernier pour départager deux actions. 500 impressions par mois est un repère, jamais un seuil qui élimine une page importante."],
+["day","Comment reproduire le même agent ?"],
+["code",SK("seo-quick-win","Opportunités rapides depuis la GSC : pages en position 3-12, impressions élevées, CTR sous la référence. 6 étapes : filtrer, trier, écart de CTR, intention, prioriser, leviers. Rapport de pré-décision obligatoire, jamais de score.","\"quick win\", \"gains rapides\", \"CTR faible\", ou dès qu'un export GSC est déposé",["Quand déclencher","Input requis","Pipeline (6 étapes)","Sortie de pré-décision (obligatoire)","Règles absolues (le CTR de référence est une estimation)","Sauvegarde","Phase apprentissage (boucle)"])],
+["them","La section « Phase apprentissage » note ce que l'action a donné 90 jours plus tard. C'est elle qui corrige la grille de CTR au fil des clients."]
+]},
+{fam:"Données Search Console",id:"seo-cannibalisation",nom:"AGENT cannibalisation",ini:"CA",sub:"Pages qui se disputent une requête",msgs:[
+["me","Le client était 3e sur « assurance vélo électrique » en mars. Aujourd'hui deux de ses pages sortent, une 9e, une 14e. Voilà l'export Requêtes filtré par URL sur 90 jours et le sitemap. Est-ce que c'est une cannibalisation, et qu'est-ce qu'on fait sans casser ce qui marche ?"],
+["them","<b>Enjeu business</b>\nRécupérer une position perdue sans supprimer une page qui rapporte.\n\n<b>Situation déclenchante</b>\n« Je rankais mieux avant » : deux pages du site sortent sur la même requête et aucune ne tient.\n\n<b>Problème à résoudre</b>\nDistinguer un vrai conflit d'une succession, de deux marchés, ou d'une triade SERP que Google affiche exprès.\n\n<b>Motivation profonde</b>\nLa peur de la 301 de trop : fusionner deux pages et perdre les deux."],
+["them","Je repère les requêtes qui déclenchent deux URL ou plus dans la Search Console. Ce sont des candidats, pas encore des conflits. Deux pages suffisent, la taille du site n'exclut rien."],
+["them","<b>Ce qu'il me faut</b>\nL'export Requêtes filtré par URL, 90 jours. La liste des URL et le contexte pilier / satellite sont recommandés."],
+["them","Avant de qualifier, je lis dans le temps et par segment. Les deux URL coexistent ou se succèdent ? Deux pays, deux appareils ? Deux facettes complémentaires ? Et je vérifie la canonical de chaque URL, parce que la GSC attribue une grande partie des performances aux URL canoniques."],
+["them","<b>4 types</b>\nA. Mot-clé exact\nB. Même intention\nC. Proximité sémantique\nTriade SERP : Google affiche volontairement plusieurs pages du site. Opportunité, pas conflit."],
+["them","<b>L'action par situation</b>\nA + une page faible : 301\nA + deux pages fortes : fusion puis 301\nB + micro-intentions distinctes : différenciation et maillage croisé\nC : maillage vers le pilier\nTriade : aucune action, chaque angle s'optimise"],
+["them","Une fusion ou une 301 porte toujours « À valider avant déploiement », avec les métriques des deux pages, la lecture temporelle faite, le contenu lu, la destination claire."],
+["day","Comment reproduire le même agent ?"],
+["code",SK("seo-cannibalisation","Audit de cannibalisation depuis la GSC : coexistences, lecture temporelle et par segment, classification A / B / C / Triade SERP, métriques, architecture, action justifiée (301, fusion, différenciation, maillage, ou rien).","\"cannibalisation\", \"deux pages sur le même mot-clé\", \"je rankais mieux avant\"",["Quand déclencher","Input requis","Pipeline (5 étapes + 1bis lecture temporelle)","Tableau situation → action","Sortie de pré-décision (obligatoire)","Règles absolues (une 301 porte « À valider avant déploiement »)","Phase apprentissage (boucle)"])]
+]},
+{fam:"Données Search Console",id:"maillage-interne-gsc",nom:"AGENT maillage GSC",ini:"MG",sub:"Mère, fille, petite-fille",msgs:[
+["me","Site d'un cabinet d'avocats en droit du travail, 200 articles de blog, 12 pages de prestation. La page « licenciement pour faute grave » est 8e depuis six mois. Voilà les exports Pages et Requêtes sur 6 mois. Construis le plan de maillage interne, je veux savoir quel article lie vers quoi, avec quelle ancre."],
+["them","<b>Enjeu business</b>\nFaire monter les pages qui rapportent avec les liens que le site a déjà.\n\n<b>Situation déclenchante</b>\nUne page commerciale en position 8 depuis six mois, et des articles qui n'envoient aucun lien vers elle.\n\n<b>Problème à résoudre</b>\nSavoir quelle page lie vers laquelle, avec quelle ancre, dans quelle phrase, et dans quel ordre.\n\n<b>Motivation profonde</b>\nUne liste de liens justifiée page par page, pas un score qui additionne des impressions et des avis."],
+["them","Je lis la structure du site dans ses données Search Console et j'en tire une hiérarchie : page mère, pages filles, petites-filles."],
+["them","<b>Ce qu'il me faut</b>\nL'export Pages (URL, clics, impressions, CTR, position). L'export Requêtes par page et 3 à 6 mois de période sont recommandés."],
+["them","<b>Mes 5 étapes</b>\n1. Récupérer les exports\n2. Diagnostiquer : mères potentielles (impressions élevées, position 4 à 15, requête transactionnelle), pages sous-maillées (bonne position, CTR faible), orphelines\n3. Construire le plan mère / fille / petite-fille avec la règle Know vers Do\n4. Prioriser\n5. Écrire les recommandations"],
+["them","Sur la priorité : plus de score numérique. L'ancienne formule additionnait des grandeurs non normalisées et les impressions écrasaient le reste. L'ordre est justifié : (a) page business à fort déficit de maillage, (b) page en position 4 à 15 sur une requête transactionnelle, (c) page en forte baisse sur 90 jours, (d) le reste. Chaque recommandation écrit la raison de son rang."],
+["them","<b>Chaque recommandation donne</b>\nPage source, page de destination, ancre, contexte de la phrase, priorité."],
+["day","Comment reproduire le même agent ?"],
+["code",SK("maillage-interne-gsc","Maillage interne depuis la GSC. Hiérarchie mère / fille / petite-fille. 5 étapes : récupérer, diagnostiquer (mères, sous-maillées, orphelines), plan Know→Do, prioriser par raison justifiée, recommandations (source, destination, ancre, contexte).","\"maillage interne\", \"pages orphelines\", \"cocon SEO\", ou dépôt d'un fichier GSC",["Quand déclencher","Philosophie","Input requis","Pipeline (5 étapes)","Structure hiérarchique","Sortie de pré-décision (obligatoire)","Règles absolues","Phase apprentissage (boucle)"])]
+]},
+{fam:"Données Search Console",id:"maillage-systeme",nom:"AGENT maillage structure",ini:"MS",sub:"Maillage sans Search Console",msgs:[
+["me","Lancement d'un blog pour une marque de compléments alimentaires, 80 articles rédigés, mise en ligne dans trois semaines. Pas de Search Console, évidemment. Voilà la liste avec titre, slug, catégorie, extrait et mots-clés, plus les 4 pages produit. Fais le plan de maillage avant la mise en ligne."],
+["them","<b>Enjeu business</b>\nLancer un site ou un blog avec une architecture qui tient, avant d'avoir une seule donnée.\n\n<b>Situation déclenchante</b>\n80 articles prêts, aucune Search Console, et la question « on les lie comment ? ».\n\n<b>Problème à résoudre</b>\nPiliers, hubs, satellites, ancres, pages orphelines, pages sans sortie : un plan de liens priorisé.\n\n<b>Motivation profonde</b>\nNe pas corriger dans un an ce qui pouvait être posé le jour du lancement."],
+["them","Même sujet que maillage-interne-gsc, sans donnée de trafic. Je raisonne sur la structure éditoriale. Utilisable avant le lancement d'un site."],
+["them","<b>Ce qu'il me faut</b>\nLa liste des articles avec titre, slug, catégorie, extrait, mots-clés. Avec le contenu intégral, je donne les ancres précises. Sans, je donne l'architecture seulement.\nRecommandés : 3 à 5 mots-clés piliers, les pages « Do » (outils, audits, formulaires)."],
+["them","<b>Mes 7 étapes</b>\n1. Classer chaque page par intention\n2. Identifier les piliers\n3. Désigner le hub de chaque pilier\n4. Cartographier les liens existants\n5. Choisir les ancres, en diversifiant les ancres entrantes\n6. Prioriser les liens à créer\n7. Vérifier les règles de conservation"],
+["them","<b>Ce que je rends, 4 blocs</b>\nArchitecture détectée. Audit du graphe existant (orphelines, pages sans lien sortant). Plan de liens à créer, priorisé. Règles de gouvernance."],
+["them","Trois cas particuliers sont écrits dans mon fichier : site sans GSC, refonte, pages générées en masse depuis une table."],
+["day","Comment reproduire le même agent ?"],
+["them","Mon dossier contient un sous-dossier scripts, avec un crawl qui sort index.json et graph.json. Le fichier décrit l'étape 0, l'ingestion d'un site déjà en ligne, avant les 7 étapes de raisonnement."],
+["code",SK("maillage-systeme","Maillage interne stratégique sans dépendre de la GSC : piliers, hub / satellite, ancres entrantes diversifiées, orphelines et dead-end, audit du graphe. 4 blocs de sortie. Utilisable avant lancement.","\"piliers de blog\", \"hub et satellite\", \"plan de cocon\", \"mailler un blog avant lancement\"",["Rôle","Données requises","Étape 0 — Ingestion (scripts/crawl_graph.py)","Raisonnement de l'agent (7 étapes)","Sortie de pré-décision (obligatoire)","Format de sortie (4 blocs)","Cas particuliers (sans GSC, refonte, pages générées)","Vérification finale (obligatoire)"])]
+]},
+{fam:"Mots-clés",id:"seo-recherche-mots-cles",nom:"AGENT recherche mots-clés",ini:"RK",sub:"De la thématique à la liste",msgs:[
+["me","Client : espace de coworking à Lyon Part-Dieu, offre de bureaux fermés de 2 à 10 postes, conversion = demande de visite. Marché France, français. Pas d'export d'outil. Trouve les mots-clés sur la location de bureaux à Lyon, avec l'intention de chaque requête."],
+["them","<b>Enjeu business</b>\nUne liste de requêtes qui correspondent à ce que le client vend, pas à ce qui a du volume.\n\n<b>Situation déclenchante</b>\nUn nouveau client, un nouveau marché, ou une catégorie de pages à ouvrir.\n\n<b>Problème à résoudre</b>\nPasser d'une thématique à 50 à 150 requêtes qualifiées par intention, sans inventer un volume.\n\n<b>Motivation profonde</b>\nNe plus présenter un export d'outil brut. Et ne pas cibler des requêtes que ChatGPT répond déjà à la place du site."],
+["them","Je pars d'une thématique ou de 3 à 5 mots-clés de départ et je sors une liste qualifiée et priorisée."],
+["them","<b>Ce qu'il me faut</b>\nLa thématique. Le secteur et l'audience. L'offre et son point de conversion, sinon le funnel est inqualifiable. Le marché et la langue.\nUn export GSC ou d'outil si tu l'as : lui seul rend les volumes réels."],
+["them","<b>Mes 5 étapes</b>\n1. Cadrer, ce qui entre et ce qui sort\n2. Étendre : modificateurs (comment, prix, avis, meilleur, vs, sans…), questions, longue traîne, co-occurrences, variantes. Objectif 50 à 150 mots-clés bruts\n3. Qualifier : intention Know-Simple / Know / Do, difficulté par proxy, étage de funnel\n4. Filtrer le bruit\n5. Tableau priorisé"],
+["them","Le volume s'affiche uniquement depuis une donnée réelle. La difficulté n'est jamais inventée."],
+["them","Ma sortie part dans seo-clustering-mots-cles, puis seo-mots-cles-decisionnels."],
+["day","Comment reproduire le même agent ?"],
+["code",SK("seo-recherche-mots-cles","Recherche de mots-clés depuis une thématique ou des seeds : cadrer, expansion sémantique (50-150 bruts), qualification intention / difficulté, filtrage, tableau priorisé. Volume seulement depuis une donnée réelle.","\"recherche de mots-clés\", \"trouve-moi des mots-clés sur\", \"quels mots-clés cibler\"",["Quand déclencher","Doctrine","Input requis","Pipeline (5 étapes)","Sortie de pré-décision (obligatoire)","Règles absolues","Enchaînement workflow (→ clustering → décisionnels)","Vérification finale (obligatoire)"])],
+["them","La « sortie de pré-décision » revient dans les trois agents mots-clés : statut RAW / HYPOTHÈSE / VALIDÉ / OBSOLÈTE / BLOQUÉ, une URL pressentie par groupe ou la raison de ne pas décider, un score business sur 5, la matière disponible, la SERP. Sans elle, l'agent n'a pas terminé."]
+]},
+{fam:"Mots-clés",id:"seo-clustering-mots-cles",nom:"AGENT clustering",ini:"CL",sub:"1 groupe = 1 page",msgs:[
+["me","Voilà 200 mots-clés bruts sur le sujet « mutuelle santé TNS », export CSV avec intention et volume. Le site a déjà 6 pages sur le sujet, liste en pièce jointe. Regroupe-moi ça en pages et dis-moi lesquelles risquent de doubler une page existante."],
+["them","<b>Enjeu business</b>\nLe bon nombre de pages. Ni une page par mot-clé, ni une page pour tout.\n\n<b>Situation déclenchante</b>\nUne liste de 200 requêtes sur la table et un plan de site à rendre.\n\n<b>Problème à résoudre</b>\nRegrouper par SERP partagée, nommer chaque groupe, désigner le pivot, détecter les groupes qui recoupent une page existante.\n\n<b>Motivation profonde</b>\nÉviter de créer la cannibalisation qu'on auditera dans six mois."],
+["them","Je découpe une liste brute en pages. Un groupe = une page."],
+["them","Mon critère : deux mots-clés qui affichent le même top 10 ont la même intention, donc une seule page. Si tu as la donnée de recouvrement de SERP d'un outil, je l'utilise. Sinon, intention identique + même tête sémantique."],
+["them","<b>Mes 5 étapes</b>\n1. Importer : collage, CSV, ou la sortie de seo-recherche-mots-cles\n2. Normaliser : doublons, bruit, singulier / pluriel, accents\n3. Regrouper\n4. Nommer chaque groupe, son intention dominante, son mot-clé pivot, ses secondaires\n5. Affecter une page par groupe. Un groupe qui recoupe une page existante part vers seo-cannibalisation"],
+["them","Je diffère de seo-cluster-aeo, qui part d'un seul mot-clé pilier pour bâtir une architecture. Moi je pars d'une liste et je la découpe."],
+["day","Comment reproduire le même agent ?"],
+["code",SK("seo-clustering-mots-cles","Regroupe une liste brute en clusters, 1 cluster = 1 page. Critère : partage de SERP. 5 étapes : importer, normaliser, regrouper, nommer + pivot, affecter avec détection de cannibalisation.","\"cluster mes mots-clés\", \"j'ai 200 mots-clés à organiser\", \"quels mots-clés vont sur la même page\"",["Quand déclencher","Doctrine (même top 10 = même page)","Input requis","Pipeline (5 étapes)","Sortie de pré-décision (obligatoire)","Règles absolues","Enchaînement workflow","Vérification finale (obligatoire)"])]
+]},
+{fam:"Mots-clés",id:"seo-mots-cles-decisionnels",nom:"AGENT mots-clés décisionnels",ini:"DK",sub:"Les requêtes qui convertissent",msgs:[
+["me","Site d'un intégrateur ERP pour PME industrielles. Trafic en hausse de 40 % sur un an, zéro demande de démo en plus. Voilà la liste de 300 requêtes où le site apparaît. L'offre : intégration à partir de 15 000 €, conversion = demande de démo. Quelles requêtes rapportent vraiment ?"],
+["them","<b>Enjeu business</b>\nDes pages qui amènent des demandes de devis, pas des lecteurs.\n\n<b>Situation déclenchante</b>\nDu trafic qui monte et un chiffre d'affaires qui ne bouge pas.\n\n<b>Problème à résoudre</b>\nIsoler les requêtes bas de funnel et dire pour chacune la page, le format, le CTA.\n\n<b>Motivation profonde</b>\nPouvoir dire au client quels mots-clés rapportent, avec un raisonnement sur l'offre plutôt qu'une promesse."],
+["them","J'isole les requêtes bas de funnel, celles qui convertissent. L'informationnel fait du trafic, pas des clients."],
+["them","<b>Ce qu'il me faut</b>\nLa liste ou la thématique. L'offre : ce qu'on vend, le prix, le point de conversion réel (formulaire, achat, démo, appel). L'audience."],
+["them","<b>Mes 5 étapes</b>\n1. Définir l'offre\n2. Passer la liste au filtre des modificateurs décisionnels (une table dans mon fichier)\n3. Classer par étage de décision\n4. Scorer : proximité à l'offre (1 à 5) × intention d'achat (1 à 5) × faisabilité (1 à 5), ramené sur 0 à 10\n5. Liste courte : pour chaque mot-clé, la page cible (landing, comparatif, produit, locale), le format, le CTA"],
+["them","Les requêtes qui portent le nom d'un autre acteur sont signalées : à vérifier avant de les cibler."],
+["day","Comment reproduire le même agent ?"],
+["them","Le cœur du fichier, ce sont deux tables : les modificateurs qui signalent une décision (prix, devis, tarif, avis, vs, près de moi…) et les étages de décision. Le reste est le pipeline."],
+["code",SK("seo-mots-cles-decisionnels","Isole les mots-clés transactionnels et bas de funnel. 5 étapes : offre et point de conversion, signaux décisionnels, étages de décision, score proximité × intention × faisabilité, shortlist avec page, format, CTA.","\"mots-clés décisionnels\", \"requêtes bas de funnel\", \"quels mots-clés rapportent\"",["Quand déclencher","Doctrine","Input requis","Signaux décisionnels (table de modificateurs)","Étages de décision","Pipeline (5 étapes)","Sortie de pré-décision (obligatoire)","Règles absolues","Vérification finale (obligatoire)"])]
+]},
+{fam:"Contenu",id:"seo-brief-contenu",nom:"AGENT brief",ini:"BR",sub:"Brief et structure Hn",msgs:[
+["me","Page à produire cette semaine par un rédacteur externe : « logiciel de gestion de cabinet d'avocats ». Groupe de requêtes et questions ci-joint, le client a 3 cas clients chiffrés qu'on peut citer. Type de page : landing. Fais le brief complet avec la structure Hn."],
+["them","<b>Enjeu business</b>\nUn article qui se positionne sur un passage précis, et qu'un rédacteur peut écrire sans revenir poser dix questions.\n\n<b>Situation déclenchante</b>\nUne page à produire cette semaine, un rédacteur externe, et pas de temps pour relire trois versions.\n\n<b>Problème à résoudre</b>\nDonner la structure Hn, le contenu attendu par H2, les signaux E-E-A-T, le format.\n\n<b>Motivation profonde</b>\nNe pas livrer une copie de ce qui est déjà en page 1. Dire ce que les autres n'ont pas dit."],
+["them","Je sors un brief éditorial avec la structure Hn, pensée pour le Passage Ranking : chaque H2 répond à un angle que Google attend sur la requête."],
+["them","Je ne copie pas les pages en place. Je cherche ce qu'elles n'ont pas dit."],
+["them","<b>Ce qu'il me faut</b>\nLe mot-clé principal et son groupe de requêtes. Les micro-intentions ou questions. Recommandés : cas concrets et données propriétaires pour l'E-E-A-T, le type de page."],
+["them","<b>Mes 7 étapes</b>\n1. Décoder la requête : intention primaire et latentes\n2. Lister les vecteurs sémantiques : entités, co-occurrences, vocabulaire expert\n3. Micro-intentions : avant, pendant, après la décision\n4. Structure Hn : H1 avec différenciateur, H2 par vecteur, H3 par micro-intention, H2 FAQ\n5. Contenu par H2 : type, longueur, éléments obligatoires\n6. Signaux E-E-A-T\n7. Format : vidéo, tableau, calculateur, modèle à télécharger"],
+["day","Comment reproduire le même agent ?"],
+["code",SK("seo-brief-contenu","Brief éditorial avec structure Hn pour le Passage Ranking. 7 étapes : décodage requête, vecteurs sémantiques, micro-intentions, structure Hn, contenu par H2, signaux E-E-A-T, format multimodal. Cherche ce que les pages en place n'ont pas dit.","\"brief\", \"structure Hn\", \"plan de page\", \"quels H2 mettre\"",["Quand déclencher","Doctrine","Input requis","Pipeline (7 étapes)","Sortie de pré-décision (obligatoire)","Output obligatoire (intention, vecteurs, structure Hn, E-E-A-T, format)","Patron — Page Solution (SaaS / B2B)","Règles absolues","Vérification finale (obligatoire)"])],
+["them","Le fichier contient un patron de page complet, H2 par H2, avec le contenu type d'un H2 posé en question. C'est ce patron que l'agent adapte."]
+]},
+{fam:"Contenu",id:"seo-faq-query",nom:"AGENT FAQ",ini:"FQ",sub:"5 à 7 questions, pas une de plus",msgs:[
+["me","Page pilier « arrêter de fumer sans grossir », B2C, lecteur fumeur qui a déjà échoué une fois et cherche une méthode seul. Objectif : prise de rendez-vous avec un tabacologue. Le corpus sourcé de la page est ci-joint. Fais la FAQ, 7 questions maximum."],
+["them","<b>Enjeu business</b>\nUne FAQ qui aide à décider et que les moteurs reprennent, pas cinq questions de remplissage.\n\n<b>Situation déclenchante</b>\nUne page publiée sans FAQ, ou une FAQ écrite au hasard qui n'apporte rien au balisage.\n\n<b>Problème à résoudre</b>\n5 à 7 questions, chacune sur un angle distinct, avec une réponse citable seule.\n\n<b>Motivation profonde</b>\nArrêter d'écrire « Qu'est-ce que le SEO ? » en bas d'une page qui vend du SEO."],
+["them","5 à 7 questions maximum. Chaque question active un vecteur sémantique distinct. Chaque réponse se lit seule et part dans le balisage FAQPage."],
+["them","<b>Ce qu'il me faut</b>\nLa requête cible. La perspective utilisateur : B2B ou B2C, rôle précis, contexte d'usage. L'objectif de la page. Le corpus sourcé quand le sujet a un enjeu.\nSans perspective explicite, je ne génère pas. Je la demande."],
+["them","<b>Les typologies où je pioche</b>, jamais toutes à la fois :\ntransactionnelle (coût, rentabilité), comparative, implémentation (friction réelle), risque ou conformité, longue traîne experte, définition avancée uniquement si une entité bloque la décision."],
+["them","Les questions qui n'aident pas à décider sont retirées."],
+["day","Comment reproduire le même agent ?"],
+["code",SK("seo-faq-query","FAQ stratégique d'une page : 5 à 7 questions, diversité RRF stricte, chaque réponse citable seule, destinée au balisage FAQPage. Perspective B2B / B2C verrouillée. Filtrage des questions qui n'aident pas à décider.","\"fais la FAQ\", \"ajoute une FAQ à cette page\", \"FAQPage schema\"",["Contexte et rôle","Entrées requises (tableau avec exemple)","Règles de filtrage, non négociables (verrouillage B2B / B2C, interdictions)","Tâche : déploiement RRF (typologies)","Exigences sur les réponses","Format de sortie","Contrôles RRF avant livraison","Enchaînement"])]
+]},
+{fam:"Avant-vente",id:"seo-pre-audit",nom:"AGENT pré-audit",ini:"PA",sub:"Un prospect, une URL, zéro outil",msgs:[
+["me","Rendez-vous jeudi avec cabinet-exemple.fr, un cabinet de géomètres-experts, 3 agences, recommandé par un client. Je n'ai que l'URL, pas d'accès Search Console. Prépare le pré-call : leur business, l'état SEO, l'angle, et ce que je dois leur demander pendant l'appel."],
+["them","<b>Enjeu business</b>\nArriver au premier call avec un angle, et signer plus souvent.\n\n<b>Situation déclenchante</b>\nUn rendez-vous prospect dans deux jours, une URL, et rien d'autre.\n\n<b>Problème à résoudre</b>\nComprendre le business, l'état SEO et la surface GEO du prospect sans accès à sa Search Console.\n\n<b>Motivation profonde</b>\nNe pas être le troisième consultant qui dit « ça dépend de vos données »."],
+["them","Je prépare le document avant le call, à partir de la seule URL et de données publiques. Aucune Search Console, aucun outil payant."],
+["them","<b>Phase A, la collecte, dans cet ordre</b>\n1. Identité et business : site, offres, mentions légales, LinkedIn, registres publics\n2. Modèle économique : qui paie, pour quoi, cycle de vente, point de conversion réel\n3. État SEO technique : sitemaps, pages utiles par section, lastmod, architecture des URL. Une refonte en cours est un signal majeur\n4. Surface GEO : le métier produit-il des requêtes qu'une réponse d'IA n'avale pas ?\n5. Données propriétaires : produits maison, méthode, cas clients, chiffres internes\n6. À demander au call, jamais simulé : accès GSC, poids de chaque pôle, qui décide"],
+["them","<b>Phase B</b> : une grille de 7 insights business.\n<b>Phase C</b> : le squelette à remplir. Diagnostic, angle (niche défendable d'abord), état des lieux SEO daté, stratégie de pages par croisement d'axes, roadmap 90 jours, notes pour le call, à vérifier."],
+["them","Règle dure : aucun volume, aucune position, aucun trafic inventé. Les exemples de requêtes portent « volumes à sourcer »."],
+["day","Comment reproduire le même agent ?"],
+["code",SK("seo-pre-audit","Pré-audit d'un prospect avant call, depuis sa seule URL et des données publiques. Phase A collecte en 6 points, phase B grille de 7 insights business, phase C squelette (diagnostic, angle, état SEO, stratégie de pages, roadmap 90 jours, notes de call). Aucun chiffre inventé.","\"prépare le pré-call\", \"fais un pré-audit\", \"analyse ce prospect\"",["Le principe de base","Règle dure, non négociable","Déclencheur","Phase A. Protocole de collecte","Phase B. La grille des 7 insights business","Phase C. Squelette de sortie (sections 1 à 7)","Checklist de qualité avant de livrer","Vérification finale (obligatoire)"])]
+]},
+{fam:"Avant-vente",id:"prospection-scraping",nom:"AGENT prospection",ini:"PS",sub:"Liste de prospection depuis des annuaires",msgs:[
+["me","Carnet de commandes à sec en janvier. Je cherche des startups B2B françaises, en activité, avec un site et un blog, trafic faible mais réel, idéalement 10 à 50 salariés. Je veux pour chacune l'URL, le dirigeant ou le responsable marketing, et son LinkedIn. Pars des annuaires publics."],
+["them","<b>Enjeu business</b>\nUn flux régulier de prospects qui ont besoin de SEO, sans acheter une base.\n\n<b>Situation déclenchante</b>\nLe carnet de commandes se vide dans deux mois et LinkedIn seul ne suffit pas.\n\n<b>Problème à résoudre</b>\nSortir une liste de sociétés en activité, avec site et blog, trafic faible mais réel, et le contact dirigeant.\n\n<b>Motivation profonde</b>\nProspecter des entreprises qu'on peut réellement aider, pas celles qui ont le plus gros budget."],
+["them","Je construis une liste depuis des annuaires publics, puis j'enrichis chaque ligne. Jamais « tout le web ». Scraping autorisé uniquement."],
+["them","<b>Ma cible par défaut</b>\nDes sociétés en activité, avec un site et un blog, à trafic faible mais réel. Ce sont les meilleures candidates à un accompagnement SEO."],
+["them","<b>Mes 6 phases</b>\n1. Cadrage\n2. Collecte sur plusieurs annuaires, en parallèle\n3. Dédoublonnage\n4. Passe 1 automatique, gratuite : le site répond, le blog existe\n5. Passe 2, enrichissement : dirigeant ou responsable marketing, LinkedIn, trafic, fraîcheur. Attention au parallélisme ici\n6. Consolidation scorée"],
+["them","<b>Par ligne</b>\nURL, contact dirigeant, profil LinkedIn. Sortie dans une feuille de calcul et un tableau de bord HTML."],
+["them","Jamais de nom, d'URL LinkedIn ni de chiffre de trafic inventé. Une case vide reste vide."],
+["day","Comment reproduire le même agent ?"],
+["them","Mon dossier contient un sous-dossier scripts pour la passe 1 (curl sur chaque site). La passe 2 est faite par des sous-agents, un lot de lignes chacun, avec un plafond de parallélisme écrit dans la section Réglages."],
+["code",SK("prospection-scraping","Liste de prospection qualifiée depuis des annuaires publics : cadrage, collecte multi-sources, dédoublonnage, passe 1 auto (site vivant + blog), passe 2 enrichissement (dirigeant, LinkedIn, trafic), consolidation scorée. Jamais de donnée inventée, scraping autorisé seulement.","\"scrape des prospects\", \"trouve-moi des startups à prospecter\", \"liste de boîtes à démarcher\"",["Le principe","Règles dures, non négociables","Déclencheur et cadrage","Phase 1 — Collecte (agents parallèles)","Phase 2 — Dédoublonnage","Phase 3 — Passe 1 automatique (scripts/)","Phase 4 — Passe 2, enrichissement","Phase 5 — Consolidation + scoring","Phase 6 — Sortie","Réglages"])]
+]}
+];
+
+// têtes de robots (planche de Tim, 16/10) : attribution fixe par skill
+const ROBOT={"audit-complet-v2": 1, "indexation-check": 2, "seo-core-web-vitals": 3, "seo-geo-audit": 4, "audit-report": 5, "seo-quick-win": 6, "seo-cannibalisation": 7, "maillage-interne-gsc": 8, "maillage-systeme": 9, "seo-recherche-mots-cles": 10, "seo-clustering-mots-cles": 11, "seo-mots-cles-decisionnels": 12, "seo-brief-contenu": 13, "seo-faq-query": 14, "seo-pre-audit": 15, "prospection-scraping": 16};
+const head=id=>'avatars/objet'+String(ROBOT[id]||1).padStart(2,'0')+'.webp';
+const list=document.getElementById('list'),thread=document.getElementById('thread');
+const pin=document.createElement('div');pin.className='conv pin';pin.dataset.i=-1;pin.innerHTML=`<div class="av"><img src="${SYSTEM.head}" alt=""></div><div class="meta"><b>${SYSTEM.id}</b><small>${SYSTEM.sub}</small></div>`;pin.onclick=()=>show(-1);list.appendChild(pin);
+let fam='';
+AGENTS.forEach((a,i)=>{
+  if(a.fam!==fam){fam=a.fam;const h=document.createElement('div');h.className='fam';h.textContent=fam;list.appendChild(h);}
+  const d=document.createElement('div');d.className='conv';d.dataset.i=i;
+  d.innerHTML=`<div class="av"><img src="${head(a.id)}" alt=""></div><div class="meta"><b>${a.nom}</b><small>${a.sub}</small></div>`;
+  d.onclick=()=>show(i);list.appendChild(d);
+});
+const cta=document.createElement('a');cta.className='cta';cta.href='https://organikk.co/systeme-seo/';cta.target='_blank';cta.rel='noopener';cta.innerHTML='Le système SEO Organikk<span>organikk.co/systeme-seo</span>';list.appendChild(cta);
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function show(i){
+  const B=document.body.classList;
+  if(i<0&&B.contains('locked')&&!aMail()){demanderMail(()=>show(-1));return}
+  if(i<0&&B.contains('locked')){B.remove('locked');B.add('choose');armed=true;}
+  if(i>=0&&B.contains('locked'))return;
+  if(i>=0&&B.contains('choose')){B.remove('choose');B.add('unlocked');modal.classList.remove('on');}
+  const a=i<0?SYSTEM:AGENTS[i];
+  document.querySelectorAll('.conv').forEach(c=>c.classList.toggle('on',+c.dataset.i===i));
+  document.getElementById('hname').textContent=a.nom||a.id;
+  document.getElementById('hsub').textContent=a.nom?'skill '+a.id+' · '+a.sub:a.sub;
+  document.querySelector('#hav img').src=a.head||head(a.id);
+  thread.innerHTML='';
+  a.msgs.forEach(([k,t])=>{
+    const m=document.createElement('div');
+    if(k==='day'){m.className='day';m.textContent=t;}
+    else if(k==='ask'){m.className='msg ask';m.textContent=t;}
+    else if(k==='code'){m.className='msg them code';m.innerHTML='<span class="tag">SKILL.md</span>\n'+esc(t);}
+    else{m.className='msg '+k;m.innerHTML=t;}
+    thread.appendChild(m);
+  });
+  thread.scrollTop=0;window.scrollTo(0,0);
+  document.body.classList.add('open');
+  try{localStorage.setItem('agent',i)}catch(e){}
+}
+
+// modale : après le clic sur Le système, au premier scroll du fil, 2 s plus tard
+const modal=document.getElementById('modal'),heads=document.getElementById('heads');
+AGENTS.forEach((a,i)=>{const b=document.createElement('button');b.innerHTML=`<div class="av"><img src="${head(a.id)}" alt=""></div><span>${a.nom.replace('AGENT ','')}</span>`;b.onclick=()=>{modal.classList.remove('on');show(i)};heads.appendChild(b)});
+let armed=false,shown=false;
+thread.addEventListener('scroll',()=>{if(armed&&!shown){shown=true;setTimeout(()=>{if(document.body.classList.contains('choose'))modal.classList.add('on')},1000)}},{passive:true});
+
+// porte email : même base que la vitrine des skills (POST /api/skill-emails), même souvenir (localStorage + cookie posé par le serveur)
+const MAIL_API='/api/skill-emails',MAIL_STATE='organikk-skills-mail',MAIL_COOKIE='organikk_skills_mail',SLUG='16-agents-seo';
+const mail=document.getElementById('mail'),mailform=document.getElementById('mailform'),mailin=document.getElementById('mailin');
+function memo(v){try{return v===undefined?localStorage.getItem(MAIL_STATE):localStorage.setItem(MAIL_STATE,v)}catch(e){return null}}
+function cookieMail(){try{return document.cookie.split('; ').some(c=>c.indexOf(MAIL_COOKIE+'=')===0)}catch(e){return false}}
+function aMail(){if(memo()==='ok')return true;if(!cookieMail())return false;memo('ok');return true}
+let apresMail=null;
+function demanderMail(suite){apresMail=suite;mailin.value='';mail.classList.add('on');setTimeout(()=>mailin.focus({preventScroll:true}),200)}
+mailform.addEventListener('submit',e=>{
+  e.preventDefault();const email=mailin.value.trim();
+  if(!/^[^\s@]+@[^\s@.]+\.[^\s@]+$/.test(email)){mail.classList.add('bad');mailin.focus();setTimeout(()=>mail.classList.remove('bad'),900);return}
+  memo('ok');
+  fetch(MAIL_API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,slug:SLUG,source:location.pathname,site:mailform.querySelector('.pot input').value})}).catch(()=>{});
+  mail.classList.remove('on');const s=apresMail;apresMail=null;if(s)s();
+});
+document.getElementById('lock').addEventListener('click',()=>show(-1));
+document.getElementById('back').onclick=()=>document.body.classList.remove('open');
+document.body.classList.add('locked');
+</script></body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITRE__ · Guide organikk.co</title>
+<meta name="description" content="__SOUS_TITRE__">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="canonical" href="__URL__">
+<meta property="og:type" content="article">
+<meta property="og:title" content="__TITRE__">
+<meta property="og:description" content="__SOUS_TITRE__">
+<meta property="og:url" content="__URL__">
+<meta property="og:site_name" content="Organikk">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preload" href="geist.woff2" as="font" type="font/woff2" crossorigin>
+<script>try{if(localStorage.getItem('organikk-guide-agent-seo')==='ok')document.documentElement.className='ouvert'}catch(e){}</script>
+<style>
+@font-face{font-family:"Geist";src:url(geist.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(geist-mono.woff2) format("woff2");font-weight:100 900;font-display:swap}
+
+:root{
+  --ink:#2b2b30; --ink-2:#6f6f78; --line:#e8e6e6; --paper:#fff;
+  --c-top:#2f4fe0; --c-bottom:#7fa0ff;
+  --wash:#f7f9ff; --tint:#e8eeff;
+  --grad:linear-gradient(160deg,var(--c-top) 0%,var(--c-top) 45%,var(--c-bottom) 100%);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --grad-text:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='240' preserveAspectRatio='none'><defs><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0' result='m'/><feComponentTransfer in='m' result='a'><feFuncA type='linear' slope='.7'/></feComponentTransfer><feComposite in='a' in2='SourceGraphic' operator='in' result='c'/><feBlend in='SourceGraphic' in2='c' mode='overlay'/></filter></defs><rect width='100%' height='100%' fill='%232f4fe0' filter='url(%23n)'/></svg>");
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Geist",system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--c-top);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+strong{font-weight:600}
+
+/* panneau dégradé grainé */
+.panel{position:relative;isolation:isolate;background:var(--grad);color:#fff;overflow:hidden}
+.panel::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.panel>*{position:relative;z-index:1}
+.mark{width:44px;height:44px;display:block}
+
+/* couverture + mur email */
+.cover{padding:72px 16px 64px}
+.cover-in{max-width:720px;margin:0 auto}
+.kicker{font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.82);margin:36px 0 18px}
+.cover h1{font-size:clamp(34px,6vw,54px);line-height:1.04;letter-spacing:-.025em;font-weight:600;margin:0;max-width:640px}
+.cover .sub{font-size:clamp(18px,2.4vw,21px);line-height:1.4;color:rgba(255,255,255,.9);margin:22px 0 0;max-width:560px}
+.cover .sig{font-family:"Geist Mono",monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.78);margin:30px 0 0}
+
+.gate{margin:44px 0 0;background:#fff;color:var(--ink);border-radius:18px;padding:26px 24px 22px;max-width:560px;box-shadow:0 18px 50px rgba(20,35,120,.28)}
+.gate h2{font-size:22px;line-height:1.2;letter-spacing:-.01em;font-weight:600;margin:0 0 16px}
+.gate .champ{display:flex;gap:8px;flex-wrap:wrap}
+.gate input[type=email]{flex:1 1 220px;min-width:0;font:inherit;font-size:16px;padding:13px 14px;border:1px solid #d9dcea;border-radius:10px;color:var(--ink);background:#fff}
+.gate input[type=email]:focus{outline:2px solid var(--c-top);outline-offset:1px;border-color:var(--c-top)}
+.gate button{flex:0 0 auto;font:inherit;font-size:16px;font-weight:600;color:#fff;background:var(--c-top);border:0;border-radius:10px;padding:13px 20px;cursor:pointer}
+.gate button:hover{background:#2440c4}
+.gate button[disabled]{opacity:.6;cursor:wait}
+.gate .err{min-height:22px;margin:10px 0 0;font-size:14.5px;color:#c4352b}
+.gate .err button{all:unset;cursor:pointer;color:var(--c-top);text-decoration:underline;text-underline-offset:3px}
+.gate .note{margin:6px 0 0;font-size:14px;color:var(--ink-2)}
+.gate .algo{margin:2px 0 0;font-size:13px;color:var(--ink-2)}
+.pot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ouvert .gate{display:none}
+html:not(.ouvert) .cover{min-height:100vh;min-height:100svh}
+
+/* corps du guide */
+html:not(.ouvert) #guide{display:none}
+main{max-width:720px;margin:0 auto;padding:24px 16px 40px}
+section{padding:40px 0 8px}
+section+section{border-top:1px solid var(--line)}
+h2{font-size:clamp(28px,4.4vw,36px);line-height:1.1;letter-spacing:-.022em;font-weight:600;margin:0 0 22px}
+main h2{color:transparent;-webkit-text-fill-color:transparent;background-image:var(--grad-text);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;width:fit-content;max-width:100%}
+h3{font-size:21px;line-height:1.25;letter-spacing:-.01em;font-weight:600;margin:38px 0 12px}
+h4{font-size:18px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:24px}
+li{margin:0 0 6px;padding-left:2px}
+li::marker{color:var(--c-top)}
+code{font-family:"Geist Mono",ui-monospace,monospace;font-size:.86em;background:var(--wash);border:1px solid var(--tint);border-radius:5px;padding:1px 5px;color:#3a3a44;overflow-wrap:anywhere}
+pre{background:var(--wash);border:1px solid var(--tint);border-radius:12px;padding:18px 20px;margin:18px 0 22px;overflow-x:auto;font-size:13.5px;line-height:1.55}
+pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:normal}
+blockquote{margin:18px 0 22px;background:var(--wash);border:1px solid var(--tint);border-radius:12px;padding:16px 20px}
+blockquote p{margin:0;font-family:"Geist Mono",ui-monospace,monospace;font-size:14.5px;line-height:1.6;color:#3a3a44}
+.bilan{margin:28px 0 12px;background:var(--tint);border-radius:12px;padding:16px 20px}
+.bilan p{margin:0}
+hr{border:0;border-top:1px solid var(--line);margin:32px 0}
+.tw{overflow-x:auto;margin:18px 0 24px;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+th,td{text-align:left;vertical-align:top;padding:10px 16px 10px 0;border-bottom:1px solid var(--line)}
+th{font-family:"Geist Mono",monospace;font-weight:600;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-top);border-bottom:1.5px solid var(--c-top)}
+th:last-child,td:last-child{padding-right:0}
+tbody tr:last-child td{border-bottom:0}
+
+/* rendez-vous final */
+.final{border-radius:20px;padding:44px 28px 30px;margin:24px 0 0}
+.final h2{color:#fff;font-size:clamp(26px,4vw,34px);margin:0 0 18px;background:none;-webkit-text-fill-color:#fff}
+.final p{color:rgba(255,255,255,.92);max-width:560px}
+.final .cta{display:inline-block;margin:12px 0 0;background:#fff;color:var(--c-top);font-weight:600;font-size:17px;padding:14px 22px;border-radius:12px;text-decoration:none}
+.final .cta .u{display:block;font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-2);font-weight:400;margin-top:3px}
+.final .foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:44px;font-family:"Geist Mono",monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.final .foot .mark{width:34px;height:34px}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .cover{padding:48px 16px 40px}
+  .gate{padding:22px 18px 18px}
+  .gate button{flex:1 1 100%}
+  .final{padding:34px 20px 24px}
+}
+</style>
+</head>
+<body>
+
+<header class="cover panel">
+  <div class="cover-in">
+    __MARK__
+    <p class="kicker">Guide organikk.co</p>
+    <h1>__TITRE__</h1>
+    <p class="sub">__SOUS_TITRE__</p>
+    <p class="sig">__SIGNATURE__</p>
+
+    <form class="gate" id="gate" novalidate>
+      <h2>Ton email, et le guide est à toi.</h2>
+      <span class="pot" aria-hidden="true"><input type="text" name="site" tabindex="-1" autocomplete="off"></span>
+      <div class="champ">
+        <input id="mail" type="email" placeholder="ton@email.fr" autocomplete="email" spellcheck="false" aria-label="Ton adresse email" required>
+        <button type="submit" id="go">Lire le guide</button>
+      </div>
+      <p class="err" id="err" role="alert"></p>
+      <p class="note">On déteste les SPAMS, donc on ne le fera jamais !</p>
+      <p class="algo">(Tu recevras aussi Algorithme, la newsletter SEO lue par 5 000+ lecteurs.)</p>
+    </form>
+  </div>
+</header>
+
+<main id="guide">
+__CORPS__
+
+<div class="final panel">
+__FIN__
+</div>
+</main>
+
+<script>
+(function(){
+  /* Mur email : même base que les autres guides du site (/api/skill-emails,
+     une fiche par adresse, filtre à faux comptes côté serveur). Une adresse refusée
+     reste bloquée ; si la base ne répond pas, le guide s'ouvre quand même. */
+  var API='/api/skill-emails', CLE='organikk-guide-agent-seo', MEMO='organikk-skills-mail', SLUG='__SLUG__';
+  var MAIL=/^[^\s@]+@[^\s@.]+\.[^\s@]+$/;
+  var form=document.getElementById('gate'), champ=document.getElementById('mail'), go=document.getElementById('go'), err=document.getElementById('err');
+  var pot=form.querySelector('input[name=site]');
+  function retenir(){try{localStorage.setItem(CLE,'ok');localStorage.setItem(MEMO,'ok')}catch(e){}}
+  function ouvrir(){
+    retenir();
+    document.documentElement.classList.add('ouvert');
+    var g=document.getElementById('guide');
+    if(g) g.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function dire(t){err.textContent=t;go.disabled=false;champ.focus()}
+  var MSG={format:"Cette adresse ne semble pas valide.",bidon:"Cette adresse ne semble pas valide.",jetable:"Les adresses jetables ne passent pas.",domaine:"Ce domaine ne reçoit pas d'emails."};
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=(champ.value||'').trim();
+    err.textContent='';
+    if(!MAIL.test(email)){dire(MSG.format);return}
+    go.disabled=true;
+    fetch(API,{method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({email:email,slug:SLUG,source:location.pathname,site:pot.value||''})})
+    .then(function(r){return r.json().then(function(j){return{s:r.status,j:j}})})
+    .then(function(x){
+      if(x.j&&x.j.ok){ouvrir();return}
+      if(x.s!==400){ouvrir();return}
+      var j=x.j||{};
+      if(j.raison==='faute'&&j.suggestion){
+        err.textContent='Tu voulais dire ';
+        var b=document.createElement('button');b.type='button';b.textContent=j.suggestion;
+        b.onclick=function(){champ.value=j.suggestion;err.textContent='';champ.focus()};
+        err.appendChild(b);err.appendChild(document.createTextNode(' ?'));
+        go.disabled=false;return;
+      }
+      dire(MSG[j.raison]||MSG.format);
+    })
+    .catch(function(){ouvrir()});
+  });
+})();
+</script>
+</body>
+</html>

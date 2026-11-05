@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construis ton propre agent SEO avec Claude · Guide organikk.co</title>
+<meta name="description" content="De zéro à un système qui travaille avec tes méthodes, tes données et ton expérience.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="canonical" href="https://organikk.co/guides/construire-agent-seo-claude/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Construis ton propre agent SEO avec Claude">
+<meta property="og:description" content="De zéro à un système qui travaille avec tes méthodes, tes données et ton expérience.">
+<meta property="og:url" content="https://organikk.co/guides/construire-agent-seo-claude/">
+<meta property="og:site_name" content="Organikk">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preload" href="geist.woff2" as="font" type="font/woff2" crossorigin>
+<script>try{if(localStorage.getItem('organikk-guide-agent-seo')==='ok')document.documentElement.className='ouvert'}catch(e){}</script>
+<style>
+@font-face{font-family:"Geist";src:url(geist.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url(geist-mono.woff2) format("woff2");font-weight:100 900;font-display:swap}
+
+:root{
+  --ink:#2b2b30; --ink-2:#6f6f78; --line:#e8e6e6; --paper:#fff;
+  --c-top:#2f4fe0; --c-bottom:#7fa0ff;
+  --wash:#f7f9ff; --tint:#e8eeff;
+  --grad:linear-gradient(160deg,var(--c-top) 0%,var(--c-top) 45%,var(--c-bottom) 100%);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --grad-text:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='240' preserveAspectRatio='none'><defs><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0' result='m'/><feComponentTransfer in='m' result='a'><feFuncA type='linear' slope='.7'/></feComponentTransfer><feComposite in='a' in2='SourceGraphic' operator='in' result='c'/><feBlend in='SourceGraphic' in2='c' mode='overlay'/></filter></defs><rect width='100%' height='100%' fill='%232f4fe0' filter='url(%23n)'/></svg>");
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Geist",system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--c-top);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+strong{font-weight:600}
+
+/* panneau dégradé grainé */
+.panel{position:relative;isolation:isolate;background:var(--grad);color:#fff;overflow:hidden}
+.panel::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.panel>*{position:relative;z-index:1}
+.mark{width:44px;height:44px;display:block}
+
+/* couverture + mur email */
+.cover{padding:72px 16px 64px}
+.cover-in{max-width:720px;margin:0 auto}
+.kicker{font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.82);margin:36px 0 18px}
+.cover h1{font-size:clamp(34px,6vw,54px);line-height:1.04;letter-spacing:-.025em;font-weight:600;margin:0;max-width:640px}
+.cover .sub{font-size:clamp(18px,2.4vw,21px);line-height:1.4;color:rgba(255,255,255,.9);margin:22px 0 0;max-width:560px}
+.cover .sig{font-family:"Geist Mono",monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.78);margin:30px 0 0}
+
+.gate{margin:44px 0 0;background:#fff;color:var(--ink);border-radius:18px;padding:26px 24px 22px;max-width:560px;box-shadow:0 18px 50px rgba(20,35,120,.28)}
+.gate h2{font-size:22px;line-height:1.2;letter-spacing:-.01em;font-weight:600;margin:0 0 16px}
+.gate .champ{display:flex;gap:8px;flex-wrap:wrap}
+.gate input[type=email]{flex:1 1 220px;min-width:0;font:inherit;font-size:16px;padding:13px 14px;border:1px solid #d9dcea;border-radius:10px;color:var(--ink);background:#fff}
+.gate input[type=email]:focus{outline:2px solid var(--c-top);outline-offset:1px;border-color:var(--c-top)}
+.gate button{flex:0 0 auto;font:inherit;font-size:16px;font-weight:600;color:#fff;background:var(--c-top);border:0;border-radius:10px;padding:13px 20px;cursor:pointer}
+.gate button:hover{background:#2440c4}
+.gate button[disabled]{opacity:.6;cursor:wait}
+.gate .err{min-height:22px;margin:10px 0 0;font-size:14.5px;color:#c4352b}
+.gate .err button{all:unset;cursor:pointer;color:var(--c-top);text-decoration:underline;text-underline-offset:3px}
+.gate .note{margin:6px 0 0;font-size:14px;color:var(--ink-2)}
+.gate .algo{margin:2px 0 0;font-size:13px;color:var(--ink-2)}
+.pot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ouvert .gate{display:none}
+html:not(.ouvert) .cover{min-height:100vh;min-height:100svh}
+
+/* corps du guide */
+html:not(.ouvert) #guide{display:none}
+main{max-width:720px;margin:0 auto;padding:24px 16px 40px}
+section{padding:40px 0 8px}
+section+section{border-top:1px solid var(--line)}
+h2{font-size:clamp(28px,4.4vw,36px);line-height:1.1;letter-spacing:-.022em;font-weight:600;margin:0 0 22px}
+main h2{color:transparent;-webkit-text-fill-color:transparent;background-image:var(--grad-text);background-size:100% 100%;-webkit-background-clip:text;background-clip:text;width:fit-content;max-width:100%}
+h3{font-size:21px;line-height:1.25;letter-spacing:-.01em;font-weight:600;margin:38px 0 12px}
+h4{font-size:18px;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:24px}
+li{margin:0 0 6px;padding-left:2px}
+li::marker{color:var(--c-top)}
+code{font-family:"Geist Mono",ui-monospace,monospace;font-size:.86em;background:var(--wash);border:1px solid var(--tint);border-radius:5px;padding:1px 5px;color:#3a3a44;overflow-wrap:anywhere}
+pre{background:var(--wash);border:1px solid var(--tint);border-radius:12px;padding:18px 20px;margin:18px 0 22px;overflow-x:auto;font-size:13.5px;line-height:1.55}
+pre code{background:none;border:0;padding:0;font-size:inherit;overflow-wrap:normal}
+blockquote{margin:18px 0 22px;background:var(--wash);border:1px solid var(--tint);border-radius:12px;padding:16px 20px}
+blockquote p{margin:0;font-family:"Geist Mono",ui-monospace,monospace;font-size:14.5px;line-height:1.6;color:#3a3a44}
+.bilan{margin:28px 0 12px;background:var(--tint);border-radius:12px;padding:16px 20px}
+.bilan p{margin:0}
+hr{border:0;border-top:1px solid var(--line);margin:32px 0}
+.tw{overflow-x:auto;margin:18px 0 24px;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+th,td{text-align:left;vertical-align:top;padding:10px 16px 10px 0;border-bottom:1px solid var(--line)}
+th{font-family:"Geist Mono",monospace;font-weight:600;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-top);border-bottom:1.5px solid var(--c-top)}
+th:last-child,td:last-child{padding-right:0}
+tbody tr:last-child td{border-bottom:0}
+
+/* rendez-vous final */
+.final{border-radius:20px;padding:44px 28px 30px;margin:24px 0 0}
+.final h2{color:#fff;font-size:clamp(26px,4vw,34px);margin:0 0 18px;background:none;-webkit-text-fill-color:#fff}
+.final p{color:rgba(255,255,255,.92);max-width:560px}
+.final .cta{display:inline-block;margin:12px 0 0;background:#fff;color:var(--c-top);font-weight:600;font-size:17px;padding:14px 22px;border-radius:12px;text-decoration:none}
+.final .cta .u{display:block;font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-2);font-weight:400;margin-top:3px}
+.final .foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:44px;font-family:"Geist Mono",monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.final .foot .mark{width:34px;height:34px}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .cover{padding:48px 16px 40px}
+  .gate{padding:22px 18px 18px}
+  .gate button{flex:1 1 100%}
+  .final{padding:34px 20px 24px}
+}
+</style>
+</head>
+<body>
+
+<header class="cover panel">
+  <div class="cover-in">
+    <svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="#fff"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="#fff"/></svg>
+    <p class="kicker">Guide organikk.co</p>
+    <h1>Construis ton propre agent SEO avec Claude</h1>
+    <p class="sub">De zéro à un système qui travaille avec tes méthodes, tes données et ton expérience.</p>
+    <p class="sig">Par Timothée Boussardon — organikk.co</p>
+
+    <form class="gate" id="gate" novalidate>
+      <h2>Ton email, et le guide est à toi.</h2>
+      <span class="pot" aria-hidden="true"><input type="text" name="site" tabindex="-1" autocomplete="off"></span>
+      <div class="champ">
+        <input id="mail" type="email" placeholder="ton@email.fr" autocomplete="email" spellcheck="false" aria-label="Ton adresse email" required>
+        <button type="submit" id="go">Lire le guide</button>
+      </div>
+      <p class="err" id="err" role="alert"></p>
+      <p class="note">On déteste les SPAMS, donc on ne le fera jamais !</p>
+      <p class="algo">(Tu recevras aussi Algorithme, la newsletter SEO lue par 5 000+ lecteurs.)</p>
+    </form>
+  </div>
+</header>
+
+<main id="guide">
+<section>
+<h2>Introduction</h2>
+<p>Ça fait des années que les consultants SEO utilisent les mêmes outils.</p>
+<p>Les mêmes mots-clés, les mêmes scores, les mêmes recommandations.</p>
+<p>Et à chaque nouveau client, on recommence presque de zéro.</p>
+<p>Depuis plusieurs mois, j'ai complètement changé ma façon de travailler.</p>
+<p>Aujourd'hui, Claude fait environ 80 % de mon travail SEO. Les 20 % restants, ce sont les décisions stratégiques, la connaissance du client et les arbitrages que je préfère garder.</p>
+<p>Mais attention, je ne parle pas de demander à ChatGPT ou à Claude de faire un audit SEO avec un prompt.</p>
+<p>Je parle de construire ton propre système.</p>
+<p>Un système qui connaît tes méthodes, retrouve tes anciennes analyses, utilise tes données clients, exécute tes tâches et apprend de tes corrections.</p>
+<p>Et surtout, un système que tu peux améliorer tous les jours.</p>
+<p>C'est exactement ce que nous allons construire dans ce guide.</p>
+<p>Je vais te montrer comment passer d'un simple chatbot à un véritable agent SEO, avec Claude Code et Obsidian.</p>
+<p>On va avancer dans un ordre précis. Pas besoin de tout construire le premier jour.</p>
+<p><strong>Le but, c'est qu'à chaque étape, tu repartes avec quelque chose qui fonctionne.</strong></p>
+</section>
+<section>
+<h2>Avant de commencer</h2>
+<p>Quelques mots à comprendre.</p>
+<ul><li><strong>Claude Code :</strong> la version de Claude qui travaille directement dans ton terminal. Il peut lire des fichiers, en créer, lancer des commandes et utiliser tes méthodes.</li><li><strong>Terminal :</strong> une application de ton ordinateur qui permet d'exécuter des commandes.</li><li><strong>Obsidian :</strong> une application gratuite pour consulter et organiser tes notes. Elle est particulièrement pratique pour construire une base de connaissances.</li><li><strong>Vault :</strong> un dossier contenant tes notes. C'est le nom donné à un espace de travail Obsidian.</li><li><strong>Skill :</strong> une méthode que tu transformes en instructions réutilisables par Claude.</li><li><strong>Workflow :</strong> plusieurs tâches enchaînées dans un ordre précis.</li><li><strong>Routine :</strong> une tâche qui se déclenche automatiquement, par exemple tous les lundis.</li><li><strong>Boucle :</strong> un mécanisme qui récupère les résultats et les corrections pour améliorer ton système.</li></ul>
+<p>Je vais utiliser ces termes dans le guide, mais tu verras rapidement qu'ils sont assez simples à comprendre.</p>
+</section>
+<section>
+<h2>Phase 0 — Comprendre ce que tu construis</h2>
+<p>Avant d'installer quoi que ce soit, il faut comprendre une différence importante.</p>
+<p>Quand tu utilises Claude dans une conversation, tu lui demandes quelque chose et il te répond.</p>
+<p>Tu peux lui donner du contexte, des documents ou des instructions.</p>
+<p>Mais ce n'est pas encore un système SEO.</p>
+<p>Pour construire ton agent, il te faut plusieurs éléments qui travaillent ensemble :</p>
+<ol><li>Une mémoire qui conserve tes connaissances.</li><li>Tes données, notamment celles de tes clients.</li><li>Tes propres méthodes SEO.</li><li>Tes règles de rédaction.</li><li>Des workflows qui enchaînent les tâches.</li><li>Des boucles qui récupèrent les résultats et les corrections.</li><li>Des routines qui lancent certaines missions automatiquement.</li></ol>
+<p>Pourquoi prendre le temps de construire tout ça ?</p>
+<p>Parce que je pense que notre valeur de consultant ne sera plus dans notre capacité à utiliser un outil.</p>
+<p>Tout le monde pourra utiliser les mêmes outils.</p>
+<p>En revanche, tout le monde n'aura pas tes connaissances, ton expérience, les questions de tes clients, tes observations et tes méthodes.</p>
+<p><strong>C'est justement ce qu'on va donner à ton agent.</strong></p>
+<p>Une précision : si tu n'as pas de méthode SEO, Claude ne va pas l'inventer correctement à ta place.</p>
+<p>Il pourra te faire des propositions. Mais il faudra toujours savoir les évaluer.</p>
+<p>L'idée, ce n'est pas de remplacer ton expertise.</p>
+<p>C'est de lui donner les moyens de travailler à plus grande échelle.</p>
+</section>
+<section>
+<h2>Phase 1 — Construire le socle</h2>
+<p>On commence par le plus important : donner à Claude un endroit où travailler et des règles à respecter.</p>
+<h3>Étape 1 — Installer Claude Code</h3>
+<p>Tu vas avoir besoin de :</p>
+<ul><li>Un ordinateur avec un terminal.</li><li>Un accès à Claude Code.</li><li>Git, pour suivre les modifications de tes fichiers.</li><li>Obsidian, pour consulter ta base de connaissances.</li></ul>
+<p>Installe Claude Code en suivant la documentation officielle d'Anthropic.</p>
+<p>Une fois installé, ouvre ton terminal et lance :</p>
+<p><code>claude</code></p>
+<p>Connecte ton compte si nécessaire.</p>
+<p>Tu peux maintenant discuter avec Claude directement depuis ton terminal.</p>
+<p>La différence avec le chat classique, c'est qu'il peut travailler sur les fichiers de ton ordinateur, dans les limites des accès que tu lui donnes.</p>
+<h3>Étape 2 — Créer ton vault</h3>
+<p>Crée un dossier sur ton ordinateur.</p>
+<p>Appelle-le par exemple <code>mon-vault</code>.</p>
+<p>C'est ici que tu vas conserver la mémoire de ton système.</p>
+<p>Ouvre Claude Code depuis ce dossier et demande-lui :</p>
+<blockquote><p>Crée une base de connaissances SEO dans ce dossier. Je veux deux espaces : raw pour conserver les documents d'origine et wiki pour les connaissances que tu vas produire à partir de ces documents. Organise les dossiers pour que je puisse ensuite utiliser Obsidian.</p></blockquote>
+<p>Tu peux partir de cette structure :</p>
+<pre><code>mon-vault/
+├── CLAUDE.md
+├── raw/
+│   ├── articles/
+│   ├── data/
+│   ├── clients/
+│   └── notes/
+└── wiki/
+    ├── index.md
+    ├── log.md
+    ├── hypotheses.md
+    ├── sources/
+    ├── concepts/
+    ├── briefs/
+    └── preuves/</code></pre>
+<p>Pas besoin de faire plus compliqué au départ.</p>
+<p><code>raw/</code> contient les fichiers d'origine.</p>
+<p><code>wiki/</code> contient les informations que ton agent a extraites, organisées et reliées entre elles.</p>
+<p>Une règle importante : <strong>Claude ne modifie jamais les documents de <code>raw/</code>.</strong></p>
+<p>Il peut les lire, mais toutes ses productions doivent être enregistrées ailleurs.</p>
+<p>Tu conserves ainsi tes sources intactes.</p>
+<h3>Étape 3 — Connecter Obsidian</h3>
+<p>Ouvre Obsidian.</p>
+<p>Choisis l'option permettant d'ouvrir un dossier existant comme coffre.</p>
+<p>Sélectionne <code>mon-vault</code>.</p>
+<p>Tu peux maintenant naviguer dans les fichiers que Claude crée.</p>
+<p>C'est assez pratique : tu peux laisser Claude travailler dans le terminal et retrouver ses productions dans Obsidian.</p>
+<p>Tu peux également modifier tes notes toi-même.</p>
+<h3>Étape 4 — Écrire ta doctrine SEO</h3>
+<p>C'est probablement l'une des étapes les plus importantes.</p>
+<p>Dans ton dossier principal, crée un fichier <code>CLAUDE.md</code>.</p>
+<p>Ce fichier doit expliquer à Claude comment tu travailles.</p>
+<p>Pas besoin d'écrire cinquante pages.</p>
+<p>Commence par tes règles SEO non négociables.</p>
+<p>Voici quelques exemples tirés de ma méthode :</p>
+<ul><li>Je privilégie les conversions plutôt que le trafic.</li><li>Je recherche d'abord des mots-clés liés aux offres du client.</li><li>Je n'invente jamais de chiffres, de volumes ou de résultats.</li><li>Je construis une page autour d'une intention principale et des questions qui l'accompagnent.</li><li>J'utilise les questions des prospects et les données propriétaires pour enrichir les contenus.</li><li>Je privilégie une structure de site cohérente plutôt que la multiplication des pages.</li><li>Chaque recommandation doit être justifiée.</li><li>Les décisions stratégiques importantes restent soumises à ma validation.</li></ul>
+<p>Tu peux ensuite demander à Claude :</p>
+<blockquote><p>Pose-moi les questions nécessaires pour comprendre exactement ma méthode SEO. À partir de mes réponses, aide-moi à construire mon fichier CLAUDE.md. N'ajoute aucune règle que je n'ai pas validée.</p></blockquote>
+<p>Il va progressivement documenter ta façon de travailler.</p>
+<p>C'est cette doctrine qui permettra à Claude d'appliquer tes méthodes plutôt que de produire systématiquement des recommandations génériques.</p>
+<div class="bilan"><p><strong>À la fin de cette phase :</strong> tu as Claude Code, ton vault Obsidian et tes premières règles SEO. Ton agent dispose d'un espace de travail et d'un cadre précis.</p></div>
+</section>
+<section>
+<h2>Phase 2 — Donner tes connaissances à l'agent</h2>
+<p>Maintenant, il faut le nourrir.</p>
+<p>Et c'est ici que je vois une énorme différence entre un consultant qui utilise simplement Claude et un consultant qui construit son système.</p>
+<p>Le premier pose des questions.</p>
+<p>Le deuxième donne à Claude tout ce qu'il a appris pendant des années.</p>
+<h3>Étape 1 — Rassembler tes données</h3>
+<p>Commence par récupérer :</p>
+<ul><li>Tes anciens audits SEO.</li><li>Tes stratégies de mots-clés.</li><li>Tes briefs de contenus.</li><li>Tes rapports Search Console.</li><li>Tes notes de rendez-vous.</li><li>Les questions de tes prospects.</li><li>Les transcriptions de tes appels commerciaux.</li><li>Les objections que tu retrouves régulièrement.</li><li>Les avis, témoignages et retours de tes clients.</li><li>Tes observations et tes propres recherches.</li></ul>
+<p>Tu n'es pas obligé de tout intégrer dès le premier jour.</p>
+<p>Commence avec un seul projet.</p>
+<p>Par exemple, récupère trois anciens audits, une stratégie de mots-clés et quelques notes clients.</p>
+<p>Dépose ces documents dans <code>raw/</code>.</p>
+<p>Anonymise les informations personnelles et vérifie que tu es autorisé à traiter les données concernées.</p>
+<h3>Étape 2 — Apprendre à Claude à traiter tes documents</h3>
+<p>Attention, déposer cent PDF dans un dossier ne suffit pas.</p>
+<p>Claude doit pouvoir retrouver les informations importantes sans relire l'intégralité des documents à chaque mission.</p>
+<p>On va donc lui apprendre à les traiter.</p>
+<p>Demande-lui :</p>
+<blockquote><p>Analyse les documents présents dans raw/. Pour chaque document, crée une fiche dans wiki/sources/ avec le contexte, les informations importantes, les chiffres utiles, les limites et les enseignements SEO. Relie ensuite ces informations aux concepts existants dans wiki/concepts/. Ne modifie jamais les sources d'origine.</p></blockquote>
+<p>Pour chaque document, ton agent doit :</p>
+<ol><li>Lire le contenu.</li><li>Identifier les informations intéressantes.</li><li>Créer une fiche.</li><li>Relier les informations aux connaissances déjà présentes.</li><li>Noter ce qu'il a fait dans <code>wiki/log.md</code>.</li></ol>
+<p>Fais-le d'abord sur un seul document.</p>
+<p>Regarde le résultat dans Obsidian.</p>
+<p>Corrige ce qui ne te plaît pas, puis recommence.</p>
+<h3>Étape 3 — Organiser les connaissances</h3>
+<p>Imaginons que tu aies travaillé sur la cannibalisation SEO pour plusieurs clients.</p>
+<p>Au lieu de conserver trois rapports indépendants, Claude peut créer une note <code>cannibalisation-seo.md</code>.</p>
+<p>Elle rassemble tes observations, les situations rencontrées, les solutions testées et les résultats mesurés.</p>
+<p>Chaque information doit rester reliée au document qui la justifie.</p>
+<p>La prochaine fois que tu lui demandes un audit de cannibalisation, il peut retrouver ce que tu sais déjà.</p>
+<p>Et si un nouveau projet apporte un résultat différent, il pourra te le signaler.</p>
+<p>C'est exactement le but.</p>
+<h3>Étape 4 — Vérifier qu'il retrouve les bonnes informations</h3>
+<p>Teste ton système avec une question précise.</p>
+<p>Par exemple :</p>
+<blockquote><p>Retrouve tout ce que nous avons déjà appris sur les pages orphelines. Distingue mes observations, mes règles et les hypothèses qui restent à confirmer. Donne-moi les sources.</p></blockquote>
+<p>Regarde s'il retrouve correctement tes anciennes analyses.</p>
+<p>Si la réponse est incomplète, améliore l'organisation des fiches.</p>
+<p>Au départ, une simple recherche dans les fichiers peut suffire.</p>
+<p>Quand ton vault devient beaucoup plus gros, tu peux ajouter un moteur de recherche sémantique local pour retrouver des informations même lorsque les mots utilisés sont différents.</p>
+<h3>Étape 5 — Protéger les données de tes clients</h3>
+<p>Ton vault est stocké sur ton ordinateur, mais cela ne veut pas dire que les informations restent toutes sur ton ordinateur lorsque Claude les traite.</p>
+<p>Claude Code transmet les données nécessaires au modèle selon son fonctionnement et les paramètres de ton compte.</p>
+<p>Avant d'importer des données clients, vérifie les paramètres de confidentialité de ton compte Anthropic et les conditions de traitement applicables.</p>
+<p>Pour un usage professionnel, privilégie un cadre contractuel adapté au traitement des données.</p>
+<p>Et garde trois habitudes :</p>
+<ol><li>Informe les personnes concernées lorsqu'un appel est enregistré.</li><li>Évite de conserver des données personnelles inutiles.</li><li>Anonymise les documents dès que possible.</li></ol>
+<p>Ne confonds pas la désactivation de l'entraînement des modèles avec la conformité au RGPD. Ce sont deux sujets différents.</p>
+<div class="bilan"><p><strong>À la fin de cette phase :</strong> ton agent commence à retrouver tes connaissances, tes expériences et les informations de tes clients. Il ne travaille plus uniquement avec les connaissances générales de Claude.</p></div>
+</section>
+<section>
+<h2>Phase 3 — Transformer tes méthodes en skills</h2>
+<p>On arrive à la partie que je préfère.</p>
+<p>Tu vas maintenant transformer tes méthodes SEO en compétences exécutables.</p>
+<p>Prenons un exemple.</p>
+<p>Tu sais faire une recherche de mots-clés. Tu as probablement une méthode, même si tu ne l'as jamais formalisée.</p>
+<p>Tu commences par comprendre l'offre du client. Tu identifies les problèmes de ses prospects. Tu recherches des formulations. Tu regroupes les intentions. Puis tu décides quelles pages créer.</p>
+<p>Tout ça, c'est déjà un processus.</p>
+<p>L'objectif est de le transformer en skill.</p>
+<h3>Étape 1 — Choisir une tâche que tu maîtrises</h3>
+<p>Ne commence pas par un audit SEO de 50 étapes.</p>
+<p>Choisis quelque chose de plus simple.</p>
+<p>Par exemple : trouver les mots-clés business d'une entreprise.</p>
+<p>Prends une méthode que tu utilises déjà et que tu sais évaluer.</p>
+<h3>Étape 2 — Décomposer ta méthode</h3>
+<p>Écris les étapes dans l'ordre.</p>
+<p>Pour une recherche de mots-clés, ça pourrait donner :</p>
+<ol><li>Comprendre l'offre.</li><li>Identifier les clients que l'entreprise veut attirer.</li><li>Récupérer les questions réelles de ses prospects.</li><li>Proposer des mots-clés liés à une intention commerciale.</li><li>Regrouper les formulations qui correspondent au même besoin.</li><li>Vérifier les données disponibles.</li><li>Préparer une liste de pages à travailler.</li><li>Soumettre la sélection pour validation.</li></ol>
+<p>L'ordre compte.</p>
+<p>Tu ne veux pas que Claude commence à proposer trente pages avant d'avoir compris ce que vend l'entreprise.</p>
+<h3>Étape 3 — Créer ton premier skill</h3>
+<p>Un skill Claude contient notamment un fichier <code>SKILL.md</code>.</p>
+<p>Tu peux demander à Claude Code de créer cette compétence avec la structure attendue.</p>
+<p>Voici un exemple simplifié :</p>
+<pre><code>---
+name: recherche-mots-cles
+description: Recherche de mots-clés business à partir
+  des offres, des clients et des données disponibles.
+---
+
+# Objectif
+
+Identifier les mots-clés susceptibles d&#x27;attirer
+des prospects qualifiés.
+
+# Étapes
+
+1. Lire la fiche du projet.
+2. Identifier les offres.
+3. Récupérer les questions des prospects.
+4. Proposer les mots-clés business.
+5. Regrouper les variantes par intention.
+6. Vérifier les données disponibles.
+7. Préparer une sélection argumentée.
+8. Demander validation.
+
+# Règles
+
+- Ne jamais inventer de volume.
+- Ne jamais inventer de données.
+- Ne pas confondre mots-clés et pages.
+- Privilégier les intentions commerciales.
+- Signaler les informations manquantes.
+- Ne pas créer de page sans validation.
+
+# Livrable
+
+Enregistrer le résultat dans wiki/briefs/.</code></pre>
+<p>Tu peux ensuite donner une mission réelle à Claude pour voir s'il applique bien le skill.</p>
+<h3>Étape 4 — Tester le skill sur un vrai projet</h3>
+<p>Prends un client que tu connais.</p>
+<p>Lance la recherche.</p>
+<p>Regarde si Claude suit les étapes, utilise les bonnes données et respecte tes règles.</p>
+<p>Il va probablement faire des erreurs.</p>
+<p>C'est normal.</p>
+<p>Mais au lieu de simplement corriger la réponse dans la conversation, demande-lui d'identifier ce qu'il faut améliorer dans le skill.</p>
+<p>Tu valides ensuite la modification.</p>
+<p>La prochaine fois, il utilisera la version corrigée.</p>
+<p>C'est tout l'intérêt.</p>
+<h3>Étape 5 — Construire les autres skills</h3>
+<p>Voici les neuf compétences SEO que je construirais en priorité :</p>
+<ol><li><strong>Recherche de mots-clés :</strong> identifier les requêtes intéressantes à partir des offres et des données.</li><li><strong>Clustering :</strong> regrouper les requêtes qui correspondent à une même intention.</li><li><strong>Mots-clés décisionnels :</strong> identifier les recherches qui peuvent conduire à une demande commerciale.</li><li><strong>Brief de contenu :</strong> préparer la structure d'une page et les questions auxquelles elle doit répondre.</li><li><strong>Entités sémantiques :</strong> identifier les concepts nécessaires pour traiter correctement un sujet.</li><li><strong>Pages programmatiques :</strong> créer une méthode de production adaptée à plusieurs pages construites sur un même modèle, lorsque chacune répond à un besoin réel.</li><li><strong>Maillage interne :</strong> analyser les liens entre les pages et proposer des améliorations.</li><li><strong>Cannibalisation :</strong> identifier les pages qui ciblent la même intention et recommander une action.</li><li><strong>Audit GEO :</strong> étudier la présence d'une entreprise dans les réponses des moteurs IA et les possibilités d'amélioration.</li></ol>
+<p>Je ne te conseille pas de construire les neuf immédiatement.</p>
+<p>Commence par trois : recherche de mots-clés, clustering et sélection des mots-clés business.</p>
+<p>Fais-les fonctionner ensemble.</p>
+<p>Ensuite seulement, ajoute les autres.</p>
+<p>Mon système a évolué de cette façon. J'ai ajouté des compétences au fur et à mesure que je rencontrais des besoins.</p>
+<p>Tu peux faire exactement pareil.</p>
+<div class="bilan"><p><strong>À la fin de cette phase :</strong> tu disposes de tes premiers skills SEO. Claude peut appliquer une méthode précise et conserver les améliorations que tu valides.</p></div>
+</section>
+<section>
+<h2>Phase 4 — Apprendre à Claude à écrire comme toi</h2>
+<p>Tu as déjà remarqué que les textes écrits par les IA finissent souvent par se ressembler ?</p>
+<p>Les mêmes expressions, les mêmes introductions, les mêmes conclusions.</p>
+<p>Pour un consultant qui produit du contenu, c'est un vrai problème.</p>
+<p>Il faut donc apprendre à ton agent comment tu écris.</p>
+<h3>Étape 1 — Rassembler tes meilleurs textes</h3>
+<p>Crée un dossier consacré à ton style de rédaction.</p>
+<p>Ajoute :</p>
+<ul><li>Tes meilleurs posts LinkedIn ou X.</li><li>Quelques newsletters.</li><li>Des mails commerciaux que tu as réellement écrits.</li><li>Des articles de ton site.</li><li>Des passages que tu trouves particulièrement réussis.</li></ul>
+<p>Privilégie les textes qui représentent vraiment ta façon de parler.</p>
+<p>Pas ceux que tu as fait entièrement rédiger par une IA.</p>
+<h3>Étape 2 — Lui faire analyser ta voix</h3>
+<p>Demande à Claude :</p>
+<blockquote><p>Analyse mes textes pour comprendre comment j'écris. Observe mes phrases, mon vocabulaire, mon rythme, mes introductions, mes transitions et mes conclusions. Identifie les expressions que j'utilise et celles que j'évite. Construis un guide de rédaction à partir de mes textes réels, sans inventer de préférences.</p></blockquote>
+<p>Tu obtiens une première version de ton guide de voix.</p>
+<p>Relis-le et corrige ce qui ne te ressemble pas.</p>
+<h3>Étape 3 — Ajouter tes règles anti-IA</h3>
+<p>Voici celles que j'utiliserais.</p>
+<p><strong>Évite :</strong></p>
+<ul><li>Les expressions artificielles comme « il est crucial de », « dans un monde en constante évolution » ou « véritable révolution ».</li><li>Les superlatifs qui ne veulent rien dire.</li><li>Les introductions qui prennent trois paragraphes pour arriver au sujet.</li><li>Les listes de trois arguments systématiques.</li><li>Les phrases qui reformulent plusieurs fois la même idée.</li><li>Les conclusions qui résument simplement ce qui vient d'être expliqué.</li><li>Les métaphores inutiles.</li><li>Les transitions forcées entre chaque paragraphe.</li><li>Le gras sur une phrase sur deux.</li><li>Les tournures qui donnent l'impression de vendre quelque chose en permanence.</li></ul>
+<p><strong>Privilégie :</strong></p>
+<ul><li>Des phrases naturelles.</li><li>Des exemples concrets.</li><li>Des observations personnelles.</li><li>Des explications qui vont droit au but.</li><li>Des variations de rythme.</li><li>Le vocabulaire que tu utilises réellement.</li><li>Des arguments qui reposent sur ton expérience et tes données.</li></ul>
+<p>Et surtout, il ne faut pas chercher à rendre tous tes textes parfaitement uniformes.</p>
+<p>Les humains n'écrivent pas comme ça.</p>
+<h3>Étape 4 — Tester sur un vrai contenu</h3>
+<p>Donne-lui une de tes anciennes newsletters.</p>
+<p>Demande une nouvelle version basée sur le guide de voix.</p>
+<p>Compare avec ton style.</p>
+<p>Quand une phrase ne te ressemble pas, explique pourquoi.</p>
+<p>Tu peux ensuite ajouter cette correction à ton guide, si c'est une préférence que tu souhaites conserver.</p>
+<p>Le but n'est pas que Claude imite quelques mots que tu utilises.</p>
+<p><strong>Le but, c'est qu'il comprenne comment tu construis une idée et comment tu l'expliques.</strong></p>
+<p>Et garde toujours une relecture humaine.</p>
+<p>Chez moi, l'agent fait une grosse partie du travail, mais je garde la rédaction finale et les derniers arbitrages.</p>
+<p>Quand tu construis un agent pour un client, tu refais cette phase avec ses propres textes.</p>
+<div class="bilan"><p><strong>À la fin de cette phase :</strong> ton agent possède un guide de rédaction personnalisé et des règles pour éviter les formulations typiques de l'IA.</p></div>
+</section>
+<section>
+<h2>Phase 5 — Construire tes workflows SEO</h2>
+<p>Maintenant que Claude possède plusieurs compétences, on va lui apprendre à les utiliser ensemble.</p>
+<p>Parce que dans une mission SEO, tu ne fais pas une recherche de mots-clés isolée.</p>
+<p>Tu analyses le site, tu identifies des opportunités, tu prépares des pages, puis tu regardes les résultats.</p>
+<p>Tout est lié.</p>
+<p>J'organise ce travail autour de quatre workflows.</p>
+<h3>Workflow 1 — L'audit SEO</h3>
+<p><strong>Objectif : comprendre ce qui bloque le site et identifier les premières actions.</strong></p>
+<p>Étape par étape :</p>
+<ol><li>Claude récupère les informations du projet.</li><li>Il analyse les données Search Console disponibles.</li><li>Il examine la structure du site et les résultats d'un crawl.</li><li>Il identifie les problèmes d'indexation, de structure et de maillage.</li><li>Il analyse les pages liées aux offres commerciales.</li><li>Il regroupe les problèmes par priorité.</li><li>Il prépare un plan d'action.</li><li>Tu valides les actions importantes.</li></ol>
+<p>L'agent ne doit pas simplement te sortir une liste de 150 problèmes techniques.</p>
+<p>Il doit t'aider à comprendre ce qu'il faut corriger en premier et pourquoi.</p>
+<h3>Workflow 2 — La stratégie de mots-clés</h3>
+<p><strong>Objectif : décider quelles pages travailler ou créer.</strong></p>
+<p>Étape par étape :</p>
+<ol><li>Lire les offres et les objectifs du client.</li><li>Rechercher les questions et les besoins de ses prospects.</li><li>Exécuter le skill de recherche de mots-clés.</li><li>Regrouper les requêtes par intention.</li><li>Sélectionner les opportunités commerciales.</li><li>Étudier les pages existantes.</li><li>Proposer les pages à améliorer ou à créer.</li><li>Préparer la stratégie pour validation.</li></ol>
+<p>C'est important : on ne crée pas automatiquement une nouvelle URL pour chaque question.</p>
+<p>Plusieurs questions peuvent être traitées sur une même page lorsqu'elles participent à la même intention.</p>
+<p>L'objectif est d'avoir un site cohérent, pas de multiplier les contenus sans raison.</p>
+<h3>Workflow 3 — La rédaction</h3>
+<p><strong>Objectif : préparer une page qui répond aux besoins de tes prospects.</strong></p>
+<p>Étape par étape :</p>
+<ol><li>Récupérer le mot-clé principal et les questions associées.</li><li>Lire les informations disponibles dans le vault.</li><li>Retrouver les preuves, les exemples et les objections clients.</li><li>Préparer la structure de la page.</li><li>Rédiger une première version en respectant ton style.</li><li>Vérifier les données et les affirmations.</li><li>Appliquer les règles anti-IA.</li><li>Te soumettre le contenu pour relecture.</li><li>Préparer la publication une fois la page validée.</li></ol>
+<p>C'est là que tes données propriétaires deviennent particulièrement utiles.</p>
+<p>Au lieu de demander à Claude d'écrire une page à partir de connaissances génériques, tu lui donnes de vraies questions, de vrais exemples et des informations issues du terrain.</p>
+<h3>Workflow 4 — Le suivi</h3>
+<p><strong>Objectif : comprendre ce que le travail SEO a réellement apporté.</strong></p>
+<p>Étape par étape :</p>
+<ol><li>Récupérer les dernières données Search Console.</li><li>Comparer avec la période précédente.</li><li>Identifier les pages dont les performances progressent ou reculent.</li><li>Repérer les nouvelles opportunités de requêtes.</li><li>Vérifier les éventuels problèmes de cannibalisation.</li><li>Proposer les améliorations de maillage.</li><li>Mettre à jour les fiches de suivi des pages.</li><li>Préparer les prochaines actions.</li></ol>
+<p>La boucle est simple :</p>
+<p>Audit → mots-clés → rédaction → suivi.</p>
+<p>Puis le suivi alimente le prochain audit ou les prochaines décisions de contenu.</p>
+<h3>Le contrôle qualité</h3>
+<p>Je te conseille d'ajouter un point de contrôle avant toute publication.</p>
+<p>Il doit notamment vérifier que :</p>
+<ul><li>Les chiffres et les affirmations sont justifiés.</li><li>Le contenu répond bien à l'intention ciblée.</li><li>Les informations du client sont correctement utilisées.</li><li>Les règles de rédaction sont respectées.</li><li>La page propose une action cohérente avec son objectif.</li><li>Les éléments importants ont été validés.</li></ul>
+<p>Une page qui échoue à un contrôle bloquant ne doit pas être publiée automatiquement.</p>
+<div class="bilan"><p><strong>À la fin de cette phase :</strong> ton agent peut enchaîner plusieurs compétences dans une mission complète. Tu interviens aux moments où ton jugement est nécessaire, pas pour lui rappeler chaque étape.</p></div>
+</section>
+<section>
+<h2>Phase 6 — Construire les boucles d'amélioration</h2>
+<p>C'est ici que ton système commence réellement à devenir intéressant.</p>
+<p>Parce qu'un agent qui produit des audits et des contenus n'est pas forcément un bon agent.</p>
+<p>Il peut simplement répéter les mêmes erreurs plus vite.</p>
+<p>Pour progresser, il doit récupérer ce qu'il apprend de ses missions.</p>
+<p>Je te propose quatre boucles.</p>
+<h3>Boucle 1 — Transformer les documents en connaissances</h3>
+<p>Tu vas régulièrement ajouter de nouvelles données dans ton vault.</p>
+<p>Le problème, c'est qu'elles risquent de rester dans tes dossiers sans être exploitées.</p>
+<p>Il faut donc une routine de traitement.</p>
+<p>Étape par étape :</p>
+<ol><li>L'agent repère les nouveaux fichiers dans <code>raw/</code>.</li><li>Il vérifie lesquels ont déjà été traités.</li><li>Il prépare une liste des documents en attente.</li><li>Il classe les documents par importance.</li><li>Tu valides ceux à traiter.</li><li>Il crée les fiches correspondantes.</li><li>Il met à jour les concepts concernés.</li></ol>
+<p>Tu peux faire ce contrôle une fois par semaine.</p>
+<p>Ainsi, ton système continue d'intégrer de nouvelles connaissances.</p>
+<h3>Boucle 2 — Mettre tes convictions à l'épreuve</h3>
+<p>Nous avons tous des convictions SEO.</p>
+<p>Mais certaines reposent sur des données solides, d'autres sur des observations limitées.</p>
+<p>Je te conseille de créer un fichier :</p>
+<p><code>wiki/hypotheses.md</code></p>
+<p>Il contiendra les idées que tu souhaites suivre.</p>
+<p>Pour chaque hypothèse, tu peux noter :</p>
+<ul><li>Ce que tu penses.</li><li>Pourquoi tu le penses.</li><li>Les données disponibles.</li><li>Ce qu'il faudrait observer pour la confirmer ou la remettre en question.</li><li>Son statut actuel.</li></ul>
+<p>Par exemple, tu peux avoir une hypothèse sur la manière dont le maillage interne influence certaines pages.</p>
+<p>L'agent va retrouver les observations pertinentes dans les projets et te signaler lorsqu'une nouvelle donnée apporte un éclairage.</p>
+<p>Une hypothèse ne devient pas une règle validée simplement parce que Claude trouve l'idée convaincante.</p>
+<p>Il faut des preuves.</p>
+<h3>Boucle 3 — Apprendre des résultats</h3>
+<p>C'est celle que je trouve la plus importante.</p>
+<p>Quand tu publies une page, ton système doit être capable de retrouver quelques mois plus tard ce qui a été décidé et ce qui s'est réellement passé.</p>
+<p>Voici comment faire.</p>
+<p><strong>À la publication :</strong></p>
+<ol><li>Créer une fiche pour la page.</li><li>Enregistrer son URL et sa date de publication.</li><li>Conserver le mot-clé et l'intention ciblés.</li><li>Noter les principales décisions SEO.</li><li>Définir les résultats attendus et les hypothèses à tester.</li></ol>
+<p><strong>À J+30 :</strong></p>
+<ol><li>Récupérer les données Search Console.</li><li>Comparer les résultats aux attentes.</li><li>Identifier les premiers signaux.</li><li>Noter les observations.</li></ol>
+<p><strong>À J+90 :</strong></p>
+<ol><li>Refaire l'analyse.</li><li>Regarder les impressions, les clics et les requêtes.</li><li>Ajouter les données de conversion lorsqu'elles sont disponibles.</li><li>Identifier ce qui semble avoir fonctionné ou non.</li><li>Proposer les ajustements nécessaires.</li></ol>
+<p>Attention, une progression SEO ne prouve pas à elle seule qu'une action précise en est la cause.</p>
+<p>L'objectif est d'accumuler des observations exploitables, pas d'inventer des certitudes.</p>
+<p>Au fil des missions, ton agent retrouve les choix précédents et les résultats observés.</p>
+<p>Tes prochaines décisions peuvent donc s'appuyer sur davantage de données réelles.</p>
+<h3>Boucle 4 — Transformer tes corrections en règles</h3>
+<p>Imaginons que Claude rédige un titre.</p>
+<p>Tu le corriges.</p>
+<p>Deux semaines plus tard, il refait exactement la même erreur.</p>
+<p>Tu le corriges à nouveau.</p>
+<p>Puis encore une fois le mois suivant.</p>
+<p>C'est une perte de temps.</p>
+<p>Il faut donc un endroit où enregistrer ces corrections.</p>
+<p>Crée un fichier :</p>
+<p><code>wiki/corrections-recurrentes.md</code></p>
+<p>À chaque correction importante :</p>
+<ol><li>Claude note ce que tu as corrigé.</li><li>Il explique la raison de la correction.</li><li>Il retrouve les corrections similaires.</li><li>Si le même problème revient, il te propose une nouvelle règle.</li><li>Tu valides ou refuses.</li><li>La règle est intégrée à la doctrine ou au skill concerné.</li><li>Un contrôle automatique est ajouté lorsqu'il est possible de détecter l'erreur mécaniquement.</li></ol>
+<p>Il ne faut pas que Claude modifie librement toutes tes méthodes.</p>
+<p>Il te propose une amélioration. Tu décides si elle doit devenir permanente.</p>
+<p>C'est comme ça que ton système conserve les apprentissages de tes anciennes missions.</p>
+<h3>Le rendez-vous du vendredi</h3>
+<p>Je te conseille de réserver quinze minutes par semaine pour faire le point.</p>
+<p>Demande simplement à Claude :</p>
+<blockquote><p>Prépare ma revue hebdomadaire. Montre-moi les nouvelles connaissances intégrées, les résultats SEO récupérés, les hypothèses qui ont évolué, les contradictions détectées et les corrections récurrentes. Termine par les décisions que je dois prendre.</p></blockquote>
+<p>Tu dois obtenir quelque chose de court et exploitable.</p>
+<p>Pas un rapport de trente pages.</p>
+<p>Si tu passes une heure à comprendre ce que ton agent a fait, c'est qu'il faut encore améliorer son organisation.</p>
+<div class="bilan"><p><strong>À la fin de cette phase :</strong> ton système ne se contente plus de produire. Il conserve des observations, confronte ses hypothèses aux résultats et te propose des améliorations fondées sur tes corrections.</p></div>
+</section>
+<section>
+<h2>Phase 7 — Automatiser les routines</h2>
+<p>Tout ce que nous avons construit jusqu'ici peut fonctionner à la demande.</p>
+<p>Tu ouvres ton terminal, tu demandes un audit et Claude exécute le workflow.</p>
+<p>Maintenant, on va automatiser certaines tâches.</p>
+<p>Pas besoin de tout automatiser.</p>
+<p>Commence par celles que tu répètes régulièrement.</p>
+<h3>Étape 1 — Choisir ta première routine</h3>
+<p>Prends une tâche simple.</p>
+<p>Par exemple, chaque lundi matin, ton agent prépare la liste des documents qui n'ont pas encore été intégrés dans le vault.</p>
+<p>Tu peux lui donner cette consigne :</p>
+<blockquote><p>Chaque lundi, vérifie les nouveaux documents présents dans raw/. Compare-les aux fiches existantes dans wiki/sources/. Prépare une liste des documents à traiter, classés par priorité. Ne modifie pas les fichiers sources et conserve un journal d'exécution.</p></blockquote>
+<h3>Étape 2 — Choisir comment la lancer</h3>
+<p>Tu as plusieurs possibilités.</p>
+<p><strong>Option 1 — Sur ton ordinateur</strong></p>
+<p>Tu peux utiliser un planificateur local, comme <code>launchd</code> sur Mac ou <code>cron</code> sur Linux.</p>
+<p>Claude Code peut être lancé sans conversation interactive, par exemple avec :</p>
+<p><code>claude -p &quot;Exécute la routine de revue du backlog&quot;</code></p>
+<p>Il faut que ton ordinateur soit allumé et que les accès nécessaires fonctionnent.</p>
+<p><strong>Option 2 — Avec GitHub Actions</strong></p>
+<p>Tu peux versionner ton vault avec Git et déclencher certaines tâches depuis GitHub Actions.</p>
+<p>L'exécution se fait alors dans le cloud.</p>
+<p>Ton ordinateur n'a pas besoin de rester allumé, mais il faut prévoir l'accès aux fichiers, au modèle et aux secrets nécessaires.</p>
+<p><strong>Option 3 — Avec les tâches planifiées Claude</strong></p>
+<p>Tu peux aussi utiliser les fonctionnalités de planification proposées dans ton environnement Claude, selon celles disponibles avec ton compte.</p>
+<p>Elles permettent de lancer certaines tâches à des horaires définis.</p>
+<p>Le principe est le même : une mission précise, un déclencheur et un résultat enregistré.</p>
+<h3>Étape 3 — Ajouter les premières routines SEO</h3>
+<p>Voici le planning que je te conseille pour commencer.</p>
+<div class="tw"><table><thead><tr><th>Routine</th><th>Fréquence</th><th>Mission</th></tr></thead><tbody><tr><td>Données Search Console</td><td>Chaque mois</td><td>Récupérer les données et mettre à jour les suivis</td></tr><tr><td>Audit d'indexation</td><td>Chaque mois</td><td>Identifier les URL présentant des problèmes</td></tr><tr><td>Documents non traités</td><td>Lundi</td><td>Préparer la liste des nouvelles sources</td></tr><tr><td>Revue des hypothèses</td><td>Début de mois</td><td>Examiner les nouvelles observations</td></tr><tr><td>Revue des corrections</td><td>Vendredi</td><td>Proposer les règles à améliorer</td></tr><tr><td>Revue hebdomadaire</td><td>Vendredi</td><td>Résumer ce qui nécessite ton attention</td></tr></tbody></table></div>
+<p>Commence par une seule routine.</p>
+<p>Fais-la fonctionner correctement, puis passe à la suivante.</p>
+<h3>Étape 4 — Vérifier ce que les routines font réellement</h3>
+<p>C'est indispensable.</p>
+<p>Une routine peut échouer sans que tu sois devant ton ordinateur.</p>
+<p>Elle peut aussi récupérer des données incomplètes ou produire un résultat incorrect.</p>
+<p>Je te conseille donc trois règles :</p>
+<ol><li>Chaque routine conserve la date, les actions réalisées et son résultat.</li><li>Si une donnée manque, l'agent le signale au lieu de l'inventer.</li><li>Les actions sensibles, comme une publication ou une modification importante, demandent une autorisation explicite.</li></ol>
+<p>Les logs doivent te permettre de comprendre ce qui s'est passé.</p>
+<p>Ne donne pas les pleins pouvoirs à ton agent simplement parce que tu veux gagner du temps.</p>
+<p>L'automatisation est utile uniquement si tu peux garder le contrôle.</p>
+<div class="bilan"><p><strong>À la fin de cette phase :</strong> certaines tâches répétitives peuvent se lancer automatiquement. Ton agent prépare ses résultats et te remonte les problèmes au lieu de te demander de tout exécuter toi-même.</p></div>
+</section>
+<section>
+<h2>Phase 8 — Apprendre à manager ton agent</h2>
+<p>C'est la dernière étape.</p>
+<p>Et probablement le changement le plus important dans ta façon de travailler.</p>
+<p>Avant, tu faisais toi-même toutes les tâches.</p>
+<p>Maintenant, tu dois apprendre à déléguer les bonnes choses.</p>
+<p>Ton travail consiste davantage à définir les objectifs, améliorer les méthodes et prendre les décisions importantes.</p>
+<h3>Étape 1 — Arrêter de tout refaire toi-même</h3>
+<p>Si tu demandes un audit à Claude, ne recommence pas l'audit intégralement à la main.</p>
+<p>Vérifie plutôt :</p>
+<ul><li>Les données utilisées.</li><li>Les conclusions importantes.</li><li>Les recommandations prioritaires.</li><li>Les points sur lesquels l'agent manque d'informations.</li></ul>
+<p>Si tu repères une erreur, cherche aussi pourquoi elle s'est produite.</p>
+<p>Est-ce que la doctrine manque d'une règle ?</p>
+<p>Est-ce que le skill est incomplet ?</p>
+<p>Est-ce que les données du client ne sont pas suffisantes ?</p>
+<p>C'est en corrigeant la méthode que tu gagnes réellement du temps.</p>
+<h3>Étape 2 — Définir ce que Claude peut décider</h3>
+<p>Toutes les décisions ne se valent pas.</p>
+<p>Tu peux autoriser l'agent à organiser des fichiers, préparer des rapports ou exécuter des analyses.</p>
+<p>En revanche, certaines actions doivent rester entre tes mains.</p>
+<p>Par exemple :</p>
+<ul><li>Valider la stratégie du client.</li><li>Choisir les principales pages commerciales.</li><li>Accepter une recommandation importante.</li><li>Valider le contenu final.</li><li>Autoriser une publication.</li><li>Modifier une règle fondamentale de ta doctrine.</li></ul>
+<p>Tu peux définir ces limites directement dans <code>CLAUDE.md</code> et dans les skills.</p>
+<h3>Étape 3 — Améliorer le système après chaque mission</h3>
+<p>Une mission ne doit pas simplement produire un livrable.</p>
+<p>Elle peut aussi améliorer le système.</p>
+<p>Après un projet, demande à Claude :</p>
+<blockquote><p>Qu'avons-nous appris pendant cette mission ? Quelles erreurs ont été corrigées ? Quelles méthodes mériteraient d'être améliorées ? Prépare des propositions, sans modifier les règles existantes avant ma validation.</p></blockquote>
+<p>Tu vas progressivement construire un système de plus en plus adapté à ta manière de travailler.</p>
+<h3>Étape 4 — Adapter les modèles aux tâches</h3>
+<p>Tu n'as pas forcément besoin du modèle le plus puissant pour chaque opération.</p>
+<p>Réserve les modèles les plus capables aux tâches qui demandent une analyse complexe ou beaucoup de jugement.</p>
+<p>Pour certaines opérations répétitives et bien cadrées, des modèles plus économiques peuvent suffire.</p>
+<p>Teste toujours la qualité des résultats avant de changer de modèle sur une tâche importante.</p>
+<h3>Étape 5 — Garder ton rôle de consultant</h3>
+<p>Je veux insister sur un point.</p>
+<p>Ce n'est pas parce que ton agent sait proposer une stratégie SEO qu'il doit prendre toutes les décisions à ta place.</p>
+<p>C'est toi qui connais ton client.</p>
+<p>C'est toi qui comprends ses objectifs commerciaux.</p>
+<p>C'est toi qui peux décider qu'une opportunité semble intéressante sur le papier, mais ne vaut pas le temps nécessaire.</p>
+<p>Claude peut analyser énormément d'informations et te faire gagner du temps.</p>
+<p>Mais <strong>il doit travailler avec ton expertise, pas à la place de ton expertise.</strong></p>
+<p>C'est ce que j'entends par manager son agent.</p>
+</section>
+<section>
+<h2>Les six erreurs à éviter</h2>
+<p>J'en ai fait certaines moi-même.</p>
+<p><strong>1. Vouloir construire un système parfait avant de l'utiliser.</strong></p>
+<p>Commence avec un vault, une doctrine et trois skills. Lance ensuite une vraie mission. Tu amélioreras le reste au fur et à mesure.</p>
+<p><strong>2. Ne donner aucune donnée propriétaire.</strong></p>
+<p>Si tu ne fournis ni expérience, ni données clients, ni méthode personnelle, tu risques simplement de construire une version plus compliquée d'un chatbot.</p>
+<p><strong>3. Laisser Claude inventer des chiffres.</strong></p>
+<p>Aucun volume, aucune statistique et aucun résultat ne doit être inventé. Cette règle doit être présente dans la doctrine et dans les skills concernés.</p>
+<p><strong>4. Produire sans mesurer.</strong></p>
+<p>Si tu ne récupères jamais les résultats de ce que tu publies, tu ne peux pas savoir si tes décisions étaient pertinentes.</p>
+<p><strong>5. Laisser ton agent décider de tout.</strong></p>
+<p>L'autonomie n'est pas un objectif en soi. Il faut toujours définir les actions autorisées et les décisions qui demandent une validation.</p>
+<p><strong>6. Garder les bonnes méthodes dans les conversations.</strong></p>
+<p>Si tu corriges une erreur importante ou améliores une méthode, conserve cette information dans ton système. Sinon, tu risques de devoir recommencer plus tard.</p>
+</section>
+<section>
+<h2>Ton plan de construction, étape par étape</h2>
+<p>Tu as maintenant toutes les pièces.</p>
+<p>Voici l'ordre que je suivrais si je devais repartir de zéro.</p>
+<p>Ne passe pas à la phase suivante simplement pour aller plus vite. Vérifie d'abord que ce que tu viens de construire fonctionne.</p>
+<div class="tw"><table><thead><tr><th>Ordre</th><th>Ce que tu construis</th><th>Comment savoir que c'est prêt</th></tr></thead><tbody><tr><td>1</td><td>Claude Code et Obsidian</td><td>Claude travaille dans ton vault</td></tr><tr><td>2</td><td>Ta doctrine SEO</td><td>Il connaît et applique tes principales règles</td></tr><tr><td>3</td><td>Ta base de connaissances</td><td>Il retrouve correctement tes anciennes informations</td></tr><tr><td>4</td><td>Tes trois premiers skills</td><td>Ils fonctionnent sur un projet réel</td></tr><tr><td>5</td><td>Ton guide de rédaction</td><td>Les brouillons respectent ta voix</td></tr><tr><td>6</td><td>Tes workflows</td><td>Plusieurs skills s'enchaînent correctement</td></tr><tr><td>7</td><td>Tes boucles d'amélioration</td><td>Les résultats et les corrections sont conservés</td></tr><tr><td>8</td><td>Tes routines</td><td>Une première tâche fonctionne automatiquement</td></tr><tr><td>9</td><td>Ton management</td><td>Tu sais ce que tu délègues et ce que tu valides</td></tr></tbody></table></div>
+<p>Et surtout, ne cherche pas à construire les neuf étapes avant de commencer à travailler pour tes clients.</p>
+<p>Dès que tu as le socle et un premier skill, utilise-le.</p>
+<p>Tu découvriras très vite ce qui manque.</p>
+</section>
+<section>
+<h2>Le mot de la fin</h2>
+<p>Je pense sincèrement que le métier de consultant va énormément changer.</p>
+<p>Aujourd'hui, presque tout le monde peut demander à Claude de faire une recherche de mots-clés ou de rédiger un article.</p>
+<p>Mais ce qui fera la différence, ce ne sera pas le nombre de prompts que tu connais.</p>
+<p>Ce sera ta capacité à construire un système qui utilise tes connaissances, tes méthodes et tes données.</p>
+<p>Un système qui conserve ce que tu apprends.</p>
+<p>Qui retrouve les problèmes déjà rencontrés.</p>
+<p>Qui applique tes méthodes.</p>
+<p>Et qui devient plus utile à chaque nouvelle mission.</p>
+<p>C'est ce que je construis depuis plusieurs mois.</p>
+<p>Et c'est aussi pour cette raison que j'ai progressivement arrêté de dépendre des outils SEO classiques.</p>
+<p>Je préfère investir du temps dans un système qui m'appartient, que je peux personnaliser et améliorer.</p>
+<p>Tu n'as pas besoin de tout construire cette semaine.</p>
+<p>Commence par ton vault.</p>
+<p>Ajoute ta méthode.</p>
+<p>Construis ton premier skill.</p>
+<p>Et fais-le travailler sur un vrai projet.</p>
+<p>Le reste viendra avec la pratique.</p>
+</section>
+
+<div class="final panel">
+<h2>On regarde tes process ensemble ?</h2>
+<p>Je te propose trente minutes en visio.</p>
+<p>Tu me montres comment tu travailles aujourd'hui, les tâches que tu répètes pour chaque client et les outils que tu utilises encore.</p>
+<p>On regarde ce que tu pourrais automatiser avec Claude Code et Obsidian, quelles méthodes transformer en skills et par où commencer.</p>
+<a class="cta" href="https://cal.com/tim-boussardon-yzrrb1/30min">Réserver un créneau<span class="u">cal.com/tim-boussardon-yzrrb1/30min</span></a>
+<div class="foot"><svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="#fff"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="#fff"/></svg><span>organikk.co</span></div>
+</div>
+</main>
+
+<script>
+(function(){
+  /* Mur email : même base que les autres guides du site (/api/skill-emails,
+     une fiche par adresse, filtre à faux comptes côté serveur). Une adresse refusée
+     reste bloquée ; si la base ne répond pas, le guide s'ouvre quand même. */
+  var API='/api/skill-emails', CLE='organikk-guide-agent-seo', MEMO='organikk-skills-mail', SLUG='guide-construire-agent-seo-claude';
+  var MAIL=/^[^\s@]+@[^\s@.]+\.[^\s@]+$/;
+  var form=document.getElementById('gate'), champ=document.getElementById('mail'), go=document.getElementById('go'), err=document.getElementById('err');
+  var pot=form.querySelector('input[name=site]');
+  function retenir(){try{localStorage.setItem(CLE,'ok');localStorage.setItem(MEMO,'ok')}catch(e){}}
+  function ouvrir(){
+    retenir();
+    document.documentElement.classList.add('ouvert');
+    var g=document.getElementById('guide');
+    if(g) g.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function dire(t){err.textContent=t;go.disabled=false;champ.focus()}
+  var MSG={format:"Cette adresse ne semble pas valide.",bidon:"Cette adresse ne semble pas valide.",jetable:"Les adresses jetables ne passent pas.",domaine:"Ce domaine ne reçoit pas d'emails."};
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=(champ.value||'').trim();
+    err.textContent='';
+    if(!MAIL.test(email)){dire(MSG.format);return}
+    go.disabled=true;
+    fetch(API,{method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({email:email,slug:SLUG,source:location.pathname,site:pot.value||''})})
+    .then(function(r){return r.json().then(function(j){return{s:r.status,j:j}})})
+    .then(function(x){
+      if(x.j&&x.j.ok){ouvrir();return}
+      if(x.s!==400){ouvrir();return}
+      var j=x.j||{};
+      if(j.raison==='faute'&&j.suggestion){
+        err.textContent='Tu voulais dire ';
+        var b=document.createElement('button');b.type='button';b.textContent=j.suggestion;
+        b.onclick=function(){champ.value=j.suggestion;err.textContent='';champ.focus()};
+        err.appendChild(b);err.appendChild(document.createTextNode(' ?'));
+        go.disabled=false;return;
+      }
+      dire(MSG[j.raison]||MSG.format);
+    })
+    .catch(function(){ouvrir()});
+  });
+})();
+</script>
+</body>
+</html>

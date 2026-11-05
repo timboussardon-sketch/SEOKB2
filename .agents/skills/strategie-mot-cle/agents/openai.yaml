@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stratégie mot-clé"
+  short_description: "Qualifier le besoin et les preuves du coffre"
+  default_prompt: "Utilise $strategie-mot-cle pour construire la stratégie du mot-clé business que je vais te donner, une étape validée à la fois."

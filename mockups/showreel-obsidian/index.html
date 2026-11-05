@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/geist.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Geist Mono";
+        src: url("assets/fonts/geist-mono.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #2f4fe0; }
+      body { font-family: "Geist", system-ui, sans-serif; color: #fff; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #2f4fe0; }
+      .clip { position: absolute; inset: 0; }
+      .mono { font-family: "Geist Mono", ui-monospace, monospace; }
+
+      #fond { background: radial-gradient(ellipse 90% 80% at 82% 12%, #7fa0ff 0%, #5a78f0 32%, #2f4fe0 68%, #2741c8 100%); transform-origin: 70% 30%; }
+      #grain { pointer-events: none; opacity: 0.22; mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.4 -0.2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+      /* plan 1 */
+      #s1 { display: flex; flex-direction: column; justify-content: center; padding-left: 220px; gap: 18px; }
+      #s1 .ligne { font-size: 104px; font-weight: 650; letter-spacing: -0.035em; line-height: 1.05; white-space: nowrap; }
+      #s1 .ligne .mono { font-weight: 500; letter-spacing: -0.06em; }
+      #s1 .ch { opacity: 0; }
+      #caret { display: inline-block; width: 8px; height: 96px; background: #fff; vertical-align: -12px; margin-left: 10px; }
+      #chemin { font-size: 26px; opacity: 0; color: rgba(255,255,255,0.75); margin-bottom: 14px; }
+
+      /* plan 2 */
+      #s2 { display: flex; align-items: center; justify-content: center; }
+      #compteurs { display: flex; gap: 130px; align-items: flex-start; }
+      .col { display: flex; flex-direction: column; gap: 22px; opacity: 0; }
+      .nb { font-size: 230px; font-weight: 700; letter-spacing: -0.06em; line-height: 0.9; font-variant-numeric: tabular-nums; }
+      .lab { font-size: 32px; color: rgba(255,255,255,0.82); }
+      #trait { position: absolute; left: 220px; right: 220px; top: 742px; height: 2px; background: rgba(255,255,255,0.55); transform-origin: left center; }
+      #releve { position: absolute; left: 220px; top: 776px; font-size: 22px; color: rgba(255,255,255,0.7); opacity: 0; }
+
+      /* plan 3 */
+      #s3 { display: flex; flex-direction: column; justify-content: center; padding-left: 220px; gap: 8px; }
+      .rang { display: flex; align-items: baseline; gap: 48px; }
+      .masque { overflow: hidden; padding-bottom: 14px; }
+      .verbe { display: block; white-space: nowrap; font-size: 124px; font-weight: 700; letter-spacing: -0.045em; line-height: 1.02; }
+      .tag { font-size: 30px; color: rgba(255,255,255,0.8); opacity: 0; }
+
+      /* plan 4 : graphe */
+      #s4 { }
+      #cam { position: absolute; inset: 0; transform-origin: 50% 50%; }
+      #graphe { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+      #graphe .lien { stroke: rgba(255,255,255,0.42); stroke-width: 1.3; fill: none; }
+      #graphe .lien.fort { stroke: rgba(255,255,255,0.7); stroke-width: 1.8; }
+      #graphe .noeud { fill: #fff; }
+      #graphe .hub { fill: #fff; }
+      #graphe .halo { fill: rgba(255,255,255,0.16); }
+      #graphe .etiq { font-family: "Geist Mono", monospace; font-size: 23px; fill: #fff; }
+      #graphe .refs { font-family: "Geist Mono", monospace; font-size: 18px; fill: rgba(255,255,255,0.72); }
+      #liens-total { position: absolute; left: 120px; top: 70px; text-shadow: 0 0 40px rgba(39,65,200,0.9); display: flex; align-items: baseline; gap: 28px; opacity: 0; }
+      #liens-total .nb { font-size: 168px; }
+      #liens-total .lab { font-size: 38px; }
+
+      /* plan 5 */
+      #s5 { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+      .phrase { font-size: 112px; font-weight: 700; letter-spacing: -0.045em; line-height: 1.08; }
+      #s5 .masque { padding-bottom: 6px; }
+      #s5 .int { display: inline-block; }
+      .crochet { font-family: "Geist Mono", monospace; font-weight: 500; letter-spacing: -0.18em; margin: 0 0.06em; color: #dfe8ff; display: inline-block; opacity: 0; }
+      #mot-lien { display: inline-block; }
+
+      /* plan 6 */
+      #s6 { display: flex; align-items: center; justify-content: center; }
+      #titre { font-size: 132px; font-weight: 750; letter-spacing: -0.05em; white-space: nowrap; }
+      #titre .l { display: inline-block; opacity: 0; }
+      #voile { background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(39,65,200,0.85) 0%, rgba(39,65,200,0.0) 100%); opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="showreel" data-start="0" data-duration="15" data-width="1920" data-height="1080" data-fps="60">
+      <section id="fond" class="clip" data-start="0" data-duration="15" data-track-index="0"></section>
+
+      <section id="s1" class="clip" data-start="0" data-duration="2.45" data-track-index="1">
+        <div id="chemin" class="mono">~/Code/seo-kb</div>
+        <div class="ligne" id="l1">Un dossier vide.</div>
+        <div class="ligne" id="l2">Un fichier AGENTS.md.<span id="caret"></span></div>
+      </section>
+
+      <section id="s2" class="clip" data-start="2.2" data-duration="3.15" data-track-index="2">
+        <div id="compteurs">
+          <div class="col"><div class="nb" id="n1">0</div><div class="lab mono">fichiers dans raw/</div></div>
+          <div class="col"><div class="nb" id="n2">0</div><div class="lab mono">pages dans wiki/</div></div>
+          <div class="col"><div class="nb" id="n3">0</div><div class="lab mono">commits</div></div>
+        </div>
+        <div id="trait"></div>
+        <div id="releve" class="mono">relevé le 1er octobre 2026</div>
+      </section>
+
+      <section id="s3" class="clip" data-start="5.1" data-duration="3.25" data-track-index="3">
+        <div class="rang"><div class="masque"><span class="verbe">Je dépose.</span></div><span class="tag mono">→ raw/</span></div>
+        <div class="rang"><div class="masque"><span class="verbe">Je pose des questions.</span></div><span class="tag mono">→ wiki/queries/</span></div>
+        <div class="rang"><div class="masque"><span class="verbe">Je relis.</span></div></div>
+      </section>
+
+      <section id="s4" class="clip" data-start="7.9" data-duration="7.1" data-track-index="4">
+        <div id="cam"><svg id="graphe" viewBox="0 0 1920 1080"></svg></div>
+        <div id="liens-total"><div class="nb" id="n4">0</div><div class="lab mono">wikilinks</div></div>
+      </section>
+
+      <section id="s5" class="clip" data-start="11.0" data-duration="2.3" data-track-index="5">
+        <div class="masque"><span class="int phrase">Une affirmation sans</span></div>
+        <div class="masque"><span class="int phrase"><span class="crochet" id="cg">[[</span><span id="mot-lien">wikilink</span><span class="crochet" id="cd">]]</span>, je la refuse.</span></div>
+      </section>
+
+      <section id="voile" class="clip" data-start="13.0" data-duration="2" data-track-index="6"></section>
+      <section id="s6" class="clip" data-start="13.1" data-duration="1.9" data-track-index="7">
+        <div id="titre"></div>
+      </section>
+
+      <section id="grain" class="clip" data-start="0" data-duration="15" data-track-index="8"></section>
+
+      <audio id="musique" src="assets/audio/musique.wav" data-start="0" data-duration="15" data-volume="1" data-track-index="9"></audio>
+    </div>
+
+    <script>
+      (function () {
+        const NS = "http://www.w3.org/2000/svg";
+
+        // Typo : découpe des lignes du plan 1 en caractères
+        function decoupe(el) {
+          const out = [];
+          el.childNodes.forEach(function (n) {
+            if (n.nodeType === 3) {
+              const frag = document.createDocumentFragment();
+              n.textContent.split("").forEach(function (c) {
+                const s = document.createElement("span");
+                s.className = "ch";
+                s.textContent = c;
+                frag.appendChild(s);
+                out.push(s);
+              });
+              n.replaceWith(frag);
+            } else if (n.id !== "caret") {
+              out.push.apply(out, decoupe(n));
+            }
+          });
+          return out;
+        }
+        const ch1 = decoupe(document.getElementById("l1"));
+        const ch2 = decoupe(document.getElementById("l2"));
+
+        // Titre final, lettre par lettre
+        const titre = document.getElementById("titre");
+        "Ma base SEO dans Obsidian".split("").forEach(function (c) {
+          const s = document.createElement("span");
+          s.className = "l";
+          s.innerHTML = c === " " ? "&nbsp;" : c;
+          titre.appendChild(s);
+        });
+
+        // Graphe : 8 concepts les plus cités (concepts.json, 1er octobre 2026), positions déterministes
+        let graine = 20261001;
+        function alea() {
+          graine |= 0; graine = (graine + 0x6d2b79f5) | 0;
+          let t = Math.imul(graine ^ (graine >>> 15), 1 | graine);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        }
+        const hubs = [
+          { id: "data-proprietaire", refs: 273, x: 960, y: 470 },
+          { id: "surprise-gap", refs: 137, x: 560, y: 300 },
+          { id: "grounding-score", refs: 133, x: 1330, y: 270 },
+          { id: "mots-cles-actionnels", refs: 131, x: 1500, y: 650 },
+          { id: "programmatique-pseo", refs: 119, x: 430, y: 690 },
+          { id: "aeo", refs: 102, x: 1180, y: 820 },
+          { id: "bootcamp-seo-ia", refs: 100, x: 760, y: 840 },
+          { id: "product-led-seo", refs: 99, x: 1560, y: 430 }
+        ];
+        const svg = document.getElementById("graphe");
+        const gLiens = document.createElementNS(NS, "g");
+        const gNoeuds = document.createElementNS(NS, "g");
+        const gEtiq = document.createElementNS(NS, "g");
+        svg.appendChild(gLiens); svg.appendChild(gNoeuds); svg.appendChild(gEtiq);
+
+        const liens = [], petits = [], hubEls = [], halos = [], etiqs = [];
+        function trace(a, b, fort) {
+          const l = document.createElementNS(NS, "line");
+          l.setAttribute("x1", a.x); l.setAttribute("y1", a.y);
+          l.setAttribute("x2", b.x); l.setAttribute("y2", b.y);
+          l.setAttribute("class", fort ? "lien fort" : "lien");
+          const len = Math.hypot(b.x - a.x, b.y - a.y);
+          l.style.strokeDasharray = len;
+          l.style.strokeDashoffset = len;
+          gLiens.appendChild(l);
+          liens.push({ el: l, len: len, d: Math.hypot((a.x + b.x) / 2 - 960, (a.y + b.y) / 2 - 470) });
+        }
+        // liens entre concepts
+        [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[1,4],[2,7],[3,5],[2,3],[5,6],[1,6],[3,7]].forEach(function (p) {
+          trace(hubs[p[0]], hubs[p[1]], true);
+        });
+        // pages autour de chaque concept
+        const pages = [];
+        for (let i = 0; i < 120; i++) {
+          const h = hubs[i % hubs.length];
+          const ang = alea() * Math.PI * 2;
+          const r = 70 + alea() * (90 + h.refs * 0.55);
+          const p = { x: h.x + Math.cos(ang) * r * 1.25, y: h.y + Math.sin(ang) * r * 0.85, h: h };
+          p.x = Math.max(40, Math.min(1880, p.x));
+          p.y = Math.max(40, Math.min(1040, p.y));
+          pages.push(p);
+          trace(h, p, false);
+          if (i > 8 && alea() < 0.35) trace(p, pages[Math.floor(alea() * (i - 1))], false);
+        }
+        pages.forEach(function (p) {
+          const c = document.createElementNS(NS, "circle");
+          c.setAttribute("cx", p.x); c.setAttribute("cy", p.y);
+          c.setAttribute("r", (2.6 + alea() * 3.2).toFixed(2));
+          c.setAttribute("class", "noeud");
+          c.style.transformOrigin = p.x + "px " + p.y + "px";
+          gNoeuds.appendChild(c);
+          petits.push({ el: c, d: Math.hypot(p.x - 960, p.y - 470) });
+        });
+        hubs.forEach(function (h) {
+          const r = 9 + Math.sqrt(h.refs) * 1.15;
+          const halo = document.createElementNS(NS, "circle");
+          halo.setAttribute("cx", h.x); halo.setAttribute("cy", h.y); halo.setAttribute("r", r * 2.4);
+          halo.setAttribute("class", "halo");
+          halo.style.transformOrigin = h.x + "px " + h.y + "px";
+          gNoeuds.appendChild(halo); halos.push(halo);
+          const c = document.createElementNS(NS, "circle");
+          c.setAttribute("cx", h.x); c.setAttribute("cy", h.y); c.setAttribute("r", r);
+          c.setAttribute("class", "hub");
+          c.style.transformOrigin = h.x + "px " + h.y + "px";
+          gNoeuds.appendChild(c); hubEls.push(c);
+          const g = document.createElementNS(NS, "g");
+          const t = document.createElementNS(NS, "text");
+          t.setAttribute("x", h.x + r + 14); t.setAttribute("y", h.y - 2);
+          t.setAttribute("class", "etiq"); t.textContent = h.id;
+          const t2 = document.createElementNS(NS, "text");
+          t2.setAttribute("x", h.x + r + 14); t2.setAttribute("y", h.y + 24);
+          t2.setAttribute("class", "refs"); t2.textContent = h.refs + " renvois";
+          g.appendChild(t); g.appendChild(t2); gEtiq.appendChild(g); etiqs.push(g);
+        });
+        liens.sort(function (a, b) { return a.d - b.d; });
+        petits.sort(function (a, b) { return a.d - b.d; });
+
+        function fr(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
+        function compte(tl, el, cible, debut, duree) {
+          const o = { v: 0 };
+          tl.to(o, { v: cible, duration: duree, ease: "power3.out", onUpdate: function () { el.textContent = fr(o.v); } }, debut);
+        }
+
+        const tl = gsap.timeline({ paused: true });
+
+        // fond qui respire
+        tl.fromTo("#fond", { scale: 1.12 }, { scale: 1, duration: 15, ease: "none" }, 0);
+
+        // plan 1 : le dossier vide
+        tl.to("#chemin", { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.1);
+        ch1.forEach(function (s, i) { tl.set(s, { opacity: 1 }, 0.18 + i * 0.038); });
+        ch2.forEach(function (s, i) { tl.set(s, { opacity: 1 }, 0.95 + i * 0.036); });
+        tl.fromTo("#caret", { opacity: 1 }, { opacity: 0, duration: 0.08, repeat: 7, yoyo: true, ease: "steps(1)" }, 0.2);
+        tl.to("#s1", { y: -90, scale: 0.94, opacity: 0, filter: "blur(14px)", duration: 0.4, ease: "power3.in" }, 2.05);
+
+        // plan 2 : les compteurs
+        tl.fromTo("#compteurs .col", { y: 140, opacity: 0, filter: "blur(18px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.7, stagger: 0.11, ease: "expo.out" }, 2.25);
+        compte(tl, document.getElementById("n1"), 726, 2.3, 1.45);
+        compte(tl, document.getElementById("n2"), 658, 2.41, 1.45);
+        compte(tl, document.getElementById("n3"), 1913, 2.52, 1.55);
+        tl.fromTo("#trait", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" }, 2.7);
+        tl.to("#releve", { opacity: 1, duration: 0.4 }, 3.3);
+        tl.to("#compteurs .col", { y: -70, opacity: 0, filter: "blur(16px)", duration: 0.35, stagger: 0.06, ease: "power3.in" }, 4.85);
+        tl.to(["#trait", "#releve"], { opacity: 0, duration: 0.3 }, 4.95);
+
+        // plan 3 : je dépose, je pose des questions, je relis
+        const verbes = gsap.utils.toArray("#s3 .verbe");
+        const tags = gsap.utils.toArray("#s3 .tag");
+        [5.2, 6.05, 6.9].forEach(function (t, i) {
+          tl.fromTo(verbes[i], { yPercent: 110 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, t);
+          if (tags[i]) tl.fromTo(tags[i], { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, t + 0.25);
+          if (i > 0) tl.to([verbes[i - 1], tags[i - 1]].filter(Boolean), { opacity: 0.32, duration: 0.35 }, t);
+        });
+        tl.to("#s3", { x: -160, opacity: 0, filter: "blur(12px)", duration: 0.4, ease: "power3.in" }, 7.9);
+
+        // plan 4 : le graphe se construit sur la relance de la batterie (8 s)
+        tl.fromTo("#cam", { scale: 1.32, rotation: -3 }, { scale: 1.0, rotation: 0, duration: 5.0, ease: "power2.out" }, 7.95);
+        hubEls.forEach(function (c, i) {
+          tl.fromTo(c, { scale: 0 }, { scale: 1, duration: 0.6, ease: "back.out(2.4)" }, 8.0 + i * 0.06);
+          tl.fromTo(halos[i], { scale: 0, opacity: 1 }, { scale: 1.6, opacity: 0, duration: 1.1, ease: "expo.out" }, 8.0 + i * 0.06);
+        });
+        liens.forEach(function (l, i) {
+          tl.to(l.el, { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, 8.05 + (i / liens.length) * 1.5);
+        });
+        petits.forEach(function (p, i) {
+          tl.fromTo(p.el, { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, 8.15 + (i / petits.length) * 1.55);
+        });
+        tl.fromTo(etiqs, { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.45, stagger: 0.07, ease: "power2.out" }, 8.6);
+        tl.fromTo("#liens-total", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 8.35);
+        compte(tl, document.getElementById("n4"), 10520, 8.35, 1.6);
+        tl.to("#liens-total", { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, 10.8);
+
+        // plan 5 : la règle du lien
+        tl.to("#cam", { opacity: 0.28, filter: "blur(3px)", duration: 0.4 }, 10.95);
+        tl.fromTo("#s5 .int", { yPercent: 110 }, { yPercent: 0, duration: 0.6, stagger: 0.12, ease: "expo.out" }, 11.05);
+        tl.fromTo(["#cg", "#cd"], { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(3)" }, 11.85);
+        tl.to("#mot-lien", { color: "#dfe8ff", duration: 0.3 }, 11.85);
+        tl.to("#s5", { scale: 1.06, opacity: 0, filter: "blur(10px)", duration: 0.35, ease: "power3.in" }, 12.9);
+
+        // plan 6 : la base entière, le titre
+        tl.to("#cam", { opacity: 1, filter: "blur(0px)", scale: 0.9, duration: 1.4, ease: "power3.out" }, 13.0);
+        tl.to("#voile", { opacity: 1, duration: 0.6 }, 13.05);
+        tl.fromTo("#titre .l", { opacity: 0, y: 70, rotationX: -70 }, { opacity: 1, y: 0, rotationX: 0, duration: 0.6, stagger: 0.025, ease: "expo.out" }, 13.15);
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["showreel"] = tl;
+        tl.seek(0);
+      })();
+    </script>
+  </body>
+</html>

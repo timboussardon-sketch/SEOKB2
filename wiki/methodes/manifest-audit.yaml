@@ -1,0 +1,81 @@
+# Manifest SKB : ce qu'un audit doit avoir chargé avant de mesurer.
+#
+# Il vit dans le vault, pas dans la chaîne d'audit. Ajouter un document ici, ou
+# le déclarer en dépendance d'un autre, suffit à ce que tous les audits suivants
+# l'aspirent : aucun script n'est à modifier.
+#
+# Chaque module liste ses documents. Chaque document peut déclarer ses propres
+# dépendances, résolues en cascade. La chaîne charge les modules requis, résout,
+# puis prend l'empreinte de ce qui a réellement été chargé.
+#
+# Posé le 26/09/2026, après qu'une liste codée en dur dans demarrer.py ait
+# reproduit, sous une autre forme, le défaut de la grille figée de jev-onglets.py.
+
+modules:
+
+  keyword_strategy:
+    description: choisir quel mot-clé attaquer, et dans quel ordre
+    requires:
+      - angle-differenciant
+      - demande-observee
+      - workflow-mots-cles
+      - mots-cles-actionnels
+      - zero-volume-business
+
+  audit_redaction:
+    description: la forme du rapport rendu au client
+    requires:
+      - opportunites-business
+      - rapport-audit-seo-format
+      - rapport-mots-cles-format
+
+  contenu_ia:
+    description: ce qu'un moteur de réponse absorbe, et ce qu'il n'absorbe pas
+    requires:
+      - test-substitution-llm
+
+documents:
+
+  angle-differenciant:
+    fichier: wiki/concepts/angle-differenciant-mot-cle.md
+    sert_a: cerner le head term au lieu de l'attaquer de front ; filtre anti-ChatGPT
+    sections_requises:
+      - "Le filtre anti-ChatGPT"
+      - "La règle — descendre dans l'intention"
+    depends_on:
+      - test-substitution-llm
+      - mots-cles-actionnels
+
+  zero-volume-business:
+    fichier: wiki/concepts/zero-volume-business.md
+    sert_a: un volume non publié n'est pas une absence de demande
+
+  demande-observee:
+    fichier: wiki/methodes/demande-observee.md
+    sert_a: les signaux de demande, affichés séparément, jamais agrégés ni inventés
+
+  workflow-mots-cles:
+    fichier: raw/bootcamp4/workflow-mots-cles-complet.md
+    sert_a: l'ordre des cinq skills et ce que chacun rend
+
+  mots-cles-actionnels:
+    fichier: wiki/concepts/mots-cles-actionnels.md
+    sert_a: ce qui distingue une requête qui convertit d'une requête qui informe
+
+  test-substitution-llm:
+    fichier: wiki/concepts/test-substitution-llm.md
+    sert_a: ce qu'un moteur de réponse peut faire à la place du site
+
+  rapport-mots-cles-format:
+    fichier: wiki/methodes/rapport-mots-cles-format.md
+    sert_a: la forme de la pré-décision, les deux scores, la gouvernance
+
+  rapport-audit-seo-format:
+    fichier: wiki/methodes/rapport-audit-seo-format.md
+    sert_a: la forme du rapport d'audit
+
+  opportunites-business:
+    fichier: wiki/methodes/opportunites-business.md
+    sert_a: contrat partagé de demande, opportunités, valeur conditionnelle, moyens et mesure
+    depends_on:
+      - demande-observee

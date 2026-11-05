@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+<defs><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.num{font-size:15px;font-weight:700;fill:#0B0B0F;letter-spacing:.6px}
+.nm{font-size:29px;font-weight:700;fill:#0B0B0F;letter-spacing:-.7px}
+.d{font-size:19px;fill:#333}
+.code{font-size:17px;fill:#0B0B0F;font-family:"SF Mono",Menlo,monospace}
+</style>
+<radialGradient id="dg" cx=".32" cy=".38" r=".78"><stop offset="0" stop-color="#3a5cff"/><stop offset=".35" stop-color="#2341e0"/><stop offset=".7" stop-color="#12249a"/><stop offset="1" stop-color="#070f4d"/></radialGradient>
+<filter id="dn" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="arithmetic" k1="0" k2="1" k3=".62" k4="-.31" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in"/></filter>
+</defs>
+<rect width="1080" height="1350" fill="#FFF"/>
+<g fill="url(#dg)" filter="url(#dn)"><path d="M48 52 Q48 40 60 40 H234 Q242 40 248 48 L258 62 Q261 66 268 66 H1020 Q1032 66 1032 78 V242 Q1032 254 1020 254 H60 Q48 254 48 242 Z"/></g>
+<text x="88" y="140" style="font-size:52px;font-weight:700;fill:#FFF;letter-spacing:-1.6px">Ton système SEO</text>
+<text x="88" y="180" style="font-size:24px;fill:#FFF">avec Claude Code, en 10 fichiers</text>
+<text x="88" y="224" style="font-size:19px;fill:#FFF;opacity:.88">Tu ne redonnes plus tes méthodes à chaque conversation. Claude les retrouve.</text>
+<path d="M48 292 Q48 284 56 284 H146 Q154 284 160 292 L170 302 Q173 306 180 306 H520 Q528 306 528 314 V463 Q528 471 520 471 H56 Q48 471 48 463 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="70" y="300">01</text>
+<text class="nm" x="76" y="352">CLAUDE.md</text>
+<text class="d" x="76" y="390">Le premier fichier que Claude lit.</text>
+<text class="d" x="76" y="418">Où trouver règles, méthodes, instructions.</text>
+<path d="M552 292 Q552 284 560 284 H650 Q658 284 664 292 L674 302 Q677 306 684 306 H1024 Q1032 306 1032 314 V463 Q1032 471 1024 471 H560 Q552 471 552 463 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="574" y="300">02</text>
+<text class="nm" x="580" y="352">AGENTS.md</text>
+<text class="d" x="580" y="390">Les règles communes : données, vérification,</text>
+<text class="d" x="580" y="418">résultats, validation avant de modifier.</text>
+<path d="M48 499 Q48 491 56 491 H146 Q154 491 160 499 L170 509 Q173 513 180 513 H520 Q528 513 528 521 V670 Q528 678 520 678 H56 Q48 678 48 670 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="70" y="507">03</text>
+<text class="nm" x="76" y="559">client.md</text>
+<text class="d" x="76" y="597">Ce que ton client vend, à qui, sur quel</text>
+<text class="d" x="76" y="625">marché, et ce qui le différencie.</text>
+<path d="M552 499 Q552 491 560 491 H650 Q658 491 664 499 L674 509 Q677 513 684 513 H1024 Q1032 513 1032 521 V670 Q1032 678 1024 678 H560 Q552 678 552 670 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="574" y="507">04</text>
+<text class="nm" x="580" y="559">conversions.md</text>
+<text class="d" x="580" y="597">Les objectifs du site : devis, appels,</text>
+<text class="d" x="580" y="625">inscriptions, achats.</text>
+<path d="M48 706 Q48 698 56 698 H146 Q154 698 160 706 L170 716 Q173 720 180 720 H520 Q528 720 528 728 V877 Q528 885 520 885 H56 Q48 885 48 877 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="70" y="714">05</text>
+<text class="nm" x="76" y="766">search-console.csv</text>
+<text class="d" x="76" y="804">Les données réelles : clics, impressions,</text>
+<text class="d" x="76" y="832">positions, pages à potentiel.</text>
+<path d="M552 706 Q552 698 560 698 H650 Q658 698 664 706 L674 716 Q677 720 684 720 H1024 Q1032 720 1032 728 V877 Q1032 885 1024 885 H560 Q552 885 552 877 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="574" y="714">06</text>
+<text class="nm" x="580" y="766">methodes.md</text>
+<text class="d" x="580" y="804">Comment tu fais tes mots-clés, ta stratégie,</text>
+<text class="d" x="580" y="832">tes audits et tes contenus.</text>
+<path d="M48 913 Q48 905 56 905 H146 Q154 905 160 913 L170 923 Q173 927 180 927 H520 Q528 927 528 935 V1084 Q528 1092 520 1092 H56 Q48 1092 48 1084 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="70" y="921">07</text>
+<text class="nm" x="76" y="973">wiki.md</text>
+<text class="d" x="76" y="1011">Tes méthodes, tes observations et les</text>
+<text class="d" x="76" y="1039">enseignements de tes missions.</text>
+<path d="M552 913 Q552 905 560 905 H650 Q658 905 664 913 L674 923 Q677 927 684 927 H1024 Q1032 927 1032 935 V1084 Q1032 1092 1024 1092 H560 Q552 1092 552 1084 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="574" y="921">08</text>
+<text class="nm" x="580" y="973">workflow.md</text>
+<text class="d" x="580" y="1011">Les étapes dans l'ordre : offre, mots-clés,</text>
+<text class="d" x="580" y="1039">intentions, pages, mesure.</text>
+<path d="M48 1120 Q48 1112 56 1112 H146 Q154 1112 160 1120 L170 1130 Q173 1134 180 1134 H520 Q528 1134 528 1142 V1291 Q528 1299 520 1299 H56 Q48 1299 48 1291 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="70" y="1128">09</text>
+<text class="nm" x="76" y="1180">SKILL.md</text>
+<text class="d" x="76" y="1218">Une tâche précise, réutilisable.</text>
+<text class="code" x="76" y="1246">.claude/skills/audit-seo/SKILL.md</text>
+<path d="M552 1120 Q552 1112 560 1112 H650 Q658 1112 664 1120 L674 1130 Q677 1134 684 1134 H1024 Q1032 1134 1032 1142 V1291 Q1032 1299 1024 1299 H560 Q552 1299 552 1291 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="574" y="1128">10</text>
+<text class="nm" x="580" y="1180">suivi.md</text>
+<text class="d" x="580" y="1218">Actions proposées, corrections validées,</text>
+<text class="d" x="580" y="1246">résultats obtenus.</text>
+</svg>

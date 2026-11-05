@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ma base SEO dans Obsidian · Guide organikk.co</title>
+<style>
+@font-face{font-family:"Geist";src:url(__FONT_GEIST__) format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Geist Mono";src:url(__FONT_MONO__) format("woff2");font-weight:100 900;font-display:block}
+
+:root{
+  --ink:#2b2b30; --ink-2:#6f6f78; --line:#e8e6e6; --paper:#fff;
+  --c-top:#2f4fe0; --c-bottom:#7fa0ff; --shadow-rgb:33,55,157;
+  --wash:#f7f9ff; --tint:#e8eeff;
+  --grad:linear-gradient(160deg,var(--c-top) 0%,var(--c-top) 45%,var(--c-bottom) 100%);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --grad-text:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='240' preserveAspectRatio='none'><defs><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0' result='m'/><feComponentTransfer in='m' result='a'><feFuncA type='linear' slope='.7'/></feComponentTransfer><feComposite in='a' in2='SourceGraphic' operator='in' result='c'/><feBlend in='SourceGraphic' in2='c' mode='overlay'/></filter></defs><rect width='100%' height='100%' fill='%232f4fe0' filter='url(%23n)'/></svg>");
+}
+
+@page{size:A4;margin:20mm 18mm 18mm}
+@page bleed{size:A4;margin:0}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Geist",system-ui,-apple-system,sans-serif;
+  font-size:10.6pt;line-height:1.62;font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+p{margin:0 0 11pt}
+strong{font-weight:600}
+a{color:inherit;text-decoration:none;border-bottom:.5pt solid rgba(47,79,224,.4)}
+.mono{font-family:"Geist Mono",ui-monospace,monospace}
+
+/* ---------- panneaux dégradés grainés ---------- */
+.panel{position:relative;isolation:isolate;background:var(--grad);color:#fff;overflow:hidden}
+.panel::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.panel > *{position:relative;z-index:1}
+
+/* ---------- couverture ---------- */
+.cover{page:bleed;margin:0;padding:32mm 24mm 24mm;width:210mm;height:297mm;display:flex;flex-direction:column;justify-content:space-between;break-after:page}
+.cover .mark{width:15mm;height:15mm}
+.cover .kicker{font-family:"Geist Mono",monospace;font-size:8pt;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.82);margin:0 0 9mm}
+.cover h1{font-size:34pt;line-height:1.04;letter-spacing:-.025em;font-weight:600;margin:0;max-width:150mm}
+.cover .sub{font-size:14pt;line-height:1.3;color:rgba(255,255,255,.88);margin:7mm 0 0;font-weight:400;max-width:120mm}
+.cover .lead{font-size:11pt;line-height:1.5;color:rgba(255,255,255,.86);margin:10mm 0 0;max-width:112mm}
+.cover .foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+
+/* ---------- titres ---------- */
+h2.grad,h3.grad{
+  color:transparent;-webkit-text-fill-color:transparent;
+  background-image:var(--grad-text);background-size:100% 100%;background-repeat:no-repeat;
+  -webkit-background-clip:text;background-clip:text;width:fit-content;max-width:100%;
+}
+.section-title{font-size:22pt;line-height:1.1;letter-spacing:-.02em;font-weight:600;margin:0 0 8mm}
+
+/* ---------- sommaire ---------- */
+.toc{break-after:page}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{display:flex;gap:8mm;align-items:baseline;padding:3.4mm 0;border-bottom:.5pt solid var(--line)}
+.toc li:last-child{border-bottom:none}
+.toc .n{font-family:"Geist Mono",monospace;font-size:8.5pt;color:var(--c-top);letter-spacing:.1em;flex:0 0 20mm}
+.toc .t{font-weight:500;font-size:11pt}
+.toc .d{color:var(--ink-2);font-size:9.5pt;margin-left:auto;text-align:right;max-width:78mm}
+
+/* ---------- ouverture de phase ---------- */
+.phase{break-before:page}
+.ph-open{margin:0 0 9mm}
+.ph-open .num{font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.26em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 4mm}
+.ph-open h2{font-size:26pt;line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0}
+.ph-open .obj{font-size:11.5pt;line-height:1.45;color:var(--ink-2);margin:5mm 0 0;max-width:130mm}
+.ph-open .rule{height:1.4pt;background:var(--c-top);width:16mm;border-radius:2pt;margin:7mm 0 0}
+
+h3.sec{font-size:14pt;line-height:1.2;font-weight:600;letter-spacing:-.01em;margin:9mm 0 4mm;break-after:avoid}
+h4.sub{font-size:11pt;font-weight:600;margin:6mm 0 2.5mm;break-after:avoid}
+
+/* ---------- listes ---------- */
+ul,ol{margin:0 0 11pt;padding-left:5.5mm}
+li{margin:0 0 4pt;padding-left:1mm}
+li::marker{color:var(--c-top)}
+ul.defs{list-style:none;padding:0}
+ul.defs li{display:block;padding:2.6mm 0;border-bottom:.5pt solid var(--line);margin:0}
+ul.defs li:last-child{border-bottom:none}
+ul.defs b{font-weight:600}
+
+/* ---------- encart résumé ---------- */
+.resume{border-radius:5mm;padding:11mm 12mm;margin:9mm 0}
+.resume .k{font-family:"Geist Mono",monospace;font-size:8pt;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.8);margin:0 0 5mm}
+.resume p{font-size:11.5pt;line-height:1.55;margin:0;color:#fff}
+
+/* ---------- règle dure ---------- */
+.hard{border-left:1.6pt solid var(--c-top);background:var(--wash);padding:5mm 7mm;margin:7mm 0;border-radius:0 3mm 3mm 0;break-inside:avoid}
+.hard p{margin:0}
+.hard .k{font-family:"Geist Mono",monospace;font-size:7.5pt;letter-spacing:.22em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 2mm}
+
+/* ---------- code ---------- */
+pre{background:var(--wash);border:.5pt solid var(--tint);border-radius:3mm;padding:6mm 7mm;font-family:"Geist Mono",ui-monospace,monospace;font-size:7.6pt;line-height:1.55;white-space:pre;overflow:visible;margin:6mm 0;break-inside:avoid;color:#3a3a44}
+
+/* ---------- tableaux ---------- */
+table{width:100%;border-collapse:collapse;margin:6mm 0;font-size:9.5pt;break-inside:avoid}
+th,td{text-align:left;vertical-align:top;padding:3mm 6mm 3mm 0;border-bottom:.5pt solid var(--line)}
+th{font-weight:600;font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:var(--c-top);border-bottom:1pt solid var(--c-top);font-family:"Geist Mono",monospace}
+td:last-child,th:last-child{padding-right:0}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-family:"Geist Mono",monospace;color:var(--c-top);white-space:nowrap}
+
+/* ---------- erreurs numérotées ---------- */
+ol.errs{list-style:none;padding:0;counter-reset:e}
+ol.errs li{counter-increment:e;display:flex;gap:6mm;padding:4mm 0;border-bottom:.5pt solid var(--line);margin:0;break-inside:avoid}
+ol.errs li:last-child{border-bottom:none}
+ol.errs li::before{content:counter(e,decimal-leading-zero);font-family:"Geist Mono",monospace;font-size:9pt;color:var(--c-top);flex:0 0 10mm}
+
+/* ---------- page finale ---------- */
+.final{page:bleed;break-before:page;margin:0;padding:44mm 24mm 24mm;width:210mm;height:297mm;display:flex;flex-direction:column;justify-content:space-between}
+.final h2{font-size:28pt;line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0 0 8mm;max-width:130mm}
+.final p{font-size:11.5pt;line-height:1.55;color:rgba(255,255,255,.9);max-width:120mm}
+.final .cta{display:inline-block;margin:6mm 0 0;background:#fff;color:var(--c-top);font-weight:600;font-size:11pt;padding:4.5mm 8mm;border-radius:3mm;border:none;text-decoration:none}
+.final .cta .u{display:block;font-family:"Geist Mono",monospace;font-size:8pt;letter-spacing:.08em;color:var(--ink-2);font-weight:400;margin-top:1.5mm}
+.final .foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.final .mark{width:13mm;height:13mm}
+
+code{font-family:"Geist Mono",ui-monospace,monospace;font-size:9pt;background:var(--wash);border-radius:1mm;padding:.3mm 1.2mm;color:#3a3a44}
+pre code{background:none;padding:0;font-size:inherit}
+
+/* ---------- ouvertures de section (variables) ---------- */
+.part{break-before:page}
+.sec-open{margin:0 0 8mm}
+.sec-open h2{font-size:26pt;line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0;max-width:150mm}
+.sec-open .kick{font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.26em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 4mm}
+.sec-open .lead{font-size:11.5pt;line-height:1.45;color:var(--ink-2);margin:5mm 0 0;max-width:132mm}
+
+/* ---------- compteurs ---------- */
+.stats{display:flex;flex-wrap:wrap;margin:0}
+.stats div{flex:0 0 50%;padding:5.5mm 0;border-bottom:.5pt solid rgba(255,255,255,.2)}
+.stats .n{font-size:25pt;font-weight:600;letter-spacing:-.025em;line-height:1}
+.stats .l{font-family:"Geist Mono",monospace;font-size:7.5pt;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:2.5mm}
+.strip{margin:9mm 0 0}
+.strip .k{font-family:"Geist Mono",monospace;font-size:7.5pt;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.7);margin:0 0 4mm}
+.strip ol{list-style:none;margin:0;padding:0;columns:2;column-gap:10mm}
+.strip li{font-size:9.5pt;color:rgba(255,255,255,.92);margin:0 0 2.6mm;break-inside:avoid}
+
+/* ---------- terminal ---------- */
+.term{background:#1b1d24;border-radius:3mm;margin:6mm 0;overflow:hidden;break-inside:avoid}
+.term .bar{font-family:"Geist Mono",monospace;font-size:7pt;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.48);padding:3.2mm 6mm;border-bottom:.5pt solid rgba(255,255,255,.1)}
+.term pre{background:none;border:none;border-radius:0;margin:0;padding:5mm 6mm;color:#d5d8e0;font-size:7.2pt;line-height:1.62}
+.term .c{color:#93a9ff}
+.term .d{color:#787e93}
+.term .g{color:#8ed3a6}
+
+/* ---------- panneau fichier ---------- */
+.file{border:.5pt solid var(--tint);border-radius:3mm;margin:6mm 0;overflow:hidden;break-inside:avoid}
+.file .bar{font-family:"Geist Mono",monospace;font-size:7.2pt;letter-spacing:.1em;color:var(--c-top);background:var(--wash);padding:3mm 6mm;border-bottom:.5pt solid var(--tint)}
+.file pre{background:none;border:none;border-radius:0;margin:0;padding:5mm 6mm;font-size:7.3pt;line-height:1.6}
+.file .body{padding:5mm 6mm;font-size:9pt;line-height:1.55}
+.file .body p{margin:0 0 5pt}
+.file .body h4{font-size:9.5pt;font-weight:600;margin:4mm 0 2mm}
+.wl{color:var(--c-top)}
+
+/* ---------- diff ---------- */
+.diffbox{border:.5pt solid var(--tint);border-radius:3mm;margin:6mm 0;overflow:hidden;break-inside:avoid}
+.diffbox .bar{font-family:"Geist Mono",monospace;font-size:7.2pt;letter-spacing:.1em;color:var(--c-top);background:var(--wash);padding:3mm 6mm;border-bottom:.5pt solid var(--tint)}
+.diffbox pre{background:none;border:none;border-radius:0;margin:0;padding:4mm 0;font-size:7.3pt;line-height:1.7}
+.diffbox i{font-style:normal;display:block;padding:0 6mm}
+.diffbox i.add{color:#166b3d;background:#edf9f2}
+.diffbox i.del{color:#9c3131;background:#fdf1f1}
+.diffbox i.ctx{color:#7b7f8c}
+
+/* ---------- Obsidian ---------- */
+.ob{display:flex;border:.5pt solid var(--tint);border-radius:3mm;overflow:hidden;margin:6mm 0;break-inside:avoid}
+.ob .side{flex:0 0 50mm;background:var(--wash);border-right:.5pt solid var(--tint);padding:4.5mm 5mm;font-family:"Geist Mono",monospace;font-size:6.8pt;line-height:2;color:var(--ink-2)}
+.ob .side b{color:var(--ink);font-weight:600}
+.ob .side .on{color:var(--c-top)}
+.ob .note{flex:1;padding:5mm 6mm;font-size:8.8pt;line-height:1.58}
+.ob .note h4{font-size:11pt;font-weight:600;margin:0 0 3mm}
+.ob .note p{margin:0 0 4pt}
+
+/* ---------- conversation ---------- */
+.chat{margin:6mm 0;break-inside:avoid}
+.chat .you{font-family:"Geist Mono",monospace;font-size:8.2pt;line-height:1.55;background:var(--tint);border-radius:2.5mm;padding:3.5mm 5mm;color:#27325c}
+.chat .cl{border-left:1.6pt solid var(--c-top);padding:1mm 0 1mm 6mm;margin:4.5mm 0 0;font-size:9.2pt;line-height:1.55}
+.chat .cl .who{font-family:"Geist Mono",monospace;font-size:7pt;letter-spacing:.2em;text-transform:uppercase;color:var(--c-top);display:block;margin-bottom:2.5mm}
+.chat .cl p{margin:0 0 4pt}
+
+/* ---------- citation verbatim ---------- */
+.cite{border-left:1.6pt solid var(--tint);padding:1mm 0 1mm 6mm;margin:6mm 0;break-inside:avoid}
+.cite p{margin:0;font-size:11pt;line-height:1.5}
+.cite .src{display:block;font-family:"Geist Mono",monospace;font-size:7.2pt;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);margin-top:2.5mm}
+
+/* ---------- graphe ---------- */
+.graph{margin:7mm 0;break-inside:avoid}
+.graph svg{width:100%;height:auto;display:block}
+.graph .cap{font-family:"Geist Mono",monospace;font-size:7.2pt;letter-spacing:.12em;color:var(--ink-2);margin:3mm 0 0}
+</style>
+
+</head>
+<body>
+
+<!-- ================= COUVERTURE ================= -->
+<div class="cover panel">
+  <svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="#ffffff"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="#ffffff"/></svg>
+  <div>
+    <p class="kicker">Guide organikk.co</p>
+    <h1>Ma base SEO dans Obsidian</h1>
+    <p class="sub">Je l'ouvre et je montre comment elle tourne.</p>
+    <p class="lead">Les chiffres, les sorties de terminal, les diffs et les pages de ce guide viennent de ma base réelle. Relevés le 23 septembre 2026.</p>
+  </div>
+  <div class="foot"><span>Timothée Boussardon</span><span>organikk.co</span></div>
+</div>
+
+<!-- ================= COMPTEURS ================= -->
+<section class="final panel" style="break-before:auto">
+  <div>
+    <p class="kicker" style="font-family:'Geist Mono',monospace;font-size:8pt;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.8);margin:0 0 7mm">Avril 2026 → 23 septembre 2026</p>
+    <div class="stats">
+      <div><div class="n">692</div><div class="l">fichiers dans raw/</div></div>
+      <div><div class="n">502</div><div class="l">pages dans wiki/</div></div>
+      <div><div class="n">136</div><div class="l">fiches source</div></div>
+      <div><div class="n">77</div><div class="l">entités</div></div>
+      <div><div class="n">69</div><div class="l">concepts</div></div>
+      <div><div class="n">1 660</div><div class="l">commits git</div></div>
+    </div>
+    <div class="strip">
+      <p class="k">Au sommaire</p>
+      <ol>
+        <li>Ce que j'ai construit</li>
+        <li>À quoi ressemble ma base</li>
+        <li>Ce qui se passe quand j'ajoute une source</li>
+        <li>Comment j'interroge ensuite ma base</li>
+        <li>Comment j'évite que 500 pages deviennent ingérables</li>
+        <li>Ce qui change quand la base devient grosse</li>
+        <li>Ce que tu dois mettre en place chez toi</li>
+      </ol>
+    </div>
+  </div>
+  <div class="foot">
+    <svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="#ffffff"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="#ffffff"/></svg>
+    <span>organikk.co</span>
+  </div>
+</section>
+
+<!-- ================= 1. CE QUE J'AI CONSTRUIT ================= -->
+<section class="part">
+  <header class="sec-open">
+    <h2 class="grad">Ce que j'ai construit</h2>
+  </header>
+  <p>En avril 2026 j'ai créé un dossier vide et un fichier <code class="mono">AGENTS.md</code>.</p>
+  <p>Au 23 septembre 2026, ce dossier contient 692 fichiers markdown dans <code class="mono">raw/</code> et 502 pages dans <code class="mono">wiki/</code>. Dont 136 fiches source, 77 entités et 69 concepts. Git compte 1 660 commits.</p>
+  <p>Je n'ai pas écrit ces 502 pages. Claude les écrit, et il les tient à jour.</p>
+  <p>Moi je dépose des fichiers, je pose des questions, et je relis.</p>
+
+  <div class="term">
+    <div class="bar">~/Code/seo-kb — git log --oneline</div>
+<pre><span class="c">$ git log --oneline | wc -l</span>
+1660
+
+<span class="c">$ git log --oneline --grep=ingest -6</span>
+<span class="d">6938a07</span> Ingest guide audit SEO technique Claude (7 phases, 5 skills)
+<span class="d">a2ae7c4</span> ingest call 24 : portail 150-0 B ter (transcript, entité, source, voix)
+<span class="d">c20cec0</span> kb rebuild — concepts.json après ingest call 17
+<span class="d">f224140</span> Automatisation ingest publications (skill + runner + launchd 2x/sem)
+<span class="d">4870ac0</span> Ingest backlog sweep — 2026-06-15 (auto)
+<span class="d">c69b973</span> ingest: playbook Reddit SEO+GEO (source + entity reddit + concept parasite-seo)</pre>
+  </div>
+
+  <p>Claude Code et ChatGPT Memory gardent des préférences entre sessions. Claude Code charge 200 lignes de <code class="mono">MEMORY.md</code> au démarrage, c'est documenté par Anthropic. Ça sert l'IA à mieux te répondre.</p>
+  <p>Ça ne te donne pas un document que tu ouvres, que tu navigues et que tu versionnes.</p>
+  <p>Le pattern vient d'un gist d'Andrej Karpathy, LLM Wiki. Sa formule tient en une ligne.</p>
+
+  <div class="cite">
+    <p>« Obsidian is the IDE; the LLM is the programmer; the wiki is the codebase »</p>
+    <span class="src">Karpathy · LLM Wiki</span>
+  </div>
+</section>
+
+<!-- ================= 2. À QUOI RESSEMBLE MA BASE ================= -->
+<section class="part">
+  <header class="sec-open">
+    <h2 class="grad">À quoi ressemble ma base</h2>
+    <p class="lead">Trois choses à la racine. <code class="mono">raw/</code>, <code class="mono">wiki/</code>, et <code class="mono">AGENTS.md</code>.</p>
+  </header>
+
+<pre>seo-kb/
+├── AGENTS.md              594 lignes
+├── raw/                   692 fichiers .md, 2 709 fichiers au total
+│   ├── organikk/          181   notes, clients, publications
+│   ├── journal/           118   mes notes datées
+│   ├── notes/              91   doctrine, corpus de voix, transcriptions
+│   ├── revue-de-presse/    69   éditions quotidiennes
+│   ├── articles/           67   clippings web
+│   ├── transcripts/        27   calls
+│   ├── papers/              5   arxiv
+│   └── data/            1 722   exports Search Console
+└── wiki/                  502 pages
+    ├── sources/           136   une fiche par document ingéré
+    ├── entities/           77   algos, outils, personnes, moteurs
+    ├── concepts/           69   les mécaniques
+    ├── queries/            28   mes questions filées en pages
+    ├── revue-hebdo/        26   le rituel du vendredi
+    ├── syntheses/          13   thèses multi-sources
+    ├── audit/              13   les rapports d'hygiène
+    ├── briefs/              9
+    ├── clusters/            7
+    ├── preuves/             7   publié ↔ mesuré
+    ├── decisions/           4
+    ├── index.md                 le catalogue
+    └── log.md                   le journal</pre>
+
+  <p><code class="mono">raw/</code>, ce sont mes sources. Des articles clippés, des transcripts de calls, des exports Search Console, mes notes de journal.</p>
+  <p>Claude y lit, et il n'y écrit jamais. C'est la seule règle que je n'ai pas assouplie en cinq mois.</p>
+  <p>La raison tient en une phrase. Le jour où l'agent reformule une source pour la rendre plus claire, tu perds la trace de ce que l'auteur avait écrit. Tu ne peux plus le citer, et tu ne peux plus le vérifier.</p>
+  <p>Les 2 709 fichiers de <code class="mono">raw/</code> ne sont pas tous du texte. <code class="mono">raw/data/</code> porte 1 722 fichiers, presque tous des exports Search Console.</p>
+
+  <p><code class="mono">wiki/</code> est le domaine de Claude. Trois types de pages portent l'essentiel.</p>
+  <p>Une fiche source par document ingéré. Elle porte le contexte, les chiffres relevés, les limites de la source, et l'angle que j'ai demandé à creuser.</p>
+  <p>Une entité par objet nommé : un algo Google, un outil, un prospect, un moteur de réponse.</p>
+  <p>Les concepts portent les mécaniques. Le passage ranking, le grounding score, l'information gain : une page chacun, qui s'enrichit à chaque source qui en parle.</p>
+  <p>Les pages se citent entre elles avec des wikilinks, et ces liens forment le graphe qu'Obsidian affiche.</p>
+
+  <div class="ob">
+    <div class="side">
+      <b>wiki</b><br>
+      &nbsp;&nbsp;├ concepts<br>
+      &nbsp;&nbsp;│ ├ aeo.md<br>
+      &nbsp;&nbsp;│ ├ data-proprietaire.md<br>
+      &nbsp;&nbsp;│ ├ grounding-score.md<br>
+      &nbsp;&nbsp;│ ├ ingest-workflow.md<br>
+      &nbsp;&nbsp;│ ├ <span class="on">persistent-wiki-vs-rag.md</span><br>
+      &nbsp;&nbsp;│ ├ query-synthesis.md<br>
+      &nbsp;&nbsp;│ └ obsidian-as-ide.md<br>
+      &nbsp;&nbsp;├ entities<br>
+      &nbsp;&nbsp;│ ├ karpathy.md<br>
+      &nbsp;&nbsp;│ ├ obsidian.md<br>
+      &nbsp;&nbsp;│ └ perplexity.md<br>
+      &nbsp;&nbsp;├ sources<br>
+      &nbsp;&nbsp;├ queries<br>
+      &nbsp;&nbsp;├ index.md<br>
+      &nbsp;&nbsp;└ log.md
+    </div>
+    <div class="note">
+      <h4>Wiki persistant vs RAG</h4>
+      <p><b>Mise à jour 2026-08-07</b> : le cadrage binaire ci-dessous date du bootstrap. <span class="mono">wiki/sources/</span> compte aujourd'hui 110 fichiers. Le seuil « ~100 sources » que la source désignait comme point de bascule est franchi.</p>
+      <p>Ce n'est pas un remplacement du wiki par du RAG, c'est une superposition.</p>
+      <p><b>Relation à d'autres concepts</b></p>
+      <p><span class="wl">[[concepts/ingest-workflow]]</span> — le <i>comment</i> de la compilation persistante<br>
+         <span class="wl">[[concepts/query-synthesis]]</span> — le <i>comment</i> des questions contre le wiki<br>
+         <span class="wl">[[concepts/obsidian-as-ide]]</span> — l'interface humaine au-dessus du wiki<br>
+         Héritier du Memex de <span class="wl">[[entities/vannevar-bush]]</span> (1945)</p>
+    </div>
+  </div>
+
+  <p><code class="mono">AGENTS.md</code> est la configuration. Claude le lit au démarrage de chaque session.</p>
+
+  <div class="file">
+    <div class="bar">AGENTS.md — extrait, §3 et §5.4</div>
+<pre>## 3. Architecture — 3 couches
+
+raw/    ← sources immuables (lecture seule pour l'agent)
+wiki/   ← domaine de l'agent (écriture exclusive)
+
+**Règle d'or** : `raw/` est immuable. L'agent lit, ne modifie jamais.
+
+## 5.4 Citations et sourcing (DOCTRINE)
+
+- **Toute donnée chiffrée a une source** : [[sources/...]]
+- **Pas de source = pas d'affirmation**
+- Quand une source est vague, marquer `confidence: low`
+- Jamais d'invention de chiffres, benchmarks ou pourcentages</pre>
+  </div>
+
+  <p>Le mien fait 594 lignes aujourd'hui. Le journal montre qu'il est passé en v2.1 puis v2.2 dès le premier jour, le 11 avril. Chaque fois qu'une session dérape, j'y ajoute une ligne.</p>
+</section>
+
+<!-- ================= 3. AJOUTER UNE SOURCE ================= -->
+<section class="part">
+  <header class="sec-open">
+    <span class="kick">19 juin 2026</span>
+    <h2 class="grad">Ce qui se passe quand j'ajoute une source</h2>
+  </header>
+  <p>J'avais écrit un playbook Reddit, un document de doctrine, jamais rangé nulle part. Je l'ai déposé dans <code class="mono">raw/reddit-playbook/</code>.</p>
+
+  <div class="chat">
+    <div class="you">&gt; ingère raw/reddit-playbook/Playbook-Reddit-SEO-GEO.md</div>
+    <div class="cl">
+      <span class="who">Claude</span>
+      <p>J'ai lu les 5 axes. Les points que j'en tire :</p>
+      <p>1. Reddit passe de l'indice Sistrix 95 à 1 370 entre mi-2023 et 2024 (+1 328 %).<br>
+         2. Trois causes empilées : update « hidden gems », filtre Discussions and forums, deal data Google-Reddit (~60 M$/an).<br>
+         3. Citations IA : n°1 Gemini et Perplexity, n°2 AI Overviews et ChatGPT.<br>
+         4. Aucune étude de cas indépendante, aucune donnée FR chiffrée.</p>
+      <p>Angle SEO à creuser ?</p>
+    </div>
+  </div>
+
+  <p>Claude lit le fichier en entier, puis il me résume les points et me demande quel angle je veux creuser. À ce stade il n'a encore rien écrit dans le wiki, et c'est voulu : je corrige sa lecture avant qu'elle parte dans quinze fichiers.</p>
+  <p>Je réponds. Il écrit.</p>
+
+  <div class="diffbox">
+    <div class="bar">git show --stat c69b9733</div>
+<pre><i class="ctx"> .claude/index/concepts.json                        | 157 +++++++++++++-</i><i class="add"> wiki/sources/2026-06-19-playbook-reddit-seo-geo.md |  53 ++++++  CRÉÉE</i><i class="add"> wiki/entities/reddit.md                            |  43 ++++++  CRÉÉE</i><i class="add"> wiki/concepts/parasite-seo.md                      |  35 ++++++  CRÉÉE</i><i class="ctx"> wiki/index.md                                      |  15 +-</i><i class="ctx"> wiki/log.md                                        |   9 ++</i><i class="ctx"> wiki/concepts/anti-ai-writing.md                   |   4 +</i><i class="ctx"> wiki/entities/perplexity.md                        |   2 +-</i><i class="ctx">
+ 8 files changed, 305 insertions(+), 13 deletions(-)</i></pre>
+  </div>
+
+  <p>Trois pages créées : la fiche source, l'entité <code class="mono">reddit</code>, le concept <code class="mono">parasite-seo</code>.</p>
+  <p>Quatre pages modifiées, dont deux que je n'aurais jamais pensé à rouvrir.</p>
+  <p>Regarde celle de <code class="mono">perplexity</code>. Une seule ligne change. Deux wikilinks ajoutés dans la section « Pages liées ».</p>
+
+  <div class="diffbox">
+    <div class="bar">wiki/entities/perplexity.md</div>
+<pre><i class="ctx">@@ -33,4 +33,4 @@  ## Pages liées</i><i class="del">- … [[sources/2026-04-13-call-04]] · [[concepts/aeo]] · [[concepts/data-proprietaire]]
+-  · [[entities/chatgpt-search]] · [[entities/google-ai-mode]]</i><i class="add">+ … [[sources/2026-04-13-call-04]] · [[sources/2026-06-19-playbook-reddit-seo-geo]]
++  · [[concepts/aeo]] · [[concepts/data-proprietaire]] · [[entities/reddit]]
++  · [[entities/chatgpt-search]] · [[entities/google-ai-mode]]</i></pre>
+  </div>
+
+  <p>Ça n'a l'air de rien. C'est pourtant le travail qu'un humain abandonne au bout de trois mois, parce qu'il faut rouvrir une page qu'on n'avait aucune raison d'ouvrir.</p>
+
+  <div class="cite">
+    <p>« Humans abandon wikis because the maintenance burden grows faster than the value »</p>
+    <span class="src">Karpathy · LLM Wiki</span>
+  </div>
+
+  <p>Le LLM ne s'ennuie pas.</p>
+  <p>Total de cet ingest : 8 fichiers touchés, 305 lignes ajoutées. Karpathy annonce généralement 10 à 15 pages touchées par source. C'est un chiffre d'expérience, aucun benchmark ne le soutient. Chez moi ça va plutôt de 4 à 15, selon la densité du document déposé.</p>
+  <p>Puis Claude écrit une ligne dans le journal.</p>
+
+  <div class="file">
+    <div class="bar">wiki/log.md — l'entrée de cet ingest</div>
+<pre>## [2026-06-19] ingest | Playbook Reddit (SEO + GEO)
+- source_type: doctrine
+- source: [[sources/2026-06-19-playbook-reddit-seo-geo]]
+- entities touchées: 2 (création [[entities/reddit]], maj [[entities/perplexity]])
+- concepts touchés: 1 (création [[concepts/parasite-seo]])
+- pages créées: 3 / mises à jour: 2 (perplexity + index)
+- contradictions: N
+- angle SEO identifié: priorité GEO &gt; parasite SEO &gt; insights ; trou FR
+  (pas de communauté SEO FR, pas d'étude de cas FR chiffrée) = cible étude
+  first-party</pre>
+  </div>
+
+  <p>Une source à la fois. Le batch existe, je m'en sers pour les lots de veille. Sur un document qui compte, je veux voir ce qu'il a compris avant qu'il écrive.</p>
+</section>
+
+<!-- ================= 4. INTERROGER ================= -->
+<section class="part">
+  <header class="sec-open">
+    <h2 class="grad">Comment j'interroge ensuite ma base</h2>
+    <p class="lead">Deux usages différents, selon que je cherche un fichier ou une réponse.</p>
+  </header>
+
+  <p>Quand je cherche où c'est rangé, j'ai une commande.</p>
+
+  <div class="term">
+    <div class="bar">~/Code/seo-kb — recherche sémantique locale</div>
+<pre><span class="c">$ ./kb search "pourquoi un wiki plutôt que du RAG" --k 5</span>
+
+=== Top 5 hits sémantiques ===
+
+<span class="g">1. [0.716]</span> Wiki persistant vs RAG  §Relation à d'autres concepts
+   <span class="d">wiki/concepts/persistent-wiki-vs-rag.md  (concept)</span>
+   <span class="d">&gt; [[concepts/ingest-workflow]] — le comment de la compilation persistante
+   &gt; [[concepts/query-synthesis]] — le comment des questions contre le wiki
+   &gt; Présenté comme l'héritier du Memex de [[entities/vannevar-bush]] (1945)</span>
+
+<span class="g">2. [0.708]</span> Wiki persistant vs RAG  §Argument d'échelle
+   <span class="d">wiki/concepts/persistent-wiki-vs-rag.md  (concept)</span>
+   <span class="d">&gt; [[entities/karpathy]] affirme que pour ~100 sources, un simple index.md
+   &gt; suffit pour router — pas besoin d'infrastructure RAG à base d'embeddings.</span>
+
+<span class="g">4. [0.675]</span> Résurgence — Wiki persistant vs RAG — 2026-08-05
+   <span class="d">wiki/revue-hebdo/resurgence-2026-08-05.md  (register)</span>
+   <span class="d">&gt; Le concept pose un argument d'échelle explicite de [[entities/karpathy]]…</span></pre>
+  </div>
+
+  <p>Chaque résultat donne le score, le fichier, son type et l'extrait. Je sais où aller lire.</p>
+  <p>Quand je pose une vraie question, je laisse Claude faire le tour lui-même. Il lit d'abord <code class="mono">index.md</code> pour repérer les pages concernées, il en ouvre cinq à huit, puis il répond en posant un wikilink sur chaque affirmation.</p>
+  <p>Une affirmation sans wikilink, je la refuse. Sans le lien je ne peux pas vérifier, donc je ne peux pas la mettre dans un livrable client.</p>
+  <p>Ce qui change tout, c'est ce qu'on fait de la réponse.</p>
+  <p>En avril, j'ai demandé si le pattern du wiki améliorait structurellement le grounding score. La réponse tenait en cinq mécanismes, appuyés sur huit sources déjà ingérées.</p>
+  <p>Elle est devenue une page permanente.</p>
+
+  <div class="file">
+    <div class="bar">wiki/queries/2026-04-12-wiki-pattern-vs-grounding-score.md</div>
+    <div class="body">
+      <pre style="padding:0 0 4mm">---
+type: query
+sources: 8
+confidence: medium
+status: stable
+---</pre>
+      <h4>Le pattern wiki persistant optimise-t-il structurellement le Grounding Score ?</h4>
+      <p><b>Contexte</b> : question flaggée « à filer » depuis l'ingest de <span class="wl">[[sources/2026-04-11-karpathy-llm-wiki]]</span>. Après l'ingest de <span class="wl">[[sources/2026-04-11-seo-ia-tim]]</span> et de 6 newsletters, le matériau est suffisant pour répondre.</p>
+      <p><b>Réponse courte.</b> Oui, mais de façon indirecte et non validée empiriquement. Le pattern produit <i>par construction</i> des pages qui satisfont les deux axes du <span class="wl">[[concepts/grounding-score]]</span> : proximité vectorielle et divergence informationnelle. Aucun test terrain ne le prouve encore.</p>
+      <p><b>Cinq mécanismes structurels</b> : agrégation vectorielle progressive · surprise informationnelle maintenue · résistance au <span class="wl">[[concepts/weight-decay]]</span> · information gain par construction · structure Associative Memory Chain.</p>
+    </div>
+  </div>
+
+  <p>Le registre des hypothèses la cite. Cinq mois plus tard elle sert encore.</p>
+  <p>Une réponse qui reste dans le chat, tu la redemandes dans six semaines.</p>
+  <p>J'ai 28 pages dans <code class="mono">queries/</code>. Aucune ne vient d'une source externe. Elles viennent toutes de questions que j'ai posées.</p>
+</section>
+
+<!-- ================= 5. TENIR 500 PAGES ================= -->
+<section class="part">
+  <header class="sec-open">
+    <h2 class="grad">Comment j'évite que 500 pages deviennent ingérables</h2>
+    <p class="lead">Six mécanismes. Aucun n'est compliqué, et tous sont ennuyeux à tenir.</p>
+  </header>
+
+  <h3 class="sec">index.md</h3>
+  <p>Le catalogue. Une ligne par page, avec sa description en dix mots.</p>
+  <div class="file">
+    <div class="bar">wiki/index.md — trois lignes parmi 502</div>
+<pre>- [[sources/2026-04-25-organikk-reddit-pour-geo]] — Reddit pour citations IA
+  sans ban (ratio 9-1-1, 44 % citations sociales AI Overviews)
+- [[sources/2026-05-08-organikk-ranker-chatgpt-2026]] — Ranker dans ChatGPT :
+  cite humains+sources, décisionnel d'abord (900M WAU)
+- [[sources/2026-05-13-algorithme-process-verifier-indexation]] — Audit
+  indexation piloté par skill Claude, 9 points/URL, sans outil payant</pre>
+  </div>
+  <p>Claude le lit avant de répondre. Sans index, l'étape « ouvre les huit bonnes pages » ne marche pas.</p>
+
+  <h3 class="sec">log.md</h3>
+  <p>Chronologique et en ajout seul. Une entrée déjà écrite n'est pas retouchée plus tard.</p>
+  <p>Quand un résultat me surprend trois semaines après, je remonte le journal au lieu de deviner.</p>
+
+  <h3 class="sec">Le frontmatter</h3>
+  <p>Obligatoire, sur <code class="mono">raw/</code> comme sur <code class="mono">wiki/</code>.</p>
+  <div class="file">
+    <div class="bar">en tête de chaque page</div>
+<pre>---
+type: concept
+title: Wiki persistant vs RAG
+aliases: [wiki-vs-rag]
+tags: [pattern-kb, rag, meta]
+created: 2026-04-11
+updated: 2026-08-07
+sources: 1
+confidence: high
+status: stable
+---</pre>
+  </div>
+  <p>Sans lui, le fichier reste trouvable au texte. Il sort de tous les filtres : type, tag, statut, confiance.</p>
+
+  <h3 class="sec">Git</h3>
+  <p>Chaque session se commit. 1 660 commits à ce jour.</p>
+  <p>C'est comme ça que j'ai ressorti le diff d'ingest de juin, trois mois après.</p>
+
+  <h3 class="sec">Les contradictions et les hypothèses</h3>
+  <p>Quand un ingest contredit une page existante, Claude le signale et la ligne va dans un registre.</p>
+  <p>Trois statuts comptent : ouverte, résolue, acceptée. Acceptée veut dire qu'on arrête de la re-discuter.</p>
+  <p>Ma doctrine contient aussi des paris. Ils sont listés, avec le contre-argument cherché en face.</p>
+
+  <div class="file">
+    <div class="bar">wiki/hypotheses.md — deux lignes du tableau</div>
+    <div class="body">
+      <table style="margin:0;font-size:8.5pt">
+        <thead><tr><th>ID</th><th>Hypothèse</th><th>Statut</th><th>Contre-argument</th></tr></thead>
+        <tbody>
+          <tr><td class="num">H-001</td><td>Google Search utilise en prod une mémoire type Titans / MIRAS</td><td>heuristique</td><td>Papier de recherche DeepMind, pas une confirmation de prod. Transfert non observable de l'extérieur.</td></tr>
+          <tr><td class="num">H-004</td><td>Une page « style wiki » est mieux citée en SGE qu'une page statique</td><td>ouvert</td><td>à chercher (prochaine revue mensuelle)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p>Une hypothèse ne passe jamais « validée » sur un ressenti. Il faut une fiche preuve adossée à de la data réelle.</p>
+
+  <h3 class="sec">Le lint</h3>
+  <p>Une fois par semaine, un audit sort un rapport. Il ne répare rien tout seul.</p>
+
+  <div class="term">
+    <div class="bar">wiki/audit/2026-09-20-audit.md</div>
+<pre>fichiers scannés      1 669
+wikilinks scannés    11 684
+
+<span class="c">cibles cassées</span>          167   <span class="d">soit 1,97 % des liens</span>
+  <span class="d">dont référencées depuis wiki/</span>     59   <span class="g">← actionnable</span>
+  <span class="d">dont hors périmètre du vault</span>     108
+
+<span class="c">fichiers orphelins</span>      747
+  <span class="d">raw/</span>                          344
+  <span class="d">agent-synthetic/</span>              300
+  <span class="d">wiki/</span>                          29   <span class="g">← actionnable</span></pre>
+  </div>
+
+  <p>Sur ces 167 cibles cassées, 59 seulement sont référencées depuis <code class="mono">wiki/</code>. Le reste vient d'espaces de travail hors périmètre. Même chose pour les orphelins : 747 au total, 29 dans <code class="mono">wiki/</code>.</p>
+  <p>Il m'a aussi trouvé une catégorie d'erreur que je ne voyais pas. Des pages qui pointent vers des slugs de la mémoire Claude, qui ne résoudront jamais dans Obsidian.</p>
+  <p>Je ne répare pas tout. Je trie, et j'accepte de laisser des liens cassés dans les dossiers qui ne sont pas le wiki.</p>
+</section>
+
+<!-- ================= 6. QUAND ÇA GROSSIT ================= -->
+<section class="part">
+  <header class="sec-open">
+    <h2 class="grad">Ce qui change quand la base devient grosse</h2>
+  </header>
+  <p>Karpathy annonce un seuil. Vers cent sources, <code class="mono">index.md</code> ne suffit plus à router vers les bonnes pages.</p>
+  <p>Chez moi le seuil est tombé le 7 août 2026, à 110 sources. L'outil était déjà là : j'avais ajouté une recherche vectorielle locale le 26 mai.</p>
+  <p>ChromaDB, embeddings <code class="mono">paraphrase-multilingual-mpnet-base-v2</code>, en local et gratuit. Un chunk par section H2. Le fichier de base pèse 231 Mo.</p>
+  <p>C'est là que le frontmatter paie. Chaque morceau de texte indexé garde les champs de son fichier d'origine, donc le filtre passe d'abord sur le type, le tag et le statut. La recherche sémantique ne travaille ensuite que sur ce qui reste.</p>
+
+  <div class="term">
+    <div class="bar">filtrage déterministe avant la recherche cosinus</div>
+<pre><span class="c">$ ./kb search "RRF" --type concept --tag aeo --k 8</span>
+<span class="c">$ ./kb rebuild</span>          <span class="d"># audit frontmatter + concepts.json + index incrémental</span>
+<span class="c">$ ./kb audit-frontmatter</span> <span class="d"># liste les fichiers raw/ sans frontmatter</span></pre>
+  </div>
+
+  <p><code class="mono">index.md</code> n'a pas disparu pour autant. Le wiki compile une fois, le moteur retrouve à chaque question.</p>
+  <p>Le graphe se mesure aussi. <code class="mono">data-proprietaire</code> est cité par 268 fichiers et pointe vers 34 pages.</p>
+  <p>Cette page-là non plus, je ne l'ai pas écrite.</p>
+
+  <div class="graph">
+    <svg viewBox="0 0 560 290" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#c9d6ff" stroke-width="1" fill="none">
+        <path d="M280 145 L120 70"/><path d="M280 145 L440 70"/><path d="M280 145 L90 160"/>
+        <path d="M280 145 L470 160"/><path d="M280 145 L150 240"/><path d="M280 145 L410 240"/>
+        <path d="M280 145 L270 40"/><path d="M280 145 L290 255"/>
+        <path d="M120 70 L270 40"/><path d="M440 70 L470 160"/><path d="M90 160 L150 240"/>
+        <path d="M410 240 L470 160"/><path d="M150 240 L290 255"/>
+      </g>
+      <g font-family="Geist, sans-serif" font-size="9" fill="#6f6f78">
+        <circle cx="280" cy="145" r="30" fill="#2f4fe0"/>
+        <text x="280" y="143" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">data-</text>
+        <text x="280" y="155" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">proprietaire</text>
+        <text x="280" y="192" text-anchor="middle" fill="#2f4fe0" font-size="8.5">268 backrefs</text>
+
+        <circle cx="120" cy="70" r="15" fill="#7fa0ff"/><text x="120" y="47" text-anchor="middle">surprise-gap 132</text>
+        <circle cx="440" cy="70" r="15" fill="#7fa0ff"/><text x="440" y="47" text-anchor="middle">mots-cles-actionnels 130</text>
+        <circle cx="90" cy="160" r="15" fill="#7fa0ff"/><text x="90" y="188" text-anchor="middle">grounding-score 129</text>
+        <circle cx="470" cy="160" r="14" fill="#7fa0ff"/><text x="470" y="188" text-anchor="middle">programmatique-pseo 115</text>
+        <circle cx="150" cy="240" r="13" fill="#9db8ff"/><text x="150" y="266" text-anchor="middle">aeo 98</text>
+        <circle cx="410" cy="240" r="12" fill="#9db8ff"/><text x="410" y="266" text-anchor="middle">product-led-seo 91</text>
+        <circle cx="270" cy="40" r="12" fill="#9db8ff"/><text x="270" y="22" text-anchor="middle">anti-ai-writing 90</text>
+        <circle cx="290" cy="255" r="11" fill="#9db8ff"/><text x="290" y="278" text-anchor="middle">tabou-visibilite 73</text>
+      </g>
+    </svg>
+    <p class="cap">Les 8 concepts les plus cités de ma base. Taille du cercle = nombre de fichiers qui pointent vers la page.</p>
+  </div>
+
+</section>
+
+<!-- ================= 7. CHEZ TOI ================= -->
+<section class="part">
+  <header class="sec-open">
+    <h2 class="grad">Ce que tu dois mettre en place chez toi</h2>
+    <p class="lead">Compte quinze minutes pour l'installation. Le premier ingest prend plus de temps que les suivants, parce que tu corriges ce que Claude a compris.</p>
+  </header>
+
+  <div class="term">
+    <div class="bar">installation</div>
+<pre><span class="c">$ npm install -g @anthropic-ai/claude-code</span>
+<span class="c">$ mkdir ma-base &amp;&amp; cd ma-base</span>
+<span class="c">$ mkdir -p raw/articles raw/data raw/clients raw/notes</span>
+<span class="c">$ mkdir -p wiki/sources wiki/entities wiki/concepts wiki/queries</span>
+<span class="c">$ touch AGENTS.md wiki/index.md wiki/log.md</span>
+<span class="c">$ git init &amp;&amp; git add . &amp;&amp; git commit -m "bootstrap"</span>
+<span class="c">$ claude</span></pre>
+  </div>
+
+  <p>Dans Obsidian, ouvre le dossier <code class="mono">ma-base</code>. Le bouton s'appelle « Open folder as vault ».</p>
+  <p>Obsidian est gratuit. Claude coûte environ 20 € par mois. Un SaaS SEO coûte plutôt 50 à 300 € par mois (relevé avril 2026).</p>
+  <p>Six sections suffisent dans <code class="mono">AGENTS.md</code> pour commencer : la mission, ta doctrine, l'arborescence, les types de pages, les conventions, les workflows.</p>
+
+  <div class="file">
+    <div class="bar">AGENTS.md — le minimum qui tient debout</div>
+<pre># AGENTS.md — ma base SEO
+
+## Mission
+Construire une base persistante qui sert mon travail de consultant SEO.
+
+## Doctrine (non négociable)
+- Pas de source = pas d'affirmation. Aucun chiffre inventé.
+- Un volume manquant s'écrit « à sourcer », jamais un nombre plausible.
+- Conversion avant visibilité. Mots-clés business d'abord.
+
+## Architecture
+raw/ est immuable. L'agent lit, il n'écrit jamais dedans.
+Tout ce qu'il produit va dans wiki/.
+
+## Types de pages
+sources/ (une fiche par document) · entities/ (objets nommés)
+concepts/ (mécaniques) · queries/ (mes questions filées)
+
+## Conventions
+- kebab-case strict, pas d'accents, un sujet = un fichier
+- frontmatter obligatoire : type, title, tags, created, updated,
+  sources, confidence, status
+- wikilinks [[...]] uniquement, 2 liens sortants minimum par page
+
+## Workflows
+INGEST : lire en entier → me résumer et demander l'angle → créer la fiche
+dans sources/ → mettre à jour entities et concepts cités → mettre à jour
+index.md → append dans log.md → me rendre le compte rendu. Une source
+à la fois.
+
+QUERY : lire index.md → ouvrir 3 à 8 pages → répondre avec un wikilink
+sur chaque affirmation → proposer de filer la réponse dans queries/.
+
+LINT : liens cassés, pages orphelines, frontmatter absent, contradictions,
+sources de plus de 12 mois. Rapport seulement, aucune réparation.</pre>
+  </div>
+
+  <p>Tu le feras grossir tout seul. Le mien est parti de là.</p>
+  <p>Pour la première source, ne prends pas n'importe laquelle. Prends celle qui compte : un transcript de call, un export Search Console, ton meilleur audit.</p>
+
+  <div class="chat">
+    <div class="you">&gt; ingère raw/notes/mon-meilleur-audit.md</div>
+    <div class="you" style="margin-top:3mm">&gt; qu'est-ce qu'on sait déjà sur [ton sujet] ? cite tes pages.</div>
+  </div>
+
+  <p>Regarde les wikilinks de la réponse. Si Claude affirme sans lier, ta doctrine n'est pas assez dure, ou ta base est encore vide.</p>
+  <p>Le réseau, lui, commence à la deuxième source.</p>
+</section>
+
+<!-- ================= PAGE FINALE ================= -->
+<section class="final panel">
+  <div>
+    <h2>On regarde tes process ensemble ?</h2>
+    <p>Trente minutes en visio.</p>
+    <p>Tu me montres comment tu travailles aujourd'hui : ce que tu fais à la main, ce que tu répètes pour chaque client et la liste interminable d'outils que tu utilises :)</p>
+    <p>On regarde ensemble ce que tu peux automatiser avec Obsidian, quelles tâches transformer en skills, et par où commencer pour ne pas procrastiner.</p>
+    <a class="cta" href="https://cal.com/tim-boussardon-yzrrb1/30min">Réserver le créneau<span class="u">cal.com/tim-boussardon-yzrrb1/30min</span></a>
+  </div>
+  <div class="foot">
+    <svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="#ffffff"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="#ffffff"/></svg>
+    <span>organikk.co</span>
+  </div>
+</section>
+
+</body>
+</html>

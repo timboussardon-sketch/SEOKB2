@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.h{font-size:40px;font-weight:700;fill:#0B0B0F;letter-spacing:-1.2px}
+.sub{font-size:20px;fill:#333}
+.t{font-size:24px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.5px}
+.s{font-size:17px;fill:#333}
+.a{font-size:15px;font-weight:500;fill:#777}
+.big{font-size:150px;font-weight:700;fill:#0B0B0F;letter-spacing:-6px}
+.v{font-size:17px;font-weight:700;fill:#0B0B0F}
+.line{fill:none;stroke:#0B0B0F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thin{fill:none;stroke:#0B0B0F;stroke-width:1;stroke-linecap:round}
+</style>
+<linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset=".45" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient>
+<filter id="on" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="m"/><feComponentTransfer in="m" result="a"><feFuncA type="linear" slope=".6"/></feComponentTransfer><feComposite in="a" in2="SourceGraphic" operator="in" result="c"/><feBlend in="SourceGraphic" in2="c" mode="overlay"/></filter>
+<marker id="p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#0B0B0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1536" height="1024" fill="#FFF"/>
+<text class="h" x="60" y="110">La semaine du système SEO KB</text>
+<text class="sub" x="60" y="148">Les automatisations préparent. Un seul moment de décision.</text>
+<line class="line" x1="60" y1="560" x2="1470" y2="560" marker-end="url(#p)"/>
+<line class="thin" x1="150" y1="560" x2="150" y2="606"/><circle cx="150" cy="560" r="6" fill="#0B0B0F"/>
+<text class="t" x="150" y="648">Tous les jours, 12:30</text>
+<text class="s" x="150" y="678">ingest-transcript</text>
+<text class="s" x="150" y="702" style="fill:#777">chaque call devient une fiche</text>
+<line class="thin" x1="450" y1="560" x2="450" y2="606"/><circle cx="450" cy="560" r="6" fill="#0B0B0F"/>
+<text class="t" x="450" y="648">Lundi, 08:00</text>
+<text class="s" x="450" y="678">ingest-backlog-sweep</text>
+<text class="s" x="450" y="702" style="fill:#777">trie le raw non digéré</text>
+<line class="thin" x1="720" y1="560" x2="720" y2="606"/><circle cx="720" cy="560" r="6" fill="#0B0B0F"/>
+<text class="t" x="720" y="648">Mercredi, 09:00</text>
+<text class="s" x="720" y="678">resurgence-espacee</text>
+<text class="s" x="720" y="702" style="fill:#777">remonte un concept oublié</text>
+<line class="thin" x1="1230" y1="560" x2="1230" y2="606"/><circle cx="1230" cy="560" r="6" fill="#0B0B0F"/>
+<text class="t" x="1230" y="648">1er du mois, 07:00</text>
+<text class="s" x="1230" y="678">gsc-watcher</text>
+<text class="s" x="1230" y="702" style="fill:#777">puis hypotheses-validation</text>
+<g fill="url(#og)" filter="url(#on)"><circle cx="1040" cy="560" r="64"/></g>
+<line class="thin" x1="1040" y1="496" x2="1040" y2="410"/>
+<text class="h" x="1040" y="360">Vendredi, Tim tranche</text>
+<text class="s" x="1040" y="392">17:30, revue-hebdo : 8 décisions</text>
+<text class="a" x="60" y="964">Cadences prévues dans AGENTS.md §7bis. Ce qui tourne vraiment : wiki/ops/sante-automatisations.</text>
+</svg>

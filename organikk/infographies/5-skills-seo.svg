@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+<defs><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.num{font-size:16px;font-weight:700;fill:#0B0B0F;letter-spacing:.6px}
+.nm{font-size:34px;font-weight:700;fill:#0B0B0F;letter-spacing:-.9px}
+.d{font-size:24px;fill:#333}
+</style>
+<radialGradient id="dg" cx=".32" cy=".38" r=".78"><stop offset="0" stop-color="#3a5cff"/><stop offset=".35" stop-color="#2341e0"/><stop offset=".7" stop-color="#12249a"/><stop offset="1" stop-color="#070f4d"/></radialGradient>
+<filter id="dn" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="arithmetic" k1="0" k2="1" k3=".62" k4="-.31" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in"/></filter>
+</defs>
+<rect width="1080" height="1350" fill="#FFF"/>
+<g fill="url(#dg)" filter="url(#dn)"><path d="M48 52 Q48 40 60 40 H234 Q242 40 248 48 L258 62 Q261 66 268 66 H1020 Q1032 66 1032 78 V196 Q1032 208 1020 208 H60 Q48 208 48 196 Z"/></g>
+<text x="88" y="148" style="font-size:60px;font-weight:700;fill:#FFF;letter-spacing:-1.8px">5 skills SEO</text>
+<path d="M48 248 Q48 240 56 240 H154 Q162 240 168 248 L178 260 Q181 264 188 264 H1024 Q1032 264 1032 272 V426 Q1032 434 1024 434 H56 Q48 434 48 426 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="72" y="258">01</text>
+<text class="nm" x="80" y="320">Skill GEO</text>
+<text class="d" x="80" y="364">Analyser une page pour identifier les améliorations</text>
+<text class="d" x="80" y="396">possibles pour les moteurs génératifs.</text>
+<path d="M48 464 Q48 456 56 456 H154 Q162 456 168 464 L178 476 Q181 480 188 480 H1024 Q1032 480 1032 488 V642 Q1032 650 1024 650 H56 Q48 650 48 642 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="72" y="474">02</text>
+<text class="nm" x="80" y="536">Skill recherche de mots-clés</text>
+<text class="d" x="80" y="580">Explorer une thématique et identifier les recherches</text>
+<text class="d" x="80" y="612">pertinentes pour une offre.</text>
+<path d="M48 680 Q48 672 56 672 H154 Q162 672 168 680 L178 692 Q181 696 188 696 H1024 Q1032 696 1032 704 V858 Q1032 866 1024 866 H56 Q48 866 48 858 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="72" y="690">03</text>
+<text class="nm" x="80" y="752">Skill mots-clés décisionnels</text>
+<text class="d" x="80" y="796">Repérer les requêtes qui présentent le meilleur</text>
+<text class="d" x="80" y="828">potentiel de conversion.</text>
+<path d="M48 896 Q48 888 56 888 H154 Q162 888 168 896 L178 908 Q181 912 188 912 H1024 Q1032 912 1032 920 V1074 Q1032 1082 1024 1082 H56 Q48 1082 48 1074 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="72" y="906">04</text>
+<text class="nm" x="80" y="968">Skill brief</text>
+<text class="d" x="80" y="1012">Préparer une structure éditoriale à partir des mots-clés</text>
+<text class="d" x="80" y="1044">et des intentions de recherche.</text>
+<path d="M48 1112 Q48 1104 56 1104 H154 Q162 1104 168 1112 L178 1124 Q181 1128 188 1128 H1024 Q1032 1128 1032 1136 V1290 Q1032 1298 1024 1298 H56 Q48 1298 48 1290 Z" fill="#FFF" stroke="#0B0B0F" stroke-opacity=".38" stroke-width="1.5"/>
+<text class="num" x="72" y="1122">05</text>
+<text class="nm" x="80" y="1184">Skill FAQ</text>
+<text class="d" x="80" y="1228">Identifier les questions importantes auxquelles</text>
+<text class="d" x="80" y="1260">une page doit répondre.</text>
+</svg>

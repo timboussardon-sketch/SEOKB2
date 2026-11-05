@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200">
+<defs><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');text{font-family:Inter,Arial,sans-serif;fill:#0B0B0F}.title{font-size:30px;font-weight:700;letter-spacing:-.7px}.body{font-size:23px;fill:#333}.small{font-size:19px;fill:#777}.label{font-size:17px;font-weight:500;fill:#777;letter-spacing:1px}</style>
+<radialGradient id="dg" cx=".32" cy=".38" r=".78"><stop offset="0" stop-color="#3a5cff"/><stop offset=".35" stop-color="#2341e0"/><stop offset=".7" stop-color="#12249a"/><stop offset="1" stop-color="#070f4d"/></radialGradient>
+<filter id="dn" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".95" numOctaves="2" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="arithmetic" k1="0" k2="1" k3=".62" k4="-.31" result="g"/><feComposite in="g" in2="SourceGraphic" operator="in"/></filter></defs><rect width="1800" height="1200" fill="#FFFFFF"/>
+<path d="M300 330 V390 H900 V440" fill="none" stroke="#2341e0" stroke-width="1.5"/>
+<path d="M900 330 V440" fill="none" stroke="#2341e0" stroke-width="1.5"/>
+<path d="M1500 330 V390 H900 V440" fill="none" stroke="#2341e0" stroke-width="1.5"/>
+<path d="M1260 575 H1140" fill="none" stroke="#2341e0" stroke-width="1.5"/>
+<path d="M1500 820 V760 H900 V710" fill="none" stroke="#2341e0" stroke-width="1.5"/>
+<path d="M900 820 V710" fill="none" stroke="#2341e0" stroke-width="1.5"/>
+<path d="M300 820 V760 H900 V710" fill="none" stroke="#2341e0" stroke-width="1.5"/>
+<path d="M540 575 H660" fill="none" stroke="#2341e0" stroke-width="1.5"/>
+<rect x="297" y="327" width="6" height="6" fill="#2341e0"/>
+<rect x="897" y="327" width="6" height="6" fill="#2341e0"/>
+<rect x="1497" y="327" width="6" height="6" fill="#2341e0"/>
+<rect x="1257" y="572" width="6" height="6" fill="#2341e0"/>
+<rect x="1497" y="817" width="6" height="6" fill="#2341e0"/>
+<rect x="897" y="817" width="6" height="6" fill="#2341e0"/>
+<rect x="297" y="817" width="6" height="6" fill="#2341e0"/>
+<rect x="537" y="572" width="6" height="6" fill="#2341e0"/>
+<rect x="60" y="60" width="480" height="270" rx="12" fill="white" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="99" cy="105" r="18" fill="#0B0B0F"/>
+<text x="99" y="112" class="body" text-anchor="middle" style="fill:white;font-size:19px;font-weight:700">1</text>
+<text x="132" y="114" class="title" >Partir de ton offre</text>
+<text x="90" y="168" class="body" >Ce que tu vends. À qui.</text>
+<text x="90" y="204" class="body" >Le problème à résoudre.</text>
+<text x="90" y="240" class="body" >Le devis, l’appel ou l’achat attendu.</text>
+<text x="90" y="300" class="small" >Le besoin commercial guide la recherche.</text>
+<rect x="660" y="60" width="480" height="270" rx="12" fill="white" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="699" cy="105" r="18" fill="#0B0B0F"/>
+<text x="699" y="112" class="body" text-anchor="middle" style="fill:white;font-size:19px;font-weight:700">2</text>
+<text x="732" y="114" class="title" >Croiser tes sources</text>
+<text x="690" y="168" class="body" >Search Console · Keyword Planner</text>
+<text x="690" y="204" class="body" >Google Suggest · résultats Google</text>
+<text x="690" y="240" class="body" >Appels et emails des prospects</text>
+<text x="690" y="300" class="small" >Chaque information garde sa provenance.</text>
+<rect x="1260" y="60" width="480" height="270" rx="12" fill="white" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="1299" cy="105" r="18" fill="#0B0B0F"/>
+<text x="1299" y="112" class="body" text-anchor="middle" style="fill:white;font-size:19px;font-weight:700">3</text>
+<text x="1332" y="114" class="title" >Explorer les requêtes</text>
+<text x="1290" y="168" class="body" >Prix, problèmes, comparaisons,</text>
+<text x="1290" y="204" class="body" >questions et besoins précis.</text>
+<text x="1290" y="240" class="body" >Retrouver les mots des prospects.</text>
+<text x="1290" y="300" class="small" >Skill : recherche de mots-clés</text>
+<rect x="1260" y="440" width="480" height="270" rx="12" fill="white" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="1299" cy="485" r="18" fill="#0B0B0F"/>
+<text x="1299" y="492" class="body" text-anchor="middle" style="fill:white;font-size:19px;font-weight:700">4</text>
+<text x="1332" y="494" class="title" >Regrouper par intention</text>
+<text x="1290" y="548" class="body" >Rassembler les formulations</text>
+<text x="1290" y="584" class="body" >qui répondent au même besoin.</text>
+<text x="1290" y="620" class="body" >Une intention → une page cible.</text>
+<text x="1290" y="680" class="small" >Skill : clustering de mots-clés</text>
+<rect x="1260" y="820" width="480" height="270" rx="12" fill="white" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="1299" cy="865" r="18" fill="#0B0B0F"/>
+<text x="1299" y="872" class="body" text-anchor="middle" style="fill:white;font-size:19px;font-weight:700">5</text>
+<text x="1332" y="874" class="title" >Filtrer le potentiel business</text>
+<text x="1290" y="928" class="body" >Lien avec l’offre et la conversion.</text>
+<text x="1290" y="964" class="body" >Preuves propres au client.</text>
+<text x="1290" y="1000" class="body" >Raison de cliquer après une réponse IA.</text>
+<text x="1290" y="1060" class="small" >Effet IA : estimation qualitative.</text>
+<rect x="660" y="820" width="480" height="270" rx="12" fill="white" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="699" cy="865" r="18" fill="#0B0B0F"/>
+<text x="699" y="872" class="body" text-anchor="middle" style="fill:white;font-size:19px;font-weight:700">6</text>
+<text x="732" y="874" class="title" >Prioriser les pages</text>
+<text x="690" y="928" class="body" >Vérifier les pages déjà présentes.</text>
+<text x="690" y="964" class="body" >Proposer de créer ou de retravailler.</text>
+<text x="690" y="1000" class="body" >Viser 3 à 5 pages prioritaires.*</text>
+<text x="690" y="1060" class="small" >Les données justifient leur ordre.</text>
+<rect x="60" y="820" width="480" height="270" rx="12" fill="white" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="99" cy="865" r="18" fill="#0B0B0F"/>
+<text x="99" y="872" class="body" text-anchor="middle" style="fill:white;font-size:19px;font-weight:700">7</text>
+<text x="132" y="874" class="title" >Tu valides chaque étape</text>
+<text x="90" y="928" class="body" >Les agents proposent.</text>
+<text x="90" y="964" class="body" >Tu acceptes ou tu corriges.</text>
+<text x="90" y="1000" class="body" >Ton accord ouvre l’étape suivante.</text>
+<text x="90" y="1060" class="small" >Aucune page ne part seule en production.</text>
+<rect x="60" y="440" width="480" height="270" rx="12" fill="white" stroke="#0B0B0F" stroke-opacity=".35" stroke-width="1.5"/>
+<circle cx="99" cy="485" r="18" fill="#0B0B0F"/>
+<text x="99" y="492" class="body" text-anchor="middle" style="fill:white;font-size:19px;font-weight:700">8</text>
+<text x="132" y="494" class="title" >Conserver et réutiliser</text>
+<text x="90" y="548" class="body" >raw/ : les documents d’origine.</text>
+<text x="90" y="584" class="body" >wiki/ : analyses et méthodes.</text>
+<text x="90" y="620" class="body" >Les résultats mesurés y reviennent.</text>
+<text x="90" y="680" class="small" >La mission suivante réutilise cette mémoire.</text>
+<g fill="url(#dg)" filter="url(#dn)"><rect x="660" y="440" width="480" height="270" rx="12"/></g>
+<text x="696" y="484" class="label" style="fill:white;opacity:.8">TON PROTOCOLE SEO</text>
+<text x="696" y="544" class="title" style="fill:white;font-size:43px">Tes mots-clés</text>
+<text x="696" y="595" class="title" style="fill:white;font-size:43px">business</text>
+<text x="696" y="647" class="body" style="fill:white;font-size:22px">Claude Code / Codex exécutent.</text>
+<text x="696" y="679" class="body" style="fill:white;font-size:22px">Obsidian conserve la mémoire.</text>
+<text x="60" y="1148" class="label" style="fill:#0B0B0F;font-weight:700;letter-spacing:2px">ORGANIKK</text>
+<text x="1740" y="1148" class="small" text-anchor="end">* 3 à 5 pages : objectif du protocole décrit dans le post de Tim.</text>
+</svg>

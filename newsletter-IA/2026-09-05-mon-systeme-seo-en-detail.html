@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mon système SEO en détail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FCFCFB;
+    --ink:#14161A;
+    --ink-2:#3A4048;
+    --muted:#6B7280;
+    --accent:#1B4DE4;
+    --accent-soft:#F0F4FE;
+    --line:#E4E5E2;
+    --line-strong:#CFD2CE;
+    --font: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:64px 24px 120px}
+
+  header.head{padding-bottom:36px;margin-bottom:44px;border-bottom:1px solid var(--line)}
+  h1{
+    font-size:40px;line-height:1.15;font-weight:600;letter-spacing:-.02em;
+    margin:0 0 20px;color:var(--ink);
+  }
+  .lede{font-size:19px;line-height:1.6;color:var(--ink-2);margin:0}
+  .meta{
+    font-family:var(--mono);font-size:12px;color:var(--muted);
+    margin-top:24px;letter-spacing:.01em;
+  }
+
+  h2{
+    font-size:27px;line-height:1.25;font-weight:600;letter-spacing:-.015em;
+    color:var(--accent);margin:64px 0 20px;
+  }
+  h3{
+    font-size:19px;line-height:1.35;font-weight:600;letter-spacing:-.01em;
+    color:var(--ink);margin:44px 0 12px;
+  }
+  h4{
+    font-size:16px;font-weight:600;color:var(--ink);margin:28px 0 8px;
+  }
+  p{margin:0 0 20px}
+  a{color:var(--accent)}
+
+  ul{margin:0 0 20px;padding:0;list-style:none}
+  ul li{position:relative;padding-left:20px;margin-bottom:10px}
+  ul li::before{
+    content:"";position:absolute;left:0;top:10px;
+    width:6px;height:6px;background:var(--accent);border-radius:1px;
+  }
+  ol{margin:0 0 20px;padding-left:22px}
+  ol li{margin-bottom:10px}
+
+  .box{
+    border:1px solid var(--line-strong);border-radius:8px;
+    padding:24px 24px 8px;margin:28px 0;background:#fff;
+  }
+  .box h4:first-child{margin-top:0}
+  .box p:last-child{margin-bottom:16px}
+
+  .note{
+    background:var(--accent-soft);border:1px solid #D6E1FB;border-radius:8px;
+    padding:20px 24px 4px;margin:28px 0;
+  }
+  .note p{font-size:16px}
+
+  .table-wrap{overflow-x:auto;margin:28px 0}
+  table{
+    width:100%;border-collapse:collapse;font-size:15px;
+    border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;
+  }
+  th{
+    text-align:left;font-weight:600;font-size:13px;
+    background:#F4F5F2;color:var(--ink);
+    padding:12px 16px;border-bottom:1px solid var(--line-strong);
+    white-space:nowrap;
+  }
+  td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+  tr:last-child td{border-bottom:none}
+  td:first-child{color:var(--ink);font-weight:500}
+
+  pre{
+    font-family:var(--mono);font-size:13px;line-height:1.6;
+    background:#F7F8F5;border:1px solid var(--line);border-radius:8px;
+    padding:20px;overflow-x:auto;margin:24px 0;color:var(--ink-2);
+    white-space:pre-wrap;
+  }
+  code{font-family:var(--mono);font-size:14px;background:#F2F3F0;padding:2px 5px;border-radius:4px}
+  pre code{background:none;padding:0;font-size:13px}
+
+  .rule{border:none;border-top:1px solid var(--line);margin:56px 0}
+  .data{font-family:var(--mono);font-size:14px;color:var(--muted)}
+  strong{font-weight:600;color:var(--ink)}
+
+  footer.end{margin-top:72px;padding-top:28px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+
+  @media (max-width:600px){
+    .wrap{padding:40px 20px 80px}
+    h1{font-size:31px}
+    h2{font-size:23px;margin-top:48px}
+    body{font-size:16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="head">
+  <h1>Mon système SEO en détail</h1>
+  <p class="lede">Ce que je fais tourner tous les jours pour livrer du SEO : ce que ça sort, comment c'est monté, et les automatisations qui tournent sans moi.</p>
+  <p class="meta">5 septembre 2026 · Timothée Boussardon</p>
+</header>
+
+<p>Je montre mon système depuis plusieurs mois par petits bouts. Voici la version complète : les trois choses qu'il produit le mieux, la façon dont il est monté, et les automatisations que j'installe chez les gens que j'accompagne.</p>
+
+<p>Tout ce qui suit tourne chez moi aujourd'hui. Aucune projection, aucun chiffre estimé.</p>
+
+<h2>Partie 1. Le système en action</h2>
+
+<p>Trois exemples, puis la liste de tout ce qui tourne.</p>
+
+<h3>Exemple 1. Un document d'audit à partir d'une seule URL</h3>
+
+<p>C'est celui qui m'a fait comprendre que je devais tout réorganiser.</p>
+
+<p>Avant un call de vente, je prépare un document d'audit. Avant, ça me prenait plusieurs heures : lire le site, compter les pages, comprendre le business, sortir un angle, mettre en page. Beaucoup de prestataires sautent cette étape. Moi je la garde, parce que c'est elle qui fait la différence pendant l'appel.</p>
+
+<p>Aujourd'hui je donne une URL. Rien d'autre. Pas d'accès à leur Search Console, pas d'outil payant.</p>
+
+<p>Le système va chercher ce qui est public : le sitemap (la liste des pages que le site déclare à Google), les pages d'offre, les mentions légales, le LinkedIn, les registres d'entreprises, la date de dernière modification de chaque page. Puis il sort un document mis en page :</p>
+
+<ul>
+  <li>qui ils sont, depuis quand, qui paie et pour quoi</li>
+  <li>l'état réel du site, section par section, avec le nombre de pages utiles</li>
+  <li>le constat business, en deux ou trois décisions tranchées</li>
+  <li>un tableau des pages à produire, avec vérification de ce qui existe déjà</li>
+  <li>une roadmap sur 90 jours</li>
+  <li>les questions à poser pendant le call</li>
+</ul>
+
+<div class="note">
+  <p><strong>La règle qui tient tout.</strong> Aucun volume de recherche, aucune position, aucun chiffre de trafic inventé. Ce qui n'est pas vérifiable est marqué « à récupérer au call ». Un chiffre inventé qui se fait vérifier en direct devant le prospect, c'est l'appel qui tombe et la crédibilité avec.</p>
+</div>
+
+<p>Il reste une relecture. Je coupe, je durcis l'angle, je change l'ordre. Le document sort bon à 90 %, et je passe mon temps sur les 10 % qui comptent.</p>
+
+<h3>Exemple 2. La chaîne mots-clés</h3>
+
+<p>Trois étapes, trois fichiers de méthode : chercher, regrouper, trier.</p>
+
+<p>Le dernier passage complet, sur mon propre site le 31 juillet : 73 mots-clés qualifiés en sortie d'étape 1. Étape 2, ils sont regroupés par page (un groupe de requêtes qui affichent les mêmes résultats Google = une seule page), avec vérification contre les pages déjà en ligne. Étape 3, il en reste 18, chacun avec sa page cible, son format, son bouton d'action et une note sur 10.</p>
+
+<p>Ce qui m'intéresse le plus dans la sortie, c'est ce qu'elle interdit :</p>
+
+<ul>
+  <li>« consultant seo » recouvre une page que j'ai déjà : on optimise l'existante, on ne duplique pas</li>
+  <li>le groupe « agence seo » est bloqué tant que je n'ai pas tranché mon positionnement agence ou consultant</li>
+  <li>« audit seo agence » est en attente : vérifier d'abord qu'il ne recoupe pas mes deux outils gratuits</li>
+</ul>
+
+<p>Un export d'outil classique ne dit jamais ça. Il trie par volume et te laisse te débrouiller. Chez moi il n'y a pas de colonne volume dans le livrable, et ce n'est pas négociable. Le volume ne dit pas si la requête peut devenir un client.</p>
+
+<h3>Exemple 3. Le registre qui note quand je me trompe</h3>
+
+<p>Celui-là, personne ne le montre. C'est pourtant le plus utile.</p>
+
+<p>Quand je publie une page pour un client, j'écris une prédiction datée, avec la donnée de départ prise dans la Search Console le jour même. Exemple réel, sur un client e-commerce :</p>
+
+<div class="box">
+  <h4>Prédiction P-2026-06-03-1</h4>
+  <p class="data">Page : guide de choix produit, refonte complète.<br>
+  Départ, 10 juin : position moyenne 8,45 · 1 330 clics · 23 151 impressions.<br>
+  Cible : position moyenne sous 5 à 30 jours.<br>
+  Échéance : 3 juillet.</p>
+</div>
+
+<p>À l'échéance, le système va chercher la donnée réelle et tranche. Résultat de celle-là : rien n'a été mesuré au 3 juillet, faute d'export déposé. La prédiction est repassée en « non résolue » et l'hypothèse qu'elle devait valider est retombée à zéro. En reprenant la mesure le 3 septembre, la vraie raison est sortie : la refonte n'avait jamais été mise en ligne côté client. La page était restée telle quelle depuis avril.</p>
+
+<p>Je garde ce registre parce que sans mesure avant et après, un résultat client n'est qu'une affirmation. Et parce qu'un système qui ne peut pas se tromper ne m'apprend rien.</p>
+
+<h3>Ce qui tourne aujourd'hui</h3>
+
+<p>71 fichiers de méthode, un par tâche. Voilà les familles, avec ce que chacune produit.</p>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Famille</th><th>Ce que ça sort</th></tr></thead>
+  <tbody>
+    <tr><td>Avant-vente</td><td>Document d'audit sur URL publique, proposition commerciale, compte rendu de call, roadmap de prestation client par client</td></tr>
+    <tr><td>Mots-clés</td><td>Recherche, regroupement en pages, tri des requêtes qui convertissent, modèles de pages à dupliquer</td></tr>
+    <tr><td>Rédaction</td><td>Brief détaillé, article complet, FAQ de page, relecture qui traque l'écriture automatique</td></tr>
+    <tr><td>Audit technique</td><td>Indexation, pages qui se cannibalisent, maillage interne, données structurées, vitesse, opportunités Search Console</td></tr>
+    <tr><td>Contenu de marque</td><td>Brèves quotidiennes, newsletter, journal LinkedIn, revue de presse</td></tr>
+    <tr><td>Capitalisation</td><td>Tri des sources non digérées, registre d'hypothèses, fiches de preuve, revue du vendredi</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Partie 2. Comment c'est monté</h2>
+
+<h3>Pourquoi la fenêtre de chat seule ne suffit pas</h3>
+
+<p>La plupart des prestataires utilisent déjà l'IA. Ils ouvrent une fenêtre, collent deux fichiers, demandent un audit. Le résultat est moyen et il faut tout reprendre.</p>
+
+<p>Ce n'est pas un problème de modèle. C'est qu'il lui manque trois choses :</p>
+
+<ul>
+  <li><strong>Le contexte.</strong> Il ne sait rien de ton métier, de tes clients, ni de ce que tu as décidé il y a trois mois.</li>
+  <li><strong>Ta méthode.</strong> Elle n'est écrite nulle part. Tu la réexpliques à chaque conversation, en moins bien à chaque fois.</li>
+  <li><strong>Ta data.</strong> Sans donnée à toi, il sort ce que tout le monde a déjà. C'est de la commodité, et personne ne paie pour de la commodité.</li>
+</ul>
+
+<p>Je le répète depuis un moment : si t'es pas bon en SEO, Claude ne sera pas bon. Le système n'apporte pas le métier. Il l'exécute vite et sans oubli.</p>
+
+<h3>Les trois couches</h3>
+
+<h4>1. La connaissance</h4>
+
+<p>Deux dossiers, et une règle d'or.</p>
+
+<p><code>raw/</code> contient tout ce que je récupère : transcripts de calls, exports Search Console, articles, notes vocales. Ce dossier n'est jamais modifié, ni par moi ni par Claude. C'est la source de vérité.</p>
+
+<p><code>wiki/</code> est écrit par Claude à partir de <code>raw/</code>. Fiches de concept, fiches d'acteur, résumés de source, synthèses. Moi je le lis, je ne l'écris pas.</p>
+
+<p class="data">État au 5 septembre : 1 053 notes · 6 665 liens entre elles · 69 fiches concept · 69 fiches acteur ou outil · 124 sources résumées.</p>
+
+<p>Le nombre de liens compte plus que le nombre de notes. C'est lui qui fait qu'une question sur un sujet ramène aussi ce que j'ai écrit sur trois sujets voisins.</p>
+
+<h4>2. La méthode</h4>
+
+<p>Un fichier par tâche. Dedans : quand le déclencher, les étapes dans l'ordre, les règles dures, le format de sortie exact.</p>
+
+<p>Ce n'est pas un prompt. Un prompt se perd à la fin de la conversation. Ces fichiers restent, se corrigent, et se rejouent à l'identique dans six mois.</p>
+
+<p>La façon la plus rapide de les écrire : reprendre tes trois meilleurs livrables passés, les donner à Claude, lui demander de reconstruire la méthode qui a servi à les produire. Tu corriges ensuite, c'est bien plus rapide que de partir de zéro.</p>
+
+<h4>3. Les branchements</h4>
+
+<p>Search Console, Drive, Notion, le CMS du client, Figma. C'est ce qui fait passer du texte dans une fenêtre à un livrable dans l'outil où travaille vraiment le client.</p>
+
+<h3>Monter le tien</h3>
+
+<ol>
+  <li><strong>Installe l'application en version logiciel</strong>, pas seulement l'onglet du navigateur. C'est ce qui donne accès à tes fichiers locaux.</li>
+  <li><strong>Branche tes outils</strong> dans les connecteurs. Pour démarrer, Notion et Drive suffisent.</li>
+  <li><strong>Crée le dossier de contexte</strong> et pose la règle des deux dossiers (bloc ci-dessous).</li>
+  <li><strong>Construis tes modèles</strong> à partir de tes meilleurs livrables passés.</li>
+  <li><strong>Implémente un seul workflow</strong>, celui que tu refais le plus souvent. Fais-le tourner en supervisé, corrige le fichier de méthode à chaque écart, et seulement ensuite programme la répétition.</li>
+</ol>
+
+<p>Le fichier de règles à coller dans ton dossier, c'est celui-là. Il tient en vingt lignes et c'est lui qui fait tout le travail :</p>
+
+<pre><code># Méthode de travail : deux dossiers, raw/ et wiki/
+
+## Les deux dossiers
+- `raw/` = mes sources brutes (articles, transcripts, notes, idées).
+  Tu LIS raw/, tu ne le modifies JAMAIS. C'est la source de vérité.
+- `wiki/` = les notes distillées. C'est TON domaine : tu écris et tu
+  mets à jour ces pages. Moi je les lis, je ne les écris pas.
+
+## Boucle d'ingestion (quand je dépose une source)
+1. Lis la source dans raw/.
+2. Résume-moi les points clés.
+3. Crée ou mets à jour la page concernée dans wiki/.
+4. Relie les pages entre elles.
+5. Tiens à jour le catalogue et le journal des ajouts.
+
+## Règles
+- raw/ est immuable. Tout ce que tu produis va dans wiki/.
+- Chaque fichier commence par un en-tête (titre, type, date, tags).
+- Une bonne réponse se classe dans wiki/, elle ne meurt pas dans le chat.</code></pre>
+
+<h3>La maintenance</h3>
+
+<p>La question que je reçois le plus : « ça doit être infernal à maintenir ». Non, parce que ce sont des routines qui s'en chargent.</p>
+
+<ul>
+  <li>dimanche 8h00 : audit du vault, cohérence des liens et des en-têtes</li>
+  <li>dimanche 11h50 : purge des brouillons abandonnés</li>
+  <li>lundi 8h00 : tri des sources déposées et pas encore traitées</li>
+  <li>lundi 8h15 : contrôle de santé de toutes les automatisations</li>
+  <li>mercredi 9h00 : remontée d'une note oubliée depuis longtemps</li>
+  <li>vendredi 17h30 : revue de la semaine et décisions à prendre</li>
+</ul>
+
+<p>Ce que je fais, moi, c'est lire la revue du vendredi et trancher. Une vingtaine de minutes.</p>
+
+<h2>Partie 3. Les automatisations</h2>
+
+<p>Une automatisation, c'est un workflow qui se déclenche tout seul à heure fixe et qui te dépose son résultat quelque part.</p>
+
+<p>Les six qui suivent, je les ai cadrées avec une consultante SEO que j'accompagne, qui gère une douzaine de comptes e-commerce. Elles sont pensées pour quelqu'un qui a plusieurs clients et pas le temps d'aller creuser dans chacun.</p>
+
+<h3>1. Résumé par client, puis résumé global</h3>
+
+<p>Chaque semaine, Claude relit ce qui s'est passé sur un client et sort trois blocs : les actions déjà en place, celles qui restent, deux ou trois points d'attention. Puis un résumé qui regroupe tous les clients.</p>
+
+<p>Ce qu'il faut avant : savoir d'où viennent tes comptes rendus de call (un outil de transcription, ou l'enregistreur de ton ordinateur), et décider où le résumé atterrit.</p>
+
+<h3>2. Opportunités Search Console</h3>
+
+<p>Claude repère les requêtes où tu es mal placé, typiquement en page 2 autour de la position 11 à 15, et ne remonte que celles qui ont un intérêt commercial réel.</p>
+
+<p>C'est le filtre qui change tout. Sans lui, tu récupères une liste de requêtes génériques bien positionnées qui ne rapportent rien. Il faut donc lui donner soit tes critères (intention d'achat, coût par clic), soit ta liste de mots-clés déjà validée.</p>
+
+<h3>3. Briefs depuis le planning éditorial</h3>
+
+<p>Claude lit ton planning (un simple Google Sheet) et prépare les briefs des contenus prévus dans les 30 prochains jours. Pas tout le planning d'un coup : il va encore changer.</p>
+
+<p>Point important : tu dois lui dire quelles lignes sont des pages stratégiques. Sur celles-là il prépare une base, et tu gardes la main sur la structure et l'angle. Sur les déclinaisons, il va plus loin tout seul.</p>
+
+<h3>4. Revue de presse thématique</h3>
+
+<p>Une veille récurrente sur un sujet : le tien, ou le secteur d'un client. Ça alimente une rubrique actualités chez lui et ça te donne de la matière pour tes prochains articles.</p>
+
+<p>Il garde en mémoire ce qu'il trouve, donc la veille de mars sert au brief de juin.</p>
+
+<h3>5. Étude de marché</h3>
+
+<p>Pour un client donné, une étude construite à partir de sources que tu choisis toi-même. Tu lui donnes deux ou trois sources fiables au départ, il complète avec du vérifiable.</p>
+
+<p>Demander « fais-moi une étude de marché » dans le vide donne un résultat générique. Les sources de départ font toute la différence.</p>
+
+<h3>6. Score de santé du lundi</h3>
+
+<p>Chaque lundi matin, l'état du site : indexation, erreurs 404 apparues dans la semaine, écarts par rapport à la semaine précédente. Pour un client qui vient de migrer, un contrôle en plus sur les redirections.</p>
+
+<p>Le score est construit sur des critères écrits, jamais sur une note sortie de nulle part.</p>
+
+<h3>Les quatre règles qui rendent une automatisation sûre</h3>
+
+<div class="box">
+  <h4>À écrire dans chaque automatisation</h4>
+  <ul>
+    <li>Elle pose ses questions de cadrage avant de construire quoi que ce soit.</li>
+    <li>Elle montre son premier résultat avant qu'on programme la répétition.</li>
+    <li>Elle ne publie jamais et n'envoie jamais un email à ta place. Elle prépare, tu valides.</li>
+    <li>Elle donne la donnée exacte ou elle dit qu'elle ne l'a pas. Jamais d'approximation.</li>
+  </ul>
+</div>
+
+<h3>Chez moi</h3>
+
+<p>25 routines tournent en permanence sur mon ordinateur. Quelques-unes, avec leur heure :</p>
+
+<ul>
+  <li>9h00 : revue de presse du jour</li>
+  <li>12h00 : synchronisation du vault et reconstruction de l'index de recherche</li>
+  <li>12h20 : brèves du jour</li>
+  <li>23h00 : récapitulatif de ce qui a été produit et poussé dans la journée</li>
+  <li>le 1er du mois, 7h00 : récupération des données Search Console</li>
+  <li>le 3 du mois, 7h30 : résolution des prédictions arrivées à échéance</li>
+  <li>le 5 du mois, 8h30 : contrôle d'indexation</li>
+</ul>
+
+<p>Deux mises en garde, apprises en me faisant avoir.</p>
+
+<p><strong>Une tâche programmée consomme beaucoup plus qu'une demande ponctuelle.</strong> Sur un abonnement à 20 $ par mois, tu ne multiplies pas les automatisations sans regarder ce que ça coûte.</p>
+
+<p><strong>Une automatisation tombe en silence.</strong> La mienne sur les emails est restée morte trois jours sans que je le voie. Depuis, le récapitulatif de 23h sert aussi de preuve de vie : s'il n'arrive pas, c'est que quelque chose est cassé.</p>
+
+<h2>Ce que le système ne fait pas</h2>
+
+<p>La partie que les démonstrations ne montrent jamais.</p>
+
+<ul>
+  <li><strong>Au-delà d'environ 1 000 pages, je garde les outils classiques.</strong> Sur un catalogue à plusieurs milliers de références, un crawler fait mieux le travail. Je le dis aux clients concernés avant de signer.</li>
+  <li><strong>Les pages business et les pages piliers restent écrites à la main.</strong> Structure, angle, hiérarchie des titres. Cas vécu chez une consultante que j'accompagne : une page produite en quasi automatique, sans data propriétaire suffisante derrière, client mécontent. La correction n'était pas dans le modèle, elle était dans la matière première.</li>
+  <li><strong>Un résultat non mesuré ne compte pas.</strong> C'est ce que dit l'exemple 3 de la partie 1 : la prédiction est retombée à zéro, et j'ai découvert trois mois plus tard que la page n'avait jamais été mise en ligne.</li>
+  <li><strong>La décision reste chez moi.</strong> Claude propose, je tranche, dans cet ordre. Quand il m'explique que « c'est comme ça qu'on fait », je tiens ma position et je lui redonne le contexte.</li>
+</ul>
+
+<h2>Où ça va</h2>
+
+<p>Ce que je vois arriver, en deux points.</p>
+
+<p>Le goulot d'étranglement n'est plus la production. Écrire l'article, sortir l'audit, mettre en page la proposition : tout ça se fait maintenant en une fraction du temps. Ce qui devient rare, c'est de savoir quoi produire, sur quelle requête, avec quelle donnée, et quand ne rien produire du tout.</p>
+
+<p>Demain, tout le monde saura brancher un modèle sur ses fichiers. La partie copiable de ce système sera copiée. Ce qui restera, c'est ce que le modèle n'a pas : la data de tes clients, tes mesures avant et après, et tes positions quand il faut dire non à quelque chose qui a l'air bien.</p>
+
+<footer class="end">
+  <p>Une question sur une partie précise du système, ou une automatisation que tu voudrais voir détaillée ? Réponds à ce mail, je réponds à tout.</p>
+</footer>
+
+</div>
+</body>
+</html>

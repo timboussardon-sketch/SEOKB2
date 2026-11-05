@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap');
+text{font-family:Inter,sans-serif}
+.h{font-size:40px;font-weight:700;fill:#0B0B0F;letter-spacing:-1.2px}
+.sub{font-size:20px;fill:#333}
+.t{font-size:24px;font-weight:700;fill:#0B0B0F;letter-spacing:-0.5px}
+.s{font-size:17px;fill:#333}
+.a{font-size:15px;font-weight:500;fill:#777}
+.big{font-size:150px;font-weight:700;fill:#0B0B0F;letter-spacing:-6px}
+.v{font-size:17px;font-weight:700;fill:#0B0B0F}
+.line{fill:none;stroke:#0B0B0F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thin{fill:none;stroke:#0B0B0F;stroke-width:1;stroke-linecap:round}
+</style>
+<linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f4fe0"/><stop offset=".45" stop-color="#2f4fe0"/><stop offset="1" stop-color="#7fa0ff"/></linearGradient>
+<filter id="on" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch" result="t"/><feColorMatrix in="t" type="saturate" values="0" result="m"/><feComponentTransfer in="m" result="a"><feFuncA type="linear" slope=".6"/></feComponentTransfer><feComposite in="a" in2="SourceGraphic" operator="in" result="c"/><feBlend in="SourceGraphic" in2="c" mode="overlay"/></filter>
+<marker id="p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#0B0B0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1536" height="1024" fill="#FFF"/>
+<text class="h" x="60" y="110">Une preuve par question d'acheteur</text>
+<text class="sub" x="60" y="148">Les pages sectorielles HubSpot, bâties sur de vrais cas clients</text>
+<circle cx="380" cy="540" r="210" fill="none" stroke="#F5F5F5" stroke-width="34"/>
+<g fill="url(#og)" filter="url(#on)"><path d="M380 313.0 A227.0 227.0 0 1 1 270.6 341.1 L287.0 370.9 A193.0 193.0 0 1 0 380 347.0 Z"/></g>
+<text class="big" x="380" y="570" text-anchor="middle" style="font-size:120px;letter-spacing:-5px">92 %</text>
+<text class="s" x="380" y="616" text-anchor="middle">des pages sectorielles</text>
+<text class="s" x="380" y="640" text-anchor="middle">citées par des moteurs de réponse</text>
+<text class="a" x="760" y="290">QUESTION</text><text class="a" x="1116" y="290">PREUVE À PRODUIRE</text>
+<rect x="760" y="312" width="310" height="52" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="776" y="344" style="fill:#777">Est-ce adapté à mon entreprise ?</text>
+<line class="thin" x1="1076" y1="338" x2="1108" y2="338" marker-end="url(#p)"/>
+<rect x="1116" y="312" width="360" height="52" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="v" x="1134" y="344">Un cas client du même secteur</text>
+<rect x="760" y="384" width="310" height="52" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="776" y="416" style="fill:#777">Combien cela coûte ?</text>
+<line class="thin" x1="1076" y1="410" x2="1108" y2="410" marker-end="url(#p)"/>
+<rect x="1116" y="384" width="360" height="52" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="v" x="1134" y="416">Des tarifs et un scénario budgétaire</text>
+<rect x="760" y="456" width="310" height="52" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="776" y="488" style="fill:#777">Quels résultats attendre ?</text>
+<line class="thin" x1="1076" y1="482" x2="1108" y2="482" marker-end="url(#p)"/>
+<rect x="1116" y="456" width="360" height="52" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="v" x="1134" y="488">Des données clients documentées</text>
+<rect x="760" y="528" width="310" height="52" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="776" y="560" style="fill:#777">Comment ça fonctionne ?</text>
+<line class="thin" x1="1076" y1="554" x2="1108" y2="554" marker-end="url(#p)"/>
+<rect x="1116" y="528" width="360" height="52" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="v" x="1134" y="560">Une démonstration du produit</text>
+<rect x="760" y="600" width="310" height="52" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="776" y="632" style="fill:#777">Est-ce difficile à installer ?</text>
+<line class="thin" x1="1076" y1="626" x2="1108" y2="626" marker-end="url(#p)"/>
+<rect x="1116" y="600" width="360" height="52" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="v" x="1134" y="632">Un exemple réel de déploiement</text>
+<rect x="760" y="672" width="310" height="52" rx="6" fill="#FFF" stroke="#BBBBBB" stroke-width="1.5"/>
+<text class="s" x="776" y="704" style="fill:#777">Quel bénéfice concret ?</text>
+<line class="thin" x1="1076" y1="698" x2="1108" y2="698" marker-end="url(#p)"/>
+<rect x="1116" y="672" width="360" height="52" rx="6" fill="#FFF" stroke="#0B0B0F" stroke-width="1.5"/>
+<text class="v" x="1134" y="704">Un avant/après documenté</text>
+<rect x="760" y="772" width="716" height="92" rx="6" fill="#F5F5F5" stroke="#F5F5F5" stroke-width="1.5"/>
+<text class="s" x="784" y="812">Les preuves ne servent pas seulement à obtenir des citations.</text>
+<text class="s" x="784" y="840">Elles répondent aux objections et facilitent la conversion.</text>
+<text class="a" x="60" y="964">92 % : chiffre déclaré par HubSpot dans son étude de cas officielle. Paires question/preuve : méthode Organikk.</text>
+</svg>

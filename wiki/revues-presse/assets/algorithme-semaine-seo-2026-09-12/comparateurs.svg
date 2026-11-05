@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 270" role="img" aria-labelledby="title"><title id="title">Schéma simplifié : comparateurs et fournisseurs directs dans les résultats Google.</title><rect width="360" height="270" fill="#eaf2ff"/><g font-family="Avenir Next, Avenir, Arial, sans-serif" fill="#193761">
+<rect x="33" y="25" width="294" height="45" rx="22" fill="white"/>
+<circle cx="56" cy="46" r="8" fill="none" stroke="#193761" stroke-width="2"/><path d="M62 52l6 6" stroke="#193761" stroke-width="2"/>
+<text x="84" y="51" font-size="15">Hôtel à Bordeaux</text>
+<rect x="25" y="95" width="181" height="146" rx="7" fill="#193761"/>
+<text x="40" y="121" font-size="14" fill="white">Comparateurs</text>
+<rect x="40" y="137" width="151" height="39" rx="4" fill="#769bcb"/>
+<path d="M49 166v-19h23v19m5 0v-25h29v25" stroke="white" stroke-width="2" fill="none"/>
+<path d="M117 148h59m-59 12h41M41 193h145m-145 16h108m-108 16h131" stroke="#b9cde8" stroke-width="6"/>
+<rect x="219" y="95" width="116" height="146" rx="7" fill="white"/>
+<text x="232" y="119" font-size="13">En direct</text>
+<path d="M237 178v-31l37-17 39 17v31z" fill="#a6bfdf"/><path d="M267 178v-21h16v21" fill="#193761"/>
+<path d="M237 195h77m-77 17h59" stroke="#c6d6e9" stroke-width="6"/>
+</g></svg>

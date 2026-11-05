@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 330" role="img" aria-labelledby="title"><title id="title">Baisse estimée du trafic de recherche vers Wikipedia anglais : 5,45 % face au groupe allemand, 4,82 % face au groupe français.</title><rect width="720" height="330" fill="#f3f6fa"/><g font-family="Avenir Next, Avenir, Arial, sans-serif" fill="#193761">
+<text x="32" y="39" font-size="21" font-weight="700">Wikipedia : une baisse autour de 5 %</text>
+<text x="32" y="67" font-size="14" fill="#53627a">Deux groupes de comparaison, une même édition anglophone</text>
+<g stroke="#d4dfed" stroke-width="1">
+<path d="M220 111V257 M290 111V257 M360 111V257 M430 111V257 M500 111V257 M570 111V257 M640 111V257"/>
+</g>
+<text x="32" y="151" font-size="16">Face à l’allemand</text>
+<text x="32" y="222" font-size="16">Face au français</text>
+<rect x="220" y="125" width="381.5" height="40" rx="3" fill="#193761"/>
+<rect x="220" y="196" width="337.4" height="40" rx="3" fill="#4674b7"/>
+<text x="585" y="151" font-size="18" font-weight="700" text-anchor="end" fill="white">−5,45 %</text>
+<text x="541" y="222" font-size="18" font-weight="700" text-anchor="end" fill="white">−4,82 %</text>
+<g font-size="12" fill="#53627a" text-anchor="middle">
+<text x="220" y="279">0</text><text x="290" y="279">1</text><text x="360" y="279">2</text><text x="430" y="279">3</text><text x="500" y="279">4</text><text x="570" y="279">5</text><text x="640" y="279">6 %</text>
+</g>
+<text x="640" y="309" text-anchor="end" font-size="13" fill="#53627a">Ampleur de la baisse estimée</text>
+</g></svg>

@@ -1,0 +1,117 @@
+Je veux créer le dashboard de suivi de suivi d'un de mes clients.
+
+Un dashboard de suivi, c'est une page web privée que mon client ouvre pendant toute la mission. Il y voit où on en est, ce que j'attends de lui, ce que je lui ai livré, et le compte rendu de chaque call.
+
+Ce n'est pas mon tableau de bord local de pilotage : celui-là est pour moi, le dashboard de suivi est pour le client.
+
+Le dossier ouvert est le vault de ce client. Tout ce que tu écris dans le dashboard de suivi vient de ce vault : raw/ pour ce que j'ai déposé (transcripts, exports Search Console, propale, notes), wiki/ pour ce que le système a déjà produit.
+
+## Règles dures
+
+- Zéro chiffre inventé. Un chiffre affiché vient d'un fichier du vault. S'il n'existe pas, tu écris [MATIÈRE MANQUANTE] dans la page et tu l'ajoutes à la liste des choses à demander au client.
+- Un trou vaut mieux qu'une phrase générique. Pas de texte d'introduction, pas de conclusion, pas de « nous sommes ravis de vous accompagner ». Une section sans matière reste courte ou disparaît.
+- Le texte est dans ma voix. Lis mes fichiers about-me, my-rules et my-voice avant d'écrire une ligne. Le tutoiement ou le vouvoiement suit ce que j'utilise avec ce client. Dans le doute, demande-moi.
+- Aucune donnée d'un autre client. Ni nom, ni chiffre, ni capture.
+- Aucune clé, aucun mot de passe, aucun identifiant d'API dans le code de la page. Elle sera en ligne et son code source est lisible par n'importe qui.
+- La page n'est pas indexée : meta robots noindex, nofollow, et un fichier _headers avec X-Robots-Tag: noindex.
+- Tu ne mets rien en ligne sans mon accord. Je valide d'abord en local.
+
+## Étape 1. L'entretien
+
+Pose-moi les questions une par une. Attends ma réponse avant la suivante. Adapte la question suivante à ce que je viens de répondre. Si la réponse est déjà dans le vault, ne me la pose pas : montre-moi ce que tu as trouvé et demande-moi de confirmer.
+
+Ce que tu dois savoir à la fin :
+
+1. Le client. Son activité, son site, qui va ouvrir le dashboard de suivi (le dirigeant, une chargée marketing, une équipe), son niveau en SEO.
+2. La mission. Audit ponctuel, accompagnement de plusieurs mois, production de contenu, transfert de mon système pour qu'il devienne autonome. La date de début et la durée.
+3. Ce que le client doit faire, lui. Les accès à me donner (Search Console, CMS, Analytics), les validations, les contenus ou les réponses que j'attends de lui.
+4. Ce que je lui livre. La liste des livrables prévus dans la propale, et ceux qui sont déjà faits.
+5. Les calls. Combien sont prévus, combien ont eu lieu, et si j'ai leurs transcripts dans le vault.
+6. Les données disponibles. Search Console connectée ou exportée, depuis quand. S'il n'y a aucune donnée mesurée, le dashboard de suivi n'affiche aucun résultat chiffré.
+7. Mon apparence. Mes couleurs, ma police, mon logo, ou un site à moi dont tu reprends le style.
+8. L'adresse. Le nom du site Netlify que je veux (par exemple prenom-client-suivi).
+
+Quand tu as tout, résume-moi mes réponses en 8 lignes et attends que je valide.
+
+## Étape 2. Le plan du dashboard de suivi
+
+Choisis les onglets dans ce catalogue. N'en prends que ceux pour lesquels le vault contient de la matière, ou que le client doit remplir lui-même.
+
+Onglets possibles :
+
+ 1. Accueil
+    « Bonjour [prénom] ». Où on en est cette semaine, la prochaine échéance, la prochaine action attendue du client.
+
+ 2. Le programme
+    Les étapes de la mission avec leurs dates, calculées depuis la date de début. Le texte repris de la propale validée, sans le reformuler.
+
+ 3. Ton point de départ
+    Un questionnaire que le client remplit : son activité, ses objectifs, ses clients, ce qu'il a déjà essayé. 10 à 12 questions maximum, choisies selon sa mission. Les réponses restent dans son navigateur (localStorage) et il peut me les envoyer par un bouton qui copie tout ou ouvre un email pré-rempli.
+
+ 4. Ce que j'attends de toi
+    La liste des accès et des validations, avec pour chacun : pourquoi j'en ai besoin, comment faire, et une case à cocher. Pour l'accès Search Console, les étapes à l'écran, une par ligne.
+
+ 5. Tes livrables
+    Chaque livrable avec sa date, son état (prévu, en cours, livré) et son lien.
+
+ 6. Nos calls
+    Un bloc par call : date, titre, sujets, puis deux vues. Le résumé, rédigé depuis le transcript, avec ses décisions et les actions de chacun. Le transcript complet, avec une recherche dans le texte.
+
+ 7. Les résultats
+    Seulement si le vault contient des exports Search Console. Clics, impressions et position, sur des périodes comparables, avec la date de l'export. Une action de la mission à côté de son effet mesuré, à J+30 et J+90. Sans donnée, l'onglet n'existe pas.
+
+ 8. Les questions qui reviennent
+    Les questions réellement posées par le client pendant les calls ou par email, avec ma réponse. Aucune question inventée.
+
+ 9. Ce qu'on peut automatiser
+    Seulement si la mission est un transfert de système. Un questionnaire sur les tâches qui lui prennent du temps : laquelle, à quelle fréquence, combien de temps, les étapes, les accès nécessaires, le risque si elle est mal faite, ce que le système ferait seul, ce qu'il garde sous son contrôle.
+
+10. Installer et mettre à jour
+    Seulement si le client installe mon système chez lui. Les étapes avec la commande exacte et ce qui doit s'afficher à l'écran.
+
+Si ma mission demande un onglet absent de ce catalogue, propose-le en m'expliquant d'où viendrait sa matière.
+
+Montre-moi le plan : pour chaque onglet retenu, son titre, les fichiers du vault qui le nourrissent, et ce qui manque. Pour chaque onglet écarté, une ligne qui dit pourquoi. Attends ma validation.
+
+## Étape 3. La construction
+
+- Un seul fichier HTML dans un dossier dashboard-suivi/ à la racine du vault, plus le fichier _headers. Pas de framework à installer, pas de build. Si tu utilises une bibliothèque, charge-la depuis cdnjs.cloudflare.com ou unpkg.com avec une version exacte.
+- Une barre de navigation sur le côté, qui devient un menu sur téléphone. La page doit se lire sur un écran de 375 px sans défilement horizontal.
+- Les contenus (programme, livrables, calls, FAQ) sont regroupés en haut du script dans des tableaux de données. Ajouter un call ou un livrable doit revenir à ajouter une entrée dans un tableau, sans toucher au reste.
+- Les dates se calculent depuis une constante DATE_DEBUT. L'état « fait » d'une étape vient de mon vault, pas d'un calcul.
+- Dans les résumés de call, les paroles du client restent entre guillemets, telles qu'il les a dites. Ce que tu reformules ne se met jamais entre guillemets.
+- Écris un fichier dashboard-suivi/SOURCES.md : pour chaque onglet, les fichiers du vault utilisés, et la liste des [MATIÈRE MANQUANTE] restants.
+
+## Étape 4. La vérification avant de me montrer
+
+Fais ces contrôles et donne-moi le résultat de chacun :
+
+1. Chaque chiffre de la page renvoie à un fichier listé dans SOURCES.md.
+2. Aucun nom, aucun chiffre d'un autre client n'apparaît. Cherche dans le fichier les noms des autres dossiers clients de mon ordinateur si tu les connais.
+3. Aucune clé, aucun token, aucun mot de passe dans le code.
+4. La meta robots noindex est présente, et _headers contient le X-Robots-Tag.
+5. Aucune phrase d'introduction, de transition ou de conclusion sans fait derrière.
+6. La page s'ouvre en local sans erreur dans la console. Lance un petit serveur (python3 -m http.server dans dashboard-suivi/) et donne-moi le lien localhost cliquable.
+
+Ensuite seulement, montre-moi la page.
+
+## Étape 5. La mise en ligne
+
+Quand je valide, guide-moi pas à pas pour publier sur Netlify :
+
+- Sans terminal : glisser le dossier dashboard-suivi/ sur app.netlify.com/drop, puis renommer le site avec le nom de l'étape 1.
+- Avec le terminal : la commande netlify deploy --dir=dashboard-suivi --prod, après connexion.
+
+Si mon plan Netlify propose la protection par mot de passe, dis-moi où l'activer. Sinon, dis-moi clairement que la page est accessible à toute personne qui a le lien, et qu'elle ne doit contenir que ce que j'accepte de voir circuler.
+
+Donne-moi l'adresse finale et un message court à envoyer au client avec le lien.
+
+## Étape 6. Après chaque call
+
+Quand je dépose le transcript d'un nouveau call dans raw/, et que je te dis « mets à jour le dashboard de suivi » :
+
+1. Ajoute le call dans le tableau des calls : résumé, décisions, actions de chacun, transcript.
+2. Mets à jour l'état des livrables, du programme et de « Ce que j'attends de toi ».
+3. Mets à jour SOURCES.md.
+4. Refais les contrôles de l'étape 4.
+5. Montre-moi ce qui a changé, puis republie seulement si je valide.

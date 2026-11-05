@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 270" role="img" aria-labelledby="title"><title id="title">Schéma : une application accède aux résultats de recherche via un accord partenaire.</title><rect width="360" height="270" fill="#f0f2f8"/><g font-family="Avenir Next, Avenir, Arial, sans-serif" fill="#193761">
+<rect x="24" y="67" width="109" height="140" rx="8" fill="white"/>
+<path d="M24 97h109" stroke="#cfdaea" stroke-width="2"/>
+<circle cx="39" cy="83" r="3" fill="#89a9d2"/><circle cx="51" cy="83" r="3" fill="#89a9d2"/>
+<text x="78" y="148" font-size="26" text-anchor="middle" fill="#193761">{ }</text>
+<text x="79" y="186" font-size="12" text-anchor="middle">Application</text>
+<path d="M139 141h77m-9-7l9 7-9 7" stroke="#193761" stroke-width="3" fill="none"/>
+<rect x="157" y="91" width="40" height="31" rx="5" fill="#e9c458"/>
+<path d="M165 91v-8a12 12 0 0124 0v8" stroke="#193761" stroke-width="3" fill="none"/>
+<circle cx="177" cy="104" r="4" fill="#193761"/>
+<rect x="227" y="67" width="109" height="140" rx="8" fill="#193761"/>
+<path d="M242 93h78m-78 20h52m-52 25h78m-78 20h63m-63 25h71" stroke="#a8c0e1" stroke-width="5"/>
+<text x="180" y="242" font-size="14" text-anchor="middle">Accord partenaire requis</text>
+</g></svg>

@@ -1,0 +1,646 @@
+@@h1 J’ai créé un système SEO avec Obsidian, Jev et Claude (ça marche!)
+@@sub (sans outil SEO)
+@@by Timothée
+
+@@open
+Je vais te donner des arguments solides pour te vendre l’intérêt de mettre en place système et d’arrêter de chatter dans Claude ou Chatgpt.
+
+@@image images/01-search-console.png
+
+Mais d’abord, il y a un problème.
+
+On vous apprend souvent quoi faire : fais ci, fais ça.
+
+Mais beaucoup plus rarement pourquoi le faire, sur quelles données s’appuyer, et dans quel cas ça vaut vraiment le coup.
+
+Par exemple, tout le monde vous dit qu’il faut être cité par les IA. C’est un mauvais angle. L’enjeu, c’est de tout faire pour trouver des mots-clés qui ne seront pas mangés par les LLM dans les 5 prochaines années.
+
+Autre exemple : on vous vend des courbes de trafic pour vous montrer à quel point la stratégie SEO en question était bonne. En 2026, c’est difficilement acceptable. Il faut désormais trouver des mots-clés business et arrêter de poursuivre le trafic comme un KPI intéressant.
+
+C’est pareil pour le volume des mots-clés : la plupart des mots-clés qui ramènent des clients n’existent pas dans les outils SEO classiques. Littéralement indétectables. Eh bien, vous devez les trouver. Voici votre mission en tant que consultant !
+
+Il n’y a aucun hack ou secret pour attaquer ce GEO ou SEO IA. C’est ta data qui fera la différence. On entre dans un jeu de data, et rien d’autre.
+
+Sauf qu’aujourd’hui, tu ne peux pas en profiter, parce que tu n’as pas de système. Et que tu n’as pas de mémoire permanente.
+
+Ah oui, ce n’est pas juste apprendre à faire des skills, c’est avoir un système complet qui peut agir comme un assistant. Comme un consultant junior.
+
+Par exemple, tu peux lui demander ça :
+
+@@image images/02-scoring-geo.png
+
+Ce que tu vois à l’image, c’est une mission que j’ai confiée à mon agent de scoring.
+
+Il va lire mon texte et, en fonction de mes critères GEO, scorer chaque paragraphe.
+
+Ça permet de réduire le risque de rédiger pour rien.
+
+Mais tu peux aussi lui demander de modéliser tes données Google Search Console, comme on l’a fait avec Seocity.app.
+
+@@image images/03-seocity.png
+
+La seule limite du système c’est ta capacité à te projeter sur le projet et être force de proposition.
+
+Bref, les arguments.
+
+@@h2n ARGUMENT 1 : Le système à vocation à remplacer tous tes outils SEO
+
+@@image images/04-argument-1-outils.png
+
+@@h2n ARGUMENT 2 : Pour remporter le jeu du SEO, il va falloir dominer celui de la data propriétaire.
+
+@@image images/05-argument-2-data.png
+
+@@h2 LE SETUP
+
+Il ne faut jamais passer sur Obsidian sans implémenter le modèle LLM wiki :
+
+@@image images/06-llm-wiki-arborescence.png 78
+
+Le principe vient d’Andrej Karpathy.
+
+L’idée est simple :
+
+le LLM écrit et maintient son propre wiki.
+
+À chaque nouvelle conversation, il peut repartir de ce qui a déjà été appris et écrit auparavant.
+
+Mon espace Obsidian est séparé en deux parties.
+
+@@h4 raw/
+C’est là que je garde toutes les sources brutes :
+
+@@li appels clients ;
+
+@@li exports Search Console ;
+
+@@li articles ;
+
+@@li autres données originales.
+
+Claude ne modifie jamais ce dossier.
+
+@@h4 wiki/
+C’est la partie organisée par Claude qui vient connecter les différentes sources des différents /raw
+
+@@h2 LE SYSTEME EN 4 AVANTAGES
+
+@@b 1. Tu as un mémoire permanente :
+
+Claude oublie le contexte → besoin d’un système en local avec Obsidian
+
+@@b 2.Le système est un modèle exponentiel :
+
+Demain les boites achèterons ton système SEO, et ne paieront plus au TJM
+
+@@b Combattre l’isolement technique :
+
+Des nouveaux modèles tous les jours, on ne sait plus quoi essayer. Là, tu gardes une même base et tu itères avec des MAJ structurelles mais sans jamais recommencer à 0
+
+@@b 4. Gain d’efficacité énorme :
+
+Sans mémoire ni Obsidian → perte massive de productivité car pas de process standardisé pour tes audits, recherches de mots clés etc.
+
+@@image images/07-message-client.png 62
+
+@@h2 CLAUDE x OBSIDIAN : les mots-clés
+
+La réflexion du système autour des mots-clés :
+
+@@li Ne pas chercher des mots-clés mangés par les LLM, chercher ceux sur lesquels ton utilisateur va cliquer.
+
+@@li 80 % de la recherche de mots-clés est de la commodité → l’IA va le faire aussi bien ou mieux que nimporte quel outil
+
+@@li 20 % c’est le vrai travail : aller regarder sur Reddit, sur X, chercher l’expertise et l’expérience réelle
+
+@@li Élimine les outils payants : mots clés évidemment mais aussi sémantique
+
+@@li Arrête de vendre du trafic → vends des leads en trouvant des mots clés business
+
+@@li Construis des corpus / bases de données par client pour chaque recherche de mots-clés pour que le systeme aille directement piocher ces infos dedans
+
+@@li Une base SEO commune à touts tes projets SEO contient toutes tes stratégies, réflexions, études, stats pour les futures recherches
+
+@@li Les mots-clés doivent être cherchés avec le contexte client : expertise, ton, point de vue → pas de copier coller doutil SEO classqiue
+
+@@k La mission
+Trie les mots-clés selon leur intérêt business et décide quoi pousser, créer, consolider ou écarter
+
+@@k Sortie
+@@li intentions d’achat ;
+
+@@li opportunités mais pas de page encore créé ;
+
+@@li pages qui sous-performent ;
+
+@@li requêtes écartées ;
+
+@@li 3 actions maximum
+
+@@k Skill complet
+@@skill
+name: seo-mots-cles-business
+
+description: Trie les mots-clés d’un site par intention business, avec ou sans Search Console. Trois portes, cinq décisions, aucun volume inventé. Déclencheurs : “mots-clés business”, “quels mots-clés cibler”, “sur quoi mon site doit se battre”.
+
+# Mots-clés business
+
+## Ce que tu donnes à Claude
+
+- L’offre et le point de conversion (devis, rendez-vous, achat).
+- La cible, le marché, la langue.
+- Les URL des pages d’offre.
+- L’export Search Console Requêtes + Pages, 3 à 6 mois, si tu l’as.
+- Des verbatims clients, si tu en as.
+
+## Consigne
+
+> Lance seo-mots-cles-business sur [URL]. Offre : [...], cible : [...], conversion : [...], marché : [...].
+
+## Étapes
+
+1. Liste les requêtes hors marque. Regroupe les variantes d’un même besoin en une intention. Signale chaque fusion.
+
+2. Sans Search Console, collecte Google Suggest, recherche web et verbatims. Deux requêtes qui partagent le même top 10 vont sur une seule page.
+
+3. Écarte ce qu’une IA répond sans clic : définition, « comment », fait unique. Garde achat, prix, comparatif, avis, local.
+
+4. Passe chaque intention aux trois portes :
+- Correspond à l’offre ? Oui / Non.
+- Intention business ? Forte / Moyenne / Faible, lue aux modificateurs, jamais au volume.
+- Opportunité démontrée ? Déjà captée / Nouvelle / Non démontrée.
+
+5. Décide : POUSSER, CRÉER, CONSOLIDER, ÉCARTER ou À VALIDER.
+
+## Demande observée
+
+Écris Faible / Moyenne / Forte, avec les signaux nommés à côté.
+
+Forte : 5 variantes Suggest ou plus, 7 mentions en calls ou plus.
+
+Seules 20 impressions Search Console ou plus confirment la demande.
+
+## Sortie
+
+- Diagnostic en une phrase.
+- 3 à 5 chiffres, avec source et période.
+- Quatre tableaux : intentions captées, opportunités sans page, pages qui sous-performent, requêtes écartées avec leur raison.
+- 3 actions maximum, chacune justifiée par sa porte.
+- Ce que les données ne permettent pas de conclure.
+
+## Règles
+
+- Aucun volume, position ou CPC inventé.
+- Aucun score sur 10.
+- Une requête à fort volume hors offre finit ÉCARTÉE, raison écrite.
+- La Search Console ne montre pas tout le marché.
+- Aucune page créée par automatisme. Cherche d’abord une URL ou un contenu existant.
+
+Enregistre la sortie dans `AAAA-MM-JJ-<site>-mots-cles-business.md`.
+@@end
+
+@@h2 CLAUDE x OBSIDIAN : audit et pré audit SEO
+
+@@li L’audit d’indexation : pas besoin d’aller sur Search Console manuellement, le système le fait tout seul
+
+@@li L’audit PageSpeed : le système regarde si tes pages sont rapides, tu n’as pas besoin de le faire toi-même
+
+@@li Les audits ne se vendent plus → arrête de les facturer à part, ils doivent être inclus ou automatisés
+
+@@li Avec un système : tu n’as plus besoin de faire l’audit à la main pour chaque client
+
+@@li L’audit enrichit la mémoire du site → à chaque audit tu alimentes l’historique du site pour le système
+
+@@li Lautomatisation ne doit pas supprimer le check manuelle pour sentir des tendances, des signaux faibles notamment sur la searhc console
+
+@@li L’audit sans CMS est plus simple et plus rapide, tu le fais directement depuis Claude
+
+@@k La mission
+Analyse indexation, vitesse, contenu, cannibalisation, maillage, données structurées et mots-clés business.
+
+@@k Sortie
+@@li diagnostic complet;
+
+@@li angle business prioritaire ;
+
+@@li scoring SEO global ;
+
+@@li roadmap 90 jours ;
+
+@@li indexation
+
+@@li structure hn
+
+@@li éléments à corriger
+
+@@h3 Pré-audit avant un call
+Le pré-audit est séparé de l’audit complet.
+
+@@k La mission
+Prépare un pré-audit SEO avant un call, à partir de la seule URL et de données publiques.
+
+@@k Sortie
+@@li En résumé : 3 à 5 phrases.
+
+@@li Diagnostic.
+
+@@li Angle.
+
+@@li État SEO daté.
+
+@@li Modèles de pages priorisés.
+
+@@li Roadmap 90 jours.
+
+@@li Notes de call.
+
+@@li À vérifier.
+
+@@k Skill pré audit complet
+@@skill
+name: seo-pre-audit
+
+description: Prépare un pré-audit SEO avant un call, à partir de la seule URL et de données publiques. Déclencheurs : “prépare le pré-call”, “fais un pré-audit”, “pré-call sur [site]”.
+
+# Pré-audit avant call
+
+## Ce que tu donnes à Claude
+
+- L’URL du site.
+- L’offre, la cible et l’objectif, si tu les connais. Sinon Claude les déduit et les marque « à confirmer au call ».
+
+## Consigne
+
+> Fais un pré-audit sur https://monsite.fr. Il vend [offre] à [cible], l’objectif est [objectif].
+
+## Règle dure
+
+Aucun volume, position ou trafic inventé.
+
+Un chiffre non vérifié porte `[À SOURCER]` ou « à récupérer au call ».
+
+## 1. Collecte publique
+
+- Identité : ancienneté, taille, offres, qui décide.
+- Modèle : qui paie, cycle de vente, point de conversion.
+- SEO : sitemap, pages utiles, pages géo ou décisionnelles, lastmod, refonte.
+- IA : requêtes absorbées par l’IA ou décisionnelles.
+- Données propriétaires : cas clients, méthode, chiffres internes.
+- À demander au call : accès Search Console, poids de chaque offre dans le CA.
+
+## 2. Les 7 questions
+
+1. Niche défendable : où attaquer en premier.
+2. Douleur qui coûte.
+3. Modèles de pages : 4 à 6.
+4. Chemin vers le lead.
+5. Moment : pourquoi maintenant.
+6. Objections.
+7. Sortie de call : roadmap 90 jours et proposition.
+
+Tranche 2 ou 3 de ces questions. Les autres deviennent des questions au call.
+
+## 3. Sortie
+
+- En résumé : 3 à 5 phrases.
+- Diagnostic.
+- Angle.
+- État SEO daté.
+- Modèles de pages priorisés.
+- Roadmap 90 jours.
+- Notes de call.
+- À vérifier.
+
+Pas de « visibilité » : parle de positions, citations IA, leads.
+@@end
+
+@@h2 Les agents techniques
+
+@@h3 1.1 agent maillage interne :
+@@li Un skill connaît l’historique du site et fait des calculs de sémantiques → te donne le rapprochement des pages qui va bien
+
+@@li Le système te propose les bons liens internes plutôt que de les chercher manuellement
+
+@@li L’objectif : éviter de faire que des pages qui tournent en rond sur de l’informationnel
+
+@@li Avec le maillage automatisé par le système : tu mets juste un clic et c’est fait
+
+@@li Le maillage interne fait partie de la partie technique à 80 % automatisée (audit, recherche mots-clés, maillage, correction technique)
+
+@@k La mission
+Le système te propose les bons liens internes plutôt que de les chercher manuellement.
+
+@@k Sortie
+@@li piliers et hubs ;
+
+@@li pages orphelines ;
+
+@@li entrants / sortants ;
+
+@@li source et cible de chaque lien ;
+
+@@li passage ;
+
+@@li ancres ;
+
+@@li justification ;
+
+@@li 3 actions prioritaires.
+
+@@k Skill complet
+@@skill
+name: maillage-systeme
+
+description: Audite et construit le maillage interne d’un site sans Search Console. Déclencheurs : “audite le maillage”, “pages orphelines”, “plan de maillage”.
+
+# Maillage interne
+
+## Ce que tu donnes à Claude
+
+- L’URL du sitemap, ou la liste des articles.
+- Tes 3 à 5 mots-clés piliers.
+- Tes pages d’offre : audit, contact, devis, outil.
+
+## Consigne
+
+> Audite le maillage de monsite.fr. Mes pages d’offre : [URL].
+
+## Étape 0 : crawl
+
+python3 ~/.claude/skills/maillage-systeme/scripts/crawl_graph.py https://monsite.fr/sitemap.xml -o ./maillage-data
+
+Seul `index.json` entre dans la conversation.
+
+Un lien présent sur 80 % des pages ou plus est un lien de gabarit. Il ne compte pas.
+
+## Étapes
+
+1. Classe chaque page : Know ou Do.
+
+2. Regroupe en piliers de 3 pages minimum, avec un hub chacun.
+
+3. Compte les liens du corps par pages sources distinctes. Repère orphelines et impasses.
+
+4. Pour chaque lien à créer : passage et 3 ancres (exacte, partielle, sémantique).
+
+5. Classe par rang :
+- page d’offre orpheline ;
+- lien Know vers Do ;
+- hub vers satellite ;
+- orpheline hors offre ;
+- lien entre piliers.
+
+## Critères d’une ancre
+
+- Elle dit ce que la cible promet.
+- La phrase reste fluide sans le lien.
+- Elle n’est pas déjà utilisée vers la même cible.
+- Les 5 mots autour parlent du sujet de la cible.
+
+Un critère raté : l’ancre est rejetée.
+
+## Sortie
+
+- Piliers et hubs.
+- Tableau : page, entrants, sortants, statut.
+- Plan de liens : source, cible, passage, ancres, justification.
+- Diagnostic en une phrase, 3 actions P1 maximum.
+- Ce que les données ne permettent pas de conclure.
+
+## Avant d’ajouter les liens
+
+- Lis chaque passage à voix haute sans le lien.
+- Insère par lots de 10 à 20.
+- Relance le crawl après chaque lot.
+- Critère de fin : zéro page d’offre orpheline.
+
+## Règles
+
+- Aucun score numérique.
+- Une page légale orpheline n’est pas un problème.
+- Liens dans le texte, jamais en « Voir aussi ».
+- Jamais de lien vers l’accueil depuis le contenu.
+
+Enregistre la sortie dans `AAAA-MM-JJ-<site>-maillage.md`.
+@@end
+
+@@h3 1.2 agent données structurées :
+@@k La mission
+Vérifie que les informations présentes dans le JSON-LD correspondent réellement à ce que la page affiche.
+
+@@k Sortie
+@@li balisages présents ;
+
+@@li valeurs incohérentes ;
+
+@@li schemas à ajouter ou retirer ;
+
+@@li validation du JSON-LD.
+
+@@k Skill complet
+@@skill
+name: seo-donnees-structurees
+
+description: Met en place ou audite les données structurées JSON-LD d’un site, dérivées du contenu de chaque page. Déclencheurs : “données structurées”, “JSON-LD”, “schema.org”, “rich results”, “balisage”.
+
+# Données structurées JSON-LD
+
+## Ce que tu donnes à Claude
+
+- L’accès au code du site.
+- L’URL des pages à contrôler.
+- L’identité réelle : nom, logo, fondateur, profils sociaux.
+
+## Consigne
+
+> Mets en place les données structurées JSON-LD sur ce projet.
+
+> Vérifie que le balisage de [URL] correspond à ce que la page affiche.
+
+## Trois règles
+
+1. Une seule source. Tout le JSON-LD vient d’un module (`lib/schema.ts`).
+
+2. Une entité, référencée par `@id`. Organization, WebSite et Person sont émis une fois.
+
+3. Dérivé du contenu. Un champ tapé à la main se désynchronise au premier edit.
+
+## Ce que chaque signal déclenche
+
+| Signal dans la page | Schema |
+|---|---|
+| Article | `Article` |
+| Toute page | `BreadcrumbList` |
+| Bloc FAQ réel | `FAQPage` |
+| Vidéo YouTube | `VideoObject` |
+| Étapes numérotées | `HowTo` |
+| Prix affiché | `Product` / `Offer` |
+
+Ne demande jamais « quel schema veux-tu ». Lis la page, émets ce qu’elle prouve.
+
+## Procédure
+
+1. Identifie le framework et sa version.
+2. Repère où vivent les données.
+3. Crée `lib/schema.ts`.
+4. Émets le graphe du site dans le layout racine.
+5. Émets un tableau JSON-LD par page.
+6. Supprime les anciens blocs redéclarés.
+7. Valide avec les outils Google et schema.org.
+
+## Audit : trois contrôles
+
+- Le JSON est valide.
+- Chaque valeur balisée existe telle quelle sur la page.
+- Le balisage sert une fonctionnalité Google réelle.
+
+## Interdits
+
+- `FAQPage` ou `HowTo` « au cas où ».
+- `aggregateRating`, avis ou prix invérifiables.
+- Auteur et éditeur redéclarés sur chaque page.
+- `wordCount` ou dates codés en dur.
+
+Demande ton accord avant chaque écriture dans le code.
+@@end
+
+@@h3 3.3 Agent indexation
+@@k La mission
+Vérifie si les pages sont réellement indexées, redirigées, inconnues ou non testables.
+
+@@k Sortie
+@@li HTTP (404/500, redirections)
+
+@@li robots.txt non bloquant
+
+@@li Pas de noindex (HTML + en-tête)
+
+@@li Sitemap (présence, fraîcheur)
+
+@@li Cohérence sitemap ↔ source
+
+@@li Maillage : combien de liens entrants par URL (crawl + hubs) ?
+
+@@li Longueur contenu (proxy thin)
+
+@@li Indexation Google estimée (site:) ou API Search Console
+
+@@li Rapport markdown
+
+@@k Skill :
+@@skill
+Tu es un auditeur SEO spécialisé en indexation. Ton rôle : vérifier que Google peut découvrir, explorer et indexer les pages qu’on souhaite rendre visibles.
+
+Ce qu’on te donne
+
+Domaine : [site.fr]
+
+Liste d’URLs : sitemap.xml public ou urls.txt (une par ligne)
+
+Pages prioritaires : les 5-30 pages d’offre (business-critical)
+
+Pages hubs : / , /blog , footer, catégories (pour le maillage)
+
+Les 9 contrôles à faire (read-only)
+
+TECHNIQUE (causes) :
+
+HTTP : codes finaux + redirections (301/302/200) ?
+
+robots.txt : bloque-t-il Googlebot ou * sur ces URLs ?
+
+noindex : présent en meta ou en en-tête HTTP ?
+
+Sitemap : présent, cohérent, lastmod < 6 mois ?
+
+Cohérence : URLs du sitemap = liste donnée ? Orphelines ?
+
+Maillage : combien de liens entrants par URL (crawl + hubs) ?
+
+Contenu : longueur par URL (< 300 mots = court à creuser)
+
+GOOGLE (observation) : 8. site: {URL} sur Google (spacer 3-5s, détecter rate-limit, marquer « non testable » si bloqué) — ou Search Console API si accès 9. Soft 404 : tester 3 URL inexistantes, relever leur title et canonical
+
+Rapport obligatoire
+
+Format markdown avec :
+
+Synthèse : X/N pages sans défaut confirmé
+
+Chiffres clés : tableau des 9 contrôles
+
+Ce qui bloque : max 3 problèmes, chacun = Observation + Preuve + Impact + Action + Priorité/Effort/Confiance
+
+Ce qui va bien : ce qui fonctionne (éviter biais négatif)
+
+Inspection Google : tableau des URLs inspectées individuellement
+
+Limites : ce qu’on n’a pas pu tester et pourquoi
+
+Pré-décision (obligatoire) : diagnostic (1 phrase) → chiffres (3-5) → État (Critique/À améliorer/Sain) → Problèmes + Actions P1-P3 → Ce qu’on ne peut pas conclure
+
+Garde-fous
+
+Lecture seule : pas de Search Console submit, pas de forçage
+
+Jamais : HTTP 200 = indexée, hors sitemap = problème, 1 lien = pas découvert
+
+Toujours : « non testable » ≠ « non indexée »
+
+Priorise les pages d’offre et les vraies anomalies (noindex accidentel, 404)
+
+Extrapolation interdite : N URLs testées ≠ cluster entier
+
+Déclenchement
+
+« Audit indexation de [domaine], sitemap : [URL] »
+@@end
+
+@@h2 J’ajoute une couche d’un nouveau modele : JEV
+
+@@image images/08-jev.png
+
+En essayant de ne pas être trop technique sur Jev (mais c’est important d’en parler) c’est un modèle utilisé pour vérifier, classer et scorer, pas pour rédiger.
+
+Il reçoit une question fermée, choisit parmi plusieurs réponses possibles et indique son niveau de confiance.
+
+Dans mon système, je l’utilise surtout avec trois scripts : verifier.py pour contrôler si chaque phrase est appuyée par les sources, liens.py pour vérifier la pertinence des liens internes, et matiere.py pour détecter les preuves ou données réelles.
+
+Son intérêt principal est la vitesse : environ 0,8 seconde par appel. Jev trie l’information, mais ne prend pas les décisions finales.
+
+En gros, un assistant qui répond rapidement, qui est capable de tranché par oui ou non, de scorer une analyse et qui utilise beaucoup, mais alors beaucoup moins de token.
+
+@@k La mission
+JEV sert à trier et vérifier, non pas à rédiger un contenu par exemple.
+
+verifier : regarde chaque phrase et vérifie d’où elle vient : d’une source, d’une déduction, de nulle part ou simplement du remplissage.
+
+liens : repère les liens internes vraiment utiles et écarte les ancres vagues ou trompeuses.
+
+matiere : cherche les preuves solides disponibles : chiffres, faits, phrases de clients ou opinions.
+
+calibrer : compare les choix de JEV avec les miens. Aucune automatisation tant qu’on n’atteint pas 80 % d’accord sur au moins 30 cas.
+
+La règle reste simple :
+
+JEV trie mais la décision finale me revient toujours.
+
+@@k Ce qu’on lui donne
+@@li un brouillon ;
+
+@@li les sources : calls, tickets, pages du site ;
+
+@@li les opportunités détectées ;
+
+@@li mes validations précédentes.
+
+@@k Sortie
+@@li les phrases non sourcées ou inutiles
+
+@@li les liens internes à garder pour le maillage interne
+
+@@li les meilleures preuves disponibles dans mon obsidian sur un sujet donné
+
+@@li un historique des décisions pour améliorer le système
+
+@@final Travailler ensemble : https://cal.com/tim-boussardon-yzrrb1/15min

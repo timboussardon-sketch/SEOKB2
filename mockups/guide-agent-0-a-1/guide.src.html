@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construire ton agent SEO avec Claude · De 0 à 1 · Guide organikk.co</title>
+<style>
+@font-face{font-family:"Geist";src:url(__FONT_GEIST__) format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Geist Mono";src:url(__FONT_MONO__) format("woff2");font-weight:100 900;font-display:block}
+
+:root{
+  --ink:#2b2b30; --ink-2:#6f6f78; --line:#e8e6e6; --paper:#fff;
+  --c-top:#2f4fe0; --c-bottom:#7fa0ff; --shadow-rgb:33,55,157;
+  --wash:#f7f9ff; --tint:#e8eeff;
+  --grad:linear-gradient(160deg,var(--c-top) 0%,var(--c-top) 45%,var(--c-bottom) 100%);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --grad-text:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='240' preserveAspectRatio='none'><defs><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix in='t' type='saturate' values='0' result='m'/><feComponentTransfer in='m' result='a'><feFuncA type='linear' slope='.7'/></feComponentTransfer><feComposite in='a' in2='SourceGraphic' operator='in' result='c'/><feBlend in='SourceGraphic' in2='c' mode='overlay'/></filter></defs><rect width='100%' height='100%' fill='%232f4fe0' filter='url(%23n)'/></svg>");
+}
+
+@page{size:A4;margin:20mm 18mm 18mm}
+@page bleed{size:A4;margin:0}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Geist",system-ui,-apple-system,sans-serif;
+  font-size:10.6pt;line-height:1.62;font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+p{margin:0 0 11pt}
+strong{font-weight:600}
+a{color:inherit;text-decoration:none;border-bottom:.5pt solid rgba(47,79,224,.4)}
+.mono{font-family:"Geist Mono",ui-monospace,monospace}
+
+/* ---------- panneaux dégradés grainés ---------- */
+.panel{position:relative;isolation:isolate;background:var(--grad);color:#fff;overflow:hidden}
+.panel::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;mix-blend-mode:overlay;background-image:var(--grain);background-size:260px 260px}
+.panel > *{position:relative;z-index:1}
+
+/* ---------- couverture ---------- */
+.cover{page:bleed;margin:0;padding:32mm 24mm 24mm;width:210mm;height:297mm;display:flex;flex-direction:column;justify-content:space-between;break-after:page}
+.cover .mark{width:15mm;height:15mm}
+.cover .kicker{font-family:"Geist Mono",monospace;font-size:8pt;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.82);margin:0 0 9mm}
+.cover h1{font-size:34pt;line-height:1.04;letter-spacing:-.025em;font-weight:600;margin:0;max-width:150mm}
+.cover .sub{font-size:14pt;line-height:1.3;color:rgba(255,255,255,.88);margin:7mm 0 0;font-weight:400;max-width:120mm}
+.cover .lead{font-size:11pt;line-height:1.5;color:rgba(255,255,255,.86);margin:10mm 0 0;max-width:112mm}
+.cover .foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+
+/* ---------- titres ---------- */
+h2.grad,h3.grad{
+  color:transparent;-webkit-text-fill-color:transparent;
+  background-image:var(--grad-text);background-size:100% 100%;background-repeat:no-repeat;
+  -webkit-background-clip:text;background-clip:text;width:fit-content;max-width:100%;
+}
+.section-title{font-size:22pt;line-height:1.1;letter-spacing:-.02em;font-weight:600;margin:0 0 8mm}
+
+/* ---------- sommaire ---------- */
+.toc{break-after:page}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{display:flex;gap:8mm;align-items:baseline;padding:3.4mm 0;border-bottom:.5pt solid var(--line)}
+.toc li:last-child{border-bottom:none}
+.toc .n{font-family:"Geist Mono",monospace;font-size:8.5pt;color:var(--c-top);letter-spacing:.1em;flex:0 0 20mm}
+.toc .t{font-weight:500;font-size:11pt}
+.toc .d{color:var(--ink-2);font-size:9.5pt;margin-left:auto;text-align:right;max-width:78mm}
+
+/* ---------- ouverture de phase ---------- */
+.phase{break-before:page}
+.ph-open{margin:0 0 9mm}
+.ph-open .num{font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.26em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 4mm}
+.ph-open h2{font-size:26pt;line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0}
+.ph-open .obj{font-size:11.5pt;line-height:1.45;color:var(--ink-2);margin:5mm 0 0;max-width:130mm}
+.ph-open .rule{height:1.4pt;background:var(--c-top);width:16mm;border-radius:2pt;margin:7mm 0 0}
+
+h3.sec{font-size:14pt;line-height:1.2;font-weight:600;letter-spacing:-.01em;margin:9mm 0 4mm;break-after:avoid}
+h4.sub{font-size:11pt;font-weight:600;margin:6mm 0 2.5mm;break-after:avoid}
+
+/* ---------- listes ---------- */
+ul,ol{margin:0 0 11pt;padding-left:5.5mm}
+li{margin:0 0 4pt;padding-left:1mm}
+li::marker{color:var(--c-top)}
+ul.defs{list-style:none;padding:0}
+ul.defs li{display:block;padding:2.6mm 0;border-bottom:.5pt solid var(--line);margin:0}
+ul.defs li:last-child{border-bottom:none}
+ul.defs b{font-weight:600}
+
+/* ---------- encart résumé ---------- */
+.resume{border-radius:5mm;padding:11mm 12mm;margin:9mm 0}
+.resume .k{font-family:"Geist Mono",monospace;font-size:8pt;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.8);margin:0 0 5mm}
+.resume p{font-size:11.5pt;line-height:1.55;margin:0;color:#fff}
+
+/* ---------- règle dure ---------- */
+.hard{border-left:1.6pt solid var(--c-top);background:var(--wash);padding:5mm 7mm;margin:7mm 0;border-radius:0 3mm 3mm 0;break-inside:avoid}
+.hard p{margin:0}
+.hard .k{font-family:"Geist Mono",monospace;font-size:7.5pt;letter-spacing:.22em;text-transform:uppercase;color:var(--c-top);display:block;margin:0 0 2mm}
+
+/* ---------- code ---------- */
+pre{background:var(--wash);border:.5pt solid var(--tint);border-radius:3mm;padding:6mm 7mm;font-family:"Geist Mono",ui-monospace,monospace;font-size:7.6pt;line-height:1.55;white-space:pre;overflow:visible;margin:6mm 0;break-inside:avoid;color:#3a3a44}
+
+/* ---------- tableaux ---------- */
+table{width:100%;border-collapse:collapse;margin:6mm 0;font-size:9.5pt;break-inside:avoid}
+th,td{text-align:left;vertical-align:top;padding:3mm 6mm 3mm 0;border-bottom:.5pt solid var(--line)}
+th{font-weight:600;font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:var(--c-top);border-bottom:1pt solid var(--c-top);font-family:"Geist Mono",monospace}
+td:last-child,th:last-child{padding-right:0}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-family:"Geist Mono",monospace;color:var(--c-top);white-space:nowrap}
+
+/* ---------- erreurs numérotées ---------- */
+ol.errs{list-style:none;padding:0;counter-reset:e}
+ol.errs li{counter-increment:e;display:flex;gap:6mm;padding:4mm 0;border-bottom:.5pt solid var(--line);margin:0;break-inside:avoid}
+ol.errs li:last-child{border-bottom:none}
+ol.errs li::before{content:counter(e,decimal-leading-zero);font-family:"Geist Mono",monospace;font-size:9pt;color:var(--c-top);flex:0 0 10mm}
+
+/* ---------- page finale ---------- */
+.final{page:bleed;break-before:page;margin:0;padding:44mm 24mm 24mm;width:210mm;height:297mm;display:flex;flex-direction:column;justify-content:space-between}
+.final h2{font-size:28pt;line-height:1.06;letter-spacing:-.025em;font-weight:600;margin:0 0 8mm;max-width:130mm}
+.final p{font-size:11.5pt;line-height:1.55;color:rgba(255,255,255,.9);max-width:120mm}
+.final .cta{display:inline-block;margin:6mm 0 0;background:#fff;color:var(--c-top);font-weight:600;font-size:11pt;padding:4.5mm 8mm;border-radius:3mm;border:none;text-decoration:none}
+.final .cta .u{display:block;font-family:"Geist Mono",monospace;font-size:8pt;letter-spacing:.08em;color:var(--ink-2);font-weight:400;margin-top:1.5mm}
+.final .foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:"Geist Mono",monospace;font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.final .mark{width:13mm;height:13mm}
+
+code{font-family:"Geist Mono",ui-monospace,monospace;font-size:9pt;background:var(--wash);border-radius:1mm;padding:.3mm 1.2mm;color:#3a3a44}
+pre code{background:none;padding:0;font-size:inherit}
+</style>
+</head>
+<body>
+
+<!-- ================= COUVERTURE ================= -->
+<div class="cover panel">
+  <svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="#ffffff"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="#ffffff"/></svg>
+  <div>
+    <p class="kicker">Guide organikk.co</p>
+    <h1>Construire ton agent SEO avec Claude</h1>
+    <p class="sub">De 0 à 1, le guide complet.</p>
+    <p class="lead">Le socle, ta data, tes skills, ta voix, les workflows, les boucles, les routines, le management. Tu les poses dans cet ordre, un par un. À la fin, tu as un système calé sur toi, qui travaille la nuit et qui s'améliore de mission en mission.</p>
+  </div>
+  <div class="foot"><span>Timothée Boussardon</span><span>organikk.co</span></div>
+</div>
+
+<!-- ================= SOMMAIRE ================= -->
+<section class="toc">
+  <h2 class="section-title grad">Sommaire</h2>
+  <ol>
+    <li><span class="n">Phase 0</span><span class="t">Comprends ce que tu construis</span><span class="d">Ce qu'est un agent, et pourquoi le construire plutôt que payer un outil</span></li>
+    <li><span class="n">Phase 1</span><span class="t">Le socle</span><span class="d">Claude Code, le vault, la doctrine</span></li>
+    <li><span class="n">Phase 2</span><span class="t">La matière première</span><span class="d">Ta data propriétaire et son workflow d'ingestion</span></li>
+    <li><span class="n">Phase 3</span><span class="t">Les compétences</span><span class="d">Tes skills : anatomie, squelette, les 9 à construire</span></li>
+    <li><span class="n">Phase 4</span><span class="t">La voix</span><span class="d">Le corpus de voix et la checklist anti-IA writing</span></li>
+    <li><span class="n">Phase 5</span><span class="t">Les workflows</span><span class="d">Audit, mots-clés, rédaction, suivi</span></li>
+    <li><span class="n">Phase 6</span><span class="t">Les boucles</span><span class="d">Les quatre boucles qui font apprendre le système</span></li>
+    <li><span class="n">Phase 7</span><span class="t">Les routines</span><span class="d">Ce qui tourne à heures fixes, sans toi</span></li>
+    <li><span class="n">Phase 8</span><span class="t">Le management</span><span class="d">Le passage à 1 : tu n'exécutes plus, tu arbitres</span></li>
+    <li><span class="n">Annexe</span><span class="t">Les erreurs qui coûtent cher</span><span class="d">Six pièges vus en vrai</span></li>
+    <li><span class="n">Annexe</span><span class="t">Le récap</span><span class="d">Ce que tu poses, ce que tu obtiens</span></li>
+  </ol>
+</section>
+
+<!-- ================= INTRODUCTION ================= -->
+<section class="intro">
+  <h2 class="section-title grad">Introduction</h2>
+  <p>Tu paies des outils SEO qui ressortent à tout le monde les mêmes mots-clés. Tu repars de zéro à chaque nouveau client. Et tu sens bien que Claude pourrait faire le gros du boulot, sauf que tu ne sais pas par où le prendre.</p>
+  <p>Ce guide règle ça. Demain, les boîtes ne paieront plus pour du TJM. Elles paieront pour ton système. Moi je mise tout sur le système : le mien fait 80% de mon SEO depuis des mois. Les 20% qui restent, c'est moi (la stratégie, la data propriétaire, le jugement). Et c'est exactement ces 20% qu'on facture. On va donc construire un agent : le même Claude, mais avec ta mémoire, tes process et ta data. Il tourne en automatique à heures fixes et il apprend de ce qu'il publie. Un consultant junior dispo 24h/24 : tu pilotes, lui exécute.</p>
+  <p>Tu vas faire deux passages dans ce guide : du chatbot à l'agent, et de Claude Cowork au terminal + Obsidian.</p>
+  <p>Une précision tout de suite, parce que c'est le piège : un agent SEO, ce n'est pas Claude tout seul. Si t'es pas bon en SEO, Claude ne sera pas bon. L'agent amplifie ta méthode, il ne la remplace pas. Tu restes manager.</p>
+
+  <div class="resume panel">
+    <p class="k">En résumé</p>
+    <p>Un agent SEO complet, c'est six composants, posés dans cet ordre : un socle (Claude Code + un vault + ta doctrine), de la matière première (ta data propriétaire), des compétences (tes skills), une voix (la tienne, pas celle de Claude), des boucles (ce qui fait que le système apprend) et des routines (ce qui tourne en automatique). Ce guide les construit un par un. À la fin, tu as un système calé sur toi, impossible à copier, qui travaille la nuit et qui s'améliore de mission en mission.</p>
+  </div>
+
+  <h3 class="sec">Avant de démarrer</h3>
+  <p>Quelques définitions, parce que personne ne naît en sachant ce qu'est un vault :</p>
+  <ul class="defs">
+    <li><b>Chatbot</b> : la fenêtre de chat de Claude. Tu poses une question, il répond, il oublie.</li>
+    <li><b>Agent</b> : Claude + ta mémoire + tes skills + des routines + des boucles. Il agit sur tes fichiers et progresse de mission en mission.</li>
+    <li><b>Cowork</b> : l'application de bureau de Claude. C'est encore le chatbot, en mieux outillé.</li>
+    <li><b>Terminal</b> : la fenêtre de commandes de ton PC. C'est là que tourne Claude Code, la version de Claude qui agit au lieu de seulement répondre.</li>
+    <li><b>Obsidian</b> : une application gratuite pour lire et organiser des notes en fichiers texte.</li>
+    <li><b>Vault</b> : le mot d'Obsidian pour ton dossier de notes. Un simple dossier de fichiers texte sur ton PC : c'est la mémoire de ton agent.</li>
+    <li><b>Skill</b> : ta méthode encodée dans un fichier, écrite une fois, exécutable à l'infini.</li>
+    <li><b>Routine</b> : une tâche qui se lance toute seule, à heure fixe, en automatique.</li>
+    <li><b>Boucle</b> : ce qui est publié revient mesuré, et la mesure corrige les décisions suivantes. C'est ce qui fait que le système apprend.</li>
+    <li><b>Cran d'autonomie</b> : la part du travail qui se fait en automatique. Un skill s'exécute quand tu le demandes, une routine se lance toute seule. Du skill à la routine, tu interviens de moins en moins.</li>
+  </ul>
+</section>
+
+<!-- ================= PHASE 0 ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Phase 0</span>
+    <h2 class="grad">Comprends ce que tu construis</h2>
+    <p class="obj">Avant d'installer quoi que ce soit.</p>
+    <div class="rule"></div>
+  </header>
+  <p>Un assistant, tu lui poses une question, il répond, il oublie. Un agent, c'est autre chose : il a une mémoire persistante (des fichiers qu'il relit à chaque session), des compétences encodées (tes méthodes, pas des prompts improvisés), des automatisations (des tâches qui se lancent toutes seules) et une boucle d'apprentissage (ce qu'il publie revient mesuré, et la mesure change ses décisions suivantes).</p>
+  <p>Pourquoi le construire plutôt que payer un outil : un outil te vend de la commodité. Du volume de mots-clés que tout le monde a, des scores que tout le monde regarde. Personne ne paie pour la commodité. Ton avantage, c'est ce que l'outil n'a pas : ta data et ta méthode. L'agent, c'est ce qui transforme les deux en production à grande échelle.</p>
+  <p>Ce qu'il te faut au départ : Claude Code (l'outil en ligne de commande d'Anthropic), un abonnement Claude, git installé, et de la discipline. Je préfère être honnête : tu ne montes pas ça en une après-midi. Tu le montes en plusieurs sessions, composant par composant. Mais une fois posé, ça te suit de client en client (et c'est tant mieux).</p>
+</section>
+
+<!-- ================= PHASE 1 ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Phase 1</span>
+    <h2 class="grad">Le socle</h2>
+    <p class="obj">Donner à Claude un endroit où se souvenir et une doctrine à suivre.</p>
+    <div class="rule"></div>
+  </header>
+
+  <h3 class="sec">1.1 Claude Code comme interface</h3>
+  <p>Pas le chat web. Claude Code. La différence est simple : le chat répond, Claude Code agit. Il lit et écrit des fichiers, lance des commandes, exécute tes skills, commit sur git. Tout ce qui suit repose là-dessus.</p>
+
+  <h3 class="sec">1.2 Le vault : ta mémoire en markdown</h3>
+  <p>Ta base de connaissances, c'est un dossier de fichiers texte. Pas une base de données, pas un SaaS de plus. Des fichiers markdown, versionnés en git, que tu peux lire toi-même dans n'importe quel éditeur (Obsidian si tu veux naviguer dedans confortablement).</p>
+  <p>La structure qui marche, deux couches :</p>
+<pre>mon-vault/
+├── AGENTS.md            ← ta doctrine (lue à chaque session)
+├── raw/                 ← les sources brutes, IMMUABLES
+│   ├── articles/        ← veille, clippings
+│   ├── data/            ← exports Search Console, crawls
+│   ├── clients/         ← notes client, briefs reçus
+│   └── notes/           ← tes notes, tes transcripts
+└── wiki/                ← ce que l'agent digère et structure
+    ├── index.md         ← le catalogue de toutes les pages
+    ├── log.md           ← le journal, en ajout seul
+    ├── hypotheses.md    ← les idées pas encore prouvées
+    ├── sources/         ← une fiche par source ingérée
+    ├── concepts/        ← tes concepts SEO (un fichier chacun)
+    ├── briefs/          ← les briefs produits
+    └── preuves/         ← contenu publié ↔ résultat mesuré</pre>
+  <div class="hard">
+    <span class="k">La règle d'or</span>
+    <p><code class="mono">raw/</code> est en lecture seule. L'agent y pioche, il n'y touche jamais. Tout ce qu'il produit va dans <code class="mono">wiki/</code>. C'est la séparation entre ta matière première et le savoir traité, et c'est ce qui t'évite de polluer tes sources.</p>
+  </div>
+
+  <h3 class="sec">1.3 La doctrine : le fichier qui empêche le générique</h3>
+  <p>À la racine, un fichier <code class="mono">AGENTS.md</code> (ou <code class="mono">CLAUDE.md</code>) que Claude lit au démarrage de chaque session. Tu y écris tes règles non négociables. Les miennes, pour te donner la base :</p>
+  <ul>
+    <li>Conversion, pas visibilité. Une page existe pour récupérer un email qualifié.</li>
+    <li>Mots-clés business uniquement. L'informationnel, les IA le mangent déjà.</li>
+    <li>Zéro chiffre inventé. Pas de source, pas d'affirmation. Un volume manquant s'écrit « à sourcer », jamais un nombre plausible.</li>
+    <li>Chaque page du wiki cite ses sources et pointe vers au moins deux autres pages.</li>
+    <li>Anti-IA writing strict (on y revient en phase 4).</li>
+    <li>L'agent propose, le gros des décisions est automatique, mais les arbitrages de jugement restent à toi.</li>
+  </ul>
+  <p>Ce fichier, c'est la différence entre un agent qui applique TA méthode et un Claude qui retombe dans son corpus moyen. Sans doctrine, tu produis ce que tout le monde produit.</p>
+  <p>Ce que tu as à la fin de la phase 1 : un agent qui connaît tes règles avant d'écrire une seule ligne.</p>
+</section>
+
+<!-- ================= PHASE 2 ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Phase 2</span>
+    <h2 class="grad">La matière première</h2>
+    <p class="obj">Nourrir l'agent avec ce que personne d'autre n'a.</p>
+    <div class="rule"></div>
+  </header>
+
+  <h3 class="sec">2.1 Ce que tu collectes</h3>
+  <p>Sans data propriétaire en entrée, l'agent te sort le corpus moyen de Claude. Donc de la commodité. La data, c'est ce qui rend ta production originale et difficile à copier. Ce que tu déposes dans <code class="mono">raw/</code> :</p>
+  <ul>
+    <li>Tes calls commerciaux, transcrits. Le vocabulaire exact de tes prospects, leurs objections réelles, les questions qu'ils posent avant d'acheter.</li>
+    <li>Tes tickets SAV et tes mails clients. Les vraies frictions, les vrais mots.</li>
+    <li>Tes avis clients. Ce qu'ils ont aimé, formulé comme eux le formulent.</li>
+    <li>Ta Search Console. Tes vraies requêtes, celles où tu apparais déjà sans le savoir.</li>
+    <li>Tes anciennes missions : audits, briefs, stratégies. Tout ce que tu as déjà appris une fois.</li>
+  </ul>
+  <p>Tu anonymises ce qui doit l'être avant de déposer. Et si tu n'as rien d'exploitable, tu ne produis pas : tu commences par aller chercher la data. C'est le pré-requis, pas une option. Je le redis depuis longtemps : vous n'êtes plus des SEO qui créent des pages, vous êtes des SEO qui récupèrent la data.</p>
+
+  <h3 class="sec">2.2 Le workflow d'ingestion</h3>
+  <p>Déposer un fichier ne suffit pas. L'agent doit le digérer. Le workflow, à encoder dans ta doctrine, pour chaque source :</p>
+  <ol>
+    <li>Lire le fichier en entier.</li>
+    <li>En tirer une fiche structurée dans <code class="mono">wiki/sources/</code> : contexte, chiffres clés, limites, implications SEO.</li>
+    <li>Mettre à jour les concepts touchés dans <code class="mono">wiki/concepts/</code> (et signaler si la nouvelle source contredit une page existante, on en reparle en phase 6).</li>
+    <li>Relier : chaque fiche pointe vers les concepts concernés, chaque concept liste ses sources.</li>
+    <li>Écrire une ligne dans <code class="mono">wiki/log.md</code>.</li>
+  </ol>
+  <p>Une source à la fois. C'est lent au début, et c'est le but : chaque source digérée enrichit le réseau, et le réseau est ce qui rend les productions suivantes meilleures.</p>
+
+  <h3 class="sec">2.3 Retrouver l'info</h3>
+  <p>Au début, la recherche texte suffit (l'agent fait des grep dans le vault). Quand le vault grossit, tu ajoutes un index de recherche sémantique en local (des embeddings gratuits, rien à payer). L'idée à retenir : l'agent doit pouvoir répondre à « qu'est-ce qu'on sait déjà sur X » avant de produire quoi que ce soit sur X. C'est ce qui fait que ton centième brief est meilleur que ton premier.</p>
+
+  <h3 class="sec">2.4 Où va ta data (confidentialité et RGPD)</h3>
+  <p>La question arrive toujours, autant y répondre avant qu'on te la pose. Claude Code envoie tes requêtes aux serveurs d'Anthropic : tout ce que l'agent lit pour travailler y passe le temps du traitement. Ce qui compte, c'est ce qu'Anthropic a le droit d'en faire, et ça dépend de ton type de compte.</p>
+  <ul>
+    <li><b>Compte pro (API, Team, Enterprise)</b> : tes données ne servent jamais à entraîner les modèles, c'est le réglage par défaut des conditions commerciales. Rien à configurer.</li>
+    <li><b>Compte perso (Free, Pro, Max)</b> : depuis septembre 2025, il y a un réglage « Help improve Claude » dans claude.ai → Settings → Privacy. S'il est activé, tes conversations et tes sessions de code servent à l'entraînement et sont conservées 5 ans. Désactive-le : plus d'entraînement, conservation 30 jours. C'est la première chose à vérifier avant de déposer de la data client dans ton vault.</li>
+  </ul>
+  <p>Et ne confonds pas entraînement et RGPD, ce sont deux sujets. « Pas d'entraînement » ne te rend pas conforme pour autant. Si tu traites de la data client (calls enregistrés, mails, tickets SAV), trois réflexes : informer les participants quand tu enregistres un call, c'est la base et c'est en amont de tout outil ; préférer un compte pro, parce qu'Anthropic fournit alors un contrat de sous-traitance (le DPA) qui cadre juridiquement le traitement ; et ne garder dans le vault que ce qui sert, en anonymisant ce qui peut l'être (tu le fais déjà depuis la section 2.1). Le brut reste chez toi, en local, dans tes fichiers markdown : c'est un des gros avantages du vault sur les outils cloud.</p>
+</section>
+
+<!-- ================= PHASE 3 ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Phase 3</span>
+    <h2 class="grad">Les compétences</h2>
+    <p class="obj">Encoder ta méthode une fois, l'exécuter à l'infini.</p>
+    <div class="rule"></div>
+  </header>
+
+  <h3 class="sec">3.1 Ce qu'est un skill</h3>
+  <p>Un skill, c'est un dossier avec un fichier <code class="mono">SKILL.md</code> qui décrit une tâche précise et la méthode pour l'exécuter, étape par étape. Claude le charge automatiquement quand ta demande matche. La différence avec un prompt : le prompt, tu le réécris à chaque fois et il dérive. Le skill est versionné, il s'améliore, et il produit la même qualité à chaque exécution.</p>
+
+  <h3 class="sec">3.2 L'anatomie d'un skill qui marche</h3>
+  <p>Chaque skill contient quatre choses :</p>
+  <ol>
+    <li><b>Les déclencheurs</b> : les phrases qui l'activent (« trouve-moi des mots-clés », « fais le clustering »).</li>
+    <li><b>Le pipeline</b> : les étapes numérotées, dans l'ordre, sans raccourci possible.</li>
+    <li><b>Les règles anti-hallucination</b> : ce que le skill n'a jamais le droit de faire. La plus importante de toutes : aucun volume de recherche inventé, aucun chiffre sorti du corpus. Une donnée manquante s'écrit « à sourcer ».</li>
+    <li><b>L'output</b> : où le résultat se range dans le vault (jamais en réponse volatile dans le chat, toujours dans un fichier).</li>
+  </ol>
+  <p>Squelette minimal, pour te lancer :</p>
+<pre>---
+name: recherche-mots-cles
+description: Recherche de mots-clés from scratch depuis une
+  thématique. Déclencher quand on dit "trouve des mots-clés",
+  "keyword research", "quels mots-clés cibler".
+---
+
+## Pipeline
+1. Cadrer : offre, point de conversion, client type.
+2. Expansion sémantique : déclinaisons, modificateurs
+   (prix, avis, alternative, urgence), problématiques.
+3. Qualifier chaque requête : intention (Know / Do),
+   signal réel (Suggest, PAA, Search Console).
+4. Filtrer le bruit, écarter l'informationnel grillé par les IA.
+5. Tableau priorisé → wiki/briefs/AAAA-MM-JJ-theme.md
+
+## Règles
+- Aucun volume inventé. Pas de source = "à sourcer".
+- Décisionnel d'abord. Le volume n'est pas un critère de choix.</pre>
+
+  <h3 class="sec">3.3 Les 9 skills à construire</h3>
+  <p>Dans l'ordre du travail SEO, chacun nourrissant le suivant :</p>
+  <ol>
+    <li><b>Recherche de mots-clés</b> : d'une thématique à une liste qualifiée, sans outil payant.</li>
+    <li><b>Clustering</b> : regrouper par intention de SERP. Deux requêtes, même top 10 : une seule page.</li>
+    <li><b>Mots-clés décisionnels</b> : isoler ce qui convertit, jeter le reste.</li>
+    <li><b>Brief de contenu</b> : structure Hn calée sur ce que les autres n'ont pas dit.</li>
+    <li><b>Entités sémantiques</b> : les termes qu'une page doit contenir pour s'aligner sur l'intention.</li>
+    <li><b>Modèles de pages (pSEO)</b> : un modèle, une variable, des dizaines ou centaines de pages décisionnelles.</li>
+    <li><b>Maillage interne</b> : relier les pages, repérer les orphelines et les culs-de-sac. (Guide dédié publié sur organikk.co/guides, avec les deux SKILL.md maillage complets.)</li>
+    <li><b>Cannibalisation</b> : repérer les pages qui se battent sur la même intention et trancher.</li>
+    <li><b>Audit GEO</b> : vérifier qu'un contenu sera cité par ChatGPT et Perplexity, pas juste indexé par Google.</li>
+  </ol>
+  <p>Tu n'as pas besoin des neuf le premier jour. Tu commences par les trois premiers (c'est la chaîne mots-clés complète), tu les fais tourner sur un vrai projet, et tu ajoutes les autres quand le besoin arrive. Le catalogue n'est pas figé non plus : les 9 sont le socle, mon système en compte 13 aujourd'hui (données structurées, Core Web Vitals, mots-clés résistants aux IA, indexation…), chacun construit sur la même anatomie quand un besoin réel est apparu. Un skill mal écrit produit du mauvais travail à grande échelle, donc tu les construis avec soin, un par un, et tu les corriges à chaque fois qu'un output te déçoit. La correction d'aujourd'hui, c'est la règle de demain.</p>
+</section>
+
+<!-- ================= PHASE 4 ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Phase 4</span>
+    <h2 class="grad">La voix</h2>
+    <p class="obj">Que la production sorte dans ta voix, pas dans celle de Claude.</p>
+    <div class="rule"></div>
+  </header>
+  <p>Par défaut, Claude écrit comme Claude. Lisse, reconnaissable, et tout le monde commence à le repérer. Deux pièces à poser :</p>
+  <p><b>Le corpus de voix.</b> Un fichier (ou un dossier) avec tes propres textes : tes posts qui ont marché, tes mails, tes passages de newsletter. Plus tes règles : ce que tu dis, ce que tu ne dis jamais, tes expressions. L'agent le lit avant chaque rédaction et calque le style.</p>
+  <p><b>La checklist anti-IA writing.</b> Une liste de contrôle que l'agent passe sur chaque texte avant de te le rendre : pas de superlatif creux (« crucial », « révolutionnaire »), pas de structure en trois points systématique, pas de conclusion qui répète, pas de métaphore décorative, pas de bold partout. Tu la mets dans la doctrine, elle s'applique à tout ce qui sort.</p>
+  <p>Le standard de rédaction jusqu'à 100, tu ne l'atteins pas avec l'IA seule. L'agent te monte à 80, proprement, dans ta voix. Les 20 derniers, c'est ta relecture. C'est non négociable si tu veux que ça ne sente pas l'IA.</p>
+  <p>Et quand tu installes l'agent chez un client, tu refais cette étape avec SA voix : son corpus, ses règles. Même méthode, voix différente. C'est ce qui rend le système réutilisable sans donner ton style.</p>
+</section>
+
+<!-- ================= PHASE 5 ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Phase 5</span>
+    <h2 class="grad">Les workflows</h2>
+    <p class="obj">Que l'agent enchaîne, pas qu'il fasse des tâches isolées.</p>
+    <div class="rule"></div>
+  </header>
+  <p>Un agent qui sait faire neuf tâches séparées, c'est bien. Un agent qui les enchaîne dans le bon ordre sans que tu pilotes chaque étape, c'est l'autonomie. Tu décris les enchaînements types une fois, dans ta doctrine, et il les déroule.</p>
+
+  <h3 class="sec">Les 4 workflows</h3>
+  <p>Mon système tient en quatre workflows, calibrés sur des dizaines de projets : l'audit, les mots-clés, la rédaction, le suivi. C'est le rythme que j'applique chez mes clients : la première semaine pose le socle, ensuite un workflow par semaine. Au bout d'un mois, le cycle complet a tourné une fois.</p>
+<pre>Les 4 workflows · un par semaine
+─────────────────────────────────────────────────────────
+ 1. AUDIT        « qu'est-ce qui ne va pas sur ce site »
+    Search Console + crawl → plan d'action priorisé
+        ↓
+ 2. MOTS-CLÉS    « qu'est-ce qu'on crée maintenant »
+    thématique → pages à créer, triées par conversion
+        ↓
+ 3. RÉDACTION    « on prépare la page »
+    brief + contenu pré-rempli dans ta voix → toi
+        ↓
+ 4. SUIVI        « qu'est-ce que ça a donné »
+    la Search Console mesure → corrections, quick wins
+        │
+        └──→ ce que le suivi trouve repart en 1 ou en 2
+─────────────────────────────────────────────────────────
+ L'agent enchaîne les skills à l'intérieur de chaque
+ workflow. Toi, tu valides entre deux workflows.</pre>
+  <p>L'audit répond à « qu'est-ce qui ne va pas sur ce site » : 100% données Google et structure du site, 8 phases (les 7 du premier guide, plus une phase vitesse possible uniquement côté terminal), de l'indexation au plan d'action priorisé. Les mots-clés répondent à « qu'est-ce qu'on crée maintenant » : recherche → clustering → décisionnels, et la sortie repart dans les skills de rédaction. La rédaction part d'un groupe de mots-clés et prépare la page : l'agent ne rédige pas à ta place, il t'aide à rédiger. Il crée le brief, y reprend ton ton de voix et les objections de tes prospects, et pré-remplit le contenu ; la rédaction finale, c'est toi, puis le contrôle qualité. Le suivi répond à « qu'est-ce que ça a donné » : une fois par mois, la Search Console ressort les quick wins, les pages qui se mangent entre elles, les liens internes à renforcer, et chaque page publiée a sa fiche preuve à J+30 et J+90. Ce que le suivi trouve repart dans l'audit ou les mots-clés du mois suivant.</p>
+  <p>Avec, au milieu de chaque workflow de production, un contrôle qualité : un point de contrôle où le contenu est vérifié avant de sortir. Les critères chez moi : chaque affirmation chiffrée a sa source, la checklist anti-IA writing passe, la page répond à l'intention visée, et elle propose une action concrète (formulaire, simulateur, devis). Une page qui rate un critère ne sort pas. Même produite à 3h du matin par une routine.</p>
+  <p>On ne crée pas un article par un article. On crée une cohérence sémantique pour le client. L'agent tient cette cohérence sur des centaines de pages, ce qu'aucun humain ne tient à la main.</p>
+</section>
+
+<!-- ================= PHASE 6 ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Phase 6</span>
+    <h2 class="grad">Les boucles</h2>
+    <p class="obj">Que le système se corrige tout seul au lieu d'accumuler.</p>
+    <div class="rule"></div>
+  </header>
+  <p>C'est la partie que tout le monde saute, et c'est celle qui sépare un agent qui produit d'un agent qui progresse. Un système qui capture et produit sans jamais se relire, ça grossit, ça ne s'améliore pas. Quatre boucles à fermer.</p>
+
+  <h3 class="sec">Boucle 1 : capture → traitement</h3>
+  <p>Ton dossier <code class="mono">raw/</code> se remplit plus vite qu'il ne se digère. C'est normal, et c'est dangereux : la data non digérée, c'est de la data qui n'existe pas pour l'agent. La boucle : une fois par semaine, l'agent compare ce qui est dans <code class="mono">raw/</code> avec ce qui a été ingéré dans <code class="mono">wiki/sources/</code>, et te sort la liste du retard, triée par priorité (la data terrain d'abord, la veille ensuite). Tu décides quoi ingérer, il ingère.</p>
+
+  <h3 class="sec">Boucle 2 : doctrine → validation</h3>
+  <p>Ta doctrine contient des convictions. Certaines sont prouvées, d'autres sont des paris. La boucle : un registre <code class="mono">wiki/hypotheses.md</code> où chaque conviction non prouvée est listée avec son statut (ouverte, en test, validée, invalidée), et un registre des contradictions (deux pages du vault qui disent l'inverse l'une de l'autre, repérées à l'ingestion). Une fois par mois, l'agent confronte les hypothèses aux sources ingérées depuis la dernière revue et fait avancer les statuts.</p>
+  <div class="hard">
+    <span class="k">La règle dure</span>
+    <p>Une hypothèse ne passe jamais « validée » sur un ressenti. Elle passe validée sur une fiche preuve adossée à de la data réelle. Sinon tu construis une doctrine qui a l'air solide et qui n'est que de l'opinion empilée.</p>
+  </div>
+
+  <h3 class="sec">Boucle 3 : sortie → apprentissage</h3>
+  <p>La plus rentable des quatre. Chaque contenu publié doit revenir mesuré, sinon « ma méthode marche » reste un argument commercial et pas un fait. Le mécanisme :</p>
+  <ol>
+    <li>À la publication, l'agent crée une <b>fiche preuve</b> : quelle page, quel mot-clé visé, quelle hypothèse de la doctrine elle teste, et une <b>prédiction datée</b> (« à 30 jours, cette page devrait faire X »).</li>
+    <li>À J+30 puis J+90, la Search Console tranche : la prédiction était bonne ou pas.</li>
+    <li>Le verdict remonte dans le vault. Une hypothèse confirmée monte en confiance, une prédiction ratée devient une question : qu'est-ce qu'on a mal jugé ?</li>
+  </ol>
+  <p>Au bout de quelques cycles, l'agent ne décide plus seulement avec ta doctrine : il décide avec ta doctrine corrigée par tes résultats réels. C'est ça, un système qui apprend. Le SEO, ce sont des tâches mathématiques que l'on répète jusqu'à trouver des patterns ; cette boucle, c'est ce qui trouve les patterns à ta place.</p>
+
+  <h3 class="sec">Boucle 4 : correction → durcissement</h3>
+  <p>La plus récente chez moi, et celle qui rentabilise les trois autres. Quand tu corriges l'agent (un titre reformulé, un mot interdit rappelé), la correction vit dans la conversation et meurt avec elle. Trois semaines plus tard, tu refais la même. La boucle : chaque correction s'écrit dans un registre (<code class="mono">wiki/corrections-recurrentes.md</code>) avec un thème stable en slug. Une occurrence isolée ne déclenche rien. La deuxième occurrence du même thème passe le statut à « récurrente », et la correction se propose au durcissement à la revue du vendredi : une règle dans la doctrine, une contrainte dans le skill concerné, ou un check automatique qui bloque la livraison.</p>
+  <div class="hard">
+    <span class="k">La règle dure</span>
+    <p>L'agent n'écrit jamais la règle lui-même dans la doctrine ou dans un skill. Il prépare la proposition, tu la valides au rituel. Et quand c'est possible, préfère le check mécanique à l'instruction répétée : un contrôle qui bloque la livraison vaut mieux qu'une consigne que le modèle peut oublier.</p>
+  </div>
+
+  <h3 class="sec">Le rituel</h3>
+  <p>Les boucles produisent des propositions. Quelqu'un doit trancher, et ce quelqu'un c'est toi. Un rendez-vous hebdomadaire de 15 minutes, le vendredi chez moi : l'agent présente ce qui a bougé (hypothèses qui ont avancé, contradictions ouvertes, retard d'ingestion, preuves rentrées, et la correction récurrente de la semaine à durcir en règle), et tu décides. L'agent propose à 95%, tu arbitres les 5% de jugement irréductible. Pas plus. Si le rituel te prend une heure, c'est que les boucles sont mal réglées.</p>
+</section>
+
+<!-- ================= PHASE 7 ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Phase 7</span>
+    <h2 class="grad">Les routines</h2>
+    <p class="obj">Que le système vive même quand tu ne l'ouvres pas.</p>
+    <div class="rule"></div>
+  </header>
+  <p>Tout ce qui précède peut se lancer à la main. Les routines, c'est ce qui le lance à ta place, à heures fixes. Trois façons de faire, de la plus simple à la plus robuste :</p>
+  <p><b>En local (cron sur Linux, launchd sur Mac).</b> Une tâche planifiée qui lance Claude Code en mode headless (<code class="mono">claude -p "ta consigne"</code>) dans le vault, à heure fixe. Simple, gratuit, mais ça suppose que ta machine soit allumée.</p>
+  <p><b>Sur GitHub Actions.</b> Ton vault est sur git de toute façon. Un workflow planifié qui tourne dans le cloud, exécute la tâche, commit le résultat. Ta machine peut être éteinte.</p>
+  <p><b>Les tâches planifiées de Claude.</b> Des routines cloud qui exécutent un prompt à un horaire cron, directement sur ton repo. C'est ce que j'utilise pour le quotidien.</p>
+  <p>Le planning qui marche chez moi, à adapter :</p>
+  <table>
+    <thead><tr><th>Routine</th><th>Cadence</th><th>Ce qu'elle fait</th></tr></thead>
+    <tbody>
+      <tr><td>Pull Search Console</td><td class="num">mensuel</td><td>récupère la data, met à jour les fiches preuves J+30 / J+90</td></tr>
+      <tr><td>Audit d'indexation</td><td class="num">mensuel</td><td>sitemap complet : quelles pages Google ignore, et pourquoi</td></tr>
+      <tr><td>Sweep du backlog</td><td class="num">lundi matin</td><td>la liste de la data non digérée, triée</td></tr>
+      <tr><td>Revue des hypothèses</td><td class="num">1er du mois</td><td>confronte la doctrine aux sources du mois</td></tr>
+      <tr><td>Rituel hebdo</td><td class="num">vendredi</td><td>prépare la synthèse de décision (toi tu arbitres)</td></tr>
+    </tbody>
+  </table>
+  <p>Deux règles de sécurité sur les routines, apprises en me plantant : d'abord, une routine n'invente jamais un chiffre, si elle n'a pas la donnée elle écrit « rien à signaler » et s'arrête (une routine qui hallucine en silence à 3h du matin, c'est pire que pas de routine). Ensuite, une routine écrit toujours un journal de ce qu'elle a fait : quand un résultat te surprend, tu remontes le log au lieu de deviner.</p>
+</section>
+
+<!-- ================= PHASE 8 ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Phase 8</span>
+    <h2 class="grad">Le management</h2>
+    <p class="obj">Le passage à 1 : tu n'exécutes plus, tu manages.</p>
+    <div class="rule"></div>
+  </header>
+  <p>À ce stade, tu as un agent qui connaît tes règles, nourri de ta data, qui exécute tes skills dans ta voix, qui enchaîne les workflows, qui apprend de ses résultats et qui tourne à heures fixes. Ton rôle change.</p>
+  <p>Concrètement, manager un agent, ça veut dire :</p>
+  <ul>
+    <li><b>Tenir tes positions.</b> Si Claude affirme « c'est comme ça qu'on fait en SEO » et que ton expérience dit l'inverse, c'est toi qui as raison. Tu le brides, tu lui redonnes le contexte, tu corriges la doctrine. Soyez manager, soyez certains de vos positions.</li>
+    <li><b>Transformer chaque correction en règle.</b> Tu reformules un titre une fois, c'est de la relecture. Tu le reformules trois fois pour la même raison, c'est une règle qui manque dans la doctrine ou dans le skill. Tu l'écris, et l'erreur disparaît pour toujours.</li>
+    <li><b>Valider aux gates, pas à chaque étape.</b> Tu n'es pas là pour relire chaque paragraphe. Tu es là aux points de contrôle : le brief avant la rédaction, la page avant la publication, le rituel du vendredi.</li>
+    <li><b>Doser les modèles.</b> Le gros modèle pour ce qui demande du jugement (la stratégie, les briefs, l'arbitrage), des modèles moins chers pour le volume (les déclinaisons, les reformulations). C'est ton premier poste d'économie quand le système monte en charge.</li>
+  </ul>
+  <p>Et tu ne paies plus un seul outil de volume. Pas par principe : parce que le volume ne t'a jamais ramené un client. Ce qui te ramène des clients, c'est ta data et ta méthode, et l'agent les exécute à une échelle que tu ne tenais pas seul.</p>
+</section>
+
+<!-- ================= ERREURS ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Annexe</span>
+    <h2 class="grad">Les erreurs qui coûtent cher</h2>
+    <p class="obj">Six pièges, vus en vrai (parfois chez moi).</p>
+    <div class="rule"></div>
+  </header>
+  <ol class="errs">
+    <li><span><b>Tout construire avant de produire.</b> Tu poses le socle, trois skills, et tu lances un vrai projet. Le reste se construit en marchant. Le système parfait qui n'a jamais produit une page ne vaut rien.</span></li>
+    <li><span><b>Sauter la data.</b> L'agent sans data propriétaire, c'est un générateur de contenu générique avec une belle architecture autour. La commodité, en plus cher.</span></li>
+    <li><span><b>Laisser passer les chiffres inventés.</b> Un seul volume de recherche halluciné dans un livrable client et ta crédibilité est morte. La règle « pas de source, pas de chiffre » se met dans la doctrine ET dans chaque skill. Double verrou.</span></li>
+    <li><span><b>Faire confiance sans boucle de preuve.</b> Sans fiches preuves, tu ne sais pas si ta méthode marche, tu sais juste qu'elle produit. Ce n'est pas pareil.</span></li>
+    <li><span><b>L'agent qui décide de tout.</b> Le jour où tu valides sans lire, le système dérive et tu ne le vois pas. Les gates existent pour ça.</span></li>
+    <li><span><b>Garder les skills dans le chat.</b> Une méthode qui reste dans tes prompts disparaît avec la conversation. Une méthode posée dans un fichier versionné s'améliore à chaque mission.</span></li>
+  </ol>
+</section>
+
+<!-- ================= RECAP ================= -->
+<section class="phase">
+  <header class="ph-open">
+    <span class="num">Annexe</span>
+    <h2 class="grad">Le récap</h2>
+    <p class="obj">Les neuf composants, ce que tu poses et ce que tu obtiens.</p>
+    <div class="rule"></div>
+  </header>
+  <table>
+    <thead><tr><th>Composant</th><th>Ce que tu poses</th><th>Ce que tu obtiens</th></tr></thead>
+    <tbody>
+      <tr><td class="num">0</td><td>Le principe</td><td>Tu sais ce que tu construis et pourquoi</td></tr>
+      <tr><td class="num">1</td><td>Claude Code + vault + doctrine</td><td>Un agent qui connaît tes règles</td></tr>
+      <tr><td class="num">2</td><td>Ta data propriétaire + ingestion</td><td>De la matière originale, pas de la commodité</td></tr>
+      <tr><td class="num">3</td><td>Les 9 skills</td><td>Ta méthode encodée, exécutable à l'infini</td></tr>
+      <tr><td class="num">4</td><td>Le corpus de voix + anti-IA writing</td><td>Une prod qui ne sent pas l'IA</td></tr>
+      <tr><td class="num">5</td><td>Les workflows + quality gates</td><td>Des chaînes contrôlées, pas des tâches isolées</td></tr>
+      <tr><td class="num">6</td><td>Les 4 boucles + le rituel</td><td>Un système qui se corrige avec du réel</td></tr>
+      <tr><td class="num">7</td><td>Les routines</td><td>Un système qui tourne en automatique</td></tr>
+      <tr><td class="num">8</td><td>Le management</td><td>Toi qui arbitres, l'agent qui exécute</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sec">Le mot de la fin</h3>
+  <p>Demain, tout le monde sera capable d'ouvrir Claude et de lui demander un article. Ça, c'est la commodité, et personne ne la paiera. Ce qui restera cher, c'est l'agent calé sur une data que les autres n'ont pas, corrigé par des résultats mesurés, piloté par quelqu'un qui sait dire non.</p>
+  <p>Construis le tien. Composant par composant, en produisant dès le premier. N'aie pas peur de l'avenir, prépare-le.</p>
+</section>
+
+<!-- ================= PAGE FINALE ================= -->
+<section class="final panel">
+  <div>
+    <h2>On regarde tes process ensemble ?</h2>
+    <p>Trente minutes en visio.</p>
+    <p>Tu me montres comment tu travailles aujourd'hui : ce que tu fais à la main, ce que tu répètes pour chaque client et la liste interminable d'outils que tu utilises :)</p>
+    <p>On regarde ensemble ce que tu peux automatiser avec Obsidian, quelles tâches transformer en skills, et par où commencer pour ne pas procrastiner.</p>
+    <a class="cta" href="https://cal.com/tim-boussardon-yzrrb1/30min">Réserver le créneau<span class="u">cal.com/tim-boussardon-yzrrb1/30min</span></a>
+  </div>
+  <div class="foot">
+    <svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z" fill="#ffffff"/><path d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z" fill="#ffffff"/></svg>
+    <span>organikk.co</span>
+  </div>
+</section>
+
+</body>
+</html>

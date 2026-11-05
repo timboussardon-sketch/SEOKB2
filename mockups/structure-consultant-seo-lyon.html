@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Structure de page : consultant SEO Lyon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17191d;
+    --ink-2:#4a4f57;
+    --ink-3:#7c828c;
+    --paper:#faf9f7;
+    --card:#ffffff;
+    --rule:#e6e3dd;
+    --rule-soft:#efece7;
+    --accent:#26456b;
+    --accent-soft:#eef2f7;
+    --warn:#8a5a1c;
+    --warn-soft:#fdf4e7;
+    --gap-tt:32px;
+    --gap-tb:112px;
+    --gap-tb-in:80px;
+    --gap-block:56px;
+    --r-card:14px;
+    --r-inner:8px;
+    --pad-card:22px;
+    --shadow:0 1px 2px rgba(23,25,29,.04), 0 4px 14px rgba(23,25,29,.05);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Geist","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:16px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* ── tête ───────────────────────────────── */
+  header.top{padding-block:72px 0}
+  h1{
+    font-size:clamp(30px,4.2vw,46px);
+    line-height:1.12;
+    letter-spacing:-.02em;
+    font-weight:600;
+    margin:0;
+    max-width:19ch;
+  }
+  .lede{margin:var(--gap-tt) 0 0;font-size:19px;line-height:1.6;color:var(--ink-2);max-width:62ch}
+  .statut{
+    display:flex;flex-wrap:wrap;gap:10px;
+    margin-top:28px;
+  }
+  .tag{
+    font-size:13px;font-weight:500;letter-spacing:.01em;
+    padding:6px 12px;border-radius:999px;
+    background:var(--accent-soft);color:var(--accent);
+  }
+  .tag.w{background:var(--warn-soft);color:var(--warn)}
+  .tag.n{background:#f1efea;color:var(--ink-2)}
+
+  /* ── grille ─────────────────────────────── */
+  .grid{display:grid;grid-template-columns:232px minmax(0,1fr);gap:56px;padding-block:var(--gap-tb) 120px;align-items:start}
+  .grid > *{min-width:0}
+  nav.rail{position:sticky;top:40px}
+  .rail-t{font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:0 0 18px}
+  .rail ol{list-style:none;margin:0;padding:0;counter-reset:h}
+  .rail li{counter-increment:h;margin-bottom:2px}
+  .rail a{
+    display:flex;gap:10px;align-items:baseline;
+    padding:7px 10px;border-radius:var(--r-inner);
+    color:var(--ink-2);text-decoration:none;font-size:14px;line-height:1.4;
+    transition-property:background-color,color;transition-duration:130ms;
+  }
+  .rail a::before{content:counter(h);font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;color:var(--ink-3);min-width:13px;font-variant-numeric:tabular-nums}
+  .rail a:hover{background:#f2efea;color:var(--ink)}
+  .rail a.on{background:var(--accent-soft);color:var(--accent);font-weight:500}
+  .rail a.on::before{color:var(--accent)}
+
+  /* ── sections ───────────────────────────── */
+  section{margin-bottom:var(--gap-tb)}
+  section:last-child{margin-bottom:0}
+  h2{
+    font-size:clamp(23px,2.5vw,30px);
+    line-height:1.2;letter-spacing:-.015em;font-weight:600;
+    margin:0;max-width:30ch;
+  }
+  h3{font-size:17px;font-weight:600;line-height:1.35;margin:0;letter-spacing:-.008em}
+  p{margin:0 0 18px;max-width:68ch}
+  p:last-child{margin-bottom:0}
+  /* l'adjacence passe apres les regles de type, sinon p{margin} l'ecrase a specificite egale */
+  h2 + *{margin-top:var(--gap-tt)}
+  h3 + *{margin-top:16px}
+  h2 + .figs,h2 + .tw,h2 + .blocs,h2 + .faq,h2 + ul.holes{margin-top:var(--gap-tb-in)}
+  strong{font-weight:600}
+  em{font-style:normal;color:var(--ink-3)}
+  code{font-family:"Geist Mono",ui-monospace,monospace;font-size:.9em;background:#f1efea;padding:2px 6px;border-radius:5px}
+  a.src{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(38,69,107,.28)}
+
+  /* ── chiffre en exergue ─────────────────── */
+  .figs{display:flex;flex-wrap:wrap;gap:14px;margin-top:var(--gap-block)}
+  .fig{
+    background:var(--card);border-radius:var(--r-card);padding:var(--pad-card);
+    box-shadow:var(--shadow);flex:1 1 240px;min-width:0;
+  }
+  .fig b{display:block;font-size:30px;line-height:1.05;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .fig span{display:block;margin-top:10px;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+  .fig i{display:block;margin-top:8px;font-style:normal;font-size:12px;color:var(--ink-3)}
+
+  /* ── tableau sans cadre ─────────────────── */
+  .tw{overflow-x:auto;margin-top:var(--gap-block);-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.5px}
+  caption{caption-side:bottom;text-align:left;font-size:12.5px;color:var(--ink-3);padding-top:14px;line-height:1.5}
+  th{
+    text-align:left;font-weight:500;font-size:12px;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--ink-3);padding:0 16px 10px 0;border-bottom:1px solid var(--rule);white-space:nowrap;
+  }
+  td{padding:13px 16px 13px 0;border-bottom:1px solid var(--rule-soft);vertical-align:baseline}
+  tbody tr:last-child td{border-bottom:none}
+  th.n,td.n{text-align:right;font-variant-numeric:tabular-nums}
+  th.pub,td.pub{padding-left:28px}
+  tr.hl td{background:var(--accent-soft)}
+  tr.hl td:first-child{font-weight:600;border-top-left-radius:var(--r-inner);border-bottom-left-radius:var(--r-inner)}
+  tr.hl td:last-child{border-top-right-radius:var(--r-inner);border-bottom-right-radius:var(--r-inner)}
+  tr.dim td{color:var(--ink-3)}
+
+  /* ── bloc H2 de la page cible ───────────── */
+  .blocs{margin-top:var(--gap-block);display:flex;flex-direction:column;gap:14px}
+  .bloc{
+    background:var(--card);border-radius:var(--r-card);padding:var(--pad-card);
+    box-shadow:var(--shadow);
+  }
+  .bloc-h{display:flex;gap:14px;align-items:baseline}
+  .num{
+    font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;font-weight:500;
+    color:var(--accent);background:var(--accent-soft);
+    border-radius:6px;padding:3px 7px;flex:none;font-variant-numeric:tabular-nums;
+  }
+  .bloc-h h3{flex:1}
+  .meta{margin-top:16px;display:flex;flex-direction:column;gap:11px}
+  .meta div{display:flex;gap:12px;font-size:14px;line-height:1.5}
+  .meta dt{
+    flex:none;width:96px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink-3);padding-top:2px;font-weight:500;
+  }
+  .meta dd{margin:0;color:var(--ink-2)}
+  .quote{
+    margin-top:16px;padding:14px 16px;background:#f7f5f1;border-radius:var(--r-inner);
+    font-size:14.5px;line-height:1.55;color:var(--ink-2);
+  }
+  .quote::before{content:"« "}
+  .quote::after{content:" »"}
+  .hole{color:var(--warn);font-weight:500}
+
+  /* ── FAQ ────────────────────────────────── */
+  .faq{margin-top:var(--gap-block);background:var(--card);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden}
+  details{border-bottom:1px solid var(--rule-soft)}
+  details:last-child{border-bottom:none}
+  summary{
+    display:flex;align-items:center;gap:18px;
+    padding:20px var(--pad-card);cursor:pointer;list-style:none;
+    font-size:16.5px;font-weight:500;line-height:1.4;letter-spacing:-.005em;
+    transition-property:background-color;transition-duration:130ms;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary:hover{background:#fbfaf8}
+  summary:active{scale:.995}
+  summary span{flex:1}
+  .plus{
+    flex:none;width:16px;height:16px;position:relative;
+    transition-property:rotate;transition-duration:180ms;
+    transition-timing-function:cubic-bezier(0.2,0,0,1);
+  }
+  .plus::before,.plus::after{
+    content:"";position:absolute;inset:0;margin:auto;background:var(--ink-3);
+  }
+  .plus::before{width:16px;height:1.5px}
+  .plus::after{width:1.5px;height:16px}
+  details[open] .plus{rotate:45deg}
+  .ans{padding:0 var(--pad-card) 22px;max-width:70ch}
+  .ans p{font-size:15.5px;color:var(--ink-2)}
+  .vec{
+    margin-top:14px;font-size:12.5px;color:var(--ink-3);line-height:1.5;
+  }
+  .vec b{color:var(--ink-2);font-weight:500}
+
+  /* ── liste trous ────────────────────────── */
+  ul.holes{list-style:none;margin:var(--gap-block) 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+  ul.holes li{
+    position:relative;font-size:15px;line-height:1.55;
+    background:var(--warn-soft);border-radius:var(--r-inner);
+    padding:14px 18px 14px 44px;color:#5f421a;
+  }
+  ul.holes li::before{
+    content:"?";position:absolute;left:18px;top:14px;
+    font-weight:600;color:var(--warn);font-family:"Geist Mono",ui-monospace,monospace;
+  }
+  ul.holes code{background:#f6e9d4;color:#5f421a}
+
+  .note{
+    margin-top:var(--gap-block);font-size:14.5px;line-height:1.6;color:var(--ink-2);
+    padding-left:18px;border-left:2px solid var(--rule);max-width:68ch;
+  }
+
+  footer{padding-block:0 100px;color:var(--ink-3);font-size:13.5px;line-height:1.6}
+  footer p{max-width:72ch}
+
+  @media (max-width:880px){
+    .grid{grid-template-columns:minmax(0,1fr);gap:0;padding-block:64px 90px}
+    nav.rail{position:static;margin-bottom:64px;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+    .rail ol{display:flex;flex-wrap:wrap;gap:4px}
+    :root{--gap-tb:72px}
+    header.top{padding-block:48px 0}
+    .meta div{flex-direction:column;gap:4px}
+    .meta dt{width:auto}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition-duration:0ms !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <h1>Structure de page : consultant SEO Lyon</h1>
+    <p class="lede">Neuf H2 et une FAQ, chacun adossé à un vecteur sémantique mesuré ou à une objection d'achat relevée. Tout ce qui n'est pas sourcé est marqué comme trou.</p>
+    <div class="statut">
+      <span class="tag">Head term mesuré : consultant SEO Lyon</span>
+      <span class="tag n">Google Ads, 14/09/2026</span>
+      <span class="tag w">SERP non relevée</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <nav class="rail">
+      <p class="rail-t">Sommaire</p>
+      <ol>
+        <li><a href="#correction">La formulation demandée n'existe pas</a></li>
+        <li><a href="#demande">La demande mesurée</a></li>
+        <li><a href="#ossature">L'ossature, 9 H2</a></li>
+        <li><a href="#faq">La FAQ, 7 signaux</a></li>
+        <li><a href="#trous">Ce qui manque</a></li>
+        <li><a href="#fiabilite">Fiabilité</a></li>
+      </ol>
+    </nav>
+
+    <main>
+
+      <!-- 1 ─────────────────────────────── -->
+      <section id="correction">
+        <h2>«&#8239;freelance SEO Lyon&#8239;» ne porte aucune donnée</h2>
+        <p>La chaîne exacte que tu demandes ne reçoit aucun volume dans la mesure Google Ads du 14 septembre. La formulation qui porte la demande lyonnaise est <code>consultant SEO Lyon</code>. Le H1 prend celle-là, <code>freelance SEO Lyon</code> descend en title alternatif et en vocabulaire de corps de page.</p>
+        <p>C'est le même écart que «&#8239;freelance SEO SaaS&#8239;», corrigé en «&#8239;consultant SEO SaaS&#8239;» lors de la même passe de mesure.</p>
+        <div class="figs">
+          <div class="fig"><b>1 600</b><span>Recherches mensuelles sur <code>consultant SEO Lyon</code></span><i>CPC 5,78 €, fourchette 1,73 à 9,82 €</i></div>
+          <div class="fig"><b>0</b><span>Donnée sur <code>freelance SEO Lyon</code></span><i>Requête absente de la mesure</i></div>
+          <div class="fig"><b>7/100</b><span>Pression publicitaire à Lyon</span><i>La plus basse des dix villes relevées</i></div>
+        </div>
+      </section>
+
+      <!-- 2 ─────────────────────────────── -->
+      <section id="demande">
+        <h2>Lyon passe devant Paris, et l'enchère y coûte moins cher</h2>
+        <p>Sur la formulation <code>consultant SEO {ville}</code>, Lyon est la première demande de France dans les dix villes mesurées, avec 1,8 fois le volume parisien. Le CPC y est aussi plus bas qu'à Paris. Les deux faits viennent de la même extraction, le même jour.</p>
+        <div class="tw">
+          <table>
+            <caption>Google Ads Keyword Planner, 14/09/2026. Moyennes mensuelles sur douze mois, CPC au milieu de la fourchette d'enchère haut de page. Lille et Nice affichent des fourchettes de 2,50 à 99,91 € et de 3,99 à 68,96 €, trop larges pour être lues comme un prix.</caption>
+            <thead>
+              <tr><th>Ville</th><th class="n">Volume / mois</th><th class="n">CPC</th><th class="pub">Pression pub.</th></tr>
+            </thead>
+            <tbody>
+              <tr class="hl"><td>Lyon</td><td class="n">1 600</td><td class="n">5,78 €</td><td class="pub">Faible, 7/100</td></tr>
+              <tr><td>Paris</td><td class="n">880</td><td class="n">6,72 €</td><td class="pub">Faible, 5/100</td></tr>
+              <tr class="dim"><td>Lille</td><td class="n">880</td><td class="n">51,21 €</td><td class="pub">Faible, 8/100</td></tr>
+              <tr><td>Montpellier</td><td class="n">590</td><td class="n">8,48 €</td><td class="pub">Faible, 7/100</td></tr>
+              <tr class="dim"><td>Nice</td><td class="n">590</td><td class="n">36,47 €</td><td class="pub">Faible, 6/100</td></tr>
+              <tr><td>Rennes</td><td class="n">480</td><td class="n">10,24 €</td><td class="pub">Faible, 4/100</td></tr>
+              <tr><td>Bordeaux</td><td class="n">480</td><td class="n">2,51 €</td><td class="pub">Faible, 7/100</td></tr>
+              <tr><td>Nantes</td><td class="n">480</td><td class="n">n.d.</td><td class="pub">Faible, 5/100</td></tr>
+              <tr><td>Marseille</td><td class="n">390</td><td class="n">2,37 €</td><td class="pub">Faible, 8/100</td></tr>
+              <tr><td>Toulouse</td><td class="n">320</td><td class="n">6,28 €</td><td class="pub">Faible, 9/100</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Le national, pour situer la page locale : <code>consultant SEO</code> 2 900 recherches à 3,32 €, <code>expert SEO</code> 1 300 à 5,76 €, <code>freelance SEO</code> 1 000 à 2,83 €, <code>consultant SEO freelance</code> 880 à 3,50 €. Le head term national est scoré 4/10 en conversion à cause d'une SERP forte observée le 14/09. La page Lyon travaille donc une demande plus étroite et moins disputée.</p>
+      </section>
+
+      <!-- 3 ─────────────────────────────── -->
+      <section id="ossature">
+        <h2>L'ossature</h2>
+        <p><strong>H1 :</strong> Consultant SEO à Lyon : les demandes attribuées, pas les positions.</p>
+        <p>Le différenciateur du H1 vient du premier frein d'achat relevé, pas d'une promesse choisie au hasard. L'ordre des neuf H2 suit les emplacements dictés par le relevé d'objections : l'attribution avant toute méthode, la preuve d'exécution dans l'offre, le bloc nominatif près du formulaire.</p>
+
+        <div class="blocs">
+
+          <article class="bloc">
+            <div class="bloc-h"><span class="num">H2 1</span><h3>De la page à la demande, puis au revenu</h3></div>
+            <div class="meta">
+              <div><dt>Vecteur</dt><dd>Attribution au revenu. Frein classé P1, et premier des trois freins critiques.</dd></div>
+              <div><dt>Contenu</dt><dd>Un enchaînement page d'entrée, formulaire, opportunité, avec la règle d'attribution écrite avant le début de la mission. 150 à 200 mots, bloc autonome lisible hors contexte.</dd></div>
+              <div><dt>Preuve</dt><dd>Une capture CRM ou analytics qui relie page, demande et revenu. <span class="hole">Trou : la capture dépend du dossier réel.</span></dd></div>
+            </div>
+            <p class="quote">Le trafic monte, mais mes commerciaux disent que les demandes viennent toujours du réseau. Je ne peux pas défendre le budget au comité.</p>
+          </article>
+
+          <article class="bloc">
+            <div class="bloc-h"><span class="num">H2 2</span><h3>Trois corrections mises en ligne, avec leur URL et leur date</h3></div>
+            <div class="meta">
+              <div><dt>Vecteur</dt><dd>Exécution réelle des recommandations. Frein P1.</dd></div>
+              <div><dt>Contenu</dt><dd>Trois lignes : URL, date de mise en ligne, responsable. Puis 60 mots de lecture. Ce n'est pas le sommaire d'un rapport, ce sont des corrections livrées.</dd></div>
+              <div><dt>Sous-titre</dt><dd>H3 : le format du ticket remis au développeur, avec impact, effort, dépendance et critère de validation.</dd></div>
+              <div><dt>Preuve</dt><dd><span class="hole">Trou : les trois corrections dépendent d'une mission réellement exécutée.</span></dd></div>
+            </div>
+            <p class="quote">J'ai déjà payé 4 000 € pour 80 recommandations. Six mois après, les trois tickets prioritaires sont toujours dans Jira.</p>
+          </article>
+
+          <article class="bloc">
+            <div class="bloc-h"><span class="num">H2 3</span><h3>Le prix, affiché</h3></div>
+            <div class="meta">
+              <div><dt>Vecteur</dt><dd>Transactionnel. <code>tarif consultant SEO</code> 30 recherches, <code>tarif freelance SEO</code> 20 recherches avec une pression publicitaire de 50/100, la plus haute de toute la liste mesurée. Faible volume, forte tension : quelqu'un paie pour ce clic.</dd></div>
+              <div><dt>Contenu</dt><dd>Trois colonnes : inclus, options, dépendances internes. La troisième répond seule au frein de dérive budgétaire.</dd></div>
+              <div><dt>Repère marché</dt><dd>Tarif journalier moyen des freelances SEO référencés sur Malt : 373 € à Lyon, 412 € à Paris, 376 € en national, sur 2 647 profils. Par expérience : 250 à 350 € en junior, 350 à 500 € en confirmé, 500 à 700 € en senior. <em>Relevé du 27/05/2026, fichier marqué obsolète, à revérifier avant publication.</em></dd></div>
+              <div><dt>Preuve</dt><dd><span class="hole">Trou : la grille réelle dépend de l'offre vendue.</span></dd></div>
+            </div>
+            <p class="quote">Le forfait semblait correct, puis chaque contenu, lien et correction technique est devenu une ligne supplémentaire.</p>
+          </article>
+
+          <article class="bloc">
+            <div class="bloc-h"><span class="num">H2 4</span><h3>La première mission, et comment on en sort</h3></div>
+            <div class="meta">
+              <div><dt>Vecteur</dt><dd>Durée contractuelle et réversibilité. Frein P2.</dd></div>
+              <div><dt>Contenu</dt><dd>Périmètre, prix, livrable, clause de sortie. 100 mots.</dd></div>
+              <div><dt>Requête d'appui</dt><dd><code>audit SEO freelance</code>, 110 recherches, CPC 2,75 €, scoré 8/10 en conversion quand l'audit est réellement vendu. C'est le meilleur score de conversion de tout le cluster.</dd></div>
+            </div>
+            <p class="quote">On me demande douze mois avant même d'avoir vérifié si le consultant comprend nos cycles de vente.</p>
+          </article>
+
+          <article class="bloc">
+            <div class="bloc-h"><span class="num">H2 5</span><h3>La migration, relevé avant et relevé après</h3></div>
+            <div class="meta">
+              <div><dt>Vecteur</dt><dd>Risque technique. Frein P3, celui qui bloque une signature sur un site qui vend déjà.</dd></div>
+              <div><dt>Contenu</dt><dd>Inventaire des URLs, plan de redirections, relevé Search Console daté avant bascule puis comparé après. La procédure, pas la promesse.</dd></div>
+            </div>
+            <p class="quote">Nous avons déjà perdu nos pages qui vendaient après une migration. Je ne signerai rien sans plan de redirections et contrôle avant/après.</p>
+          </article>
+
+          <article class="bloc">
+            <div class="bloc-h"><span class="num">H2 6</span><h3>Lyon demande plus que Paris et se paie moins cher</h3></div>
+            <div class="meta">
+              <div><dt>Vecteur</dt><dd>Contre-intuitif, et entièrement sourçable. C'est le seul H2 de la page qu'un autre site ne peut pas recopier sans refaire la mesure.</dd></div>
+              <div><dt>Contenu</dt><dd>Deux faits qui ne vont pas ensemble : 1 600 recherches à Lyon contre 880 à Paris, et un tarif journalier moyen plus bas à Lyon. 150 à 200 mots, les chiffres, leurs dates, leurs sources, aucune conclusion au-delà de ce qu'ils disent.</dd></div>
+              <div><dt>Réserve</dt><dd>Le second chiffre vient d'un relevé de mai marqué obsolète. Sans revérification, ce H2 se limite au premier fait.</dd></div>
+            </div>
+          </article>
+
+          <article class="bloc">
+            <div class="bloc-h"><span class="num">H2 7</span><h3>Ce que change réellement le fait d'être à Lyon</h3></div>
+            <div class="meta">
+              <div><dt>Vecteur</dt><dd>Proximité géographique, traitée en réduction de risque et non en argument.</dd></div>
+              <div><dt>Contenu</dt><dd>Ce qui change : déplacement, réunion sur site, connaissance du bassin. Et ce qui ne change rien. Si rien ne change, l'écrire.</dd></div>
+              <div><dt>Preuve</dt><dd><span class="hole">Trou : aucun élément d'ancrage lyonnais vérifiable dans la matière retenue. Sans lui, ce H2 tombe et la page locale perd sa raison d'être.</span></dd></div>
+            </div>
+          </article>
+
+          <article class="bloc">
+            <div class="bloc-h"><span class="num">H2 8</span><h3>Les branches d'expertise, en sections et pas en pages</h3></div>
+            <div class="meta">
+              <div><dt>Vecteur</dt><dd>Spécialité mesurée : <code>consultant SEO local</code> 390 à 5,34 €, <code>consultant SEO WordPress</code> 390 à 6,74 €, <code>consultant SEO e-commerce</code> 320 à 3,62 €, <code>consultant GEO</code> 260 à 5,62 €.</dd></div>
+              <div><dt>Contenu</dt><dd>Quatre blocs de 40 mots, chacun avec son cas ou rien. Ces branches ne deviennent des pages que si une preuve propre existe : sans preuve, leur proximité à l'offre s'effondre.</dd></div>
+              <div><dt>Scoring</dt><dd><code>consultant SEO local</code> 6/10 et <code>consultant GEO</code> 8/10 en conversion, mais seulement si l'offre correspondante est réellement vendue.</dd></div>
+            </div>
+          </article>
+
+          <article class="bloc">
+            <div class="bloc-h"><span class="num">H2 9</span><h3>Qui fait le travail, nom et rôle</h3></div>
+            <div class="meta">
+              <div><dt>Vecteur</dt><dd>Séniorité de l'exécutant. Frein P1, troisième des critiques.</dd></div>
+              <div><dt>Emplacement</dt><dd>Près du formulaire, pas en haut de page. L'emplacement est dicté par le relevé d'objections.</dd></div>
+              <div><dt>Contenu</dt><dd>Bloc nominatif audit, production, suivi. 80 à 120 mots. Vérifiable avant signature, pas après.</dd></div>
+            </div>
+            <p class="quote">La personne du rendez-vous maîtrisait mon marché. Après signature, je ne l'ai plus jamais vue dans les points mensuels.</p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 4 ─────────────────────────────── -->
+      <section id="faq">
+        <h2>La FAQ, sept questions pour sept signaux</h2>
+        <p>Perspective verrouillée : dirigeant ou responsable marketing d'une PME, d'un SaaS ou d'un e-commerce, en train de choisir un prestataire. Accordéon natif, la réponse reste dans le HTML livré et part en balisage <code>FAQPage</code>.</p>
+        <div class="faq">
+
+          <details>
+            <summary><span>Combien coûte un consultant SEO à Lyon ?</span><i class="plus"></i></summary>
+            <div class="ans">
+              <p>Le tarif journalier moyen des freelances SEO référencés sur Malt est de 373 € à Lyon, contre 412 € à Paris et 376 € en moyenne nationale. Un audit ponctuel et un accompagnement mensuel ne se comparent pas : le premier a un périmètre fermé, le second une durée. Relevé du 27/05/2026, à revérifier. Grille réelle : <span class="hole">trou</span>.</p>
+              <p class="vec"><b>Vecteur couvert :</b> prix et niveau d'investissement, avec un repère marché daté.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>La personne rencontrée au premier rendez-vous est-elle celle qui fera le travail ?</span><i class="plus"></i></summary>
+            <div class="ans">
+              <p>Le nom et le rôle de chaque intervenant sont affichés pour l'audit, la production et le suivi. C'est vérifiable avant signature, pas après.</p>
+              <p class="vec"><b>Vecteur couvert :</b> séniorité de l'exécutant.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>Que se passe-t-il si mon développeur ne peut pas appliquer les corrections ?</span><i class="plus"></i></summary>
+            <div class="ans">
+              <p>Chaque ticket porte son impact, son effort, sa dépendance et son critère de validation. Le développeur arbitre sur ces quatre lignes au lieu d'arbitrer sur le mot «&#8239;critique&#8239;».</p>
+              <p class="vec"><b>Vecteur couvert :</b> friction opérationnelle entre le diagnostic et la mise en production.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>Comment saurai-je quelles pages ont envoyé les demandes ?</span><i class="plus"></i></summary>
+            <div class="ans">
+              <p>Un tableau relie page d'entrée, formulaire et opportunité, avec la règle d'attribution écrite avant le début de la mission. Sans cette règle posée à l'avance, aucun reporting ne tranche entre le SEO et le réseau.</p>
+              <p class="vec"><b>Vecteur couvert :</b> attribution au revenu, le frein qui empêche de défendre un budget en comité.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>Faut-il s'engager douze mois ?</span><i class="plus"></i></summary>
+            <div class="ans">
+              <p>La première mission a un périmètre, un prix, un livrable et une clause de sortie. L'engagement long se discute après un livrable remis.</p>
+              <p class="vec"><b>Vecteur couvert :</b> durée contractuelle et réversibilité.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>Une refonte peut-elle faire perdre les pages qui vendent ?</span><i class="plus"></i></summary>
+            <div class="ans">
+              <p>Oui. C'est pour ça que le plan de migration contient l'inventaire des URLs, le plan de redirections et un relevé Search Console daté avant bascule, comparé après.</p>
+              <p class="vec"><b>Vecteur couvert :</b> risque technique de migration, formulé en conformité de procédure.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>Être à Lyon change quoi sur la prestation ?</span><i class="plus"></i></summary>
+            <div class="ans">
+              <p><span class="hole">Trou</span> jusqu'à ce que la réponse soit vraie. Si c'est «&#8239;la réunion se fait sur place&#8239;», l'écrire. Si c'est «&#8239;rien&#8239;», supprimer la question : la FAQ reste valide à six.</p>
+              <p class="vec"><b>Vecteur couvert :</b> proximité géographique réelle, à ne pas simuler.</p>
+            </div>
+          </details>
+
+        </div>
+        <p class="note">Contrôle de diversité : sept questions, sept signaux distincts, prix, séniorité, friction technique, attribution, contrat, migration, proximité. Les dix objections relevées se répartissent sans qu'aucune question en reprenne deux.</p>
+      </section>
+
+      <!-- 5 ─────────────────────────────── -->
+      <section id="trous">
+        <h2>Ce qui manque pour que la page s'écrive</h2>
+        <ul class="holes">
+          <li>La SERP des requêtes lyonnaises. Rien n'est relevé, donc la difficulté de <code>consultant SEO Lyon</code> reste inconnue et le H1 n'est pas validé.</li>
+          <li>Un élément d'ancrage lyonnais vérifiable. Sans lui, le H2 7 tombe et la page locale n'a plus de fondement.</li>
+          <li>Les trois corrections avec URL, date et responsable. C'est la preuve qui porte le H2 2.</li>
+          <li>La capture qui relie page d'entrée, demande et revenu. C'est la preuve qui porte le H1 et le H2 1.</li>
+          <li>La grille de prix réelle, en trois colonnes.</li>
+          <li>La revérification des tarifs journaliers Malt, dont le relevé de mai est marqué obsolète.</li>
+          <li>Le nom et le rôle des intervenants du H2 9.</li>
+        </ul>
+        <p class="note">Sept trous sur une structure de dix blocs. C'est normal à ce stade : la structure est arrêtée, la matière de preuve ne l'est pas. Chaque trou nomme ce qu'il faut aller chercher.</p>
+      </section>
+
+      <!-- 6 ─────────────────────────────── -->
+      <section id="fiabilite">
+        <h2>Fiabilité</h2>
+        <p>Moyenne. Les volumes et les CPC sont mesurés au 14/09/2026 sur Google Ads Keyword Planner, jamais estimés. Aucune SERP n'a été relevée, donc aucune difficulté SEO n'est affichée. Les tarifs journaliers viennent d'un relevé du 27/05/2026 dont le fichier est marqué obsolète. Les dix objections d'achat et leurs verbatims sont des hypothèses terrain, à confirmer en entretien commercial, et pas des faits prouvés.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <p>Structure produite avec seo-brief-contenu et seo-faq-query. Matière : quatre fichiers de l'Obsidian, hors périmètre Organikk. Statut de pré-décision : hypothèse, tant que la SERP n'est pas relevée.</p>
+  </footer>
+</div>
+
+<script>
+  var liens = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+  var cibles = liens.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  var obs = new IntersectionObserver(function(entrees){
+    entrees.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var i = cibles.indexOf(e.target);
+      liens.forEach(function(a,j){ a.classList.toggle('on', j === i); });
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  cibles.forEach(function(c){ if(c) obs.observe(c); });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+{
+  "schema_version": "0.1.0",
+  "method_version": "0.1.0",
+  "project_id": "synthetic-business",
+  "dataset_kind": "synthetic_test",
+  "dataset_notice": "DONNÉES FICTIVES DE TEST — aucune prévision client.",
+  "scopes": [
+    {
+      "id": "scope-main",
+      "offer_ids": [
+        "offer-main"
+      ],
+      "segments": [
+        "Segment fictif"
+      ],
+      "countries": [
+        "FR"
+      ],
+      "languages": [
+        "fr"
+      ],
+      "description": "Périmètre réservé au test.",
+      "limitations": [
+        "Ne représente aucun marché."
+      ]
+    }
+  ],
+  "offers": [
+    {
+      "id": "offer-main",
+      "name": "Offre fictive",
+      "description": "Offre de test",
+      "source_ids": [
+        "source-test"
+      ],
+      "status": "hypothesis",
+      "commercial_objective": "Tester le contrat de données",
+      "conversion": "Demande qualifiée",
+      "constraints": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "source-test",
+      "kind": "fixture",
+      "origin": "tests/factories.py",
+      "collected_at": "2026-11-05",
+      "document_date": null,
+      "locator": "Données fictives réservées aux tests",
+      "sha256": null,
+      "limitations": [
+        "Aucune mesure client ; jeu fictif."
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "id": "variant-a",
+      "value": 100,
+      "quantity": "search_volume",
+      "unit": "searches/month",
+      "channel": "google_search",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : variant-a",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": "provider-bundle-a"
+    },
+    {
+      "id": "variant-b",
+      "value": 100,
+      "quantity": "search_volume",
+      "unit": "searches/month",
+      "channel": "google_search",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : variant-b",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": "provider-bundle-a"
+    },
+    {
+      "id": "independent-c",
+      "value": 50,
+      "quantity": "search_volume",
+      "unit": "searches/month",
+      "channel": "google_search",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : independent-c",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": "provider-bundle-c"
+    },
+    {
+      "id": "ia-count",
+      "value": 3,
+      "quantity": "ia_citations",
+      "unit": "citations",
+      "channel": "ia",
+      "status": "hypothesis",
+      "scope_id": "scope-main",
+      "period": {
+        "start": "2026-11-01",
+        "end": "2026-11-30"
+      },
+      "currency": null,
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py : ia-count",
+      "rationale": "Valeur fictive fixée pour contrôler un calcul exact.",
+      "author": "Fixture de test",
+      "counting_key": "ia-three-responses"
+    }
+  ],
+  "needs": [
+    {
+      "id": "need-main",
+      "text": "Besoin fictif explicitement identifié",
+      "kind": "hypothesis",
+      "scope_id": "scope-main",
+      "source_ids": [
+        "source-test"
+      ],
+      "locator": "tests/factories.py",
+      "metric_ids": [],
+      "date": "2026-11-05"
+    }
+  ],
+  "groups": [],
+  "actors": [],
+  "actions": [
+    {
+      "id": "action-page",
+      "title": "Documenter le besoin vérifié",
+      "kind": "existing_page",
+      "source_ids": [
+        "source-test"
+      ],
+      "rationale": "Action fictive servant au test.",
+      "urls": [],
+      "status": "proposed",
+      "owner": null,
+      "dependencies": [],
+      "effort_metric_id": null,
+      "cost_metric_id": null,
+      "planned_date": null,
+      "date_basis_source_ids": [],
+      "validation": {
+        "status": "proposed",
+        "reviewer": null,
+        "date": null,
+        "message": null,
+        "content_sha256": null
+      }
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "opp-main",
+      "title": "Opportunité de test",
+      "offer_id": "offer-main",
+      "scope_id": "scope-main",
+      "need_ids": [
+        "need-main"
+      ],
+      "group_ids": [],
+      "actor_ids": [],
+      "source_ids": [
+        "source-test"
+      ],
+      "urls": [],
+      "gates": {
+        "offer": {
+          "status": "satisfied",
+          "rationale": "Condition explicitement posée par le jeu de test.",
+          "source_ids": [
+            "source-test"
+          ]
+        },
+        "business_intent": {
+          "status": "satisfied",
+          "rationale": "Condition explicitement posée par le jeu de test.",
+          "source_ids": [
+            "source-test"
+          ]
+        },
+        "demonstrated_opportunity": {
+          "status": "satisfied",
+          "rationale": "Condition explicitement posée par le jeu de test.",
+          "source_ids": [
+            "source-test"
+          ]
+        }
+      },
+      "decision": "retain",
+      "priority_reason": "Ordre fictif justifié par la dépendance commerciale du cas.",
+      "feasibility": "À confirmer avec le responsable.",
+      "action_ids": [
+        "action-page"
+      ],
+      "scenario_ids": [],
+      "measurement": {
+        "indicator": "Clients qualifiés",
+        "formula": "Clients confirmés dans le CRM sur la période définie.",
+        "source_ids": [
+          "source-test"
+        ],
+        "baseline_metric_id": null,
+        "owner": null,
+        "review_date": null,
+        "attribution": "Aucune attribution réelle : jeu de test.",
+        "continue_if": "Hypothèses confirmées par la mesure.",
+        "revise_if": "Conversion différente du scénario.",
+        "stop_if": "Capacité indisponible.",
+        "limitations": [
+          "Jeu fictif."
+        ]
+      },
+      "validation": {
+        "status": "proposed",
+        "reviewer": null,
+        "date": null,
+        "message": null,
+        "content_sha256": null
+      }
+    }
+  ],
+  "scenarios": [],
+  "aggregates": [
+    {
+      "id": "variants-dedup",
+      "metric_ids": [
+        "variant-a",
+        "variant-b"
+      ],
+      "independence": "unknown",
+      "rationale": "Même mesure fournisseur.",
+      "source_ids": [
+        "source-test"
+      ]
+    },
+    {
+      "id": "disjoint-total",
+      "metric_ids": [
+        "variant-a",
+        "variant-b",
+        "independent-c"
+      ],
+      "independence": "documented_disjoint",
+      "rationale": "Indépendance posée par le jeu de test.",
+      "source_ids": [
+        "source-test"
+      ]
+    },
+    {
+      "id": "unknown-overlap",
+      "metric_ids": [
+        "variant-a",
+        "independent-c"
+      ],
+      "independence": "unknown",
+      "rationale": "Chevauchement inconnu.",
+      "source_ids": []
+    },
+    {
+      "id": "mixed-google-ia",
+      "metric_ids": [
+        "variant-a",
+        "ia-count"
+      ],
+      "independence": "documented_disjoint",
+      "rationale": "Mélange volontairement invalide pour vérifier le refus du total.",
+      "source_ids": [
+        "source-test"
+      ]
+    }
+  ],
+  "panels": [],
+  "explored_need_ids": [
+    "need-main"
+  ],
+  "retained_opportunity_ids": [
+    "opp-main"
+  ],
+  "priority_order": [
+    "opp-main"
+  ],
+  "production_capacity_id": null,
+  "validation": {
+    "status": "proposed",
+    "reviewer": null,
+    "date": null,
+    "message": null,
+    "content_sha256": null
+  }
+}
