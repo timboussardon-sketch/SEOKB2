@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet" />
+<title>Audit SEO pré-call, Harvestr · organikk.co</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --ink:#1d1d1f;
+  --ink-2:#3a3a3c;
+  --muted:#6e6e73;
+  --muted-2:#8e8e93;
+  --line:rgba(0,0,0,.09);
+  --blue:#2559DD;
+  --blue-d:#1B3E8F;
+  --grad:linear-gradient(120deg,#1B3E8F 0%,#2559DD 52%,#5b86f5 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{
+  font-family:'Geist',-apple-system,system-ui,sans-serif;
+  background:var(--bg); color:var(--ink);
+  -webkit-font-smoothing:antialiased; letter-spacing:-.011em; line-height:1.6;
+}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.wrap{max-width:840px; margin:0 auto; padding:60px 40px 90px}
+
+/* ── en-tête ── */
+.head{border-bottom:1px solid var(--line); padding-bottom:30px; margin-bottom:12px}
+h1{font-size:35px; line-height:1.14; font-weight:600; letter-spacing:-.035em; max-width:22ch;
+   background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent}
+.head .sub{margin-top:16px; font-size:16px; color:var(--muted); max-width:64ch}
+.meta{margin-top:22px; font-size:13px; line-height:1.7; color:var(--muted)}
+.meta b{color:var(--ink-2); font-weight:600}
+
+/* ── sections ── */
+section{margin-top:44px}
+h2{font-size:24px; font-weight:600; letter-spacing:-.028em; color:var(--ink); margin-bottom:16px; line-height:1.2}
+h3{font-size:16px; font-weight:600; color:var(--ink); margin:24px 0 7px; letter-spacing:-.015em}
+p{font-size:15px; color:var(--ink-2); max-width:72ch}
+p + p{margin-top:12px}
+
+/* ── résumé ── */
+.resume{background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:26px 30px; box-shadow:0 12px 34px -22px rgba(12,26,70,.30)}
+.resume p{font-size:15.5px; color:var(--ink-2)}
+.resume p:first-child{font-weight:500; color:var(--ink)}
+
+/* ── stats ── */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin:22px 0 8px}
+.stat{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px 18px}
+.stat .n{font-size:34px; font-weight:600; letter-spacing:-.04em; line-height:1; color:var(--blue); font-variant-numeric:tabular-nums}
+.stat .n small{font-size:19px}
+.stat .t{margin-top:9px; font-size:12.5px; line-height:1.45; color:var(--muted)}
+
+/* ── listes ── */
+ul.clean{list-style:none; margin-top:8px}
+ul.clean li{font-size:15px; color:var(--ink-2); padding:8px 0 8px 20px; position:relative; border-bottom:1px solid rgba(0,0,0,.05); max-width:74ch}
+ul.clean li:last-child{border-bottom:0}
+ul.clean li::before{content:''; position:absolute; left:2px; top:15px; width:5px; height:5px; border-radius:50%; background:var(--blue)}
+ul.clean li b{color:var(--ink); font-weight:600}
+code{font-family:'Geist Mono',monospace; font-size:.88em; color:var(--blue-d); background:#eef2fb; padding:1px 5px; border-radius:4px}
+
+/* ── tableau modèles ── */
+.tbl-wrap{margin-top:16px; border:1px solid var(--line); border-radius:12px; overflow:hidden}
+table{border-collapse:collapse; width:100%; font-size:13.5px; table-layout:fixed}
+thead th{background:#eef2fb; color:var(--blue-d); text-align:left; font-weight:600; font-size:12.5px;
+  padding:12px 13px; letter-spacing:-.01em; border-bottom:1px solid var(--line)}
+thead th:nth-child(1){width:23%}
+thead th:nth-child(2){width:20%}
+thead th:nth-child(3){width:13%}
+thead th:nth-child(4){width:22%}
+thead th:nth-child(5){width:22%}
+tbody td{padding:13px 13px; border-top:1px solid var(--line); color:var(--ink-2); vertical-align:top; line-height:1.45; word-wrap:break-word; overflow-wrap:break-word}
+tbody tr:nth-child(even){background:#fafafb}
+td.mdl{font-weight:600; color:var(--ink)}
+td .pat{font-family:'Geist Mono',monospace; font-size:11.5px; color:var(--blue-d)}
+.ok{color:#1a7f47; font-weight:600}
+.no{color:#b0341d; font-weight:600}
+.note-tbl{margin-top:14px; font-size:13px; color:var(--muted); max-width:74ch}
+
+/* ── roadmap ── */
+.phase{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px 26px; margin-top:14px;
+  box-shadow:0 10px 30px -24px rgba(12,26,70,.28); display:grid; grid-template-columns:96px 1fr; gap:22px; align-items:start}
+.phase .ph-k{font-size:13.5px; font-weight:600; color:var(--blue); padding-top:2px}
+.phase .ph-t{font-size:16.5px; font-weight:600; letter-spacing:-.02em; margin-bottom:7px}
+.phase .ph-d{font-size:14px; color:var(--muted); line-height:1.55; max-width:64ch}
+.rhythm{margin-top:16px; font-size:13px; color:var(--muted); background:#eef2fb; border-radius:10px; padding:15px 18px; max-width:74ch}
+.rhythm b{color:var(--ink-2)}
+.anchor{margin-top:10px; font-size:12px; color:var(--muted-2)}
+
+/* ── à récupérer ── */
+.call-box{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px 28px}
+.foot{margin-top:52px; padding-top:22px; border-top:1px solid var(--line); font-size:12px; color:var(--muted-2); line-height:1.7}
+
+@media(max-width:720px){
+  .wrap{padding:40px 20px 70px}
+  .stats{grid-template-columns:1fr 1fr; gap:14px}
+  .phase{grid-template-columns:1fr; gap:8px}
+  h1{font-size:28px}
+}
+@media print{
+  body{background:#fff}
+  .wrap{max-width:none; padding:0}
+  @page{size:A4; margin:15mm 14mm}
+  section{margin-top:26px}
+  .phase,.resume,.call-box{break-inside:avoid}
+  table{font-size:11px}
+  thead th{padding:8px 9px; font-size:11px}
+  tbody td{padding:9px 9px}
+  thead{display:table-header-group}
+  tbody tr{break-inside:avoid}
+  h1,.stat .n{background:none !important; -webkit-text-fill-color:initial !important}
+  h1{-webkit-background-clip:border-box !important; background-clip:border-box !important; color:#1B3E8F !important}
+  .stat .n{color:#2559DD !important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <h1>Harvestr : la bonne page existe déjà, elle n'est pas déclinée</h1>
+    <p class="sub">Diagnostic, modèles de pages à produire et roadmap 90 jours, préparés avant l'échange à partir des seules pages publiques.</p>
+    <div class="meta">
+      Préparé par <b>Timothée Boussardon</b>, organikk.co<br />
+      Cible <b>harvestr.io</b>, catégorie product feedback et product management<br />
+      Relevé le <b>21/07/2026</b>, données 100 % publiques, Search Console à récupérer au call
+    </div>
+  </header>
+
+  <!-- EN RÉSUMÉ -->
+  <section>
+    <h2>En résumé</h2>
+    <div class="resume">
+      <p>Harvestr a construit exactement le bon type de page une fois, puis s'est arrêté. Sa page « productboard alternative » vise une requête d'acheteur en fin de parcours, elle est bien faite, et elle est seule.</p>
+      <p>Le reste du contenu tire dans la mauvaise direction : une soixantaine d'articles de blog informationnels, figés depuis février 2024, sur des questions que les réponses génératives traitent désormais sans renvoyer de clic. Dans le même temps, six pages d'intégration à intention commerciale sont interdites d'indexation dans le robots.txt du site.</p>
+      <p>L'ouverture est nette et défendable : décliner les modèles de pages qui fonctionnent déjà chez eux, comparatif et intégration, sur toute la catégorie, à partir de leurs cas clients et de leur angle revenu. On remplit les cases vides du sitemap, on ne recrée pas ce qui existe.</p>
+    </div>
+  </section>
+
+  <!-- AUDIT -->
+  <section>
+    <h2>L'audit</h2>
+
+    <h3>Identité et modèle</h3>
+    <p>Plateforme de product management pour éditeurs SaaS B2B en croissance. Positionnement « Turn Feedback into Revenue » : centraliser le feedback, le relier à la donnée de revenu, prioriser, boucler la boucle avec les équipes au contact client. Le point de conversion est la demande de démo et l'inscription. Cible internationale, site en anglais, version française existante.</p>
+    <p>La preuve sociale est réelle et exploitable : cas clients Agorapulse, Dashdoc, 360Learning, Agendor, Indy, Kolay, et logos Aircall, Brevo, ElevenLabs, Kpler. C'est de la data propriétaire directement mobilisable dans les pages.</p>
+
+    <h3>État SEO technique</h3>
+    <div class="stats">
+      <div class="stat"><div class="n">38</div><div class="t">pages seulement dans le sitemap principal</div></div>
+      <div class="stat"><div class="n">≈60</div><div class="t">articles de blog, tous informationnels, dernier publié 02/2024</div></div>
+      <div class="stat"><div class="n">1</div><div class="t">page de comparaison décisionnelle (productboard)</div></div>
+      <div class="stat"><div class="n">6</div><div class="t">pages d'intégration bloquées dans le robots.txt</div></div>
+    </div>
+    <ul class="clean">
+      <li><b>Une seule page de comparaison.</b> <code>/compare/productboard-alternative</code>, correcte (tableaux par catégorie, différenciateurs). Aucune autre déclinaison en ligne.</li>
+      <li><b>Treize pages d'intégration existent</b> (Jira, Linear, Notion, Intercom, Zendesk, Slack, HubSpot, Salesforce, Gong), mais six sont en <code>Disallow</code> dans le robots.txt tout en figurant au sitemap. Contradiction technique qui prive de requêtes d'acheteurs équipés.</li>
+      <li><b>Blog informationnel et daté.</b> ≈60 guides type « what is JTBD », « OKRs », « product-led growth », dernier daté de février 2024. Le contenu absorbé par les AI Overviews sans clic.</li>
+      <li><b>Preuve tierce faible.</b> Profil G2 non revendiqué, avis anciens, à confirmer au call.</li>
+    </ul>
+
+    <h3>Le constat, reformulé en coût</h3>
+    <p>Le format qui amène des acheteurs en décision est déjà validé chez eux, mais décliné une seule fois. Chaque page de la catégorie non couverte est une demande de démo qui part vers un autre outil. Le blog, lui, consomme de la production pour capter un trafic que les moteurs de réponse interceptent avant le clic.</p>
+
+    <h3>L'angle défendable</h3>
+    <p>Le décisionnel de la catégorie ne se fait pas absorber par l'IA : sur « [outil] alternative » ou « feedback tool with [intégration] », les moteurs renvoient vers des pages de comparaison, pas vers une réponse synthétique. C'est là que Harvestr tient sa position, et c'est là que sa data (cas clients, angle revenu, liste d'intégrations) crée une page qui ne se copie pas au clavier.</p>
+  </section>
+
+  <!-- MODÈLES DE PAGES -->
+  <section>
+    <h2>Les modèles de pages à produire</h2>
+    <p>On ne part pas d'une liste de mots-clés, on part de modèles de pages, avec une vérification de ce qui existe déjà sur le site. Le principe : un modèle, une variable, des dizaines de pages, et on ne produit que les cases vides. La colonne « déjà sur le site » est relevée dans le sitemap le 21/07 ; les requêtes déjà couvertes se confirment en Search Console au cadrage.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Modèle de page</th><th>Pattern d'URL</th><th>Intention</th><th>Déjà sur le site ?</th><th>Ce qui remplit la page</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mdl">Comparatif « [outil] alternative »</td>
+            <td><span class="pat">/compare/[outil]-alternative</span></td>
+            <td>Do · BoFu</td>
+            <td><span class="ok">Oui pour productboard</span> (1 page). Canny, Aha, Cycle, Dovetail, Savio absents.</td>
+            <td>Tableau de fonctionnalités, angle revenu, cas clients du segment visé.</td>
+          </tr>
+          <tr>
+            <td class="mdl">Page d'intégration « [outil] »</td>
+            <td><span class="pat">/product/integrations/[outil]</span></td>
+            <td>Do · BoFu</td>
+            <td><span class="no">Existent mais 6 bloquées</span> en Disallow (Jira, Linear, Notion, GitHub, Figma, Chrome).</td>
+            <td>Cas d'usage du feedback dans l'outil, capture, bénéfice revenu. Débloquer avant d'enrichir.</td>
+          </tr>
+          <tr>
+            <td class="mdl">Page équipe « feedback for [équipe] »</td>
+            <td><span class="pat">/solutions/[équipe]</span></td>
+            <td>Do · MoFu-BoFu</td>
+            <td><span class="no">Aucune</span> en ligne aujourd'hui.</td>
+            <td>Le discours « customer-facing teams », cas clients par rôle (customer success, produit, support).</td>
+          </tr>
+          <tr>
+            <td class="mdl">Guide revenu « prioriser le feedback par le revenu »</td>
+            <td><span class="pat">/product/revenue-data + guides</span></td>
+            <td>Know-Do · MoFu</td>
+            <td><span class="no">1 page produit</span>, jamais déclinée en pages de capture.</td>
+            <td>Leur différenciateur unique : feedback relié au CRM et au revenu. Angle inimitable.</td>
+          </tr>
+          <tr>
+            <td class="mdl">Pilier « best [catégorie] tool for [cible] »</td>
+            <td><span class="pat">page pilier + maillage</span></td>
+            <td>Do · requête posée aux IA</td>
+            <td><span class="no">Aucune</span>.</td>
+            <td>Les cas clients servent de source de citation par les moteurs de réponse.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note-tbl">Les requêtes exactes (canny alternative, product feedback tool with jira integration, feedback for customer success) se figent au cadrage, Search Console en main, après avoir vérifié ce sur quoi le site ressort déjà. On ne cible jamais une requête que Harvestr couvre déjà : on part des modèles et on remplit les vides. Aucun volume affiché, il se cale sur données au cadrage.</p>
+  </section>
+
+  <!-- ROADMAP -->
+  <section>
+    <h2>Roadmap 90 jours</h2>
+    <p>Calée sur la méthode Organikk en quatre phases. Trois mois pour poser la machine, trois de plus pour la pousser, puis l'agent SEO prend le relais.</p>
+
+    <div class="phase">
+      <div class="ph-k">Mois 1</div>
+      <div>
+        <div class="ph-t">Stratégie</div>
+        <p class="ph-d">Audit complet et connexion de la Search Console. On relève ce sur quoi le site ressort déjà, puis on sort les requêtes décisionnelles de la catégorie et de la data Harvestr (cas clients, arguments de vente, liste d'intégrations) plutôt que d'un outil. On repart avec la carte des pages à produire et les deux modèles de départ : comparatif et intégration. Correction technique du robots.txt.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="ph-k">Mois 2</div>
+      <div>
+        <div class="ph-t">Mise en production et agent SEO</div>
+        <p class="ph-d">Les premiers comparatifs manquants partent en ligne (canny, aha, cycle, dovetail) et les six pages d'intégration sont débloquées puis enrichies. En parallèle, on construit l'agent SEO Harvestr sur leur data et nos process : c'est lui qui produira et surveillera ensuite.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="ph-k">Mois 3</div>
+      <div>
+        <div class="ph-t">Mise en production et optimisation</div>
+        <p class="ph-d">Pages d'intégration CRM et pages équipe. On mesure en Search Console (indexation, positions, requêtes gagnées) et on optimise l'existant, à commencer par la page productboard, plutôt que d'empiler. Fin du mois : on décide entre autonomie avec l'agent et prolongation.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="ph-k">Mois 3 à 6</div>
+      <div>
+        <div class="ph-t">Optimisation, production et CRO</div>
+        <p class="ph-d">Le reste de la catégorie est décliné, l'existant s'optimise, et on travaille le taux de conversion des pages : ce qui décide un visiteur à demander une démo plutôt qu'à repartir. C'est là que le trafic décisionnel acquis se transforme en demandes entrantes.</p>
+      </div>
+    </div>
+
+    <p class="rhythm"><b>Rythme de production :</b> 10 à 15 pages par mois, soit 45 à 50 à trois mois. <b>Ce qu'on attend de Harvestr :</b> sa data (cas clients, arguments face aux autres outils, positionnement) et la description de ses process. C'est la seule chose sur laquelle on ne peut pas se substituer à l'équipe.</p>
+    <p class="anchor">Ancrage doctrine : méthode Organikk 4 piliers, data propriétaire, liens gagnés jamais achetés, mots-clés actionnels.</p>
+  </section>
+
+  <!-- À RÉCUPÉRER AU CALL -->
+  <section>
+    <h2>À récupérer au call</h2>
+    <div class="call-box">
+      <ul class="clean">
+        <li><b>Accès Search Console.</b> Impressions par mois, position moyenne, requêtes qui ramènent déjà des démos, et surtout ce sur quoi le site ressort déjà, pour ne produire aucune page en doublon.</li>
+        <li><b>Qui décide et qui pilote le site.</b> Champion produit, marketing ou fondateur, et qui a la main sur le repo (Webflow aujourd'hui).</li>
+        <li><b>Poids réel du SEO</b> dans l'acquisition de démos face aux autres canaux.</li>
+        <li><b>Les outils que leurs acheteurs comparent le plus</b> à Harvestr, pour ordonner les comparatifs.</li>
+        <li><b>Faisabilité technique du robots.txt et du blog</b> (accès, CMS, contraintes).</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="foot">
+    organikk.co, audit préparé à partir de données publiques le 21/07/2026.<br />
+    Volumes, positions et trafic à confirmer sur la Search Console. Aucun chiffre non sourcé n'est avancé dans ce document.
+  </div>
+
+</div>
+</body>
+</html>

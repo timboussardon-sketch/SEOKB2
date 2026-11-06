@@ -1,55 +1,32 @@
 # SEOKB2
 
-Copie filtrée du dépôt SEO KB de Timothée Boussardon, préparée pour les élèves le 5 novembre 2026.
+Le système SEO et la base de connaissances commune de Tim, installables dans le coffre de chaque élève. SEOKB2 prend la suite du système `organikk-seo-system` ; la version de distribution est **2.0.0**.
 
-Les dossiers de missions, données clients, documents nominatifs, identifiants potentiels et pièces jointes non validées ont été exclus. Aucun historique Git du dépôt original n’est inclus. Certains liens internes et dépendances locales peuvent rester à adapter ; cette copie ne constitue pas une installation autonome vérifiée. Les méthodes mêlées à des cas clients ont également été écartées.
+**Pour installer ou migrer : lire [INSTALLATION.md](INSTALLATION.md).** Donner le lien de ce dépôt à un agent ne suffit pas : il doit exécuter l'installateur en ciblant le coffre de l'élève.
 
----
+L'installateur ajoute la bibliothèque commune dans `.seokb/base/`, les skills dans `.claude/skills/` et les commandes de diagnostic, dashboard et mise à jour dans `.seokb/runtime/`. Les données personnelles `raw/` et les productions `wiki/` restent dans le coffre. Les remplacements sont sauvegardés ; un conflit local interrompt l'installation avant toute écriture.
 
-# SEO Knowledge Base
+Les skills distribués reprennent le pack élèves Organikk 1.5.6 avec des chemins adaptés, une collecte GEO indépendante des outils privés, et les entrées SEOKB2. Les méthodes et sources du coffre filtré complètent cette distribution. Les automatisations personnelles du Mac de Tim sont conservées dans `archives/` pour référence ; elles ne sont pas installées.
 
-Une base de connaissances personnelle SEO/IA/GEO construite et maintenue par un agent LLM.
+Python 3.10 ou supérieur et Git sont nécessaires. Aucune bibliothèque Python supplémentaire pour l'installation, le diagnostic et le dashboard. Certains workflows métier requièrent des outils, accès API, dépendances Python/Node ou données externes : leur disponibilité doit être vérifiée au lancement de la mission. Voir [CAPACITES.md](CAPACITES.md).
 
-Inspirée du pattern [LLM Wiki d'Andrej Karpathy](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
+Le corpus reste une copie filtrée : des liens historiques peuvent viser des notes exclues pour confidentialité. L'index `wiki/index.md` liste les notes présentes. Une référence absente n'est pas une preuve consultée.
 
-## Principe
+## Après installation
 
-- `raw/` = tes sources (articles, papers, data). **Immuable**.
-- `wiki/` = le wiki markdown entièrement écrit par Claude Code. Tu le lis dans Obsidian.
-- `AGENTS.md` = le schéma qui me dit comment construire et maintenir le wiki.
-
-## Workflow quotidien
-
-1. Tu trouves une source → glisse dans `raw/articles/`
-2. Tu me dis : "ingère raw/articles/foo.md"
-3. Je lis, je crée `wiki/sources/...md`, je mets à jour entities/concepts, je mets à jour index.md + log.md
-4. Tu ouvres Obsidian et tu explores les nouvelles connexions dans le graph view
-
-## Quick start
+Depuis le coffre de l'élève :
 
 ```bash
-# Init git
-git init
-git add .
-git commit -m "bootstrap: AGENTS.md v1.0 + stubs wiki"
-
-# Ouvre comme vault Obsidian
-open -a Obsidian .
-
-# Lance Claude Code
-claude
+python3 .seokb/runtime/doctor.py
+python3 .seokb/runtime/dashboard.py --port 0
 ```
 
-Puis dis-moi : "ingère raw/articles/karpathy-llm-wiki.md"
+Ouvrir l'adresse localhost imprimée par le serveur. Les sections donnent accès au catalogue, au journal, aux sources, à la recherche, à la production et à la base commune. Relancer la session de l'agent après l'installation pour charger les skills.
 
-## Stack
+## Prochaines mises à jour
 
-- **Editor** : Obsidian (wikilinks `[[...]]`, graph view, plugins)
-- **Agent** : Claude Code (lit AGENTS.md, exécute workflows)
-- **Versioning** : git (markdown files, history)
+```bash
+python3 .seokb/runtime/update.py
+```
 
-## Plugins recommandés
-
-- Dataview (queries dynamiques sur frontmatter)
-- Marp (slide decks depuis markdown)
-- Graph Analysis (visualiser la structure)
+Cette commande télécharge SEOKB2 et applique le même installateur avec sauvegarde et contrôle des conflits. Les anciens hooks connus sont raccordés à SEOKB2 ; aucun cron personnel n'est créé.

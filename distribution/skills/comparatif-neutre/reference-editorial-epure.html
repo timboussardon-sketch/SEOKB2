@@ -1,0 +1,223 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V1 Éditorial — Comparatif agents SEO</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+*{box-sizing:border-box}
+:root{--paper:#F4F5F7;--paper2:#ECEEF2;--card:#fff;--ink:#141B24;--ink2:#46505A;--muted:#71787F;--faint:#A2A8AF;--line:#E4E7EC;--line2:#D7DBE2;--dark:#102830;--petrol:#1F373D;--on-dark:#F4F5F7;--accent:#0A8F6F;--accent-ink:#0A7D62;--accent-soft:#E4F3EE;--accent-grad:linear-gradient(120deg,#16C784 0%,#0A8F6F 100%);--serif:"Newsreader",Georgia,serif;--sans:"Inter",system-ui,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;--shadow:0 1px 2px rgba(16,16,16,.04),0 16px 40px -22px rgba(16,16,16,.22);--ease:cubic-bezier(.22,.61,.18,1)}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink2);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;display:block}
+a{color:inherit}
+.hero-inner,.page{max-width:760px;margin:0 auto;padding-left:24px;padding-right:24px}
+.hero{padding:64px 0 8px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.title{font-family:var(--serif);font-weight:400;font-size:clamp(38px,4.8vw,54px);line-height:1.06;letter-spacing:-.02em;color:var(--ink);margin:0}
+.tgrad{font-style:italic;font-weight:500;background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.hero .sub{font-size:18px;color:var(--muted);line-height:1.6;margin:20px 0 0;max-width:540px}
+.page{padding-top:28px;padding-bottom:110px}
+.prose{font-size:17px;line-height:1.78;color:var(--ink2)}
+.prose p{margin:0 0 16px}
+.prose strong{color:var(--ink);font-weight:600}
+.prose .lead{font-size:20px;line-height:1.65;color:var(--ink);margin:0 0 22px}
+.prose h2{font-family:var(--serif);font-size:clamp(27px,2.6vw,34px);font-weight:400;color:var(--ink);letter-spacing:-.015em;line-height:1.12;margin:52px 0 16px;scroll-margin-top:80px}
+.prose h3{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--ink);margin:30px 0 6px;letter-spacing:-.01em}
+.prose .tg{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:600}
+.note-transp{margin:26px 0 6px;padding:18px 20px;background:var(--accent-soft);border-radius:12px;font-size:14px;line-height:1.65;color:var(--ink2)}
+.note-transp .nt-label{display:block;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-ink);margin-bottom:8px}
+.post-table-wrap{position:relative;left:50%;transform:translateX(-50%);width:min(1080px,94vw);margin:26px 0 30px;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:var(--shadow)}
+.cmp-table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.55;color:var(--ink2)}
+.cmp-table thead th{background:var(--card);color:var(--faint);font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;font-weight:500;text-align:left;padding:16px 16px 11px;border-bottom:1px solid var(--line)}
+.cmp-table thead th:first-child{padding-left:20px}
+.cmp-table td{padding:15px 16px;border-top:1px solid var(--line);vertical-align:top}
+.cmp-table tbody tr:first-child td{border-top:none}
+.cmp-table td:first-child{padding-left:20px;color:var(--ink);font-weight:600;min-width:132px;font-size:15px}
+.cmp-table strong{color:var(--ink);font-weight:600}
+.cmp-sub{display:block;font-family:var(--mono);font-size:9.5px;color:var(--faint);font-weight:400;margin-top:4px;letter-spacing:.04em;text-transform:uppercase}
+.lvl-chip{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.02em;color:var(--accent-ink);background:var(--accent-soft);border-radius:6px;padding:2px 7px;margin-right:7px;white-space:nowrap}
+.gauge{display:inline-block;width:58px;height:7px;border-radius:999px;background:var(--line2);vertical-align:middle;overflow:hidden}
+.gauge i{display:block;height:100%;border-radius:999px;background:var(--accent-grad)}
+.gauge.g1 i{width:25%}.gauge.g2 i{width:50%}.gauge.g3 i{width:75%}.gauge.g4 i{width:100%}
+.cmp-scores{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:13px 18px;background:var(--paper2);border-radius:12px}
+.cmp-scores .sc{display:inline-flex;align-items:center;gap:9px;white-space:nowrap}
+.cmp-scores .sc-l{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.cmp-scores .gauge{width:52px}
+.cmp-score-table td:not(:first-child){text-align:center}
+.cmp-score-table td:not(:first-child) .gauge{width:104px}
+.cmp-score-table th:not(:first-child){text-align:center}
+.cmp-card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin:22px 0 24px}
+.cmp-shot{width:100%;height:auto;border-bottom:1px solid var(--line)}
+.cmp-card h3{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--ink);letter-spacing:-.01em;margin:20px 20px 12px}
+.cmp-card .cmp-scores{margin:0 20px}
+.cmp-card>p{margin:14px 20px 22px;font-size:15px;color:var(--ink2);line-height:1.72}
+.need-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0}
+.need-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.need-card h4{font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink);margin:0 0 8px;line-height:1.25}
+.need-card p{font-size:14px;color:var(--ink2);line-height:1.6;margin:0 0 14px}
+.need-tags{display:flex;flex-wrap:wrap;gap:7px}
+.need-tags span{font-family:var(--mono);font-size:11px;color:var(--accent-ink);background:var(--accent-soft);border-radius:7px;padding:4px 9px}
+.need-note{margin:6px 0 0;padding:16px 20px;background:var(--dark);color:var(--on-dark);border-radius:14px;font-size:14.5px;line-height:1.6}
+.post-sources{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.6}
+@media(max-width:820px){.post-table-wrap{width:100%;left:auto;transform:none}.need-grid{grid-template-columns:1fr}}
+
+/* V1 — Éditorial épuré */
+body{background:#F5F5F3}
+.hero-inner,.page{max-width:720px}
+.hero-ed .title{font-size:clamp(40px,5.2vw,58px)}
+.prose h2{padding-top:26px;position:relative}
+.prose h2::before{content:"";position:absolute;top:0;left:0;width:44px;height:3px;border-radius:3px;background:var(--accent-grad)}
+.cmp-card{border-radius:16px}
+</style></head><body class="mkt-lp"><header class="hero hero-ed"><div class="hero-inner"><div class="eyebrow">Comparatif · 22 juillet 2026 · 11 min</div><h1 class="title">Agents SEO <span class="tgrad">IA</span> : le comparatif technique 2026</h1></div></header><main class="page"><div class="prose">
+      <p class="lead">Un agent SEO IA analyse vos données SEO et produit des actions : un audit, un plan, un contenu, une correction.</p>
+      <p>Les outils réunis ici se présentent tous comme des agents. Leur niveau d'autonomie, lui, diffère : certains se limitent à mesurer, d'autres recommandent des actions, d'autres les exécutent sous validation.</p>
+      <p>Aucun des sept comparés ne publie sans intervention humaine par défaut.</p>
+      <p>Ce comparatif porte sur sept outils positionnés comme agents SEO : Qadence, Writesonic, Frase, Profound, AirOps (Quill), SEO Assist et Semrush Enterprise AIO.</p>
+      <p>Chacun est passé sur la même grille : architecture, autonomie vérifiée, connexions data en lecture et en écriture, modèle d'IA quand il est divulgué, prix, et écart entre la promesse commerciale et la documentation. Les données viennent des pages officielles de chaque éditeur ; quand une information n'est pas publique, c'est indiqué.</p>
+      <div class="note-transp"><span class="nt-label">Transparence</span>Cet article est publié par Qadence, l'un des sept outils comparés. Il est traité avec la même grille et les mêmes exigences que les autres, y compris là où il est en retrait. Le périmètre couvre les agents qui analysent et décident ; il exclut les outils d'automatisation qui publient du contenu sans phase de décision.</div>
+
+      <h2 id="autonomie">Lire l'autonomie sur quatre niveaux</h2>
+      <p>Pour comparer ces outils sans se fier au vocabulaire commercial, un repère utile est le niveau d'autonomie réel, qui se lit sur quatre paliers.</p>
+      <p><strong>Niveau 1, le monitoring.</strong> L'outil observe et mesure (positions, citations dans les IA, logs de crawl). Il ne décide rien.</p>
+      <p><strong>Niveau 2, la recommandation priorisée.</strong> L'outil analyse la data et sort une liste d'actions classées par impact. L'exécution reste humaine.</p>
+      <p><strong>Niveau 3, l'exécution sous validation.</strong> L'outil rédige, corrige, prépare la publication, et attend une approbation avant que quoi que ce soit parte.</p>
+      <p><strong>Niveau 4, l'autonomie complète.</strong> L'outil exécute et publie sans intervention humaine. Sur les sept, aucun ne fonctionne ainsi par défaut.</p>
+
+      <h2 id="archi">Architecture, autonomie et modèle d'IA</h2>
+      <div class="post-table-wrap">
+      <table class="cmp-table">
+        <thead><tr><th>Agent</th><th>Nature réelle</th><th>Autonomie vérifiée</th><th>Modèle d'IA</th><th>Mémoire projet</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Qadence</strong></td><td>Agent connecté à la Search Console qui lit la data réelle et sort un plan d'action priorisé par ce qui rapporte</td><td><span class="lvl-chip">Niveau 3</span>trois surveillances autonomes + briefing quotidien ; n'exécute pas à la place de l'utilisateur</td><td>Non communiqué</td><td>Oui : mémoire d'une session à l'autre + fiche projet et documents</td></tr>
+          <tr><td><strong>Writesonic</strong><span class="cmp-sub">GEO Agent</span></td><td>Plateforme d'analytics GEO + « Action Center » qui priorise les actions ; couche agent déportée sur un serveur MCP</td><td><span class="lvl-chip">Niveau 2</span>reco priorisées ; le rewrite de page est « coming soon », le MCP est en lecture seule</td><td>Non divulgué (moteur GEO)</td><td>Suivi d'état des tâches (à faire / en cours / résolu), pas de mémoire conversationnelle</td></tr>
+          <tr><td><strong>Frase</strong><span class="cmp-sub">AI Agent</span></td><td>Pipeline séquentiel en 6 étapes (recherche → brief → rédaction → optimisation → publication → suivi)</td><td><span class="lvl-chip">Niveau 3</span>publie sous validation ; auto-publish activable par type de contenu ; pas de planificateur autonome</td><td>Non divulgué</td><td>Profils de voix et de marque persistants, appliqués à chaque run</td></tr>
+          <tr><td><strong>Profound</strong><span class="cmp-sub">Agents</span></td><td>Builder de workflows visuels (runtime « Cortex » en graphes orientés) au-dessus d'un socle de mesure de visibilité IA</td><td><span class="lvl-chip">Niveau 3</span>gates de validation humaine ; l'orchestration multi-agents autonome est annoncée en roadmap</td><td>Non divulgué (16 « reasoning models » interrogés, non listés)</td><td>Variables et données entre nodes ; mémoire d'agent non documentée</td></tr>
+          <tr><td><strong>AirOps</strong><span class="cmp-sub">Quill</span></td><td>Plateforme d'orchestration node-based ; Quill surveille, brief, exécute des campagnes et apprend des résultats</td><td><span class="lvl-chip">Niveau 3</span>boucle complète mais toute publication finale exige une validation humaine</td><td>Multi-modèle (GPT-4o cité, Claude recommandé pour la rédaction) ; liste complète non publique</td><td>Brand Kit + Knowledge Bases versionnés</td></tr>
+          <tr><td><strong>SEO Assist</strong><span class="cmp-sub">SEO Vendor</span></td><td>Interface conversationnelle qui recommande le bon outil de la suite CORE AI et génère un lien à lancer</td><td><span class="lvl-chip">Niveau 2</span>recommande et génère des livrables ; « l'implémentation reste à vous » (doc officielle)</td><td>CORE AI = réseau de neurones propriétaire breveté (pas un LLM) ; le LLM de génération n'est pas divulgué</td><td>Un « stream » de conversation par site, contexte conservé</td></tr>
+          <tr><td><strong>Semrush</strong><span class="cmp-sub">Enterprise AIO</span></td><td>Assistant de scoring et de génération de contenu (SEO + visibilité IA) ; aucun produit officiellement nommé « agent »</td><td><span class="lvl-chip">Niveau 2</span>reco + génération avant publication ; l'exécution automatique est déléguée à Adobe</td><td>Non divulgué</td><td>Non documentée</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 id="data">Connexions data, publication, visibilité IA et prix</h2>
+      <div class="post-table-wrap">
+      <table class="cmp-table">
+        <thead><tr><th>Agent</th><th>Data en lecture</th><th>Écriture / publication</th><th>Visibilité IA (plateformes)</th><th>Prix (public)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Qadence</strong></td><td>Google Search Console (lecture seule, 16 mois) + Keyword Planner pour les volumes</td><td>Publication WordPress depuis le chat (déclenchée par l'utilisateur) ; pas de modification des données Google</td><td>Non affiché dans l'offre publique</td><td>Gratuit pour tester (7 actions + 2 audits, sans carte) ; Starter 19 € / Essentiel 29 € / Pro 49 € par mois ; offre agence sur devis</td></tr>
+          <tr><td><strong>Writesonic</strong></td><td>GSC, GA4 (Enterprise), Keyword Planner, Ahrefs, SERP live, logs de crawlers IA via CDN</td><td>Publication de brouillons vers WordPress, Sanity, Contentful, Vercel ; correctifs techniques manuels</td><td>10 plateformes (3 seulement hors Enterprise), monitoring par scraping de l'interface réelle</td><td>≈ 73 / 183 / 367 €/mois + Enterprise ; Action Center limité à Growth et Enterprise</td></tr>
+          <tr><td><strong>Frase</strong></td><td>SERP, Google Search Console (lecture) ; pas de GA4 natif</td><td>Publication directe WordPress, Webflow, Sanity, Wix, FraseCMS (sous approbation) ; MCP read-write</td><td>2 plateformes (Starter) à 5 (Scale)</td><td>≈ 45 / 119 / 275 €/mois (≈ 36 / 95 / 220 € en annuel) + Enterprise</td></tr>
+          <tr><td><strong>Profound</strong></td><td>GA4, Google Search Console, Adobe Analytics, logs CDN (Cloudflare, Fastly, Akamai, Vercel…)</td><td>Publication directe vers CMS (WordPress, Webflow, Sanity…) sous validation humaine</td><td>~10 answer engines (Starter = ChatGPT seul), capture navigateur</td><td>≈ 91 / 367 €/mois + Enterprise ; Agents facturés en crédits par run</td></tr>
+          <tr><td><strong>AirOps</strong></td><td>GSC, GA4, Moz, DataForSEO, nombreux CMS, sources client (Gong, Intercom) via MCP</td><td>Publication directe CMS sous validation humaine ; API publique</td><td>8 moteurs (Solo = ChatGPT seul)</td><td>Insights gratuit ; Solo ≈ 184 € ; Pro ≈ 1 840 €/mois ; facturé à la « task »</td></tr>
+          <tr><td><strong>SEO Assist</strong></td><td>Écosystème propriétaire fermé ; connecteurs data first-party non documentés</td><td>Ne publie pas : rend des livrables prêts à l'emploi, l'implémentation reste à l'utilisateur</td><td>Non documenté</td><td>Plans Free / Plus / Pro : montants non publics</td></tr>
+          <tr><td><strong>Semrush AIO</strong></td><td>GA4 ou Adobe Analytics + data SEO native Semrush ; GSC non documenté sur l'offre AIO</td><td>Ne publie rien : reco et génération, publication humaine</td><td>ChatGPT, Google AI, Gemini, Perplexity (Grok et Claude en Enterprise), par test de prompts</td><td>Enterprise sur devis ; AI Visibility Toolkit distinct à ≈ 91 €/mois par domaine</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Sur les données incertaines : le modèle d'IA sous-jacent n'est divulgué par presque aucun éditeur (seul AirOps nomme GPT-4o et Claude dans sa documentation). Les bases de prompts affichées par Semrush varient d'une page à l'autre (213, 261 ou 289 millions selon l'endroit), et le chiffre « 289M » parfois attribué à Profound ne figure sur aucune de ses pages officielles : Profound documente « 130M+ de conversations ». Les données non publiques sont signalées comme telles.</p>
+
+      <h2 id="fiches">Les sept agents en détail</h2>
+      <p>Pour chaque agent : sa page d'accueil, son profil sur les quatre axes (barème détaillé plus bas), et ce que confirme sa documentation.</p>
+
+      <div class="cmp-card">
+        <img class="cmp-shot" src="/comparatif/qadence.jpg" alt="Page d'accueil de Qadence" loading="lazy">
+        <h3>Qadence</h3>
+        <div class="cmp-scores"><span class="sc"><span class="sc-l">Autonomie</span><span class="gauge g3"><i></i></span></span><span class="sc"><span class="sc-l">Connexions</span><span class="gauge g2"><i></i></span></span><span class="sc"><span class="sc-l">Visibilité IA</span><span class="gauge g1"><i></i></span></span><span class="sc"><span class="sc-l">Prix</span><span class="gauge g4"><i></i></span></span></div>
+        <p>Il se connecte à la Search Console en lecture seule, lit les requêtes, positions et pages, puis en tire un plan d'action classé par ce qui rapporte, et mesure le résultat de chaque action 14 jours plus tard. Trois surveillances tournent seules et un briefing quotidien signale les évolutions. La seule action d'écriture est la publication d'un contenu WordPress depuis le chat, déclenchée par l'utilisateur. Il conserve en mémoire les décisions d'une session à l'autre. Il se présente comme un copilote de niveau 3 : il assiste, il n'exécute pas à la place de l'utilisateur. Il n'affiche pas de fonction de visibilité dans les IA dans son offre publique.</p>
+      </div>
+
+      <div class="cmp-card">
+        <img class="cmp-shot" src="/comparatif/writesonic.jpg" alt="Page d'accueil de Writesonic" loading="lazy">
+        <h3>Writesonic</h3>
+        <div class="cmp-scores"><span class="sc"><span class="sc-l">Autonomie</span><span class="gauge g2"><i></i></span></span><span class="sc"><span class="sc-l">Connexions</span><span class="gauge g4"><i></i></span></span><span class="sc"><span class="sc-l">Visibilité IA</span><span class="gauge g4"><i></i></span></span><span class="sc"><span class="sc-l">Prix</span><span class="gauge g3"><i></i></span></span></div>
+        <p>C'est d'abord une plateforme de mesure de visibilité dans les IA. Sa méthode : scraper l'interface web réelle de dix plateformes (ChatGPT, Perplexity, Gemini, AI Overviews, Copilot…), chaque jour, en variant la géolocalisation, plutôt que d'interroger les API. L'« Action Center » classe ensuite les opportunités par impact et effort. Écart promesse ↔ doc : le bouton de réécriture de page est « coming soon », le serveur MCP est en lecture seule, et les correctifs techniques annoncés « en un clic » sont décrits comme manuels dans la documentation.</p>
+      </div>
+
+      <div class="cmp-card">
+        <img class="cmp-shot" src="/comparatif/frase.jpg" alt="Page d'accueil de Frase" loading="lazy">
+        <h3>Frase</h3>
+        <div class="cmp-scores"><span class="sc"><span class="sc-l">Autonomie</span><span class="gauge g3"><i></i></span></span><span class="sc"><span class="sc-l">Connexions</span><span class="gauge g3"><i></i></span></span><span class="sc"><span class="sc-l">Visibilité IA</span><span class="gauge g2"><i></i></span></span><span class="sc"><span class="sc-l">Prix</span><span class="gauge g4"><i></i></span></span></div>
+        <p>Un pipeline de contenu en six étapes qui se passent le contexte (le brief, la voix de marque, les scores) de l'une à l'autre, jusqu'à la publication sur WordPress, Webflow, Sanity, Wix ou son CMS maison. Son serveur MCP (`@frase/mcp-server`) est l'un des rares en lecture-écriture. Rien ne se publie sans accord par défaut, et l'auto-publish s'active type de contenu par type de contenu. Ce n'est pas un planificateur autonome mais un enchaînement d'étapes fixe.</p>
+      </div>
+
+      <div class="cmp-card">
+        <img class="cmp-shot" src="/comparatif/profound.jpg" alt="Page d'accueil de Profound" loading="lazy">
+        <h3>Profound</h3>
+        <div class="cmp-scores"><span class="sc"><span class="sc-l">Autonomie</span><span class="gauge g3"><i></i></span></span><span class="sc"><span class="sc-l">Connexions</span><span class="gauge g4"><i></i></span></span><span class="sc"><span class="sc-l">Visibilité IA</span><span class="gauge g4"><i></i></span></span><span class="sc"><span class="sc-l">Prix</span><span class="gauge g3"><i></i></span></span></div>
+        <p>Le socle est la mesure de visibilité IA : runs quotidiens capturés depuis le navigateur, tracking des crawlers IA par lecture des logs CDN, vérification des vrais bots contre les IP publiées. Le module Agents ajoute un builder de workflows visuels (runtime « Cortex »). Écart promesse ↔ doc : l'expression « autonomous workers » recouvre des workflows avec points de validation humaine ; l'orchestration multi-agents autonome est présentée comme roadmap. Le plan d'entrée à ≈ 91 € ne couvre que ChatGPT.</p>
+      </div>
+
+      <div class="cmp-card">
+        <img class="cmp-shot" src="/comparatif/airops.jpg" alt="Page d'accueil d'AirOps" loading="lazy">
+        <h3>AirOps (Quill)</h3>
+        <div class="cmp-scores"><span class="sc"><span class="sc-l">Autonomie</span><span class="gauge g3"><i></i></span></span><span class="sc"><span class="sc-l">Connexions</span><span class="gauge g4"><i></i></span></span><span class="sc"><span class="sc-l">Visibilité IA</span><span class="gauge g3"><i></i></span></span><span class="sc"><span class="sc-l">Prix</span><span class="gauge g3"><i></i></span></span></div>
+        <p>Une plateforme node-based, une exécution en masse par « Grid » (une ligne de tableau = un run), une API publique, le support MCP. Quill, annoncé en mai 2026, boucle sur monitoring → brief → exécution de campagnes → apprentissage. Toute publication finale exige aujourd'hui une validation humaine. La facturation se fait à la « task » (chaque étape consomme), et le plan Pro démarre à ≈ 1 840 €/mois.</p>
+      </div>
+
+      <div class="cmp-card">
+        <img class="cmp-shot" src="/comparatif/seoassist.jpg" alt="Page d'accueil de SEO Assist (SEO Vendor)" loading="lazy">
+        <h3>SEO Assist (SEO Vendor)</h3>
+        <div class="cmp-scores"><span class="sc"><span class="sc-l">Autonomie</span><span class="gauge g2"><i></i></span></span><span class="sc"><span class="sc-l">Connexions</span><span class="gauge g1"><i></i></span></span><span class="sc"><span class="sc-l">Visibilité IA</span><span class="gauge g1"><i></i></span></span><span class="sc"><span class="sc-l">Prix</span><span class="gauge g1"><i></i></span></span></div>
+        <p>Son socle CORE AI est un réseau de neurones propriétaire, breveté, qui fait de l'analyse prédictive sur plus de 100 facteurs, et qui n'est pas un LLM. Écart promesse ↔ doc : malgré le vocabulaire « autonomous », l'agent est décrit dans sa propre documentation comme un copilote qui recommande le bon outil à lancer et génère des livrables, en laissant l'implémentation à l'utilisateur. Les connecteurs data first-party ne sont pas documentés, et les prix des plans Plus et Pro ne sont pas publics.</p>
+      </div>
+
+      <div class="cmp-card">
+        <img class="cmp-shot" src="/comparatif/semrush.jpg" alt="Page Semrush Enterprise AIO" loading="lazy">
+        <h3>Semrush Enterprise AIO</h3>
+        <div class="cmp-scores"><span class="sc"><span class="sc-l">Autonomie</span><span class="gauge g2"><i></i></span></span><span class="sc"><span class="sc-l">Connexions</span><span class="gauge g3"><i></i></span></span><span class="sc"><span class="sc-l">Visibilité IA</span><span class="gauge g3"><i></i></span></span><span class="sc"><span class="sc-l">Prix</span><span class="gauge g2"><i></i></span></span></div>
+        <p>Il n'existe pas, sur les pages officielles, de produit nommé « SEO AI Agent ». Ce qui existe est un assistant qui score le contenu en direct (couverture sémantique, structure, lisibilité) sur deux axes, SEO et visibilité IA, et qui génère des brouillons et des briefs. Il ne publie rien : l'exécution automatisée d'entreprise est déléguée à Adobe. Son apport est d'unifier la data SEO historique de Semrush avec la mesure de visibilité IA.</p>
+      </div>
+
+      <h2 id="scoring">Récapitulatif du scoring</h2>
+      <p>Les quatre axes sont notés de un à quatre points, à partir des données documentées. La règle de notation ci-dessous est identique pour tous les agents, ce qui permet de vérifier chaque note.</p>
+      <p><strong>Autonomie.</strong> Le palier atteint sur l'échelle : monitoring seul (1), recommandation priorisée (2), exécution sous validation (3), publication sans intervention (4).</p>
+      <p><strong>Connexions data.</strong> Écosystème fermé sans connecteur documenté (1) ; quelques connexions en lecture (2) ; plusieurs sources en lecture plus écriture CMS (3) ; nombreuses sources (Search Console, GA4, outils tiers) plus écriture CMS plus API ou MCP (4).</p>
+      <p><strong>Visibilité IA.</strong> Aucune fonction publique (1) ; suivi de deux à quelques plateformes (2) ; suivi étendu mais bridé par le plan (3) ; large couverture (environ dix plateformes) avec méthode de mesure documentée (4).</p>
+      <p><strong>Transparence prix.</strong> Prix non publics (1) ; une offre publique et le reste sur devis (2) ; grille publique mais fonctions clés réservées aux paliers hauts (3) ; grille complète et lisible publiquement (4).</p>
+      <div class="post-table-wrap">
+      <table class="cmp-table cmp-score-table">
+        <thead><tr><th>Agent</th><th>Autonomie</th><th>Connexions data</th><th>Visibilité IA</th><th>Transparence prix</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Qadence</strong></td><td><span class="gauge g3"><i></i></span></td><td><span class="gauge g2"><i></i></span></td><td><span class="gauge g1"><i></i></span></td><td><span class="gauge g4"><i></i></span></td></tr>
+          <tr><td><strong>Writesonic</strong></td><td><span class="gauge g2"><i></i></span></td><td><span class="gauge g4"><i></i></span></td><td><span class="gauge g4"><i></i></span></td><td><span class="gauge g3"><i></i></span></td></tr>
+          <tr><td><strong>Frase</strong></td><td><span class="gauge g3"><i></i></span></td><td><span class="gauge g3"><i></i></span></td><td><span class="gauge g2"><i></i></span></td><td><span class="gauge g4"><i></i></span></td></tr>
+          <tr><td><strong>Profound</strong></td><td><span class="gauge g3"><i></i></span></td><td><span class="gauge g4"><i></i></span></td><td><span class="gauge g4"><i></i></span></td><td><span class="gauge g3"><i></i></span></td></tr>
+          <tr><td><strong>AirOps</strong></td><td><span class="gauge g3"><i></i></span></td><td><span class="gauge g4"><i></i></span></td><td><span class="gauge g3"><i></i></span></td><td><span class="gauge g3"><i></i></span></td></tr>
+          <tr><td><strong>SEO Assist</strong></td><td><span class="gauge g2"><i></i></span></td><td><span class="gauge g1"><i></i></span></td><td><span class="gauge g1"><i></i></span></td><td><span class="gauge g1"><i></i></span></td></tr>
+          <tr><td><strong>Semrush AIO</strong></td><td><span class="gauge g2"><i></i></span></td><td><span class="gauge g3"><i></i></span></td><td><span class="gauge g3"><i></i></span></td><td><span class="gauge g2"><i></i></span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Ces points mesurent un périmètre documenté et sa transparence, pas une qualité globale. Il n'y a volontairement ni total ni gagnant : un outil fort en visibilité IA et faible en transparence prix répond à un besoin différent d'un outil à l'inverse.</p>
+
+      <h2 id="constats">Ce que montrent les données</h2>
+      <p>Sur la visibilité dans les IA (GEO), <span class="tg">Profound</span>, <span class="tg">Writesonic</span> et <span class="tg">AirOps</span> sont les plus avancés : méthodes de mesure documentées, et davantage de plateformes suivies.</p>
+      <p><span class="tg">Qadence</span> n'affiche pas de fonction de visibilité IA dans son offre publique. <span class="tg">SEO Assist</span> ne documente pas ce périmètre.</p>
+      <p>Un constat est commun aux sept : le mot « agent » précède souvent la fonction réelle.</p>
+      <p><span class="tg">SEO Assist</span> se présente comme « autonomous » et laisse l'implémentation à l'utilisateur. <span class="tg">Semrush</span> nomme « agent » un assistant de scoring. <span class="tg">Profound</span> qualifie d'« autonomous workers » un builder de workflows validés à la main. <span class="tg">Writesonic</span> annonce un « auto-fix en un clic » que sa documentation décrit comme manuel.</p>
+      <p>Dans les quatre cas, la formulation commerciale décrit une capacité plus avancée que celle réellement documentée à ce jour.</p>
+      <p>Côté périmètre, les usages se répartissent en trois familles : la visibilité IA (<span class="tg">Profound</span>, <span class="tg">Writesonic</span>, <span class="tg">AirOps</span>, <span class="tg">Semrush</span>), la production de contenu (<span class="tg">Frase</span>, <span class="tg">AirOps</span>), et le pilotage par la donnée d'un site existant (<span class="tg">Qadence</span>). <span class="tg">SEO Assist</span> et <span class="tg">Semrush AIO</span> ciblent les agences et les grandes entreprises.</p>
+
+      <h2 id="choix">Repères de choix par besoin</h2>
+      <div class="need-grid">
+        <div class="need-card">
+          <h4>Mesurer sa présence dans les IA</h4>
+          <p>Profound pour la mesure la plus fine, Writesonic pour le couple mesure et recommandations, AirOps pour la production à l'échelle. Les moteurs au-delà de ChatGPT sont souvent réservés aux paliers hauts.</p>
+          <div class="need-tags"><span>Profound</span><span>Writesonic</span><span>AirOps</span></div>
+        </div>
+        <div class="need-card">
+          <h4>Produire et industrialiser du contenu</h4>
+          <p>Frase pour un solo ou une petite équipe, avec un serveur MCP en lecture-écriture. AirOps pour une équipe qui a une compétence ops et un budget supérieur.</p>
+          <div class="need-tags"><span>Frase</span><span>AirOps</span></div>
+        </div>
+        <div class="need-card">
+          <h4>Piloter par la donnée d'un site existant</h4>
+          <p>Qadence lit la Search Console et priorise les actions par ce qui rapporte, sans produire de contenu de masse. Il suppose de l'historique et un objectif de conversion.</p>
+          <div class="need-tags"><span>Qadence</span></div>
+        </div>
+        <div class="need-card">
+          <h4>Agence ou grande entreprise multi-marques</h4>
+          <p>Semrush AIO pour unifier SEO et visibilité IA à l'échelle, SEO Assist pour un flux de livrables white-label. Les prix des deux ne sont pas publics.</p>
+          <div class="need-tags"><span>Semrush AIO</span><span>SEO Assist</span></div>
+        </div>
+      </div>
+      <p class="need-note">Aucun des sept ne publie sans validation humaine par défaut. Le choix se fait sur le périmètre (mesure IA, production de contenu, pilotage par la data), les connexions data disponibles et le budget.</p>
+
+      <p class="post-sources">Sources : pages officielles, documentation technique et grilles tarifaires de chaque éditeur (qadence.io, writesonic.com, frase.io, tryprofound.com, airops.com, seovendor.co, semrush.com), consultées en juillet 2026. Les données non publiques sont signalées comme telles dans le texte. Les prix en dollars sont convertis en euros au taux indicatif 1 $ ≈ 0,92 € (juillet 2026), hors taxes. Chiffres susceptibles d'évoluer.</p>
+</div></main></body></html>

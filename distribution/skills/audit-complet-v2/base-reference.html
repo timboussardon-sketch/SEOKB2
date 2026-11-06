@@ -1,0 +1,1033 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>Audit fusionn.co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Coque : reprise à l'identique de la DA des audits organikk.co,
+   verbatim sur les tokens, les classes .fs-*, .dashwrap, .kchat .markdown,
+   .aide, .avert : seul le contenu change. */
+:root{--bg:#FAFAFC;--bg-sidebar:#FAFBFC;--border:#E5E7EB;--scrim:rgba(17,24,39,.32);--accent-grad:linear-gradient(160deg,#2f4fe0 0%,#2f4fe0 45%,#7fa0ff 100%)}
+*,*:before,*:after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Geist',system-ui,-apple-system,sans-serif;background:var(--bg);color:#111827;-webkit-font-smoothing:antialiased}
+button{font:inherit}
+[title]{cursor:help}
+
+/* ── sidebar ── */
+.qadence-sidebar{width:264px;max-width:calc(100vw - 40px);height:100%;min-height:0;flex-shrink:0;display:flex;flex-direction:column;background:var(--bg-sidebar,#F2F3F7);border-right:1px solid var(--border,#e5e7eb);color:#111827;font-family:'Geist',system-ui,sans-serif}
+.qadence-sidebar button{font:inherit;cursor:pointer;text-align:left;border:0;background:none;color:inherit}
+.qadence-sidebar button:focus-visible{outline:2px solid #2135d9;outline-offset:2px}
+.qadence-sidebar svg{flex-shrink:0}
+.fs-header{height:69px;min-height:69px;padding:0 19px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.fs-brand{display:flex;align-items:center;gap:7px;font-size:20px;font-weight:750;letter-spacing:-.8px;white-space:nowrap}
+.fs-brand .chip{width:30px;height:30px;border-radius:10px;background:#eef2ff;border:1px solid #dfe6ff;display:grid;place-items:center;flex:none}
+.fs-brand .mark{width:18px;height:18px}
+.fs-brand .mark .pa{fill:url(#orgA)}
+.fs-brand .mark .pb{fill:url(#orgB)}
+.kchat-top .chip{width:24px;height:24px;border-radius:8px;background:#eef2ff;border:1px solid #dfe6ff;display:grid;place-items:center;flex:none}
+.kchat-top .chip .mark{width:14px;height:14px}
+.kchat-top .chip .pa{fill:url(#orgA)}
+.kchat-top .chip .pb{fill:url(#orgB)}
+.fs-brand small{font-size:10px;letter-spacing:0;font-weight:450;color:#6b7280;margin-left:3px}
+.qadence-sidebar .fs-icon-button{display:inline-flex;align-items:center;justify-content:center;padding:6px;border-radius:6px;color:#6b7280;flex-shrink:0}
+.qadence-sidebar .fs-icon-button:hover{background:#eceef1}
+.fs-picker{position:relative;margin:2px 13px 14px;flex-shrink:0;z-index:3}
+.qadence-sidebar .fs-site-select{display:flex;align-items:center;gap:10px;width:100%;padding:10px;background:#fff;border:1px solid #dfe2e7;border-radius:9px}
+.fs-site-avatar{width:29px;height:29px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0;background:#f4f5f7;color:#6b7280;font-size:13px;font-weight:650}
+.fs-site-identity{flex:1;min-width:0}
+.fs-site-identity small{display:block;font-size:10px;color:#6b7280;margin-bottom:3px}
+.fs-site-identity strong{display:block;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fs-scroll{padding:0 13px 16px;flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin}
+.fs-audit-meta{padding:14px 0 16px;border-top:1px solid #e5e7eb}
+.fs-audit-meta strong{display:block;font-size:11px;font-weight:600}
+.fs-audit-meta small{display:block;font-size:10px;color:#6b7280;margin-top:3px}
+.qadence-sidebar .fs-nav-item{gap:12px;min-height:46px;padding:7px 9px 7px 7px;border-radius:14px;font-size:13px;color:#4b4b52;margin-bottom:4px;border:1px solid transparent;display:flex;align-items:center;width:100%}
+.qadence-sidebar .fs-nav-item:hover{background:#fff;border-color:#e8e6e6}
+.qadence-sidebar .fs-nav-item.is-active{background:#fff;border-color:#dfe6ff;color:#2f4fe0;font-weight:600;box-shadow:0 10px 26px rgba(33,55,157,.08)}
+.fs-nav-item>span:not(.ico-rond){flex:1;min-width:0}
+.fs-nav-item .ico-rond{width:26px;height:26px;display:grid;place-items:center;flex:none;background:none;border:0;transition:transform .18s}
+.fs-nav-item .ico-rond svg{width:20px;height:20px;stroke:url(#navGrad);stroke-width:1.9}
+.fs-nav-item.is-active .ico-rond{transform:translateY(-1px)}
+.fs-nav-item.is-active .ico-rond svg{stroke-width:2.2}
+.fs-nav-item .num{font-family:'Geist Mono',ui-monospace,monospace;font-style:normal;font-size:10.5px;color:#9a9aa3;flex:none}
+.fs-nav-item.is-active .num{color:#2f4fe0}
+.fs-section-label{margin:14px 10px 10px;font-family:'Geist Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9a9aa3}
+.fs-suite{padding:0 0 14px}
+.fs-suite .fs-suite-t{font-family:'Geist Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9a9aa3;margin-bottom:9px}
+.fs-suite a{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:12px;border:1px solid #dfe6ff;background:#fff;color:#2f4fe0;font-size:12px;font-weight:500;line-height:1.35;text-decoration:none;margin-bottom:6px;transition:transform .18s,box-shadow .18s,border-color .18s}
+.fs-suite a:hover{transform:translateY(-1px);border-color:#2f4fe0;box-shadow:0 12px 26px -14px rgba(47,79,224,.5)}
+.fs-suite a svg{flex:none;color:#2f4fe0}
+.fs-suite a span{flex:1;min-width:0}
+.fs-socials{list-style:none;padding:0 0 14px;margin:0;display:flex;align-items:center;gap:8px}
+.fs-socials a{position:relative;isolation:isolate;width:36px;height:36px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;color:#2f4fe0;background:#fff;border:1px solid rgba(47,79,224,.18);box-shadow:0 1px 2px -1px rgba(27,62,143,.1);transition:transform .22s cubic-bezier(.2,0,0,1),color .22s,border-color .22s,box-shadow .22s}
+.fs-socials a::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:linear-gradient(135deg,#2f4fe0 0%,#4f78ff 55%,#7fa0ff 100%);opacity:0;transition:opacity .22s cubic-bezier(.2,0,0,1)}
+.fs-socials a:hover,.fs-socials a:focus-visible{color:#fff;transform:translateY(-2px);border-color:transparent;box-shadow:0 14px 26px -14px rgba(47,79,224,.55)}
+.fs-socials a:hover::before,.fs-socials a:focus-visible::before{opacity:1}
+.fs-socials svg{display:block}
+.fs-footer{padding:12px 15px 0;flex-shrink:0}
+
+/* ── coque ── */
+.shell{position:fixed;inset:0;display:flex;background:var(--bg)}
+.shell>.side{display:flex;height:100%}
+.main{flex:1;min-width:0;position:relative}
+.scrim{display:none;position:fixed;inset:0;z-index:190;background:var(--scrim)}
+@media(max-width:700px){
+  .shell>.side{position:fixed;top:0;bottom:0;left:0;z-index:200;transform:translateX(-100%);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+  .shell.open>.side{transform:none}
+  .shell.open .scrim{display:block}
+}
+.kchat{position:absolute;inset:0;display:flex;flex-direction:column;background:#FBFBFC;min-width:0;
+  --border-light:#EEF0F2;--accent:#2f4fe0;--accent-light:rgba(47,79,224,.09);--accent-deep:#2135d9;
+  --text-primary:#111827;--text-secondary:#374151;--text-muted:#6B7280;--md-emph:#111827;
+  --code-bg:#e8eeff;--code-fg:#1e2eba;--font:'Geist',system-ui,-apple-system,sans-serif;
+  --font-content:'Geist',system-ui,-apple-system,sans-serif;--font-mono:'Geist Mono',ui-monospace,monospace;--bg-white:#fff}
+.kchat-top{min-height:48px;flex-shrink:0;display:flex;align-items:center;gap:10px;padding:8px 16px;background:#fff;border-bottom:1px solid var(--border)}
+.kchat-top .menu{background:none;border:none;color:var(--text-muted);padding:4px;border-radius:6px;cursor:pointer;display:flex}
+.kchat-project-name{font-size:13px;color:var(--text-secondary);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kchat-sources{display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;border:1px solid var(--border);background:#fff;white-space:nowrap}
+.kchat-sources span:last-child{font-size:12px;font-weight:500;color:var(--text-secondary)}
+.kchat-org{margin-left:auto;font-size:12px;color:var(--text-muted)}
+@media(max-width:700px){.kchat-sources{display:none}}
+.kchat-feed{flex:1;min-width:0;min-height:0;overflow-y:auto;overflow-x:hidden;padding:24px 0;-webkit-overflow-scrolling:touch}
+.kchat-col{display:flex;flex-direction:column;gap:56px;padding:8px 48px 80px;max-width:996px;width:100%;margin:0 auto}
+@media(max-width:700px){.kchat-col{padding:8px 20px 80px}}
+.kchat-msg{display:none;width:100%;padding:2px 0}
+.kchat-msg.on{display:block;animation:kchat-fade .2s ease}
+.kchat-col:has(.home.on){max-width:none;padding:0 24px}
+@keyframes kchat-fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ── markdown (Fiche d'identité) ── */
+.kchat .markdown{font-family:var(--font-content);font-size:17px;line-height:1.8;color:var(--text-primary)}
+.kchat .markdown p{font-size:17px;font-weight:400;line-height:1.8;letter-spacing:-.006em;color:var(--text-primary);margin-top:20px}
+.kchat .markdown p:first-child{margin-top:0}
+.kchat .markdown strong{font-weight:600;color:var(--md-emph)}
+.kchat .markdown h1,.kchat .markdown h2,.kchat .markdown h3,.kchat .markdown h4{margin-bottom:16px;margin-top:48px;line-height:1.2;letter-spacing:-.025em;color:var(--md-emph);font-family:var(--font)}
+.kchat .markdown h1,.kchat .markdown h2{font-weight:700;background:linear-gradient(135deg,#2f4fe0 0%,#4664f3 55%,#7fa0ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;width:fit-content;max-width:100%}
+.kchat .markdown h3,.kchat .markdown h4{font-weight:600}
+.kchat .markdown h1{font-size:34px}
+.kchat .markdown h2{font-size:26px;margin-top:0;padding-top:8px}
+.kchat .markdown h4{font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-top:32px}
+.kchat .markdown h1:first-child,.kchat .markdown h2:first-child{margin-top:0}
+.kchat .markdown h4+p,.kchat .markdown h4+table{margin-top:8px}
+.kchat .markdown table{width:100%;table-layout:fixed;border-collapse:collapse;margin:24px 0 32px;font-size:14.5px;overflow:hidden;border:1px solid var(--border);border-radius:16px}
+.kchat .markdown thead th{position:sticky;top:0;z-index:2;background:#fff;color:var(--text-muted);padding:12px 14px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em;box-shadow:inset 0 -1px 0 var(--border)}
+.kchat .markdown tbody td{padding:14px;border-top:1px solid var(--border-light);color:var(--text-primary);vertical-align:top;line-height:1.6}
+.kchat .markdown tbody tr:nth-child(even) td{background:#F3F4F6}
+.kchat .markdown th.num,.kchat .markdown td.num{text-align:right;font-family:var(--font-mono);font-size:13.5px;white-space:nowrap}
+.kchat .markdown code{font-family:var(--font-mono);font-size:13px;background:var(--code-bg);padding:2px 6px;border-radius:5px;color:var(--code-fg)}
+.kchat .sources{font-size:13px;color:var(--text-muted);line-height:1.6;margin-top:32px;padding-top:16px;border-top:1px solid var(--border-light)}
+
+/* ── dashwrap (Résumé) ── */
+.dashwrap{
+  --ink:#2b2b30; --ink-2:#6f6f78; --ink-3:#9a9aa3; --line:#e8e6e6; --paper:#fff;
+  --c-top:#2f4fe0; --c-bottom:#7fa0ff;
+  --shadow-rgb:33,55,157;
+  --tint:#e8eeff; --wash:#f7f9ff;
+  --rose:#f4e9fb; --rose-ink:#6c3fa0;
+  --vert:#eaf6ee; --vert-ink:#1d6b38;
+  --orange:#fdf4e3; --orange-ink:#8a5b12;
+  --rouge:#fdeceb; --rouge-ink:#a6291d;
+  --r-sm:10px; --r-md:16px; --r-lg:24px; --r-xl:40px;
+  --sans:'Geist',system-ui,-apple-system,sans-serif;
+  --mono:'Geist Mono',ui-monospace,monospace;
+  --grad:linear-gradient(160deg,var(--c-top) 0%,var(--c-top) 45%,var(--c-bottom) 100%);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  font-size:16px;line-height:1.6;color:var(--ink);max-width:1240px;margin:0 auto;font-family:var(--sans)
+}
+.dashwrap .dash{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}
+.dashwrap .col{display:grid;gap:20px;min-width:0}
+.dashwrap .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px}
+.dashwrap a.card{display:block;transition:border-color .18s,box-shadow .18s,transform .18s}
+.dashwrap a.card:hover{border-color:#cdd8f8;box-shadow:0 14px 34px rgba(var(--shadow-rgb),.09);transform:translateY(-2px)}
+.dashwrap .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.dashwrap .card-head h3{font-size:16px;margin:0;font-weight:600;letter-spacing:-.02em}
+.dashwrap .ico-rond{width:34px;height:34px;border-radius:12px;background:var(--wash);border:1px solid var(--line);display:grid;place-items:center;flex:none;color:var(--ink-2)}
+.dashwrap .ico-rond svg{width:17px;height:17px}
+.dashwrap .profil{display:grid;justify-items:center;text-align:center}
+.dashwrap .rangee .profil{justify-content:center}
+.dashwrap .profil .ring{margin-top:20px;position:relative;width:170px;height:170px;display:grid;place-items:center}
+.dashwrap .profil .ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.dashwrap .profil .av{width:104px;height:104px;border-radius:30px;background:var(--grad);display:grid;place-items:center;overflow:hidden;color:#fff;font-size:34px;font-weight:600}
+.dashwrap .profil .badge{position:absolute;right:8px;bottom:8px;min-width:38px;height:38px;padding:0 10px;border-radius:14px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:600;font-size:15px;border:3px solid var(--paper)}
+.dashwrap .profil b{margin-top:22px;font-size:20px}
+.dashwrap .profil .role{display:block;font-size:13px;color:var(--ink-2);margin-top:6px}
+.dashwrap .chips{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.dashwrap .chip{font-size:12.5px;padding:6px 12px;border-radius:999px;background:var(--wash);border:1px solid var(--line);display:inline-flex;align-items:center;gap:7px}
+.dashwrap .chip i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.dashwrap .chip.v i{background:#2aa35a}
+.dashwrap .chip.r i{background:#d9463a}
+.dashwrap .chip.b i{background:var(--c-top)}
+.dashwrap .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:20px}
+.dashwrap .kpi{position:relative;min-height:172px;display:flex;flex-direction:column}
+.dashwrap .kpi .t{display:block;font-size:15px;font-weight:500;padding-right:48px}
+.dashwrap .kpi .n{display:block;margin-top:auto;font-size:40px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.dashwrap .kpi .l{display:block;margin-top:10px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.dashwrap .kpi .src{display:block;margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--ink-3);line-height:1.4}
+.dashwrap .kpi .ico-rond{position:absolute;top:24px;right:24px}
+.dashwrap .kpi.rose .n{color:var(--rose-ink)}
+.dashwrap .kpi.rose .ico-rond{background:var(--rose);border-color:#ecdcf7;color:var(--rose-ink)}
+.dashwrap .kpi.bleu .n{color:var(--c-top)}
+.dashwrap .kpi.bleu .ico-rond{background:var(--tint);border-color:#d7e1ff;color:var(--c-top)}
+.dashwrap .kpi.vert .n{color:var(--vert-ink)}
+.dashwrap .kpi.vert .ico-rond{background:var(--vert);border-color:#d5ecdd;color:var(--vert-ink)}
+.dashwrap .kpi.orange .n{color:var(--orange-ink)}
+.dashwrap .kpi.orange .ico-rond{background:var(--orange);border-color:#f6e6c8;color:var(--orange-ink)}
+.dashwrap .kpi.rouge .n{color:var(--rouge-ink)}
+.dashwrap .kpi.rouge .ico-rond{background:var(--rouge);border-color:#f8d8d5;color:var(--rouge-ink)}
+.dashwrap .sources{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.dashwrap .sources b{font-size:15px}
+.dashwrap .sources span{font-size:13px;color:var(--ink-2)}
+.dashwrap .rangee{display:grid;grid-template-columns:300px minmax(0,1fr);gap:20px;align-items:stretch}
+@media (max-width:1040px){.dashwrap .dash{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:820px){.dashwrap .rangee{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.dashwrap .card{padding:20px}}
+.dashwrap table{border-collapse:collapse;width:100%;font-size:14.5px}
+.dashwrap th,.dashwrap td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+.dashwrap thead th{background:#f4f7fd;font-weight:500;font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+.dashwrap tbody tr:last-child td{border-bottom:0}
+.dashwrap td.num,.dashwrap th.num{text-align:right;font-family:var(--mono);font-size:13px;white-space:nowrap}
+.dashwrap .etat{font-family:var(--mono);font-size:11px;letter-spacing:.03em;text-transform:uppercase;padding:4px 9px;border-radius:999px;white-space:nowrap;display:inline-block}
+.dashwrap .e-crit{background:var(--rouge);color:var(--rouge-ink)}
+.dashwrap .e-ame{background:var(--orange);color:var(--orange-ink)}
+.dashwrap .e-ok{background:var(--vert);color:var(--vert-ink)}
+.dashwrap .note{font-size:13.5px;color:var(--ink-2);margin-top:20px}
+.dashwrap .act{padding:26px 0;border-top:1px solid var(--line)}
+.dashwrap .act:first-child{border-top:0;padding-top:0}
+.dashwrap .act b{display:block;font-weight:600;margin-bottom:14px}
+.dashwrap .act p+p{margin-top:14px}
+.dashwrap .act .eff{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+.dashwrap .barres{margin:18px 0 0;padding:0;list-style:none}
+.dashwrap .barres li{padding:13px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 90px 42px;gap:12px;align-items:center}
+.dashwrap .barres li:first-child{border-top:0}
+.dashwrap .barres .nom{font-size:13px;line-height:1.35}
+.dashwrap .barres .nom span{display:block;color:var(--ink-3);font-size:11.5px;margin-top:2px}
+.dashwrap .barres .jauge{height:6px;border-radius:99px;background:var(--wash);overflow:hidden}
+.dashwrap .barres .jauge i{display:block;height:100%;border-radius:99px;background:var(--c-top)}
+.dashwrap .barres .n{font-family:var(--mono);font-size:12px;color:var(--ink-2);text-align:right}
+
+/* ── aide (tooltip) ── */
+.aide{position:relative;display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;margin-left:6px;border-radius:50%;border:1px solid #dfe6ff;background:#eef2ff;color:#2f4fe0;font-family:'Geist',system-ui,sans-serif;font-size:10.5px;font-weight:700;line-height:1;cursor:help;vertical-align:middle;flex:none;padding:0}
+.aide:hover,.aide:focus-visible{background:#2f4fe0;color:#fff;border-color:#2f4fe0;outline:none}
+.aide::after{content:attr(data-aide);position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%) translateY(3px);width:max-content;max-width:270px;padding:10px 13px;border-radius:12px;background:#1f2430;color:#fff;font-size:12.5px;font-weight:400;line-height:1.5;text-align:left;box-shadow:0 14px 34px rgba(17,24,39,.22);opacity:0;pointer-events:none;transition:opacity .16s,transform .16s;z-index:120;white-space:normal}
+.aide::before{content:"";position:absolute;bottom:calc(100% + 3px);left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1f2430;opacity:0;transition:opacity .16s;z-index:121}
+.aide:hover::after,.aide:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.aide:hover::before,.aide:focus-visible::before{opacity:1}
+.aide.bas::after{bottom:auto;top:calc(100% + 9px);transform:translateX(-50%) translateY(-3px)}
+.aide.bas::before{bottom:auto;top:calc(100% + 3px);border-top-color:transparent;border-bottom-color:#1f2430}
+.aide:hover,.aide:focus-visible{z-index:200}
+.card:has(.aide:hover),.card:has(.aide:focus-visible){position:relative;z-index:200}
+
+/* ── copier le résumé ── */
+.copie-claude{display:inline-flex;align-items:center;gap:8px;margin:0 0 18px;padding:9px 15px;border:1px solid var(--border,#e5e7eb);border-radius:12px;background:#fff;color:#2f4fe0;font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:border-color .18s,background .18s}
+.copie-claude:hover{border-color:#2f4fe0;background:#f4f6ff}
+.copie-claude.fait{color:#0a7c53;border-color:#0a7c53;background:#f0faf5}
+
+/* ── avertissement à l'ouverture ── */
+.avert{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(17,24,39,.32);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.avert[hidden]{display:none}
+.avert-carte{max-width:470px;width:100%;background:#fff;border-radius:24px;padding:30px 32px 26px;box-shadow:0 30px 70px -20px rgba(33,55,157,.35);font-family:'Geist',system-ui,sans-serif;color:#111827}
+.avert-carte h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:0 0 14px;background:linear-gradient(135deg,#2f4fe0 0%,#4664f3 55%,#7fa0ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;width:fit-content}
+.avert-carte p{font-size:15px;line-height:1.65;color:#374151;margin:0 0 12px}
+.avert-carte p:last-of-type{margin-bottom:22px}
+.avert-carte button{display:block;width:100%;min-height:44px;border:0;border-radius:12px;background:linear-gradient(160deg,#2f4fe0 0%,#2f4fe0 45%,#7fa0ff 100%);color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;cursor:pointer}
+.avert-carte button:hover{filter:brightness(1.06)}
+.avert-carte button:focus-visible{outline:2px solid #1e2eba;outline-offset:3px}
+
+/* ── listes et compléments dashwrap (onglets de dimension) ── */
+.dashwrap h2{font-size:clamp(21px,2.6vw,28px);color:var(--c-top);margin-top:0;font-weight:600;letter-spacing:-.02em}
+.dashwrap>p:first-of-type{margin-top:8px;color:var(--ink-2)}
+.dashwrap h3{font-size:18px;margin-top:40px;font-weight:600;letter-spacing:-.01em}
+.dashwrap h3:first-of-type{margin-top:44px}
+.dashwrap td.strong,.dashwrap th.strong{color:var(--ink);font-weight:500}
+.dashwrap td.mono,.dashwrap th.mono{font-family:var(--mono);font-size:13px}
+.dashwrap code{font-family:var(--mono);font-size:.88em;background:var(--wash);border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--c-top)}
+.dashwrap .kwtab td.kw{font-weight:500;color:var(--ink)}
+.dashwrap ul.plain,.dashwrap ol{margin-top:20px;max-width:52em}
+.dashwrap ul.plain{list-style:none;padding:0}
+.dashwrap ul.plain li{padding-left:18px;position:relative;margin-top:10px;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+.dashwrap ul.plain li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--c-top)}
+.dashwrap ol{padding-left:20px}
+.dashwrap ol li{margin-top:8px;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+.dashwrap .tablewrap{border:1px solid var(--line);border-radius:var(--r-lg);overflow:auto;background:var(--paper);margin-top:8px}
+.dashwrap .tablewrap table{border:0}
+.dashwrap h4{font-size:13px;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.03em;margin-top:22px}
+.dashwrap h4:first-child{margin-top:0}
+.dashwrap h4+p,.dashwrap h4+ul,.dashwrap h4+ol{margin-top:10px}
+
+/* ── table mots-clés (kwtab) ── */
+.dashwrap .kwtab td.kw{font-weight:500}
+.dashwrap .kwtab .tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--c-top);background:var(--tint);border-radius:4px;padding:2px 6px;margin-right:6px;vertical-align:middle}
+.dashwrap .kwtab tr.biz td{background:var(--wash)}
+
+/* ── validation requise ── */
+.dashwrap .valid{display:inline-block;margin-top:12px;font-size:12px;font-weight:600;color:var(--rouge-ink);background:var(--rouge);padding:4px 10px;border-radius:8px}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="orgA" gradientUnits="userSpaceOnUse" x1="51.81" y1="0.0" x2="0.0" y2="91.87"><stop offset="4.2%" stop-color="#455df5"/><stop offset="29.2%" stop-color="#4664f3"/><stop offset="54.2%" stop-color="#6481f4"/><stop offset="79.2%" stop-color="#91a8f6"/><stop offset="95.8%" stop-color="#b1c1f8"/></linearGradient>
+<linearGradient id="orgB" gradientUnits="userSpaceOnUse" x1="6.04" y1="96.0" x2="96.0" y2="57.49"><stop offset="4.2%" stop-color="#1e2eba"/><stop offset="29.2%" stop-color="#2840e7"/><stop offset="54.2%" stop-color="#5674f3"/><stop offset="79.2%" stop-color="#9bb0f5"/><stop offset="95.8%" stop-color="#c9d5f9"/></linearGradient>
+<linearGradient id="navGrad" gradientUnits="userSpaceOnUse" x1="3" y1="3" x2="21" y2="21"><stop offset="0%" stop-color="#2f4fe0"/><stop offset="100%" stop-color="#7fa0ff"/></linearGradient>
+<linearGradient id="scoreGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2f4fe0"/><stop offset="100%" stop-color="#7fa0ff"/></linearGradient>
+</defs></svg>
+
+<div class="shell" id="shell">
+  <div class="side">
+    <aside class="qadence-sidebar">
+      <div class="fs-header">
+        <div class="fs-brand"><span class="chip"><svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path class="pb" d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z"/><path class="pa" d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z"/></svg></span>Organikk<small>audit</small></div>
+      </div>
+      <div class="fs-picker">
+        <div class="fs-site-select"><span class="fs-site-avatar">f</span><div class="fs-site-identity"><small>Site audité</small><strong>fusionn.co</strong></div></div>
+      </div>
+      <nav class="fs-scroll" id="nav">
+        <button class="fs-nav-item" data-view="0"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M6 16c.7-1.6 1.8-2.4 3-2.4s2.3.8 3 2.4"/><path d="M15 9h3M15 13h3"/></svg></span><span>Fiche d'identité</span><i class="num">0</i></button>
+        <button class="fs-nav-item is-active" data-view="1" aria-current="page"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="11" width="8" height="10" rx="2"/><rect x="3" y="14" width="8" height="7" rx="2"/></svg></span><span>Résumé</span><i class="num">1</i></button>
+        <button class="fs-nav-item" data-view="2"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/></svg></span><span>Indexation</span><i class="num">2</i></button>
+        <button class="fs-nav-item" data-view="3"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></span><span>Maillage interne</span><i class="num">3</i></button>
+        <button class="fs-nav-item" data-view="4"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6v12M13 6v12M5 12h8"/><path d="M17 10h3v8"/></svg></span><span>Structure des titres</span><i class="num">4</i></button>
+        <button class="fs-nav-item" data-view="5"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6a8 8 0 0 0-8 8h4a4 4 0 0 1 8 0h4a8 8 0 0 0-8-8z"/><path d="M12 14l3.5-3.5"/></svg></span><span>Vitesse</span><i class="num">5</i></button>
+        <button class="fs-nav-item" data-view="6"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="8" height="6" rx="2"/><rect x="15" y="14" width="6" height="6" rx="2"/></svg></span><span>Données structurées</span><i class="num">6</i></button>
+        <button class="fs-nav-item" data-view="7"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18h16"/><path d="M7 18V9M12 18V5M17 18v-6"/></svg></span><span>Mots-clés business</span><i class="num">7</i></button>
+      </nav>
+      <div class="fs-footer">
+        <div class="fs-audit-meta"><strong>Audit du 26/09/2026 · Claude</strong><small>fusionn.co</small></div>
+        <div class="fs-suite">
+          <div class="fs-suite-t">Pour aller plus loin</div>
+          <a href="https://organikk.co/agent-seo/" target="_blank" rel="noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2.5"/><path d="M8 8V6a4 4 0 018 0v2M9 13.5h.01M15 13.5h.01"/></svg><span>Votre agent SEO technique</span></a>
+          <a href="https://organikk.co/systeme-seo/" target="_blank" rel="noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5z"/><path d="m3 13 9 5 9-5"/><path d="m3 17.5 9 5 9-5"/></svg><span>Système SEO</span></a>
+        </div>
+        <ul class="fs-socials" role="list">
+          <li><a href="https://www.youtube.com/@ethicseo" target="_blank" rel="noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a></li>
+          <li><a href="https://algorithme.substack.com/" target="_blank" rel="noreferrer" aria-label="Substack" title="Substack"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22.54 8.24H1.46V5.41h21.08v2.83zM1.46 10.81V24L12 18.11 22.54 24V10.81H1.46zM22.54 0H1.46v2.83h21.08V0z"/></svg></a></li>
+          <li><a href="https://www.linkedin.com/in/timothee-boussardon/" target="_blank" rel="noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg></a></li>
+          <li><a href="https://x.com/Timseo_" target="_blank" rel="noreferrer" aria-label="X" title="X"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.22-6.82-5.97 6.82H1.66l7.73-8.83L1.24 2.25h6.83l4.71 6.23 5.46-6.23zm-1.16 17.52h1.83L7.08 4.13H5.11l11.97 15.64z"/></svg></a></li>
+          <li><a href="https://wa.me/639998711485" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.48-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.37 9.37 0 0 1-1.44-5c0-5.18 4.23-9.4 9.42-9.4a9.36 9.36 0 0 1 9.41 9.41c0 5.18-4.22 9.4-9.42 9.4zM20.5 3.49A11.8 11.8 0 0 0 12.04 0C5.47 0 .12 5.34.12 11.91c0 2.1.55 4.15 1.6 5.96L0 24l6.27-1.64a11.9 11.9 0 0 0 5.77 1.47h.01c6.57 0 11.92-5.34 11.92-11.91a11.84 11.84 0 0 0-3.47-8.43z"/></svg></a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="main">
+    <div class="kchat">
+      <div class="kchat-top">
+        <button class="menu" aria-label="Barre latérale" id="menuBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <span class="chip"><svg class="mark" viewBox="0 0 96 96" aria-hidden="true"><path class="pb" d="M0.0 92.84C40.85 54.96 57.38 54.05 96.0 57.49L53.09 91.05Q47.05 96.0 38.78 96.0L3.81 96.0A3.81 3.3 0 0 1 0.0 92.84Z"/><path class="pa" d="M0.0 36.86C0.0 15.68 45.14 0.0 46.73 0.0L49.91 0.0A1.91 1.65 0 0 1 51.81 1.65L51.81 50.06C53.25 62.39 32.2 59.09 0.0 91.87Z"/></svg></span>
+        <span class="kchat-project-name" title="fusionn.co">fusionn.co</span>
+        <div class="kchat-sources" title="Search Console vérifiée, 6 mois de données"><span>Avec Search Console</span></div>
+        <span class="kchat-org">organikk.co</span>
+      </div>
+
+      <div class="kchat-feed">
+        <div class="kchat-col">
+
+<!-- ═══ 0. FICHE D'IDENTITÉ ═══ -->
+<div class="kchat-msg" data-view="0"><div class="markdown">
+<h2>fusionn.co : 51 pages auditées, sur 47 déclarées au sitemap</h2>
+<p>Fusionn est un générateur de mots-clés gratuit et un petit ensemble d'outils SEO autour : clustering, comparateur de volume, explorateur de questions, listes de mots-clés par persona. L'entrée se fait sans compte, le résultat s'affiche en ligne.</p>
+<p>Périmètre : les 51 pages accessibles depuis le site (47 déclarées au sitemap + 4 pages actives trouvées en Search Console mais absentes du sitemap : <code>/generateur-mots-cles-ia</code>, <code>/generateur-mots-cles-amazon</code>, <code>/documentation</code>, <code>/blog/trouver-mots-cles-pertinents-2026</code>). Chaque chiffre de ce rapport porte sa base : 51 pages pour ce qui est audité, 6 mois pour la Search Console.</p>
+<h4>Ce que le site dit de lui-même</h4>
+<table>
+<thead><tr><th>Élément</th><th style="width:62%">Relevé sur le site</th></tr></thead>
+<tbody>
+<tr><td>Promesse</td><td>« L'outil qui te trouve tes meilleurs mots-clés business pour ranker sur Google et ChatGPT »</td></tr>
+<tr><td>Ce qui est rendu</td><td>une liste de mots-clés générée depuis une graine, avec clustering et export</td></tr>
+<tr><td>Hébergement</td><td>Netlify (en-tête <code>server: Netlify</code>)</td></tr>
+<tr><td>Backend</td><td>Supabase (autorisé dans la <code>Content-Security-Policy</code>)</td></tr>
+<tr><td>Entrée</td><td>utilisation directe, sans compte pour le générateur gratuit</td></tr>
+<tr><td>Robots</td><td>robots.txt ouvert, <code>/admin/</code> et <code>/compte</code> exclus</td></tr>
+</tbody>
+</table>
+<h4>Les familles de pages du site</h4>
+<table>
+<thead><tr><th>Famille</th><th class="num" style="width:20%">Pages</th><th style="width:40%">Dans le périmètre</th></tr></thead>
+<tbody>
+<tr><td>Page d'accueil</td><td class="num">1</td><td><b>1 auditée</b></td></tr>
+<tr><td>Hub listes-mots-clés</td><td class="num">1</td><td><b>1 audité</b></td></tr>
+<tr><td>Listes de mots-clés par persona</td><td class="num">22</td><td><b>22 auditées</b></td></tr>
+<tr><td>Pages produit (générateurs, comparateur, clusteriseur, score sémantique…)</td><td class="num">11</td><td><b>11 auditées</b></td></tr>
+<tr><td>Hub blog (liste des articles)</td><td class="num">1</td><td><b>1 audité</b></td></tr>
+<tr><td>Articles de blog réels</td><td class="num">8</td><td><b>8 audités</b></td></tr>
+<tr><td>Doublon soft-404 (<code>/blog/trouver-mots-cles-pertinents-2026</code>)</td><td class="num">1</td><td><b>1 audité</b></td></tr>
+<tr><td>Pages utilitaires (à-propos, contact, conditions, confidentialité, documentation, glossaire)</td><td class="num">6</td><td><b>6 auditées</b></td></tr>
+</tbody>
+</table>
+<h4>Comment cet audit a été mené</h4>
+<p>Neuf phases, dans l'ordre : positionnement, indexation, vitesse en laboratoire, quick wins, structure des titres, cannibalisation, maillage, synthèse, plan. Les mesures viennent du crawl du site, de Google Search Console (6 mois), de Lighthouse en local, de l'inspection d'index Google et d'une recherche web sur les requêtes qui pèsent le plus.</p>
+<div class="sources">Sources : crawl du 26/09/2026, 51 adresses lues · Google Search Console, 26/03 au 25/09/2026 · Lighthouse 13.3.0 mobile en local sur les 51 adresses · inspection d'index Google sur 9 adresses représentatives · recherche web sur 5 requêtes.</div>
+</div></div>
+
+<!-- ═══ 1. RÉSUMÉ ═══ -->
+<div class="kchat-msg home on" data-view="1"><div class="dashwrap">
+<button type="button" id="copie-claude" class="copie-claude"><svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14"><g fill="currentColor"><rect x="11.1" y="2" width="1.8" height="20" rx=".9"/><rect x="11.1" y="2" width="1.8" height="20" rx=".9" transform="rotate(45 12 12)"/><rect x="11.1" y="2" width="1.8" height="20" rx=".9" transform="rotate(90 12 12)"/><rect x="11.1" y="2" width="1.8" height="20" rx=".9" transform="rotate(135 12 12)"/></g></svg><span>Copier le résumé pour Claude</span></button>
+<script type="text/plain" id="resume-claude">AUDIT SEO de fusionn.co, relevé du 26/09/2026 par Organikk
+
+PÉRIMÈTRE : 51 pages (47 déclarées au sitemap + 4 trouvées actives en
+  Search Console mais absentes du sitemap).
+
+MÉTHODE : workflow d'audit en neuf phases, 100% Google (Search Console,
+  crawl, Lighthouse, inspection d'index), aucun outil payant.
+
+DIAGNOSTIC PRINCIPAL
+  Le probleme principal identifie est le routage. Le sitemap declare
+  majoritairement une variante d'URL differente de celle finalement
+  servie, et les URL inexistantes retournent le contenu de la page
+  d'accueil avec un statut 200. Ces deux comportements doivent etre
+  corriges avant d'attribuer les faibles performances des pages
+  business a leur contenu ou a leur maillage.
+
+LES CHIFFRES
+  2896 impressions / 0 clic sur /generateur-mots-cles-gratuit
+  49 pages sur 51 redirigees par un mismatch trailing slash
+  51 pages sur 51 en LCP mobile superieur a 4 secondes (mesure sur URL canoniques)
+  4 pages sur 22 (cluster listes-mots-cles) confirmees inconnues de Google, 18 non verifiees
+
+SCORE SEO : 49/100 (score brut pondere 64,9/100, plafonne par un probleme
+  bloquant d'indexation generalise). Confiance de l'audit : 81%.
+
+  Dimension              Score  Poids  Contribution  Confiance
+  Indexation                31    30%           9,3        75%
+  Vitesse                   75    20%          15,0        90%
+  Contenu                   95    20%          19,0        90%
+  Maillage                  63    15%           9,5        70%
+  Structure Hn              76    10%           7,6        80%
+  Donnees structurees       90     5%           4,5        85%
+
+  Ce score remplace la moyenne des % de pages sans defaut confirme par
+  dimension (mesure encore visible dans chaque onglet) : il penalise une
+  cause validee, pas chaque page touchee, pondere par gravite et par
+  portee (localise / strategique / systemique).
+
+LES TROIS ACTIONS À FAIRE MAINTENANT
+  1. Corriger le routage et normaliser les URL. Le sitemap doit declarer
+     la version canonique reellement servie, sans redirection
+     systematique liee au slash final.
+  2. Corriger la gestion des URL inexistantes : un vrai 404 avec une
+     page d'erreur dediee, pas le contenu de la home.
+  3. Refaire le maillage des pages strategiques, en commencant par
+     /score-semantique puis les pages satellites du cluster
+     listes-mots-cles, par role et parcours business.
+
+CE QUE CET AUDIT NE PEUT PAS VOIR
+  - Aucune donnee d'autorite de domaine ou de backlinks.
+  - La cause exacte du CLS eleve partage sur le premier releve contamine
+    par le mismatch trailing slash (corrige sur le releve canonique).
+  - Le statut d'indexation individuel des 18 pages du cluster non
+    inspectees directement (4 sur 22 testees).
+  - Aucune requete business fournie en amont : l'analyse part des
+    requetes deja mesurees par Search Console.
+
+Cet audit peut contenir des erreurs : les mesures viennent d'outils
+automatiques et leur lecture est produite par une intelligence artificielle.</script>
+
+<div class="dash">
+  <div class="col">
+
+    <div class="rangee">
+      <div class="card profil">
+        <div class="card-head"><h3>Site</h3></div>
+        <div class="ring"><svg viewBox="0 0 170 170"><circle cx="85" cy="85" r="78" fill="none" stroke="#eef0f5" stroke-width="9"/><circle cx="85" cy="85" r="78" fill="none" stroke="url(#scoreGrad)" stroke-width="9" stroke-linecap="round" stroke-dasharray="240.1 490.1"/></svg>
+          <span class="av">F</span><span class="badge">49<button type="button" class="aide bas" data-aide="Score SEO pondéré par dimension sur les findings validés (Indexation 30%, Vitesse 20%, Contenu 20%, Maillage 15%, Structure Hn 10%, Données structurées 5%), pas une moyenne des % de pages en défaut. Score brut pondéré 64,9/100, plafonné à 49/100 : un problème bloquant d'indexation généralisé (URL inexistantes servies avec le contenu de la home) plafonne le score quelles que soient les autres dimensions. Confiance de l'audit : 81 %." aria-label="Score SEO pondéré par dimension, plafonné à 49/100 par un problème bloquant d'indexation généralisé. Confiance 81 %.">?</button></span></div>
+        <b>fusionn.co</b>
+        <span class="role">relevé le 26/09/2026 · 51 pages auditées sur 47 déclarées au sitemap</span>
+        <span class="role">le score porte sur l'état technique des pages, pas sur ce que le site couvre de son marché</span>
+        <div class="chips">
+          <span class="chip r"><i></i>toute adresse invalide rend 200 et sert le contenu de la home</span>
+          <span class="chip b"><i></i>49 pages sur 51 redirigées par un mismatch trailing slash</span>
+          <span class="chip v"><i></i>la home convertit déjà : position 6,4, 17% de clics</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="kpis">
+          <a href="#" data-vue="2" class="card kpi vert"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><span class="t">Indexation · sans défaut confirmé</span><b class="n">53 %<button type="button" class="aide" data-aide="Part des pages sans défaut d'indexation confirmé, sur les 51 testées." aria-label="Part des pages sans défaut d'indexation confirmé, sur les 51 testées.">?</button></b><span class="l">24 pages sur 51</span><span class="src">4 pages sur 22 confirmées inconnues de Google (18 non vérifiées), 1 orpheline, 1 page qui sert le contenu de la home</span></a>
+          <div class="card kpi bleu"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9l4 4v12H6z"/><path d="M9 12h6M9 16h6"/></svg></span><span class="t">Contenu · sans défaut confirmé</span><b class="n">94 %<button type="button" class="aide" data-aide="Part des pages sans contenu trop court (moins de 300 mots), sur les 51 testées." aria-label="Part des pages sans contenu trop court (moins de 300 mots), sur les 51 testées.">?</button></b><span class="l">3 pages sur 51</span><span class="src">le logo n'a pas de texte alternatif, sur les 51 pages (1 défaut de gabarit, pas 51)</span></div>
+        </div>
+        <div class="card sources">
+          <div><b>Mesures connectées</b><br><span>5 sources actives : crawl du site, Google Search Console (6 mois), PageSpeed / Lighthouse mobile, inspection d'index Google, recherche web</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpis">
+      <a href="#" data-vue="3" class="card kpi rose"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.5 1.5"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></svg></span><span class="t">Maillage interne · sans défaut confirmé</span><b class="n">55 %<button type="button" class="aide" data-aide="Part des pages sans défaut de maillage (absente du graphe de liens ou moins de 2 liens entrants hors gabarit), sur les 51 testées." aria-label="Part des pages sans défaut de maillage, sur les 51 testées.">?</button></b><span class="l">23 pages sur 51</span><span class="src">1 page produit absente du graphe de liens internes relevé, 22 pages à 1 seul lien entrant</span></a>
+      <a href="#" data-vue="4" class="card kpi orange"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6v12M13 6v12M5 12h8"/><path d="M17 10h3v8"/></svg></span><span class="t">Structure des titres · sans défaut confirmé</span><b class="n">47 %<button type="button" class="aide" data-aide="Part des pages sans défaut de structure Hn (H2 non différenciant, saut de hiérarchie, ou contenu dupliqué), sur les 51 testées." aria-label="Part des pages sans défaut de structure Hn, sur les 51 testées.">?</button></b><span class="l">27 pages sur 51</span><span class="src">22 pages au gabarit Hn identique, 4 sauts de hiérarchie, 1 page dupliquée</span></a>
+      <a href="#" data-vue="5" class="card kpi vert"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6a8 8 0 0 0-8 8h4a4 4 0 0 1 8 0h4a8 8 0 0 0-8-8z"/><path d="M12 14l3.5-3.5"/></svg></span><span class="t">Vitesse · laboratoire</span><b class="n">0 %<button type="button" class="aide" data-aide="Part des pages avec un LCP mobile sous le seuil de 4 secondes, sur les 51 mesurées en Lighthouse local sur leur URL canonique." aria-label="Part des pages avec un LCP mobile sous 4 secondes, sur les 51 mesurées.">?</button></b><span class="l">51 pages sur 51 hors seuil</span><span class="src">LCP médian 6,19 s sur URL canoniques, score Lighthouse médian 69/100</span></a>
+      <a href="#" data-vue="6" class="card kpi bleu"><span class="ico-rond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="8" height="6" rx="2"/><rect x="15" y="14" width="6" height="6" rx="2"/></svg></span><span class="t">Données structurées · sans défaut confirmé</span><b class="n">35 %<button type="button" class="aide" data-aide="Part des pages avec un balisage schema.org présent et cohérent avec leur contenu, sur les 51 testées." aria-label="Part des pages avec un balisage schema.org présent et cohérent, sur les 51 testées.">?</button></b><span class="l">33 pages sur 51</span><span class="src">11 pages sans balisage dont la home, 22 pages balisées comme des articles de blog</span></a>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div><h3>Diagnostic principal</h3></div></div>
+      <p class="note">Le problème principal identifié est le routage. Le sitemap déclare majoritairement une variante d'URL différente de celle finalement servie, et les URL inexistantes retournent le contenu de la page d'accueil avec un statut 200. Ces deux comportements doivent être corrigés avant d'attribuer les faibles performances des pages business à leur contenu ou à leur maillage.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div><h3>Score SEO</h3><p class="sous">Note globale calculée sur les findings validés, pas une moyenne des pourcentages de pages en défaut par dimension. Chaque dimension part de 100, une pénalité par cause réelle (pas par page touchée), pondérée par gravité et par portée (localisé / stratégique / systémique).</p></div></div>
+      <p class="note">Score brut pondéré : 64,9/100. <b>Plafonné à 49/100</b> : un problème bloquant d'indexation généralisé (toute URL inexistante rend 200 avec le contenu de la home) plafonne le score quelles que soient les autres dimensions, tant qu'il n'est pas corrigé. Confiance de l'audit : <b>81 %</b>, plus basse sur les dimensions qui reposent sur un échantillon (Maillage, Indexation).</p>
+      <table>
+      <thead><tr><th>Dimension</th><th class="num" style="width:14%">Score</th><th class="num" style="width:12%">Poids</th><th class="num" style="width:16%">Contribution</th><th class="num" style="width:16%">Confiance</th></tr></thead>
+      <tbody>
+      <tr><td>Indexation</td><td class="num">31</td><td class="num">30 %</td><td class="num">9,3</td><td class="num">75 %</td></tr>
+      <tr><td>Vitesse</td><td class="num">75</td><td class="num">20 %</td><td class="num">15,0</td><td class="num">90 %</td></tr>
+      <tr><td>Contenu</td><td class="num">95</td><td class="num">20 %</td><td class="num">19,0</td><td class="num">90 %</td></tr>
+      <tr><td>Maillage</td><td class="num">63</td><td class="num">15 %</td><td class="num">9,5</td><td class="num">70 %</td></tr>
+      <tr><td>Structure Hn</td><td class="num">76</td><td class="num">10 %</td><td class="num">7,6</td><td class="num">80 %</td></tr>
+      <tr><td>Données structurées</td><td class="num">90</td><td class="num">5 %</td><td class="num">4,5</td><td class="num">85 %</td></tr>
+      <tr><td class="strong">Global (brut, avant plafond)</td><td></td><td></td><td class="num strong">64,9</td><td class="num strong">81 %</td></tr>
+      </tbody>
+      </table>
+      <p class="note">Détail des pénalités par dimension, en annexe de chaque onglet. Indexation (100 → 31) : problème bloquant systémique (fallback URL inexistantes, −40), problème majeur systémique reclassé modéré après relecture (mismatch sitemap, −12), problème modéré stratégique à preuve partielle (cluster listes-mots-clés, 4/22 confirmées, −12), problème mineur localisé (2 pages hors sitemap, −5). Vitesse (100 → 75) : un problème majeur systémique (LCP &gt; 4 s sur 51/51 pages, cause non isolée, −25). Maillage (100 → 63) : un problème modéré stratégique (/score-semantique absente du graphe de liens, −12) et un problème majeur systémique (22 pages à 1 lien entrant, −25). Structure Hn (100 → 76) : un problème modéré systémique (gabarit identique du cluster, −12) et un problème modéré localisé (4 sauts de hiérarchie, −12). Données structurées (100 → 90) : deux problèmes mineurs (balisage du cluster à requalifier, home sans balisage, −5 chacun).</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div><h3>État par zone</h3></div></div>
+      <table>
+      <thead><tr><th>Zone</th><th style="width:22%">État</th><th style="width:48%">Pourquoi</th></tr></thead>
+      <tbody>
+      <tr><td>Indexation</td><td><span class="etat e-crit">Critique</span></td><td>toute URL inexistante retourne 200 avec le contenu de la home, 47 URL sur 47 du sitemap redirigent</td></tr>
+      <tr><td>Maillage</td><td><span class="etat e-crit">Critique</span></td><td>1 page produit absente du graphe de liens, 22 pages satellites à 1 seul lien entrant</td></tr>
+      <tr><td>Performance</td><td><span class="etat e-ame">À améliorer</span></td><td>51 pages sur 51 en LCP mobile &gt; 4 s, home à 5,91 s</td></tr>
+      <tr><td>Contenu et titres</td><td><span class="etat e-ame">À améliorer</span></td><td>4 sauts de hiérarchie, 22 pages au gabarit Hn identique</td></tr>
+      <tr><td>Requêtes business</td><td><span class="etat e-ame">À améliorer</span></td><td>2 intentions déjà en position 18-22, la majorité des formulations reste hors top 10</td></tr>
+      <tr><td>Données structurées</td><td><span class="etat e-ok">Aucun problème majeur</span></td><td>uniquement des défauts mineurs, home sans balisage et typage du cluster à requalifier</td></tr>
+      </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div><h3>Les trois actions à faire maintenant</h3></div></div>
+      <p class="note"><b>1. Corriger le routage et normaliser les URL.</b> Le sitemap doit déclarer directement la version canonique réellement servie, sans redirection systématique liée au slash final. Preuve : 49 URL sur 51 crawlées passent par cette redirection, pas besoin de Lighthouse pour le démontrer. Effort faible, confiance forte.</p>
+      <p class="note"><b>2. Corriger la gestion des URL inexistantes.</b> Une route qui n'existe pas doit renvoyer un 404 avec une page d'erreur dédiée, pas le contenu de la home. La page qui sert aujourd'hui ce contenu par erreur (<code>/blog/trouver-mots-cles-pertinents-2026</code>, 17 impressions, position 6,35) est à traiter séparément : si elle doit exister, elle a besoin de son propre contenu, pas d'un 404 automatique. Effort moyen, confiance forte.</p>
+      <p class="note"><b>3. Refaire le maillage des pages stratégiques.</b> En commençant par <code>/score-semantique</code>, puis les 22 pages satellites du cluster listes-mots-clés par rôle : pour chaque page stratégique, identifier les pages sources sémantiquement pertinentes et le parcours business auquel elle appartient, pas un ajout mécanique de liens. Effort faible, confiance forte.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div><h3>Ce qui bloque</h3><p class="sous">Les contrôles en défaut sur les 51 pages du périmètre, classés par ce qu'ils coûtent</p></div></div>
+      <ul class="barres">
+        <li><span class="nom">mismatch trailing slash, sitemap sans slash servi avec slash<span>Indexation · sur 49 pages sur 51</span></span><span class="jauge"><i style="width:100%"></i></span><span class="n">49 p.</span></li>
+        <li><span class="nom">LCP mobile au-delà de 4 secondes<span>Vitesse · sur 51 pages sur 51, mesuré sur URL canoniques</span></span><span class="jauge"><i style="width:100%"></i></span><span class="n">51 p.</span></li>
+        <li><span class="nom">donnée structurée absente ou mal typée<span>Données structurées · sur 33 pages sur 51</span></span><span class="jauge"><i style="width:67%"></i></span><span class="n">33 p.</span></li>
+        <li><span class="nom">structure Hn identique au gabarit, cluster listes-mots-clés<span>Structure des titres · sur 22 pages sur 51</span></span><span class="jauge"><i style="width:45%"></i></span><span class="n">22 p.</span></li>
+        <li><span class="nom">un seul lien entrant, cluster listes-mots-clés<span>Maillage interne · sur 22 pages sur 51</span></span><span class="jauge"><i style="width:45%"></i></span><span class="n">22 p.</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><div><h3>Ce que cet audit ne peut pas voir</h3></div></div>
+      <p class="note">Aucune donnée d'autorité de domaine ou de backlinks (hors périmètre : aucun outil payant tiers). Impossible de trancher si la position 40-99 des pages business vient uniquement du rendu et de l'indexation, ou aussi d'un manque d'autorité externe.</p>
+      <p class="note">La cause exacte du CLS élevé mesuré sur le premier relevé (police, bandeau, composant précis) : ce CLS s'est révélé être en grande partie un artefact du hop de redirection trailing slash, quasi nul une fois mesuré sur URL canoniques (voir l'onglet Vitesse).</p>
+      <p class="note">Le statut d'indexation individuel des 18 pages du cluster listes-mots-clés non inspectées directement (4 sur 22 testées) : extrapolé par cohérence structurelle, pas mesuré une par une.</p>
+      <p class="note">Aucune requête business n'a été fournie en amont : les requêtes analysées sont celles déjà mesurées par Google Search Console.</p>
+    </div>
+
+  </div>
+</div>
+</div></div>
+
+<!-- ═══ 2. INDEXATION ═══ -->
+<div class="kchat-msg" data-view="2"><div class="dashwrap">
+<h2>Indexation</h2>
+<p>51 pages testées sur 51. Sources : crawl, sitemap, robots.txt, Search Console, inspection d'URL Google, tests HTTP directs.</p>
+<p><b>Pages sans défaut d'indexation confirmé : 53 %</b> (24 pages sur 51 : le cluster non crawlé, la page orpheline, la page soft-404). Ce pourcentage ne compte que les défauts qui empêchent ou faussent l'indexation elle-même. Le problème n°1 ci-dessous (49 URL redirigées) touche davantage de pages mais n'est pas compté dedans : une redirection 301 suivie par Google n'est pas en soi un échec d'indexation, elle est traitée séparément parce que c'est la cause de routage la plus probable derrière plusieurs des 24 pages en défaut.</p>
+
+<h3>Chiffres à retenir</h3>
+<div class="tablewrap"><table><tbody>
+<tr><td class="strong">Pages testées</td><td>51</td></tr>
+<tr><td class="strong">Pages répondant en 200</td><td>51 / 51</td></tr>
+<tr><td class="strong">Pages en noindex</td><td>0</td></tr>
+<tr><td class="strong">Pages bloquées par robots.txt</td><td>0</td></tr>
+<tr><td class="strong">Redirections non souhaitées</td><td>49</td></tr>
+<tr><td class="strong">URL importantes absentes du sitemap</td><td>2</td></tr>
+<tr><td class="strong">URL du sitemap redirigées</td><td>49</td></tr>
+<tr><td class="strong">Soft 404 / fallback détectés</td><td>1 page réelle confirmée + le motif site-wide</td></tr>
+<tr><td class="strong">URL inspectées individuellement dans Google</td><td>9</td></tr>
+</tbody></table></div>
+
+<h3>Ce qui bloque réellement</h3>
+<div class="act">
+  <b>1. Corriger le fallback des URL inexistantes</b>
+  <p><span class="strong">État constaté :</span> une URL inventée retourne HTTP 200, avec le contenu exact de la home et son canonical.</p>
+  <p><span class="strong">Preuve :</span> diff binaire sur plusieurs URL inventées (85 274 octets identiques, même <code>title</code>, même <code>canonical</code>).</p>
+  <p><span class="strong">Impact :</span> l'espace d'URL invalides capables de renvoyer 200 avec le contenu de la home est illimité. Le même mécanisme de repli touche aussi une page réelle : <code>/blog/trouver-mots-cles-pertinents-2026</code> (17 impressions, position 6,35 sur 6 mois) renvoie 200 avec le contenu de la home, sans aucune redirection HTTP observée au crawl. <code>index_inspect</code> Google rapporte pour cette URL un <code>coverageState</code> « Page with redirect » et un canonical calculé vers <code>/blog</code>, ni la home ni elle-même : c'est la terminologie interne de Google pour une page qu'il traite comme résolue ailleurs, pas la preuve d'une redirection HTTP réelle. Le problème n'est donc pas la redirection, c'est que la destination ne renvoie pas le contenu attendu. Cause probable : le pré-rendu statique de cette route n'a jamais été généré, et le mécanisme de repli sert la home comme sur n'importe quelle URL inexistante.</p>
+  <p><span class="strong">Action :</span> retourner un vrai 404 avec une page d'erreur dédiée aux routes non reconnues. La page réelle concernée (<code>/blog/trouver-mots-cles-pertinents-2026</code>) est à traiter séparément : si elle doit exister, elle a besoin de son pré-rendu régénéré, pas d'un 404 automatique. Ne pas utiliser 410 : réservé aux ressources supprimées volontairement.</p>
+  <div class="eff">Priorité haute · effort moyen · confiance forte</div>
+</div>
+<div class="act">
+  <b>2. Aligner le sitemap sur les URL canoniques</b>
+  <p><span class="strong">État constaté :</span> les 47 URL déclarées au sitemap sont toutes sans slash final ; le serveur ne sert jamais cette forme directement, il redirige (301/308) vers la forme avec slash sur les 47/47. Au total, 49 URL sur les 51 crawlées (sitemap et hors sitemap confondues) montrent ce pattern.</p>
+  <p><span class="strong">Preuve :</span> crawl des 51 URL · <code>curl -sI</code> sur échantillon · sitemap.xml. Preuve indépendante : <code>/blog</code> (sans slash) et <code>/blog/</code> (avec slash) mesurées séparément en Lighthouse donnent deux scores différents pour la même page.</p>
+  <p><span class="strong">Impact :</span> Google recommande de déclarer l'URL canonique dans le sitemap et tente de crawler l'URL exactement telle que déclarée. Ce n'est pas en soi une preuve de perte de ranking ou de crawl budget avec ces données, c'est une incohérence de canonicalisation/routage à nettoyer.</p>
+  <p><span class="strong">Action :</span> générer le sitemap directement avec les URL finales canoniques.</p>
+  <div class="eff">Priorité haute · effort faible · confiance forte</div>
+  <span class="valid">À valider avant déploiement</span>
+</div>
+<div class="act">
+  <b>3. Ajouter les pages stratégiques manquantes au sitemap</b>
+  <p><span class="strong">État constaté :</span> <code>/generateur-mots-cles-ia</code>, <code>/generateur-mots-cles-amazon</code> et <code>/documentation</code> sont des URL réelles, actives et indexées, absentes du sitemap.</p>
+  <p><span class="strong">Preuve :</span> diff sitemap.xml contre Search Console (dimension page) et crawl direct.</p>
+  <p><span class="strong">Impact :</span> le critère n'est pas leur volume d'impressions ou leur nombre de liens entrants, c'est une seule question : est-ce une URL canonique, indexable, qu'on souhaite voir dans Google ? Oui pour les trois.</p>
+  <p><span class="strong">Action :</span> ajouter les trois au sitemap.</p>
+  <div class="eff">Priorité moyenne · effort faible · confiance forte</div>
+</div>
+<div class="act">
+  <b>4. Inspecter réellement le cluster listes-mots-clés</b>
+  <p><span class="strong">État constaté :</span> 4 pages sur 22 inspectées individuellement renvoient « URL is unknown to Google » (agence-seo, expert-prestashop, freelance-seo, agence-marketing). Les 18 autres n'ont pas été vérifiées individuellement.</p>
+  <p><span class="strong">Preuve :</span> inspection d'index Google, 4/22.</p>
+  <p><span class="strong">Impact :</span> le problème est confirmé sur les 4 URL testées. Le fait qu'elles partagent le même template et la même architecture justifie d'inspecter le reste du cluster en priorité, mais pas d'extrapoler leur statut aux 18 autres.</p>
+  <p><span class="strong">Action :</span> vérifier le statut des 18 pages restantes et chercher le pattern commun aux 4 déjà confirmées, avant toute correction du cluster.</p>
+  <div class="eff">Priorité moyenne · effort faible · confiance forte</div>
+</div>
+
+<h3>Ce qui va bien</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Contrôle</th><th class="num">Résultat</th><th>Lecture</th></tr></thead>
+<tbody>
+<tr><td class="strong">HTTP</td><td class="num">51 / 51</td><td>toutes les pages répondent 200</td></tr>
+<tr><td class="strong">noindex</td><td class="num">0</td><td>aucune directive trouvée</td></tr>
+<tr><td class="strong">robots.txt</td><td class="num">0</td><td>aucun blocage sur les 51 URL testées</td></tr>
+<tr><td class="strong">canonical</td><td class="num">1 anomalie connue</td><td>le cas soft-404 seulement ; audit canonical complet non mené sur les 51 pages</td></tr>
+<tr><td class="strong">pages business inspectées</td><td class="num">4 / 4</td><td>générateurs et comparateur indexés, recrawlés entre le 12 et le 19/09/2026</td></tr>
+</tbody></table></div>
+
+<h3>Inspection Google, URL inspectées individuellement (9)</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>URL</th><th>Verdict Google</th><th>Dernier crawl</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td class="mono">/generateur-mots-cles-gratuit</td><td><span class="etat e-ok">Indexée</span></td><td>~25/06/2026</td><td>Inspection Google</td></tr>
+<tr><td class="mono">/generateur-mots-cles-ia</td><td><span class="etat e-ok">Indexée</span></td><td>19/09/2026</td><td>Inspection Google</td></tr>
+<tr><td class="mono">/generateur-mots-cles-amazon</td><td><span class="etat e-ok">Indexée</span></td><td>14/09/2026</td><td>Inspection Google</td></tr>
+<tr><td class="mono">/comparateur-volume-business-seo</td><td><span class="etat e-ok">Indexée</span></td><td>19/09/2026</td><td>Inspection Google</td></tr>
+<tr><td class="mono">/blog/trouver-mots-cles-pertinents-2026</td><td><span class="etat e-ame">Page with redirect</span></td><td>12/09/2026</td><td>Inspection Google</td></tr>
+<tr><td class="mono">/listes-mots-cles/agence-seo</td><td><span class="etat e-crit">Inconnue de Google</span></td><td>jamais</td><td>Inspection Google</td></tr>
+<tr><td class="mono">/listes-mots-cles/expert-prestashop</td><td><span class="etat e-crit">Inconnue de Google</span></td><td>jamais</td><td>Inspection Google</td></tr>
+<tr><td class="mono">/listes-mots-cles/freelance-seo</td><td><span class="etat e-crit">Inconnue de Google</span></td><td>jamais</td><td>Inspection Google</td></tr>
+<tr><td class="mono">/listes-mots-cles/agence-marketing</td><td><span class="etat e-crit">Inconnue de Google</span></td><td>jamais</td><td>Inspection Google</td></tr>
+</tbody></table></div>
+<p class="note">Ce que l'échantillon permet de dire : 4 pages sur 22 du cluster ont été inspectées individuellement, les 4 renvoient « URL inconnue de Google ». Ce qui peut être dit : le problème est confirmé sur les 4 URL testées. Ce qui ne peut pas être dit : les 22 pages n'ont jamais été vues par Google. Pour les 18 autres, le même comportement est possible compte tenu de leur architecture commune, mais il n'est pas mesuré individuellement.</p>
+
+<h3>Sitemap</h3>
+<div class="tablewrap"><table><tbody>
+<tr><td class="strong">URL déclarées dans le sitemap</td><td>47</td></tr>
+<tr><td class="strong">URL du sitemap qui redirigent (sans slash → slash)</td><td>47 / 47</td></tr>
+<tr><td class="strong">URL crawlées (sitemap + hors sitemap) qui redirigent au total</td><td>49 / 51</td></tr>
+<tr><td class="strong">Pages stratégiques absentes</td><td>2 (<code>/generateur-mots-cles-ia</code>, <code>/generateur-mots-cles-amazon</code>)</td></tr>
+<tr><td class="strong">URL non destinées à l'indexation présentes</td><td>aucune détectée</td></tr>
+<tr><td class="strong">Dernière lecture du sitemap par Google</td><td>29/06/2026</td></tr>
+</tbody></table></div>
+
+<h3>Soft 404 et fallback</h3>
+<p>URL inventées testées (<code>/page-qui-nexiste-vraiment-pas-xyz123</code> et variantes) : 200, contenu identique octet pour octet à la home, même <code>title</code>, même <code>canonical</code>.</p>
+<p class="note">Conclusion défendable : les URL inexistantes retournent HTTP 200 et servent le contenu de la page d'accueil. Action : retourner un vrai 404 avec une page d'erreur dédiée. Ne pas utiliser 410 automatiquement, réservé aux ressources connues volontairement supprimées.</p>
+
+<h3>Redirections observées</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Type</th><th class="num">Nombre</th><th>Exemple</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>Sans slash → slash</td><td class="num">49</td><td class="mono">/blog → /blog/</td><td>corriger le sitemap</td></tr>
+<tr><td>Autres redirections</td><td class="num">0</td><td>aucune</td><td>rien</td></tr>
+</tbody></table></div>
+<p class="note">Cette redirection est un finding parce qu'elle apparaît systématiquement dans le sitemap et concerne des URL destinées à être canoniques, pas parce qu'une redirection est en soi un problème.</p>
+
+<h3>Pages hors sitemap</h3>
+<p>Une URL hors sitemap n'est pas automatiquement un défaut. Question centrale : cette URL est-elle canonique, indexable, et veut-on la voir dans Google ? Le nombre de liens entrants ou d'impressions n'est pas le critère.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>URL</th><th>Doit être indexée ?</th><th>Dans sitemap ?</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td class="mono">/generateur-mots-cles-ia</td><td>Oui</td><td>Non</td><td>ajouter</td></tr>
+<tr><td class="mono">/generateur-mots-cles-amazon</td><td>Oui</td><td>Non</td><td>ajouter</td></tr>
+<tr><td class="mono">/documentation</td><td>Oui</td><td>Non</td><td>ajouter</td></tr>
+<tr><td class="mono">/blog/trouver-mots-cles-pertinents-2026</td><td>À confirmer</td><td>Non</td><td>à vérifier : conséquence du fallback, pas une page distincte voulue</td></tr>
+</tbody></table></div>
+
+<h3>Pages à examiner en priorité</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>URL</th><th>Rôle</th><th>État Google</th><th>Problème</th><th>Priorité</th></tr></thead>
+<tbody>
+<tr><td class="mono">/blog/trouver-mots-cles-pertinents-2026</td><td>Business (17 impressions)</td><td>Page with redirect (200, contenu de la home, aucune redirection HTTP)</td><td>la destination ne renvoie pas le contenu attendu</td><td>Haute</td></tr>
+<tr><td class="mono">/listes-mots-cles/agence-seo, /expert-prestashop, /freelance-seo, /agence-marketing</td><td>Cluster (4 pages inspectées sur 22)</td><td>Inconnue de Google (confirmé sur les 4 testées)</td><td>statut des 18 autres non vérifié</td><td>Moyenne</td></tr>
+<tr><td class="mono">/generateur-mots-cles-ia, /generateur-mots-cles-amazon</td><td>Business</td><td>Indexées malgré tout</td><td>absentes du sitemap</td><td>Moyenne</td></tr>
+</tbody></table></div>
+<p class="note">La priorité dépend de l'importance business × la gravité technique × le niveau de preuve, pas uniquement du nombre de pages touchées.</p>
+
+<h3>Ce qui a été détecté mais n'est pas retenu</h3>
+<p><b>Absence de Schema.org sur certaines pages.</b> L'absence de données structurées n'empêche pas l'indexation ; traité séparément dans l'onglet Données structurées.</p>
+<p><b>Longueur de contenu.</b> La longueur ne détermine pas l'indexabilité ; le seul cas de contenu court identifié (le logo sans texte alternatif) est un défaut de gabarit, traité dans le score Contenu, pas ici.</p>
+
+<h3>Ce que les données ne permettent pas de conclure</h3>
+<p class="note">Le statut d'indexation des 18 pages du cluster non inspectées individuellement (4 sur 22 testées) ; la cause exacte du « Page with redirect » sans données complémentaires ; qu'un manque de liens internes explique à lui seul l'absence d'indexation du cluster (le sitemap non retraité s'y ajoute) ; qu'un sitemap ancien signifie que Google n'a pas découvert les URL par d'autres moyens (2 des 4 pages hors sitemap sont indexées quand même). Prochaine étape : resoumettre le sitemap dans Search Console après correction du routage.</p>
+</div></div>
+
+<!-- ═══ 3. MAILLAGE INTERNE ═══ -->
+<div class="kchat-msg" data-view="3"><div class="dashwrap">
+<h2>Maillage interne</h2>
+<p>55 % des pages sans défaut de maillage, sur les 51 testées. Méthode : <code>maillage-systeme</code> (architecture en piliers) chaîné avec <code>maillage-interne-gsc</code> (Search Console), le site a 6 mois de données.</p>
+
+<h3>Architecture en trois piliers</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Pilier</th><th>Hub</th><th>Satellites</th><th>Constat</th></tr></thead>
+<tbody>
+<tr><td class="strong">Outils de génération de mots-clés</td><td class="mono">/generateur-mots-cles-gratuit</td><td class="num">9</td><td>0 lien contextuel entre le hub et ses 9 satellites, hors gabarit</td></tr>
+<tr><td class="strong">Listes de mots-clés par persona</td><td class="mono">/listes-mots-cles</td><td class="num">22</td><td>1 lien hub → satellite chacun, aucun lien satellite ↔ satellite</td></tr>
+<tr><td class="strong">Blog, contenu éditorial</td><td class="mono">/blog/quadrillage-semantique-strategie-seo-face-ia</td><td class="num">7</td><td>le plus cité par ses pairs (7 entrants réels), seul pilier avec des citations entre pages</td></tr>
+</tbody></table></div>
+<p>Aucun des trois piliers ne linke vers un autre en dehors du gabarit de navigation commun aux 51 pages. Pages hors pilier, non forcées dans une architecture qu'elles ne servent pas : à-propos, contact, conditions, confidentialité, documentation, glossaire.</p>
+
+<h3>Ce que le crawl montre</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Page</th><th class="num">Liens entrants</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="mono strong">/</td><td class="num">119</td><td>page mère de fait</td></tr>
+<tr><td class="mono strong">/documentation</td><td class="num">101</td><td>sur-liée pour son poids réel, 8 impressions Search Console en 6 mois</td></tr>
+<tr><td class="mono strong">/listes-mots-cles</td><td class="num">62</td><td>hub pilier 2, 3 impressions en 6 mois, position 85</td></tr>
+<tr><td>9 satellites du pilier 1 (générateurs, comparateur, clusteriseur…)</td><td class="num">40-41</td><td>uniquement du gabarit, aucun lien contextuel entre elles ni vers le hub au-delà du gabarit</td></tr>
+<tr><td>22 pages listes-mots-clés</td><td class="num">1</td><td>depuis le hub uniquement</td></tr>
+<tr><td class="mono strong">/blog/quadrillage-semantique-strategie-seo-face-ia</td><td class="num">7</td><td>hub naturel du pilier 3, le plus cité par les 7 autres articles</td></tr>
+<tr><td class="mono">/blog/trouver-mots-cles-avec-claude</td><td class="num">1</td><td>seule page du pilier 3 jamais citée par un autre article</td></tr>
+<tr><td class="mono">/score-semantique</td><td class="num">0</td><td><span class="etat e-crit">Orpheline</span> · absente du gabarit du pilier 1</td></tr>
+</tbody></table></div>
+
+<h3>Le vrai problème structurel</h3>
+<p>Trois zones de contenu existent (outils, listes par persona, blog) mais aucune ne redistribue vers les deux autres. Le pilier 1 (outils) ne linke contextuellement vers aucun des 22 satellites du pilier 2, alors que 3 pages du pilier 1 citent déjà « agence », « freelance » ou « consultant » dans leur propre texte, les mêmes profils que les personas du pilier 2 nomment individuellement.</p>
+
+<div class="act">
+  <b>1. Réintégrer /score-semantique au gabarit du pilier 1</b>
+  <p>La page produit <code>/score-semantique</code> est présente dans le sitemap mais absente du gabarit qui liste les 9 autres pages du même pilier. Relevé du 26/09 : la page se rend en état dégradé (« Analyses gratuites épuisées »), à revérifier hors quota.</p>
+  <p>Action : ajouter la page au même gabarit que les 9 autres pages du pilier, comme elles.</p>
+  <div class="eff">Effort faible · confiance forte · risque faible</div>
+</div>
+<div class="act">
+  <b>2. Lier /generateur-mots-cles-gratuit vers les pages persona qu'elle nomme déjà</b>
+  <p>La page hub du pilier 1 (2 896 impressions Search Console, position 45) cite « agence, freelance, consultant » dans son propre texte mais ne linke vers aucune des 22 pages persona du pilier 2 qui leur sont dédiées.</p>
+  <p>Action : ajouter un lien contextuel vers <code>/listes-mots-cles/consultant-seo</code>, ancre « liste de mots-clés pour consultant SEO », dans le passage qui mentionne déjà ce profil.</p>
+  <div class="eff">Effort faible · confiance forte · risque faible</div>
+</div>
+<div class="act">
+  <b>3. Lier le hub du pilier 3 vers un outil du pilier 1</b>
+  <p><code>/blog/quadrillage-semantique-strategie-seo-face-ia</code> cite déjà 5 autres articles du blog mais aucun outil du site, alors que son sujet (regrouper des mots-clés par thème) est ce que <code>/clusteriser-mots-cles</code> exécute.</p>
+  <p>Action : ajouter un lien contextuel Know → Do vers <code>/clusteriser-mots-cles</code> dans le passage qui introduit le regroupement thématique.</p>
+  <div class="eff">Effort faible · confiance moyenne · risque faible</div>
+</div>
+<p class="note">Le seuil « moins de 2 liens entrants hors gabarit » utilisé pour compter un défaut de maillage est une convention interne à cet audit, pas une règle documentée par Google.</p>
+<p class="note">Ce que ça ne permet pas de conclure : si le déficit de maillage explique à lui seul le zéro indexation des 22 satellites, ou si le sitemap non retraité depuis 3 mois y contribue aussi. Les deux se cumulent, la part de chacun n'est pas isolable avec ces seules données.</p>
+</div></div>
+
+<!-- ═══ 4. STRUCTURE HN ═══ -->
+<div class="kchat-msg" data-view="4"><div class="dashwrap">
+<h2>Structure des titres</h2>
+<p>47 % des pages sans défaut de structure de titres (H2 non différenciant, saut de hiérarchie, ou contenu dupliqué), sur les 51 testées.</p>
+
+<h3>Ce qui bloque le plus</h3>
+<div class="act">
+  <b>1. 22 pages listes-mots-clés partagent une structure Hn identique à 100 %, hors H1</b>
+  <p>Les 22 pages ont exactement les mêmes 10 intitulés de Hn, dans le même ordre, à l'exception du H1. Un gabarit identique n'est pas un défaut en soi, c'est un choix de structure pSEO. Ce qui est mesuré séparément : ces 22 pages captent 0 impression Search Console sur 6 mois. La corrélation entre gabarit non différencié et absence de visibilité est nette, sans que sa part exacte soit isolable de celle du maillage à un seul lien (onglet Maillage interne) et du défaut d'indexation du cluster (onglet Indexation).</p>
+  <p>Action : réécrire au moins un H2 par page pour y faire apparaître le persona, en complément des corrections de maillage et de routage.</p>
+  <div class="eff">Effort moyen · confiance moyenne · risque faible</div>
+</div>
+<div class="act">
+  <b>2. Deux paires de pages sautent un niveau de titre dans leur contenu principal</b>
+  <p><code>/blog</code> et <code>/listes-mots-cles</code> passent du H1 directement au H3, sans aucun H2 dans le contenu. <code>/contact</code> et <code>/blog/trouver-mots-cles-avec-claude</code> passent du H2 au H4, en sautant le H3. Les quatre cas sont vérifiés hors du pied de page, qui garde sa propre structure H2 → H3 cohérente sur les 51 pages.</p>
+  <p>Action : rétablir la hiérarchie complète sur ces 4 pages. Google et les lecteurs d'écran s'appuient sur l'ordre des niveaux, pas seulement sur leur présence.</p>
+  <div class="eff">Effort faible · confiance forte · risque faible</div>
+</div>
+<div class="act">
+  <b>3. Une page sert la structure Hn de la home à la place de la sienne</b>
+  <p><code>/blog/trouver-mots-cles-pertinents-2026</code> porte les 7 mêmes intitulés que la home, même H1 « L'outil qui te trouve tes meilleurs mots-clés business ». Conséquence du soft-404 documenté dans l'onglet Indexation.</p>
+  <p>Action : se résout avec la correction du routage (onglet Indexation), pas par une réécriture de contenu. C'est la page de blog la mieux positionnée du site, invisible pour tout ce qui ne rend pas le contenu attendu.</p>
+  <div class="eff">Effort faible · confiance forte · risque faible</div>
+</div>
+
+<h3>Ce qui va bien</h3>
+<div class="tablewrap"><table><tbody>
+<tr><td class="strong">H1</td><td>unique et présent sur les 51 pages</td></tr>
+<tr><td class="strong">Hn génériques</td><td>aucun « Introduction » / « Conclusion » détecté</td></tr>
+<tr><td class="strong">4 pages « générateur de mots-clés »</td><td>H1 et intentions distincts entre elles (générique / Google Suggest / IA / Amazon), pas de confusion de structure</td></tr>
+</tbody></table></div>
+
+<h3>Un H2 de gabarit à corriger, hors défaut de contenu</h3>
+<p>Le pied de page est balisé en <code>&lt;h2&gt;Fusion n .io&lt;/h2&gt;</code> (avec un espace parasite) sur les 51 pages sans exception. Un H2 de pied de page identique partout n'est pas un vecteur sémantique : à sortir du balisage <code>h2</code>, sans effet sur le score de cette page puisque compté comme un seul défaut de gabarit.</p>
+
+<h3>Détail par URL (51 pages)</h3>
+<p>« À vérifier » sur les pages du cluster signale un gabarit non différencié, pas un défaut confirmé par Google : voir le point 1 ci-dessus pour la nuance entre ce qui est mesuré et ce qui reste une corrélation.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>URL</th><th>H1</th><th class="num">H2</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td class="mono">/</td><td>L'outil qui te trouve tes meilleurs mots-clés business pour ranker sur Google et ChatGPT</td><td class="num">7</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/a-propos</td><td>À propos de Fusionn</td><td class="num">1</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/blog</td><td>SEO, IA générative, stratégies de contenu</td><td class="num">0</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H1 → H3 direct, aucun H2 dans le contenu</div></td></tr>
+<tr><td class="mono">/blog/fin-contenu-genere-humain-opportunite-seo</td><td>La fin du contenu généré par l'humain ?</td><td class="num">5</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/blog/google-punit-il-le-contenu-ia</td><td>Google est-il en train de punir le contenu IA ?</td><td class="num">2</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/blog/ma-reflexion-du-moment-sur-le-seo-ia</td><td>Ma réflexion du moment sur le SEO IA</td><td class="num">3</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/blog/pourquoi-88-pourcent-sites-seo-napparaissent-pas-dans-ia</td><td>Pourquoi 88% des sites SEO n'apparaissent pas dans les IA ?</td><td class="num">5</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/blog/prompts-seo-strategies-workflows</td><td>Mes Prompts SEO propriétaires pour améliorer votre référencement</td><td class="num">4</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/blog/quadrillage-semantique-strategie-seo-face-ia</td><td>Quadrillage sémantique comme stratégie SEO face à l'IA</td><td class="num">2</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/blog/trouver-mots-cles-avec-claude</td><td>Trouver tes mots-clés avec Claude</td><td class="num">6</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 → H4 direct, saut de niveau</div></td></tr>
+<tr><td class="mono">/blog/trouver-mots-cles-pertinents</td><td>Trouver des mots clés pertinents pour les LLMs</td><td class="num">6</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/blog/trouver-mots-cles-pertinents-2026</td><td>L'outil qui te trouve tes meilleurs mots-clés business pour ranker sur Google et ChatGPT</td><td class="num">7</td><td><span class="etat e-crit">Critique</span><div class="detail">sert le title/H1/contenu de la home (soft-404)</div></td></tr>
+<tr><td class="mono">/clusteriser-mots-cles</td><td>Regroupez vos mots-clés en pages, pas en doublons</td><td class="num">3</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/comparateur-volume-business-seo</td><td>Calculer le potentiel business de vos mots clés</td><td class="num">3</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/conditions</td><td>Conditions générales d'utilisation</td><td class="num">11</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/confidentialite</td><td>Politique de confidentialité</td><td class="num">11</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/contact</td><td>Contactez-nous</td><td class="num">1</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 → H4 direct, saut de niveau</div></td></tr>
+<tr><td class="mono">/documentation</td><td>Documentation Fusionn</td><td class="num">13</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/explorateur-questions-seo</td><td>Trouvez les vraies questions que les gens posent</td><td class="num">3</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/generateur-mots-cles-amazon</td><td>Générateur de mots-clés Amazon</td><td class="num">3</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/generateur-mots-cles-google-suggest</td><td>Générateur de mots-clés Google Suggest</td><td class="num">2</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/generateur-mots-cles-gratuit</td><td>Générateur de mots-clés gratuit</td><td class="num">3</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/generateur-mots-cles-ia</td><td>Générateur de mots-clés IA</td><td class="num">3</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/glossaire</td><td>Glossaire SEO 2026</td><td class="num">3</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/listes-mots-cles</td><td>Listes de mots-clés par métier et secteur</td><td class="num">0</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H1 → H3 direct, aucun H2 dans le contenu</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/agence-communication</td><td>Liste des mots-clés pour agence communication</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/agence-growth</td><td>Liste des mots-clés pour agence growth</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/agence-inbound-marketing</td><td>Liste des mots-clés pour agence inbound marketing</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/agence-marketing</td><td>Liste des mots-clés pour agence marketing</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/agence-seo</td><td>Liste des mots-clés pour agence SEO</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/agence-webmarketing</td><td>Liste des mots-clés pour agence webmarketing</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/consultant-seo</td><td>Liste des mots-clés pour consultant SEO</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/content-manager</td><td>Liste des mots-clés pour content manager</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/e-commercant</td><td>Liste des mots-clés pour e-commerçant</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/expert-prestashop</td><td>Liste des mots-clés pour expert Prestashop</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/expert-seo</td><td>Liste des mots-clés pour expert SEO</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/expert-shopify</td><td>Liste des mots-clés pour expert Shopify</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/expert-woocommerce</td><td>Liste des mots-clés pour expert WooCommerce</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/freelance-seo</td><td>Liste des mots-clés pour freelance SEO</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/logiciel-marketing</td><td>Liste des mots-clés pour logiciel marketing</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/outil-de-prospection</td><td>Liste des mots-clés pour outil de prospection</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/outil-ia</td><td>Liste des mots-clés pour outil IA</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/outil-seo</td><td>Liste des mots-clés pour outil SEO</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/plateforme-analytics</td><td>Liste des mots-clés pour plateforme analytics</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/redacteur-web</td><td>Liste des mots-clés pour rédacteur web</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/saas-b2b</td><td>Liste des mots-clés pour SaaS B2B</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/listes-mots-cles/vendeur-amazon</td><td>Liste des mots-clés pour vendeur Amazon</td><td class="num">4</td><td><span class="etat e-ame">À vérifier</span><div class="detail">H2 templés à l'identique, 22 pages du cluster</div></td></tr>
+<tr><td class="mono">/mots-cles-qui-convertissent</td><td>Repérez les mots-clés qui rapportent vraiment</td><td class="num">3</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/score-semantique</td><td>Score Sémantique</td><td class="num">1</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/structure-h2-h3-seo</td><td>Outil balise hn et structure page optimisé</td><td class="num">2</td><td><span class="etat e-ok">Sain</span></td></tr>
+<tr><td class="mono">/test-citation-ia-gemini</td><td>Êtes-vous cité par Gemini ?</td><td class="num">2</td><td><span class="etat e-ok">Sain</span></td></tr>
+</tbody></table></div>
+</div></div>
+
+<!-- ═══ 5. VITESSE ═══ -->
+<div class="kchat-msg" data-view="5"><div class="dashwrap">
+<h2>Vitesse</h2>
+<p>51 pages mesurées sur 51, uniquement sur leur URL canonique.</p>
+<p><b>Source principale :</b> Lighthouse mobile local. <b>Type de mesure :</b> laboratoire. <b>Score Lighthouse médian :</b> 69/100.</p>
+
+<h3>Chiffres à retenir</h3>
+<div class="tablewrap"><table><tbody>
+<tr><td class="strong">Score Lighthouse médian</td><td>69/100</td></tr>
+<tr><td class="strong">LCP médian</td><td>6,19 s</td></tr>
+<tr><td class="strong">Pages avec LCP &gt; 4 s</td><td>51 / 51</td></tr>
+<tr><td class="strong">CLS médian</td><td>0,008</td></tr>
+<tr><td class="strong">Pages avec CLS &gt; 0,25</td><td>0 / 51</td></tr>
+<tr><td class="strong">TBT médian</td><td>0 ms</td></tr>
+<tr><td class="strong">TTFB médian</td><td>383 ms</td></tr>
+<tr><td class="strong">Page business la plus exposée</td><td><code>/generateur-mots-cles-gratuit</code> · 2 896 impressions · LCP 6,69 s</td></tr>
+</tbody></table></div>
+
+<h3>Ce que les mesures montrent</h3>
+<p><b>LCP.</b> 51 sur 51 pages dépassent 4 secondes. LCP médian : 6,19 s. Fourchette observée : 4,46 s à 8,29 s.</p>
+<p class="note">Le problème n'est pas limité à quelques URL : il apparaît sur l'ensemble du gabarit testé. Cela oriente davantage vers une cause commune qu'un problème propre à une seule page. Ne pas conclure à la cause à ce stade.</p>
+<p><b>CLS.</b> CLS médian : 0,008. 51 pages dans la zone correcte, 0 page à surveiller, 0 page dégradée.</p>
+<p class="note">Aucun problème généralisé de stabilité visuelle n'est détecté.</p>
+<p><b>Interactivité.</b> TBT laboratoire : 0 ms médian (jusqu'à 137 ms sur un cas isolé). Le TBT sert uniquement d'indicateur laboratoire, il ne doit pas être présenté comme une mesure INP réelle.</p>
+<p class="note">L'INP réel des visiteurs n'est pas mesurable avec ce relevé.</p>
+
+<h3>Terrain et laboratoire</h3>
+<div class="tablewrap"><table><tbody>
+<tr><td class="strong">Lighthouse</td><td>13.3.0</td></tr>
+<tr><td class="strong">Appareil simulé</td><td>mobile</td></tr>
+<tr><td class="strong">Nombre de pages</td><td>51</td></tr>
+<tr><td class="strong">Passages par page</td><td>1</td></tr>
+<tr><td class="strong">Données terrain (CrUX)</td><td>indisponible</td></tr>
+</tbody></table></div>
+<p class="note">Aucun diagnostic sur l'expérience réelle des visiteurs ne peut être tiré de Lighthouse seul. Ne jamais présenter une différence terrain / laboratoire comme une contradiction : les deux mesures répondent à des questions différentes.</p>
+
+<h3>Qualité de la mesure</h3>
+<p><b>Variance observée.</b> Aucun test de répétition contrôlé (même URL, même passage, mesurée plusieurs fois à la suite) n'a été fait dans cet audit : chaque page canonique n'a été mesurée qu'une fois.</p>
+<p class="note">Un score Lighthouse isolé ne doit pas être interprété au point près, y compris sans preuve de variance chiffrée sur ce site précis : c'est une limite connue de l'outil, pas une mesure faite ici. La tendance globale, la médiane et les problèmes répétés entre plusieurs pages restent plus fiables que le classement individuel d'une URL.</p>
+<p><b>Mesures écartées.</b> Un premier relevé sur les 51 pages mélangeait URL avec et sans slash final : 49 URL sur 51 sans slash redirigent (301/308) vers la forme avec slash, donc mesuraient en partie le coût de la redirection elle-même. Preuve : <code>/blog</code> (sans slash, premier relevé) → score 68 ; <code>/blog/</code> (avec slash, premier relevé) → score 45 ; <code>/blog/</code> (avec slash, second relevé canonique) → score 65. Le même URL canonique passe de 45 à 65 entre les deux relevés, mais les deux mesures ne sont pas comparables au point près : la méthodologie a changé entre elles (mélange de formes puis forme canonique seule), ce n'est pas une répétition à l'identique.</p>
+<p class="note">Pourquoi le premier relevé est écarté : il ne teste pas la page telle qu'elle sera réellement servie une fois le sitemap corrigé, et mélange le coût de la redirection avec le rendu de la page cible. Remplacé intégralement par le second relevé, exclusif aux 51 URL canoniques (celui de ce rapport). Ne jamais mélanger les deux, et ne pas lire l'écart 45→65 comme une mesure de variance pure.</p>
+
+<h3>Décomposition du problème</h3>
+<p><b>TTFB.</b> TTFB médian : 383 ms. Fourchette : 48 à 764 ms.</p>
+<p class="note">Lecture : correct. Ne pas conclure à un problème d'hébergement.</p>
+<p><b>Temps restant jusqu'au LCP, page d'accueil.</b> LCP : 5,91 s. TTFB : 0,42 s. Temps après réponse serveur : ≈ 5,5 s.</p>
+<p class="note">Cela indique que la majeure partie du délai intervient après la réponse serveur. Ne pas attribuer automatiquement ce temps à une cause précise. Causes possibles, non mesurées : délai de découverte de la ressource LCP, téléchargement de l'image ou de la police, CSS bloquant, JavaScript, délai de rendu, élément LCP injecté tardivement. Ces causes restent des hypothèses tant qu'elles ne sont pas mesurées : la décomposition complète (resource load delay / resource load time / element render delay) n'est pas disponible sur ce relevé.</p>
+
+<h3>Pages à regarder en priorité</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Page</th><th>Importance business</th><th class="num">Impressions</th><th class="num">LCP</th><th class="num">Score</th><th>Pourquoi la regarder</th></tr></thead>
+<tbody>
+<tr><td class="mono">/generateur-mots-cles-gratuit</td><td>Forte</td><td class="num">2 896</td><td class="num">6,69 s</td><td class="num">74</td><td>page business la plus exposée</td></tr>
+<tr><td class="mono">/generateur-mots-cles-google-suggest</td><td>Forte</td><td class="num">757</td><td class="num">5,92 s</td><td class="num">69</td><td>même problème, deuxième plus exposée</td></tr>
+<tr><td class="mono">/</td><td>Forte</td><td class="num">153</td><td class="num">5,91 s</td><td class="num">69</td><td>page qui convertit déjà (position 6,4), contrôle du gabarit</td></tr>
+</tbody></table></div>
+<p class="note">La priorité ne dépend pas uniquement de la page la plus lente. Croiser : gravité technique × importance business × exposition réelle.</p>
+
+<h3>Priorités</h3>
+<div class="act">
+  <b>1. Le LCP mobile dépasse 4 secondes sur l'intégralité des 51 pages testées</b>
+  <p><span class="strong">État constaté :</span> LCP médian 6,19 s, fourchette 4,46 s à 8,29 s, sur les 51 pages sur leur URL canonique, aucune exception.</p>
+  <p><span class="strong">Preuve :</span> relevé Lighthouse mobile canonique, 51/51 pages · TTFB médian 383 ms (correct) contre un temps restant jusqu'au LCP d'environ 5,5 s sur la home.</p>
+  <p><span class="strong">Action :</span> décomposer le LCP ressource par ressource (délai de découverte, téléchargement, rendu) sur les pages business avant toute correction, la cause précise n'est pas mesurée par ce relevé.</p>
+  <p><span class="strong">Pourquoi le corriger :</span> touche la totalité du site, y compris la page qui convertit déjà (position 6,4 sur la home) et la page la plus exposée en Search Console.</p>
+  <div class="eff">Impact fort · confiance forte · effort à déterminer après décomposition</div>
+</div>
+
+<h3>Ce qui n'est pas retenu comme problème</h3>
+<p><b>CLS.</b> Mesure : médian 0,008, pire cas 0,149. Pourquoi il n'est pas retenu : sous le seuil de 0,25 sur les 51 pages ; le signal contaminé du premier relevé (jusqu'à 0,99 sur certaines pages) était un artefact du hop de redirection, résolu par la mesure canonique.</p>
+<p><b>TBT.</b> Mesure : médian 0 ms, pire cas 137 ms. Pourquoi il n'est pas retenu : largement sous le seuil de 600 ms. Un TTFB correct n'exclut pas un problème de rendu ailleurs, et le TBT n'est pas l'INP.</p>
+<p><b>Variance de score entre pages proches.</b> Mesure : fourchette 60 à 81. Pourquoi elle n'est pas retenue : un score Lighthouse de 68 au lieu de 74 n'est pas en soi une anomalie ; une différence entre deux runs ne prouve pas une régression.</p>
+
+<h3>Ce que cette mesure ne permet pas de conclure</h3>
+<p class="note">Lighthouse ne mesure pas directement l'expérience réelle de tous les visiteurs. TBT n'est pas INP. Une corrélation entre une métrique et un composant ne démontre pas sa causalité. Une seule passe par URL ne permet pas une comparaison au point près. Sans décomposition du LCP, la cause précise ne doit pas être affirmée. Sans données CrUX, aucune conclusion sur les Core Web Vitals réels du site ne doit être présentée comme mesurée.</p>
+</div></div>
+
+<!-- ═══ 6. DONNÉES STRUCTURÉES ═══ -->
+<div class="kchat-msg" data-view="6"><div class="dashwrap">
+<h2>Données structurées</h2>
+<p>35 % des pages sans défaut de balisage, sur les 51 testées. Un balisage schema.org correct reste un levier mineur face à l'indexation et au rendu : à traiter après les onglets Indexation et Vitesse.</p>
+
+<h3>Répartition mesurée</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Balisage</th><th class="num">Pages</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td class="strong">Aucun balisage</td><td class="num">11 / 51</td><td>dont la page d'accueil et la page soft-404</td></tr>
+<tr><td class="strong">FAQPage</td><td class="num">10 / 51</td><td>les pages outils (générateurs, comparateur, clusteriseur…), cohérent avec leur contenu</td></tr>
+<tr><td class="strong">BlogPosting</td><td class="num">30 / 51</td><td>8 vrais articles de blog (cohérent) + 22 pages « listes de mots-clés »</td></tr>
+</tbody></table></div>
+
+<h3>Le point le plus net</h3>
+<div class="act">
+  <b>1. Le balisage BlogPosting posé sur les 22 pages listes-mots-clés correspond-il à leur contenu ?</b>
+  <p>Les 22 pages <code>/listes-mots-cles/*</code> portent un balisage <code>schema.org/BlogPosting</code>, le même type que les 8 vrais articles du blog. Une liste de mots-clés par persona n'est pas un article au sens strict de ce type.</p>
+  <p>Action : évaluer si un autre type (<code>CollectionPage</code> ou <code>ItemList</code>) correspondrait mieux à leur contenu réel. Effet attendu sur les extraits enrichis non mesuré.</p>
+  <div class="eff">Effort faible · confiance moyenne · risque faible</div>
+</div>
+<div class="act">
+  <b>2. La page d'accueil n'a aucune donnée structurée</b>
+  <p>Aucun bloc <code>application/ld+json</code> détecté sur <code>/</code>, alors qu'elle concentre déjà 26 clics et 153 impressions sur 6 mois, la page la plus performante du site.</p>
+  <p>Action : poser un balisage <code>WebSite</code> ou <code>Organization</code>, cohérent avec ce que la page présente.</p>
+  <div class="eff">Effort faible · confiance moyenne · risque faible</div>
+</div>
+<p class="note">Ce que ça ne permet pas de conclure : l'effet réel d'un balisage corrigé sur les extraits enrichis affichés par Google. Les données structurées restent un levier mineur, à ne pas prioriser avant l'indexation et la vitesse.</p>
+</div></div>
+
+<!-- ═══ 7. MOTS-CLÉS BUSINESS ═══ -->
+<div class="kchat-msg" data-view="7"><div class="dashwrap">
+<h2>Mots-clés business</h2>
+<p>L'analyse ne cherche pas les requêtes qui génèrent le plus d'impressions, mais celles qui sont les plus proches de l'offre et d'une décision d'utilisation. Les variantes orthographiques correspondant à la même intention sont regroupées (20 requêtes Search Console mesurées, 9 intentions après regroupement) ; les requêtes de marque (fusionn, fusionn.io) sont exclues. Décision par trois portes plutôt que par score : correspond à l'offre (oui/non), intention business (forte/moyenne/faible), opportunité SEO démontrée (déjà captée / nouvelle opportunité / non démontrée).</p>
+
+<h3>1. Les intentions business déjà captées</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Intention / cluster</th><th>Page actuelle</th><th class="num">Impressions 6 mois</th><th class="num">Position</th><th>Intention</th><th>Correspondance offre</th><th>Décision</th></tr></thead>
+<tbody>
+<tr><td>Générateur de mots-clés gratuit <span class="mono">(générateur de mots clés gratuit, générateur mot clé gratuit, générateur mots clés gratuit)</span></td><td class="mono">/generateur-mots-cles-gratuit</td><td class="num">322</td><td class="num">18,3 à 20,5</td><td>Forte</td><td>Très forte</td><td><span class="etat e-ok">Pousser</span></td></tr>
+<tr><td>Générateur de mots-clés SEO <span class="mono">(générateur de mots clés seo, générateur mots clés seo)</span></td><td class="mono">/generateur-mots-cles-gratuit</td><td class="num">280</td><td class="num">19,8 à 22,1</td><td>Forte</td><td>Forte</td><td><span class="etat e-ok">Pousser</span></td></tr>
+<tr><td>Générateur Google Suggest <span class="mono">(suggest keyword, google suggest keywords, suggest google)</span></td><td class="mono">/generateur-mots-cles-google-suggest</td><td class="num">290</td><td class="num">20,8 à 30,6</td><td>Forte</td><td>Forte</td><td><span class="etat e-ame">Consolider</span></td></tr>
+<tr><td>Générateur de mots-clés, formulation générique <span class="mono">(générateurs de mots clés, générateur de mots clés, générateur de mots clés en ligne, outil generateur de mots clés)</span></td><td class="mono">/generateur-mots-cles-gratuit</td><td class="num">450</td><td class="num">42,0 à 71,6</td><td>Moyenne</td><td>Forte</td><td><span class="etat e-ame">Consolider</span></td></tr>
+<tr><td>Clustering de mots-clés</td><td class="mono">/clusteriser-mots-cles</td><td class="num">85</td><td class="num">54,5</td><td>Forte</td><td>Très forte</td><td><span class="etat e-ame">Consolider</span></td></tr>
+<tr><td>Générateur / recherche de mots-clés Amazon <span class="mono">(générateur de mots clés amazon, recherche mot clé amazon)</span></td><td class="mono">/generateur-mots-cles-amazon</td><td class="num">48</td><td class="num">50,5 à 51,0</td><td>Moyenne</td><td>Forte</td><td><span class="etat e-ame">À valider</span></td></tr>
+<tr><td>Outil SEO gratuit mot-clé</td><td class="mono">/generateur-mots-cles-gratuit</td><td class="num">18</td><td class="num">59,7</td><td>Moyenne</td><td>Moyenne</td><td><span class="etat e-ame">À valider</span></td></tr>
+</tbody></table></div>
+
+<h3>2. Les opportunités business sans page dédiée</h3>
+<p class="note">Aucune intention à fort potentiel et sans page qui y réponde n'est démontrée dans les 20 requêtes captées par Search Console : chacune route déjà, même imparfaitement, vers une page existante. Repérer de vraies opportunités non couvertes demande la chaîne sans GSC (<code>seo-recherche-mots-cles</code> → <code>seo-clustering-mots-cles</code> → <code>seo-mots-cles-decisionnels</code>) appliquée en complément, hors périmètre de cette lecture GSC seule.</p>
+
+<h3>3. Les pages business qui sous-performent</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Page</th><th>Intention cible</th><th>Signal actuel</th><th>Diagnostic</th></tr></thead>
+<tbody>
+<tr><td class="mono">/clusteriser-mots-cles</td><td>clustering de mots-clés</td><td>position 54,5, 85 impressions</td><td>adéquation forte avec la fonctionnalité produit, faible performance ; marché moins consolidé qu'un générateur générique (un seul concurrent identifié en recherche web) mais la page ne le montre pas encore</td></tr>
+<tr><td class="mono">/generateur-mots-cles-google-suggest</td><td>générateur Google Suggest</td><td>position 21 à 31, 290 impressions</td><td>page dédiée qui capte du volume mais reste hors top 10</td></tr>
+<tr><td class="mono">/generateur-mots-cles-gratuit</td><td>formulations génériques du même outil</td><td>position 42 à 72 sur les formulations larges, contre 18 à 22 sur les formulations qualifiées « gratuit »/« seo »</td><td>Google comprend l'intention qualifiée mais pas la formulation générique : signe possible d'un contenu qui ne couvre pas assez le terme large, à vérifier en Phase 3 (structure Hn)</td></tr>
+</tbody></table></div>
+
+<h3>4. Les requêtes à ne pas poursuivre</h3>
+<div class="tablewrap"><table>
+<thead><tr><th>Requête / intention</th><th>Pourquoi elle est écartée</th></tr></thead>
+<tbody>
+<tr><td>« mots clés générateur » · « mot clé generateur » (ordre inversé, 353 impressions cumulées, position 68 à 85)</td><td>le plus gros volume cumulé après les clusters qualifiés, mais position quasi invisible ; la recherche web de la Phase 0 confirme qu'Ahrefs domine largement les requêtes génériques « outil », faisabilité trop basse pour justifier l'effort face au volume</td></tr>
+<tr><td>« volume recherche mot clé » · « volume de recherche mot clé » (127 impressions cumulées, position 98 à 99,9)</td><td>décalage d'offre : la requête cherche un vérificateur de volume générique, le site propose un comparateur orienté potentiel business, pas un pur outil de volume ; position quasi nulle</td></tr>
+</tbody></table></div>
+
+<h3>Ce qu'il faut faire</h3>
+<div class="act">
+  <b>1. Consolider le cluster générateur de mots-clés gratuit</b>
+  <p>L'intention est déjà directement liée au produit et Google expose déjà la page à position 18-22 sur les formulations qualifiées. L'opportunité est démontrée, pas à recréer.</p>
+</div>
+<div class="act">
+  <b>2. Retravailler la page clustering de mots-clés</b>
+  <p>L'intention correspond directement à une fonctionnalité du produit, mais la page reste en position 54. À déterminer si le problème vient de la page, de l'intention ciblée ou de la SERP, avant de réécrire.</p>
+</div>
+<div class="act">
+  <b>3. Ne pas créer de page pour les formulations à ordre inversé malgré leur volume</b>
+  <p>353 impressions cumulées, le deuxième plus gros volume du site sur ce périmètre, mais un marché déjà verrouillé par un acteur établi sur ces formulations génériques (Ahrefs). Le volume seul ne suffit pas à justifier l'effort.</p>
+</div>
+
+<p class="note">Ce que ça ne permet pas de conclure : le volume de recherche mensuel réel (ces chiffres sont des impressions Search Console sur 6 mois, pas un volume Keyword Planner), le CPC ou la valeur business exacte de chaque requête, si des intentions business existent en dehors des 20 requêtes déjà mesurées par Google sur ce site.</p>
+</div></div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="avert" id="avert" role="dialog" aria-modal="true" aria-labelledby="avert-t">
+  <div class="avert-carte">
+    <h2 id="avert-t">Avertissement</h2>
+    <p>Cet audit peut contenir des erreurs. Les mesures viennent d'outils automatiques et leur lecture est produite par une intelligence artificielle.</p>
+    <p>Vérifiez ce qui vous engage avant d'agir, ou confiez ce rapport à un consultant SEO.</p>
+    <button type="button" id="avert-ok" autofocus>J'ai compris</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var shell = document.getElementById('shell');
+  var menuBtn = document.getElementById('menuBtn');
+  var scrim = document.getElementById('scrim');
+  menuBtn.addEventListener('click', function(){ shell.classList.toggle('open'); });
+  scrim.addEventListener('click', function(){ shell.classList.remove('open'); });
+
+  document.getElementById('nav').addEventListener('click', function(e){
+    var b = e.target.closest('.fs-nav-item'); if (!b) return;
+    document.querySelectorAll('#nav .fs-nav-item').forEach(function(t){
+      var on = t === b; t.classList.toggle('is-active', on);
+      if (on) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current');
+    });
+    document.querySelectorAll('.kchat-msg').forEach(function(m){ m.classList.toggle('on', m.dataset.view === b.dataset.view); });
+    shell.classList.remove('open');
+    document.querySelector('.kchat-feed').scrollTo(0,0);
+  });
+
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('[data-vue]'); if (!a) return;
+    e.preventDefault();
+    var target = document.querySelector('#nav .fs-nav-item[data-view="' + a.dataset.vue + '"]');
+    if (target) target.click();
+  });
+
+  var v = document.getElementById('avert'), ok = document.getElementById('avert-ok');
+  ok.addEventListener('click', function(){ v.setAttribute('hidden',''); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') v.setAttribute('hidden',''); });
+
+  var b = document.getElementById('copie-claude'), s = document.getElementById('resume-claude');
+  if (b && s) {
+    var lab = b.querySelector('span'), texte = lab.textContent;
+    b.addEventListener('click', function(){
+      var t = s.textContent;
+      var fini = function(ok2){
+        b.classList.toggle('fait', ok2);
+        lab.textContent = ok2 ? 'Résumé copié' : 'Copie refusée par le navigateur';
+        setTimeout(function(){ b.classList.remove('fait'); lab.textContent = texte; }, 2600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(function(){ fini(true); }, function(){ fini(false); });
+      } else { fini(false); }
+    });
+  }
+})();
+</script>
+
+</body></html>

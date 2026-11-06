@@ -1,0 +1,13 @@
+{
+  "installer-skills.sh": [
+    "34a2cf83595dee34886a36924d7c185f1fce42989cd1f922828f17541eb71271"
+  ],
+  "mettre-a-jour.sh": [
+    "213df1f8dcc485ab501b7530b834e78bf9a370cb572cb9f58d92f7832e24863b",
+    "a0f44496658a54af1e43a98f03268349b374061d34cb189d77ecc5da46540b06"
+  ],
+  "verifier-maj.sh": [
+    "88ac87bf7ed4346f50498aaf8168cd67b81fb645c9ed1dae35b406a9bc23aefc",
+    "cca6aabcd89041d2d5224f96f80f560c10c7aa532fb180a77bbedf0677ab9b8f"
+  ]
+}
