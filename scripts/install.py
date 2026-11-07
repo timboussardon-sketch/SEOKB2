@@ -40,9 +40,9 @@ def plan(source, target):
         files[name]=(old.rstrip()+'\n'+block).encode()
     # Retire only the three known old hooks; preserve settings and other hooks.
     for name in ['mettre-a-jour','verifier-maj','installer-skills']:
-        command='update.py' if name=='mettre-a-jour' else 'doctor.py'
+        command='update.py' if name in ['mettre-a-jour','verifier-maj'] else 'doctor.py'
         extra=' --check' if name=='verifier-maj' else ''
-        files['.claude/hooks/'+name+'.sh']=('#!/usr/bin/env bash\nset -euo pipefail\nROOT="${CLAUDE_PROJECT_DIR:-$(pwd)}"\nexec python3 "$ROOT/.seokb/runtime/'+command+'"'+extra+'\n').encode()
+        files['.claude/hooks/'+name+'.sh']=('#!/usr/bin/env bash\nset -euo pipefail\nROOT="${CLAUDE_PROJECT_DIR:-$(pwd)}"\nPYTHON=\nfor candidate in python3 python; do\n  if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c 'import sys; raise SystemExit(sys.version_info < (3, 10))' >/dev/null 2>&1; then PYTHON="$candidate"; break; fi\ndone\nif [ -z "$PYTHON" ]; then echo 'SEOKB2 : Python 3.10+ introuvable (python3 ou python).' >&2; exit 127; fi\nexec "$PYTHON" -X utf8 "$ROOT/.seokb/runtime/'+command+'"'+extra+'\n').encode()
     seeds={
         'wiki/index.md':'# Index du coffre\n\n- [[pilotage/recap]]\n- [[log]]\n',
         'wiki/log.md':'# Journal du coffre\n\n- [[index]]\n- [[pilotage/recap]]\n',
@@ -107,7 +107,7 @@ def install(source,target,replace=False,dry=False):
         mf.write_text(json.dumps(state,indent=2)+'\n')
     except BaseException:
         restore(target,backup);raise
-    return {'version':state['version'],'files':len(payload),'changes':len(changed),'backup':str(backup),'doctor':'python3 .seokb/runtime/doctor.py'}
+    return {'version':state['version'],'files':len(payload),'changes':len(changed),'backup':str(backup),'doctor':'python .seokb/runtime/doctor.py (ou python3)'}
 
 def restore(target,backup):
     receipt=json.loads((backup/'rollback.json').read_text())
