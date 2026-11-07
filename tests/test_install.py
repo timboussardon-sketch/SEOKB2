@@ -1,4 +1,4 @@
-import importlib.util,json,shutil,tempfile,unittest
+import importlib.util,json,os,shutil,subprocess,sys,tempfile,unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('installer',ROOT/'scripts/install.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
@@ -42,4 +42,28 @@ class Migration(unittest.TestCase):
    with self.assertRaises(OSError):self.install()
   self.assertFalse((self.target/'.seokb/manifest.json').exists())
   self.assertFalse((self.target/'.claude/skills/mise-a-jour/SKILL.md').exists())
+ def test_generated_hooks_execute_with_python_fallback(self):
+  payload=m.plan(ROOT,self.target)
+  runtime=self.target/'.seokb/runtime';runtime.mkdir(parents=True)
+  for script in ['update.py','doctor.py']:
+   (runtime/script).write_text('import json,sys\nprint(json.dumps([sys.argv,sys.flags.utf8_mode]))\n')
+  bindir=self.target/'bin';bindir.mkdir()
+  bash=shutil.which('bash')
+  for fallback in [False,True]:
+   for name in ['python3','python']:
+    p=bindir/name
+    if p.exists() or p.is_symlink():p.unlink()
+   if fallback:
+    (bindir/'python3').write_text('#!/bin/sh\nexit 1\n');(bindir/'python3').chmod(0o755)
+   (bindir/('python' if fallback else 'python3')).symlink_to(sys.executable)
+   env={**os.environ,'PATH':str(bindir),'CLAUDE_PROJECT_DIR':str(self.target)}
+   for name,script,args in [('mettre-a-jour','update.py',[]),('verifier-maj','update.py',['--check']),('installer-skills','doctor.py',[])]:
+    hook=self.target/(name+'.sh');hook.write_bytes(payload['.claude/hooks/'+name+'.sh'])
+    subprocess.run([bash,'-n',str(hook)],check=True,capture_output=True)
+    result=subprocess.run([bash,str(hook)],env=env,check=True,capture_output=True,text=True)
+    argv,utf8=json.loads(result.stdout)
+    self.assertEqual(argv,[str(runtime/script),*args]);self.assertEqual(utf8,1)
+  (bindir/'python').unlink()
+  result=subprocess.run([bash,str(hook)],env=env,capture_output=True,text=True)
+  self.assertEqual(result.returncode,127);self.assertIn('Python 3.10+ introuvable',result.stderr)
 if __name__=='__main__':unittest.main(verbosity=2)

@@ -42,7 +42,15 @@ def plan(source, target):
     for name in ['mettre-a-jour','verifier-maj','installer-skills']:
         command='update.py' if name in ['mettre-a-jour','verifier-maj'] else 'doctor.py'
         extra=' --check' if name=='verifier-maj' else ''
-        files['.claude/hooks/'+name+'.sh']=('#!/usr/bin/env bash\nset -euo pipefail\nROOT="${CLAUDE_PROJECT_DIR:-$(pwd)}"\nPYTHON=\nfor candidate in python3 python; do\n  if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c 'import sys; raise SystemExit(sys.version_info < (3, 10))' >/dev/null 2>&1; then PYTHON="$candidate"; break; fi\ndone\nif [ -z "$PYTHON" ]; then echo 'SEOKB2 : Python 3.10+ introuvable (python3 ou python).' >&2; exit 127; fi\nexec "$PYTHON" -X utf8 "$ROOT/.seokb/runtime/'+command+'"'+extra+'\n').encode()
+        files['.claude/hooks/'+name+'.sh']=("""#!/usr/bin/env bash
+set -euo pipefail
+ROOT="${CLAUDE_PROJECT_DIR:-$(pwd)}"
+PYTHON=
+for candidate in python3 python; do
+  if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c 'import sys; raise SystemExit(sys.version_info < (3, 10))' >/dev/null 2>&1; then PYTHON="$candidate"; break; fi
+done
+if [ -z "$PYTHON" ]; then echo 'SEOKB2 : Python 3.10+ introuvable (python3 ou python).' >&2; exit 127; fi
+exec "$PYTHON" -X utf8 "$ROOT/.seokb/runtime/""" + command + '"' + extra + '\n').encode()
     seeds={
         'wiki/index.md':'# Index du coffre\n\n- [[pilotage/recap]]\n- [[log]]\n',
         'wiki/log.md':'# Journal du coffre\n\n- [[index]]\n- [[pilotage/recap]]\n',
