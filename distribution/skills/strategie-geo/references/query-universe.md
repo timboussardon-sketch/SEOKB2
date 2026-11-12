@@ -1,3 +1,7 @@
+# Périmètre et provenance — nouvelles missions
+
+Les amorces ci-dessous servent à explorer. Une formulation générée reste une hypothèse, même si elle semble naturelle. Une page concurrente ne prouve pas qu’un acheteur a posé la question. Conserver original, extrait, source, date, périmètre et statut. Distinguer groupes sémantiques hypothétiques et partage de SERP réellement vérifié. Le contrat commun remplace le score `brand_fit` par les trois critères justifiés, la faisabilité et les moyens. Les indications de chemin de citation ci-dessous sont des hypothèses à confronter aux réponses collectées, pas des mécanismes établis ni des délais garantis.
+
 # Query Universe : les 9 familles, les amorces, le filtre
 
 ## Principe
@@ -138,10 +142,10 @@ Une requête qui ne vient d'aucune de ces six sources est signalée comme infér
 
 ## Colonnes du fichier `data/queries.csv`
 
-Contrat officiel, celui que lit le dashboard :
+Format CSV historique. Les nouvelles missions utilisent `data/opportunites-business.json` (méthode commune) ; ce CSV reste une annexe sans valeur de sélection autonome :
 
 ```
-query,intention,priorite,brand_fit,chemin_citation,type_page,cluster,justification
+query,intention,priorite,chemin_citation,type_page,cluster,justification
 ```
 
 Deux colonnes facultatives que le dashboard ignore mais qui servent à la relecture : `forme_posee` (la phrase complète telle qu'on la pose à une IA) et `source` (d'où vient la requête, parmi les six sources ci-dessus).
@@ -150,4 +154,4 @@ Deux colonnes facultatives que le dashboard ignore mais qui servent à la relect
 
 ## Réserve à écrire dans tout livrable
 
-Le Keyword Planner regroupe les requêtes et coupe la longue traîne sous son seuil de report. « Aucune donnée » ne veut pas dire zéro recherche. Seule la Search Console du site tranche. Quand l'accès n'est pas ouvert, l'écrire, avec la date de la demande.
+Le Keyword Planner regroupe les requêtes et coupe la longue traîne sous son seuil de report. « Aucune donnée » ne veut pas dire zéro recherche. La Search Console décrit la demande sur laquelle ce site apparaît, dans les limites de son export ; elle ne décrit pas toute la demande du marché. Quand l'accès n'est pas ouvert, l'écrire, avec la date de la demande.

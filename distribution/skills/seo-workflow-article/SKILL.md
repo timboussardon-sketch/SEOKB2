@@ -1,9 +1,17 @@
 ---
 name: seo-workflow-article
-description: "Rédaction d'article SEO en 8 étapes, 2000-2500 mots. « workflow article », « aide-moi à écrire un article sur »."
+description: "Article SEO en 5 phases validées (brief, Hn, data, FAQ, rédaction) et 8 étapes. « workflow article », « écris un article »."
 ---
 
 # Skill — Workflow Création Article Complet (8 étapes)
+
+## Workflow obligatoire pour toute rédaction et correction (règle du 2026-11-06)
+
+Toujours appliquer **brief → structure Hn → data dans les Hn → FAQ → rédaction**, avec validation explicite de chaque phase avant la suivante. Cela s'applique aussi à une réécriture, à une correction de wording et à une passe anti-IA sur un article ou une page de contenu. La longueur, l'urgence et le caractère mineur de la correction ne permettent pas de sortir du workflow.
+
+Avant toute intervention sur le texte, lire `.claude/skills/seo-workflow-article/SKILL.md` et vérifier les cinq livrables, leurs versions et leurs validations. En reprise, conserver les validations dont le livrable et le périmètre sont inchangés ; rouvrir la phase touchée et faire valider la correction. Un changement de H1/H2/H3 rouvre la structure, une nouvelle donnée rouvre la data, une nouvelle réponse rouvre la FAQ. Une phase absente ou non validée doit être traitée avant les phases qui en dépendent.
+
+`redaction-naturelle` et `redaction-anti-ia` interviennent dans la phase rédaction. Leurs scripts et leurs passes de correction ne remplacent jamais le workflow. Tracer dans le suivi les fichiers, accords explicites, changements et phase courante. Une correction ou un rappel du processus ne vaut pas validation d'un livrable.
 
 ## Quand utiliser ce skill
 
@@ -36,23 +44,26 @@ AUDIENCE     : [qui va lire]
 
 Si ces variables ne sont pas fournies par l'utilisateur, les demander AVANT de commencer. Ne pas deviner.
 
-## Process en 4 phases validées (règle l'utilisateur, 2026-10-21) — prime sur tout le reste
+## Process en 5 phases validées (règle du 2026-10-21) — prime sur tout le reste
 
 Consigne de l'utilisateur : « TOUJOURS RESPECTER, TOUJOURS : brief, structure Hn, ensuite ajoute data dans le Hn, puis rédaction. Chaque phase doit être validée par le consultant. »
+
+*Mise à jour du 2026-10-28 : la FAQ Query est une phase à part entière, entre la data et la rédaction.*
 
 | Phase | Livrable montré au consultant | Étapes du skill mobilisées |
 |---|---|---|
 | 1. Brief | Brief (skill `seo-brief-contenu`) : requête, intention, angle, cible, Surprise Gap | Input requis + étape 1 (Surprise Gap) |
 | 2. Structure Hn | H1/H2/H3 seuls, sans prose (skill `seo-structure-hn-v2`) | Étape 5 (architecture narrative), réduite aux Hn |
 | 3. Data dans les Hn | La même structure Hn, avec sous chaque H2/H3 les chiffres, sources, verbatims, cas et inversions qui le nourrissent ; trou = `[MATIÈRE MANQUANTE]` | Étapes 2 (ancrage), 3 (données chiffrées), 4 (inversions) rangées sous chaque Hn |
-| 4. Rédaction | Texte rédigé à partir de la phase 3 validée, rien d'autre | Étapes 6, 7, 8 |
+| 4. FAQ Query | FAQ de la page (skill `seo-faq-query`) : 5 à 7 questions, une par vecteur sémantique, réponses citables isolément, chaque réponse reliée à la data validée en phase 3 ; trou = `[MATIÈRE MANQUANTE]` | Skill `seo-faq-query` |
+| 5. Rédaction | Texte rédigé à partir des phases 3 et 4 validées, rien d'autre | Étapes 6, 7, 8 (la FAQ validée en phase 4 est intégrée telle quelle) |
 
 Règles :
 - **Une phase par tour.** Livrer la phase, puis s'arrêter et demander la validation. Jamais deux phases dans la même réponse, même si la suite paraît évidente.
 - **Validation = accord explicite du consultant** sur cette phase. Le silence, un « ok continue » donné sur une autre phase, ou un brief fourni par l'utilisateur sans mot de validation ne valent pas validation.
 - **Une correction relance la même phase** : on la corrige, on la remontre, on attend l'accord. On ne passe pas à la suivante avec les corrections « intégrées en route ».
 - **Matière fournie par l'utilisateur** (brief ou Hn déjà prêts) : la présenter comme livrable de la phase correspondante et demander la validation avant de passer à la suivante.
-- **Aucune phase sautée**, y compris pour un article court ou urgent. La rédaction n'utilise que la data posée et validée en phase 3 : une info absente de la phase 3 n'entre pas dans le texte.
+- **Aucune phase sautée**, y compris pour un article court ou urgent. La rédaction n'utilise que la data posée et validée en phase 3 et la FAQ validée en phase 4 : une info absente de ces phases n'entre pas dans le texte.
 - Sauvegarder chaque phase validée dans le fichier de travail, avec la date de validation.
 
 ## Structure V2 (skill `seo-structure-hn-v2`)
@@ -72,7 +83,7 @@ En phase 2 (structure Hn, étape 5), charger `seo-structure-hn-v2` avant de pose
 | 7 | **FAQ micro-intentions** | 6-8 questions bas de funnel (non traitées dans le corps) |
 | 8 | **Compilation finale** | Article complet + checklist qualité |
 
-L'agent ne saute AUCUNE étape. L'ordre d'exécution suit les 4 phases validées : 1 (brief) → 5 (Hn) → 2, 3, 4 (data rangée dans les Hn) → 6, 7, 8 (rédaction). Arrêt et validation du consultant après chaque phase.
+L'agent ne saute AUCUNE étape. L'ordre d'exécution suit les 5 phases validées : 1 (brief) → 5 (Hn) → 2, 3, 4 (data rangée dans les Hn) → FAQ Query (`seo-faq-query`) → 6, 7, 8 (rédaction). Arrêt et validation du consultant après chaque phase.
 
 ## Frameworks intégrés
 

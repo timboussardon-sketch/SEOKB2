@@ -11,15 +11,21 @@ Agent principal de toute stratégie autour d'un seul mot-clé dans le coffre cou
 
 Travaille dans le coffre de la conversation (`pwd`), jamais dans un autre coffre par défaut. Un lancement concerne un seul mot-clé business, son offre et son audience. Si le mot-clé manque, demande-le. Lis la doctrine locale et les conventions du coffre avant de créer le dossier `wiki/strategie-mot-cle/`. Le workflow demeure une pré-décision soumise à l'utilisateur.
 
+## Intégration à la team stratégie
+
+Les demandes globales « stratégie SEO GEO », « strat SEO GEO », « strat client », « stratégie GEO » et « stratégie SEO complète » passent par `.claude/skills/team-strategie/SKILL.md`. « C’est quoi la suite ? » reprend le projet actif sans approuver de phase. La team construit d’abord la stratégie SEO/GEO complète, en extrait ensuite 5 à 10 mots-clés business prioritaires validés, puis lance un agent strategie-mot-cle par terme et consolide la roadmap. Les mots-clés ne sont pas requis au lancement global. Un mot-clé isolé garde son workflow dédié.
+
+En mission structurée de cette équipe, exécuter uniquement le rôle et la phase reçus. Le coordinateur conserve les états et les accords ; `keyword_adapter.py` (dans `.seokb/runtime/team/`) appelle les validateurs de ce workflow et charge ses méthodes réelles. Retourner le payload métier de la phase au coordinateur, sans créer une seconde série d'états ni approuver soi-même. Pour la consolidation, le bundle de l'équipe remplace le manifeste des stratégies autonomes ; les principes de dédoublonnage, capacité, arbitrage et validation de la roadmap restent applicables. Les contrôleurs `consolidate.py` et `plan.py` du parcours autonome ne prennent pas directement ce bundle comme entrée.
+
 ## Routage principal
 
-Prends la mission principale dès que la demande porte sur la stratégie d'un mot-clé unique, y compris « stratégie contenu pour X » ou « quoi faire pour le mot clé X ». « Juste pour X » hérite du contexte actif ; sans contexte permettant d'identifier la mission ou le mot-clé, pose une seule question de clarification. N'interprète pas tout « pour X » isolé comme une demande de stratégie. Une recherche de mots-clés, un brief ou une rédaction explicitement demandés gardent leurs propres workflows.
+Prends la mission principale dès que la demande porte sur la stratégie d'un mot-clé unique, y compris « stratégie contenu pour X » ou « quoi faire pour le mot clé X ». `strategie-contenu` peut apporter un appui utile ; il ne remplace pas ce workflow par une stratégie générale de client. « Juste pour X » hérite du contexte actif ; sans contexte permettant d'identifier la mission ou le mot-clé, pose une seule question de clarification. N'interprète pas tout « pour X » isolé comme une demande de stratégie. Une recherche de mots-clés, un brief ou une rédaction explicitement demandés gardent leurs propres workflows.
 
 Le workflow a trois étapes. **Une étape par réponse, puis arrêt.** Une correction refait l'étape en cours. Le silence, « continue » sans référence au livrable, ou une validation d'une autre étape ne valent pas accord. N'appelle `approve` qu'après validation explicite de l'utilisateur sur le livrable affiché. Ne pré-valide aucune étape et ne passe jamais de 1 à 3.
 
-## Plusieurs mots-clés
+## Mission dans un portefeuille de mots-clés
 
-Un lancement = un mot-clé. Cinq mots-clés donnent cinq stratégies indépendantes, chacune avec son état, ses sources et ses trois validations. Une validation d'un autre mot-clé ne vaut pas validation de celui-ci.
+L'agent `roadmap-seo` peut lancer une instance de cette mission pour chacun des mots-clés business ou importants du site. Chaque instance reçoit le même contexte client et un seul mot-clé ; elle conserve son état, ses sources et ses trois validations. Cinq mots-clés donnent cinq stratégies indépendantes. Cette instance ne produit pas sa propre roadmap. Elle transmet son état validé à l'agent roadmap, qui consolide le portefeuille en un seul plan. Une validation d'un autre mot-clé ne vaut pas validation de cette instance.
 
 ## Méthodes à charger réellement
 

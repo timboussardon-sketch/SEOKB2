@@ -1,3 +1,11 @@
+# Mesure business et panel — contrat commun
+
+Pour les nouvelles missions, `wiki/methodes/opportunites-business.md` et son calculateur fixent les définitions opérationnelles. Les barèmes de contenu ci-dessous ne sont jamais des scores de priorité business. Une citation indique une URL présente dans la réponse, pas la lecture complète de la page ni une vente.
+
+Taux de mention/citation/recommandation : réponses positives divisées par réponses valides évaluées pour ce critère, par question et moteur. Inconnues, erreurs et runs manquants restent visibles. Part de voix : paires marque-réponse / paires acteur-réponse pour les acteurs suivis, sur les réponses où tous ont été évalués. Toujours indiquer période, panel, moteur, mode, répétitions, source et dénominateur ; jamais « part de marché ». Les formules sont celles du résultat commun, pas un compte de lignes CSV agrégées.
+
+La demande Google, les questions clients et les observations IA restent séparées. Trente relevés est une règle de collecte existante, pas une preuve statistique de représentativité. Sous ce protocole, afficher la limite. Aucun passage visibilité → trafic → revenu sans données documentées. Les commandes payantes gardent leur validation de coût.
+
 # Barèmes et mesure
 
 ## 1. Content Engineering Score, sur 100

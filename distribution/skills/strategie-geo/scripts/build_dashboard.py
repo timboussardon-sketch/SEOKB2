@@ -5,7 +5,7 @@ Lit les CSV/JSON du dossier <projet>/data/ et produit <projet>/dashboard.html
 (un seul fichier, ouvrable hors ligne, sans réseau sauf la police Geist).
 
 Usage :
-    python3 build_dashboard.py strategie-geo/<slug> "Nom de la marque"
+    python3 build_dashboard.py wiki/strategie-geo/<slug> "Nom de la marque"
 
 Fichiers lus (tous optionnels, un onglet absent est signalé, jamais inventé) :
 
@@ -29,6 +29,29 @@ ROOT = os.path.expanduser(sys.argv[1] if len(sys.argv) > 1 else '.')
 BRAND = sys.argv[2] if len(sys.argv) > 2 else os.path.basename(ROOT.rstrip('/'))
 DATA = os.path.join(ROOT, 'data')
 OUT = os.path.join(ROOT, 'dashboard.html')
+
+BUSINESS_MODE = '--business' in sys.argv
+_bundle = None
+if BUSINESS_MODE:
+    # Shared business module; override is only for staged integration tests.
+    import os as _business_os
+    from pathlib import Path as _BusinessPath
+    try:
+        _vault = _BusinessPath(__file__).resolve().parents[4]
+    except IndexError:
+        _vault = _BusinessPath.cwd()
+    _candidates = [_vault / ".seokb" / "base" / "wiki" / "methodes" / "opportunites-business", _vault / "wiki" / "methodes" / "opportunites-business"]
+    _default = next((c for c in _candidates if (c / "integration.py").is_file()), _candidates[0])
+    _business_root = _BusinessPath(_business_os.environ.get("SEO_BUSINESS_ROOT", str(_default))).resolve()
+    sys.path.insert(0, str(_business_root))
+    import integration as _business
+    if _BusinessPath(_business.__file__).resolve().parent != _business_root:
+        raise RuntimeError("Module business inattendu : " + str(_business.__file__))
+    _bundle = _business.load_bundle(os.path.join(DATA, 'opportunites-business.json'))
+    OUT = os.path.join(ROOT, 'dashboard-business.html')
+    if _BusinessPath(OUT).exists() or _BusinessPath(OUT+'.business.json').exists() or 'raw' in _BusinessPath(OUT).resolve().parts:
+        raise ValueError('Choisir un nouveau dossier de sortie hors raw/.')
+
 
 
 def esc(s):
@@ -135,15 +158,20 @@ if proof is not None:
 else:
     kpis.append(('Affirmations tracées', 'n/d', 'proof.csv absent'))
 
-if visib is not None and visib:
-    tot = len(visib)
-    men = sum(1 for r in visib if (r.get('mentionnee') or '').lower().startswith(('o', 'y')))
-    cit = sum(1 for r in visib if (r.get('citee') or '').lower().startswith(('o', 'y')))
-    kpis.append(('Relevés de visibilité IA', tot,
-                 f'{men}/{tot} mentionnée · {cit}/{tot} citée en source'))
+if BUSINESS_MODE:
+    kpis.append(('Visibilité IA', 'Panel documenté' if _bundle['result']['panels'] else 'Non relevée',
+                 'Dénominateurs et conditions dans l’onglet Visibilité IA'))
 else:
-    kpis.append(('Relevés de visibilité IA', 'n/d',
-                 'aucun relevé, à lancer avec geo-citations (30 runs min.)'))
+    if visib is not None and visib:
+        tot = len(visib)
+        men = sum(1 for r in visib if (r.get('mentionnee') or '').lower().startswith(('o', 'y')))
+        cit = sum(1 for r in visib if (r.get('citee') or '').lower().startswith(('o', 'y')))
+        kpis.append(('Relevés de visibilité IA', tot,
+                     f'{men}/{tot} mentionnée · {cit}/{tot} citée en source'))
+    else:
+        kpis.append(('Relevés de visibilité IA', 'n/d',
+                     'aucun relevé, à lancer avec geo-citations (30 runs min.)'))
+    
 
 kpi_html = ''.join(
     f'<div class="kpi"><div class="kn">{esc(v)}</div><div class="kl">{esc(l)}</div>'
@@ -219,7 +247,7 @@ def qcell(k, v, r):
 
 q_html = table(queries,
                [('query', 'Requête'), ('intention', 'Intention'), ('priorite', 'Priorité'),
-                ('brand_fit', 'Adéquation'), ('chemin_citation', 'Chemin de citation'),
+                *([] if BUSINESS_MODE else [('brand_fit', 'Adéquation')]), ('chemin_citation', 'Chemin de citation'),
                 ('type_page', 'Module'), ('cluster', 'Cluster')],
                qcell, ['query', 'intention', 'cluster', 'type_page'],
                ['priorite', 'intention']) or missing(
@@ -315,6 +343,19 @@ TABS = [('synthese', 'Synthèse', entity_html),
         ('autorite', 'Autorité', auth_html),
         ('visibilite', 'Visibilité IA', v_html)]
 
+if BUSINESS_MODE:
+    # A single bundle feeds all panes. Legacy CSVs are not business evidence.
+    TABS = [('synthese', 'Synthèse', _business.CSS + _business.context(_bundle) + _business.summary(_bundle, 'geo')),
+            ('requetes', 'Demande et concurrence', '<section class="business">' + _business.demand(_bundle) + '</section>'),
+            ('moyens', 'Moyens et suivi', _business.resources(_bundle)),
+            ('pages', 'Pages', p_html), ('preuves', 'Preuves', pr_html),
+            ('autorite', 'Autorité', auth_html),
+            ('visibilite', 'Visibilité IA', _business.visibility(_bundle))]
+    kpis = [('Besoins explorés', len(_bundle['data']['explored_need_ids']), 'Périmètre documenté, pas un marché exhaustif'),
+            ('Opportunités proposées', len(_bundle['data']['retained_opportunity_ids']), 'Sélection soumise à validation'),
+            ('Validation', _business.LABELS.get(_bundle['result']['validation'], _bundle['result']['validation']), 'Version des données présentées')]
+    kpi_html = ''.join('<div class="kpi"><div class="kn">'+esc(v)+'</div><div class="kl">'+esc(l)+'</div><div class="ks">'+esc(n)+'</div></div>' for l,v,n in kpis)
+
 tabs_nav = ''.join(
     f'<button class="tab{" active" if i == 0 else ""}" data-t="{t}">{esc(l)}</button>'
     for i, (t, l, _) in enumerate(TABS))
@@ -397,7 +438,7 @@ footer{{margin-top:44px;padding-top:18px;border-top:1px solid {C['line']};
 <header>
   <h1>Stratégie GEO · {esc(BRAND)}</h1>
   <div class="sub">Univers de requêtes, portefeuille de contenus, preuves, autorité tierce et visibilité dans les réponses génératives.</div>
-  <div class="mono">Généré le {date.today().strftime('%d/%m/%Y')} · {esc(ROOT)}</div>
+  <div class="mono">Généré le {date.today().strftime('%d/%m/%Y')}{'' if BUSINESS_MODE else ' · ' + esc(ROOT)}</div>
 </header>
 <div class="kpis">{kpi_html}</div>
 <nav>{tabs_nav}</nav>
@@ -449,3 +490,6 @@ print(f'Dashboard écrit : {OUT}')
 print(f'  présents : {", ".join(present) or "aucun"}')
 if absent:
     print(f'  manquants (affichés comme non relevés) : {", ".join(absent)}')
+
+if BUSINESS_MODE:
+    _business.record_execution(_bundle, __file__, OUT)

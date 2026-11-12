@@ -63,7 +63,7 @@ L'objectif n'est pas de générer des liens à la chaîne. C'est de construire u
 Si le site est en ligne avec un sitemap, lancer le script d'ingestion AVANT toute lecture de page :
 
 ```bash
-python3 .claude/skills/maillage-systeme/scripts/crawl_graph.py https://site.com/sitemap.xml -o./maillage-data
+python3 .claude/skills/maillage-systeme/scripts/crawl_graph.py https://site.com/sitemap.xml -o ./maillage-data
 ```
 
 Le script (stdlib Python uniquement, zéro dépendance, zéro token) produit :
@@ -296,6 +296,7 @@ Ce skill raisonne par lecture et jugement éditorial (étapes 1-7). Ce raisonnem
 **Détection** : si un lot de pages partage la même route/le même template et provient d'une table de données (pSEO — un mot de lexique, une fiche produit, un lieu, une entité par ligne), et que ce lot dépasse **300-500 instances**, NE PAS appliquer les étapes 1-7 à ce lot. Le pilier de ces pages est déjà donné par le template lui-même — il n'y a rien à clusteriser.
 
 **Ce qui remplace le raisonnement agent à cette échelle** : un signal de données réel et vérifiable, calculé une fois pour tout le lot, jamais un agent qui juge page par page. Par ordre de préférence :
+1. **Relation déjà présente dans la donnée** (cooccurrence, attribut partagé, référence croisée, clé étrangère). C'est le signal le plus fiable : il est vérifiable, pas juste "sémantiquement proche".
 2. **Embedding + kNN**, seulement si aucune relation de données n'existe pour rapprocher les instances entre elles.
 
 Dans les deux cas, l'agent n'intervient qu'en amont — pour définir la règle (quel signal, combien de liens, quel format de rendu) — jamais par page. Le rendu est un bloc templaté (type "Mots liés"), pas un lien in-body : la règle "pas de Voir aussi" de ce skill vise le contenu éditorial écrit à la main, elle ne s'applique pas à un gabarit généré à grande échelle où aucune prose organique n'existe pour y glisser un lien contextuel.
@@ -316,4 +317,4 @@ Si le lot reste sous le seuil (quelques dizaines à ~300 pages), les étapes 1-7
 
 ## Vérification finale (obligatoire)
 
-Avant de présenter le livrable comme terminé : lancer `verificateur-livrable` avec les 6 sections de le skill `verification-livrable` (demande de tous les skills utilisés, livrables, sources, contraintes). Corriger les ❌, relancer le vérificateur sur la nouvelle version, recopier le dernier tableau dans la réponse. Un hook refuse la fin de la réponse tant que ce n'est pas fait.
+Avant de présenter le livrable comme terminé : appliquer le skill `verification-livrable` (demande de l'utilisateur, tous les skills utilisés, livrables, sources, contraintes). Corriger les ❌, relancer le vérificateur sur la nouvelle version, recopier le dernier tableau dans la réponse.

@@ -37,10 +37,10 @@ Analyse et optimisation du maillage interne depuis les données GSC. Hiérarchie
 1. **Récupérer les données GSC** — export Pages + Requêtes par URL
 2. **Diagnostiquer la structure** :
    - Pages mères potentielles (impressions élevées, pos 4-15, requête transactionnelle)
-   - Pages sous-maillées (bonne position mais CTR faible)
-   - Pages orphelines (aucune thématique secondaire dans GSC)
+   - Pages sous-maillées : déficit de liens entrants confirmé par un crawl ; le CTR seul ne le démontre pas
+   - Pages orphelines : aucun lien entrant détecté dans le périmètre du crawl, à expliciter ; la GSC seule ne le démontre pas
 3. **Construire le plan de maillage** — hiérarchie mère/fille/petite-fille + règles Know→Do
-4. **Prioriser** — plus de score numérique  + (Potentiel position × 0.4) + (Business value × 0.2)` additionnait des grandeurs non normalisées, les impressions écrasaient le reste). Priorité justifiée, dans cet ordre : (a) page business prioritaire à fort déficit de maillage (forte en impressions, peu de liens entrants éditoriaux depuis des pages distinctes) ; (b) page en position 4-15 sur une requête transactionnelle que des liens entrants peuvent aider ; (c) page en forte baisse sur 90 jours contre 90 (tendance `declining`) ; (d) le reste. Chaque recommandation écrit la raison de son rang.
+4. **Prioriser** — plus de score numérique (l'ancienne formule `(Impressions × 0.4) + (Potentiel position × 0.4) + (Business value × 0.2)` additionnait des grandeurs non normalisées, les impressions écrasaient le reste). Priorité justifiée, dans cet ordre : (a) page business prioritaire à fort déficit de maillage (forte en impressions, peu de liens entrants éditoriaux depuis des pages distinctes) ; (b) page en position 4-15 sur une requête transactionnelle que des liens entrants peuvent aider ; (c) page en forte baisse sur 90 jours contre 90 (tendance `declining`) ; (d) le reste. Chaque recommandation écrit la raison de son rang.
 5. **Générer les recommandations** — page source + page destination + ancre + contexte + priorité
 
 ## Structure hiérarchique
@@ -95,7 +95,7 @@ Pour chaque action :
 
 ## Sauvegarde
 
-Output dans `wiki/maillage/YYYY-MM-DD-slug.md` selon hook §7 AGENTS.md.
+Output dans `wiki/maillage/YYYY-MM-DD-slug.md` dans le dossier de travail du projet.
 
 ## Concepts liés
 

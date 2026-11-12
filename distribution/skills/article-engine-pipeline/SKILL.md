@@ -5,65 +5,45 @@ description: "Article SEO complet depuis un brief en Hn : RRF, FAQ, rédaction 8
 
 # Article Engine Pipeline — Rédaction SEO complète en 5 phases
 
+## Workflow obligatoire pour toute rédaction et correction (règle du 2026-11-06)
+
+Toujours appliquer **brief → structure Hn → data dans les Hn → FAQ → rédaction**, avec validation explicite de chaque phase avant la suivante. Cela s'applique aussi à une réécriture, à une correction de wording et à une passe anti-IA sur un article ou une page de contenu. La longueur, l'urgence et le caractère mineur de la correction ne permettent pas de sortir du workflow.
+
+Avant toute intervention sur le texte, lire `.claude/skills/seo-workflow-article/SKILL.md` et vérifier les cinq livrables, leurs versions et leurs validations. En reprise, conserver les validations dont le livrable et le périmètre sont inchangés ; rouvrir la phase touchée et faire valider la correction. Un changement de H1/H2/H3 rouvre la structure, une nouvelle donnée rouvre la data, une nouvelle réponse rouvre la FAQ. Une phase absente ou non validée doit être traitée avant les phases qui en dépendent.
+
+`redaction-naturelle` et `redaction-anti-ia` interviennent dans la phase rédaction. Leurs scripts et leurs passes de correction ne remplacent jamais le workflow. Tracer dans le suivi les fichiers, accords explicites, changements et phase courante. Une correction ou un rappel du processus ne vaut pas validation d'un livrable.
+
 ## Quand utiliser ce skill
 
 Pipeline complet de rédaction d'article SEO en 5 phases automatisées. L'utilisateur fournit un brief structuré par Hn (avec mots-clés, idées, data par section), et le skill enchaîne : décodage sémantique RRF de la requête → génération FAQ stratégique FM → workflow rédaction 8 étapes (Surprise Gap, Ancrage, Données, Inversions, Architecture, Rédaction, FAQ, Compilation) → checklist de fact-check pour vérification manuelle.
 
 TOUJOURS utiliser ce skill quand l'utilisateur mentionne : "rédige un article", "lance le pipeline de rédaction", "article engine", "article complet", "j'ai un brief prêt", "voilà mes Hn", "lance la rédaction à partir de mon brief", "rédaction SEO complète", "pipeline article", "workflow rédaction complet", "article de A à Z", ou quand il fournit une structure Hn avec des idées/data et veut un article complet. Utiliser aussi quand l'utilisateur dit "améliore cet article avec le workflow" ou "passe cet article dans le pipeline".
 
-## Process en 4 phases validées (règle Tim, 2026-10-21) — prime sur tout le reste
+## Process en 5 phases validées (règle du 2026-10-21) — prime sur tout le reste
 
 Consigne de Tim : « TOUJOURS RESPECTER, TOUJOURS : brief, structure Hn, ensuite ajoute data dans le Hn, puis rédaction. Chaque phase doit être validée par le consultant. »
+
+*Mise à jour du 2026-10-28 : la FAQ Query est une phase à part entière, entre la data et la rédaction.*
 
 | Phase | Livrable montré au consultant | Étapes du skill mobilisées |
 |---|---|---|
 | 1. Brief | Brief (skill `seo-brief-contenu`) : requête, intention, angle, cible, Surprise Gap | Phase 1 (brief) + phase 2 (décodage RRF) qui l'alimente |
 | 2. Structure Hn | H1/H2/H3 seuls, sans prose (skill `seo-structure-hn-v2`) | Étape 5 de `seo-workflow-article`, réduite aux Hn |
 | 3. Data dans les Hn | La même structure Hn, avec sous chaque H2/H3 les chiffres, sources, verbatims, cas et inversions qui le nourrissent ; trou = `[MATIÈRE MANQUANTE]` | Étapes 2, 3, 4 de `seo-workflow-article` rangées sous chaque Hn |
-| 4. Rédaction | Texte rédigé à partir de la phase 3 validée, rien d'autre | Étapes 6, 7, 8 + phase 3 (FAQ) + phase 5 (fact-check) |
+| 4. FAQ Query | FAQ de la page (skill `seo-faq-query`) : 5 à 7 questions, une par vecteur sémantique, réponses citables isolément, chaque réponse reliée à la data validée en phase 3 ; trou = `[MATIÈRE MANQUANTE]` | Phase 3 du pipeline (FAQ stratégique FM) = skill `seo-faq-query` |
+| 5. Rédaction | Texte rédigé à partir des phases 3 et 4 validées, rien d'autre | Étapes 6, 7, 8 + phase 5 du pipeline (fact-check) |
 
 Règles :
 - **Une phase par tour.** Livrer la phase, puis s'arrêter et demander la validation. Jamais deux phases dans la même réponse, même si la suite paraît évidente.
 - **Validation = accord explicite du consultant** sur cette phase. Le silence, un « ok continue » donné sur une autre phase, ou un brief fourni par l'utilisateur sans mot de validation ne valent pas validation.
 - **Une correction relance la même phase** : on la corrige, on la remontre, on attend l'accord. On ne passe pas à la suivante avec les corrections « intégrées en route ».
 - **Matière fournie par l'utilisateur** (brief ou Hn déjà prêts) : la présenter comme livrable de la phase correspondante et demander la validation avant de passer à la suivante.
-- **Aucune phase sautée**, y compris pour un article court ou urgent. La rédaction n'utilise que la data posée et validée en phase 3 : une info absente de la phase 3 n'entre pas dans le texte.
+- **Aucune phase sautée**, y compris pour un article court ou urgent. La rédaction n'utilise que la data posée et validée en phase 3 et la FAQ validée en phase 4 : une info absente de ces phases n'entre pas dans le texte.
 - Sauvegarder chaque phase validée dans le fichier de travail, avec la date de validation.
 
 ## Vue d'ensemble
 
-Ce pipeline prend un brief structuré par Hn et produit un article SEO complet, prêt à publier, avec une FAQ stratégique FM et une checklist de fact-check.
-
-```
-INPUT : Brief structuré (Hn + mots-clés + idées + data par section)
-  │
-  ├─► Phase 1 — BRIEF (fourni par l'utilisateur)
-  │     L'utilisateur donne ses Hn avec mots-clés intégrés,
-  │     ses idées, points clés et data pour chaque section.
-  │
-  ├─► Phase 2 — DÉCODAGE SÉMANTIQUE RRF
-  │     Décoder la requête principale : entités, intentions,
-  │     cluster sémantique, vecteurs multimodaux, specs FM.
-  │     → Utilise le prompt "Query requête" (references/query-requete.md)
-  │
-  ├─► Phase 3 — FAQ STRATÉGIQUE FM
-  │     Générer 5-7 questions FAQ stratégiques.
-  │     Chaque question = 1 vecteur sémantique distinct.
-  │     → Utilise le prompt "FAQ Query" (references/faq-query.md)
-  │
-  ├─► Phase 4 — WORKFLOW RÉDACTION 8 ÉTAPES
-  │     Surprise Gap → Ancrage → Données chiffrées → Inversions
-  │     → Architecture narrative → Rédaction → FAQ intégrée → Compilation
-  │     → Utilise le skill `seo-workflow-article`
-  │
-  ├─► Phase 5 — CHECKLIST FACT-CHECK
-  │     Liste chaque chiffre, source, et ce qu'il faut vérifier.
-  │     L'utilisateur vérifie manuellement (Grok ou autre).
-  │
-  OUTPUT : Article complet (.md) + Checklist fact-check
-```
-
----
+L'ordre des livrables est brief → structure Hn → data → FAQ → rédaction. Le décodage sémantique alimente le brief et les données ; la FAQ Query est validée avant rédaction ; le contrôle des faits fait partie de la phase rédaction. Les numéros des sections techniques ci-dessous sont des repères d'outils, pas un second cycle de validation.
 
 ## Comment l'utilisateur fournit son brief
 
@@ -151,7 +131,7 @@ Livrable : 5-7 questions avec réponses et vecteur sémantique couvert pour chac
 
 C'est le coeur du pipeline. Lire et exécuter le skill `seo-workflow-article` dans son intégralité.
 
-Les 8 étapes sont séquentielles — chaque étape alimente la suivante :
+Les opérations ci-dessous sont réparties dans les cinq phases validées définies au début du skill :
 
 1. **Surprise Gap** — identifier ce que 80% des articles disent vs ce qui manque. Utiliser le décodage RRF de la phase 2 pour alimenter le diagnostic.
 2. **Ancrage local/sectoriel** — signaux E-E-A-T géographiques et sectoriels précis
@@ -159,7 +139,7 @@ Les 8 étapes sont séquentielles — chaque étape alimente la suivante :
 4. **Inversions expertes** — 5 croyances fausses corrigées avec preuves
 5. **Architecture narrative** — plan Low→High Surprise section par section. Intégrer le passage ancré (150-200 mots) et le bloc authorship (~50 mots).
 6. **Rédaction principale** — prose 2000-2500 mots, pattern Tension→Résolution→Preuve. Anti-patterns IA vérifiés.
-7. **FAQ intégrée** — reprendre les questions de la phase 3 et les intégrer en fin d'article. Ajuster les réponses si le corps de l'article a déjà traité certains points.
+7. **FAQ intégrée** — reprendre les questions de la phase 3 et les intégrer en fin d'article. Conserver les réponses validées ; toute modification rouvre la phase FAQ.
 8. **Compilation finale** — tout assembler, vérifier fluidité, supprimer répétitions, contrôler anti-patterns IA.
 
 L'input du brief utilisateur (ses idées, points, data par Hn) doit être intégré dans chaque étape pertinente. Ce n'est pas du contenu à ignorer — c'est la matière première de l'article.
@@ -205,7 +185,7 @@ Ajouter en fin de checklist :
 
 L'agent ne saute AUCUNE phase. L'ordre est strict : 2 → 3 → 4 → 5.
 
-Entre chaque phase du process en 4 phases validées (brief → structure Hn → data dans les Hn → rédaction), l'agent produit le livrable de la phase, s'arrête et attend la validation explicite du consultant. Il ne passe jamais à la phase suivante sans cet accord (règle Tim du 2026-10-21, remplace l'ancien enchaînement sans validation).
+Entre chaque phase du process en 5 phases validées (brief → structure Hn → data dans les Hn → FAQ → rédaction), l'agent produit le livrable de la phase, s'arrête et attend la validation explicite du consultant. Il ne passe jamais à la phase suivante sans cet accord (règle du 2026-10-21, remplace l'ancien enchaînement sans validation).
 
 Le livrable final est un fichier markdown unique contenant l'article complet, sauvegardé dans le dossier outputs avec le format :
 `article-[slug-du-titre]-YYYY-MM-DD.md`

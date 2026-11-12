@@ -234,14 +234,22 @@ def main():
 
     # Compteurs sur les liens in-body non sitewide uniquement (nav/footer et
     # liens de gabarit ne comptent pas comme maillage éditorial dans la méthode)
+    # inbound_in_body = pages sources distinctes (10 liens depuis un seul article = 1) ;
+    # inbound_links_in_body = nombre brut de liens
+    inbound_sources = defaultdict(set)
+    for p in index.values():
+        p["inbound_links_in_body"] = 0
     for e in edges:
         if not e["in_body"] or e["sitewide"]:
             continue
         if e["source"] in index:
             index[e["source"]]["outbound_in_body"] += 1
         if e["target"] in index:
-            index[e["target"]]["inbound_in_body"] += 1
+            index[e["target"]]["inbound_links_in_body"] += 1
+            inbound_sources[e["target"]].add(e["source"])
 
+    for u, p in index.items():
+        p["inbound_in_body"] = len(inbound_sources[u])
     orphans = [u for u, p in index.items() if p["inbound_in_body"] == 0]
     dead_ends = [u for u, p in index.items() if p["outbound_in_body"] == 0]
 

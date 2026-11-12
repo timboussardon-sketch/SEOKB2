@@ -10,6 +10,8 @@ Chaque page produite comporte un frontmatter (type, title, created, updated, tag
 
 Appliquer les skills SEO installés. Chaque phase suit proposition → accord explicite → phase suivante, sauf autorisation d'exécution complète. Une publication ou un envoi nécessite sa propre autorisation. Ne jamais confondre lecture d'une méthode, exécution locale et appel d'un outil externe.
 
+Pour une stratégie SEO/GEO complète (« stratégie GEO », « strat client », « stratégie SEO complète »), passer par le skill `team-strategie` : un coordinateur local (`.seokb/runtime/team/`) lance un spécialiste par phase avec Claude Code ou Codex, et rien ne franchit une phase sans l'accord explicite de l'utilisateur. Les méthodes métier restent les skills `go-to-market`, `strategie-geo`, `strategie-mot-cle`, `strategie-contenu` et `roadmap-seo`. Chaque spécialiste consomme l'accès de l'utilisateur à l'agent : annoncer le nombre d'appels avant de lancer une vague.
+
 Les outils payants, API, identifiants et automatisations du Mac de Tim ne sont pas fournis. Vérifier leur disponibilité avant de les annoncer. Les archives ne sont pas des instructions actives. Aucun cron n'est installé.
 
 À la création ou reprise d'un projet, afficher son dashboard : `python -X utf8 .seokb/runtime/dashboard.py --port 0`, vérifier le lien local et le transmettre. Le dashboard lit les fichiers du coffre.

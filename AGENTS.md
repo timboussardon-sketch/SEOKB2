@@ -17,4 +17,4 @@ Les outils payants, API, identifiants et automatisations du Mac de Tim ne sont p
 Mise à jour : `python3 .seokb/runtime/update.py`. Diagnostic : `python3 .seokb/runtime/doctor.py`. Pour la recherche simple utiliser la recherche de fichiers ou `rg` ; l'ancien index vectoriel et ses dépendances sont optionnels et archivés.
 
 ## Développement du dépôt de distribution
-Dans ce dépôt source, la bibliothèque est dans `wiki/` et `raw/`, les skills distribués dans `distribution/skills/`. Ne pas traiter les archives comme des skills installables. Exécuter `python3 tests/test_install.py` avant livraison.
+Dans ce dépôt source, la bibliothèque est dans `wiki/` et `raw/`, les skills distribués dans `distribution/skills/`. Ne pas traiter les archives comme des skills installables. Exécuter `python3 tests/test_install.py` avant livraison. Tests des skills portés avec leur code : `python3 -X utf8 -m unittest discover -s tests/<dossier> -p 'test_*.py'` pour `team` (requiert `python -m pip install jsonschema`), `roadmap-seo`, `strategie-mot-cle` et `maillage-systeme`. Les tests de la team n'appellent aucun modèle : un faux agent remplace Claude Code.

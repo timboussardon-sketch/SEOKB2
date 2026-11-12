@@ -39,6 +39,14 @@ ou quand il colle un texte réécrit à la main en exemple de ton de voix.
 
 # Rédaction naturelle : mesurer avant de réécrire
 
+## Workflow obligatoire pour toute rédaction et correction (règle du 2026-11-06)
+
+Toujours appliquer **brief → structure Hn → data dans les Hn → FAQ → rédaction**, avec validation explicite de chaque phase avant la suivante. Cela s'applique aussi à une réécriture, à une correction de wording et à une passe anti-IA sur un article ou une page de contenu. La longueur, l'urgence et le caractère mineur de la correction ne permettent pas de sortir du workflow.
+
+Avant toute intervention sur le texte, lire `.claude/skills/seo-workflow-article/SKILL.md` et vérifier les cinq livrables, leurs versions et leurs validations. En reprise, conserver les validations dont le livrable et le périmètre sont inchangés ; rouvrir la phase touchée et faire valider la correction. Un changement de H1/H2/H3 rouvre la structure, une nouvelle donnée rouvre la data, une nouvelle réponse rouvre la FAQ. Une phase absente ou non validée doit être traitée avant les phases qui en dépendent.
+
+`redaction-naturelle` et `redaction-anti-ia` interviennent dans la phase rédaction. Leurs scripts et leurs passes de correction ne remplacent jamais le workflow. Tracer dans le suivi les fichiers, accords explicites, changements et phase courante. Une correction ou un rappel du processus ne vaut pas validation d'un livrable.
+
 ## D'où viennent ces règles
 
 Tim a réécrit à la main quatre textes de StopClope le 2026-08-18, puis a demandé la

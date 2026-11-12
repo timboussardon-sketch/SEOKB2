@@ -1,1665 +1,880 @@
 ---
 name: strategie-geo
-description: "Stratégie GEO complète en 10 étapes et roadmap 90 jours. « stratégie GEO », « stratégie SEO GEO », « visibilité ChatGPT »."
+description: "Méthode AI SEARCH GROWTH SYSTEM : stratégie SEO × GEO en 10 étapes, roadmap 90 jours. « growth seo », « visibilité ChatGPT »."
 ---
-
-# SKILL — STRATÉGIE GEO
 
 ## Quand utiliser ce skill
 
-Construire une stratégie GEO et d'acquisition via les moteurs IA
-à partir des offres, des questions réelles des acheteurs, des
-données propriétaires et des pages existantes. Utiliser ce skill
-lorsqu'un utilisateur demande une stratégie GEO, une stratégie
-de visibilité ChatGPT, une cartographie des intentions IA,
-un plan de citations IA ou une roadmap d'acquisition SEO × IA.
-Fonctionne pour les entreprises B2B, SaaS, e-commerce,
-services, organismes de formation et sites éditoriaux.
-TOUJOURS utiliser ce skill quand l'utilisateur dit :
-"stratégie GEO", "strategie geo", "stratégie IA", "strategie IA",
-"stratégie SEO GEO", "strategie seo geo", "stratégie SEO",
-"strategie SEO".
+Construire une stratégie complète AI SEARCH GROWTH SYSTEM orientée acquisition SEO × GEO. Déclencheurs : « STRATEGIE GEO », « stratégie geo », « skill growth seo », « growth seo », « AI SEARCH GROWTH SYSTEM », « stratégie SEO GEO », « stratégie d'acquisition IA », « stratégie de visibilité ChatGPT », « stratégie de référencement IA ». Le skill analyse les offres, les données propriétaires, les intentions commerciales, les questions des acheteurs, les URLs existantes, les preuves, la visibilité IA, la distribution externe et les conversions. Livrable : stratégie complète en 10 étapes, roadmap de 90 jours et 10 actions prioritaires.
 
-## 1. MISSION
+## Team stratégie
 
-Construire une stratégie d'acquisition permettant à une
-entreprise d'être découverte, comprise, citée et recommandée
-dans les réponses des moteurs IA.
+Toute demande globale « stratégie SEO GEO », « strat SEO GEO », « strat client », « stratégie SEO complète » ou « stratégie GEO » est pilotée par `.claude/skills/team-strategie/SKILL.md`. « C’est quoi la suite ? » reprend ce pilote dans le contexte du projet actif, sans valider une phase à lui seul. Une mission structurée reçue du coordinateur exécute uniquement son rôle ; elle ne relance pas la team.
 
-Moteurs concernés :
-- ChatGPT
-- Google AI Overviews et AI Mode
-- Gemini
-- Perplexity
-- Autres moteurs IA pertinents pour le marché
+Le pilote construit **d'abord la stratégie SEO/GEO complète** à partir du client, du site, de ses offres, objectifs et données. **Ensuite**, une sélection validée en tire **5 à 10 mots-clés business prioritaires**. **Puis un agent `strategie-mot-cle` par mot-clé** approfondit intentions, questions et preuves, avant consolidation de la roadmap. Aucun mot-clé n'est exigé à l'entrée ; les termes fournis sont des pistes. Les dix étapes et treize parties ci-dessous sont exécutées avec leurs validations avant la sélection finale. L'exploration globale ne dépend pas des agents spécialisés lancés plus tard.
 
-La stratégie doit relier :
 
-OFFRES
-  ↓
-ACHETEURS
-  ↓
-PROBLÈMES
-  ↓
-MICRO-INTENTIONS
-  ↓
-QUESTIONS IA
-  ↓
-PAGES + PREUVES
-  ↓
-DISTRIBUTION
-  ↓
-VISIBILITÉ IA
-  ↓
-LEADS ET CLIENTS
+# AI SEARCH GROWTH SYSTEM
+## Système complet d'acquisition SEO × GEO
 
-Les mentions et les citations sont des indicateurs
-intermédiaires.
+**Entreprise : [NOM]**
 
-La finalité reste l'acquisition commerciale.
+**Site : [URL]**
+
+**Objectif : être découvert, compris, cité et recommandé dans Google, ChatGPT, Gemini et Perplexity, afin de générer des leads qualifiés et des clients.**
+
+Tu es un stratège SEO × GEO spécialisé dans l'acquisition commerciale.
+
+Ta mission consiste à construire une stratégie complète à partir des offres de l'entreprise, des problèmes de ses acheteurs, des pages existantes, de ses données propriétaires et des opportunités de visibilité dans les moteurs IA.
+
+Tu dois produire des décisions concrètes, une architecture de contenu, un système de mesure et une roadmap de 90 jours.
+
+## Contrat commun des opportunités business — 2026-11-05
+
+Pour toute nouvelle mission, lire `wiki/methodes/opportunites-business.md` (base commune : `.seokb/base/wiki/methodes/opportunites-business.md`) et son contrat `wiki/methodes/opportunites-business/schema.json`. La méthode et le calculateur sont communs à Stratégie GEO et Audit complet V2. Créer `data/opportunites-business.json` selon ce contrat. Les dates et références pointent vers les pièces originales ; `raw/` reste immuable.
+
+Demande observée → opportunité accessible → valeur estimée → moyens nécessaires → mesure des résultats. Offre et périmètre d’abord ; distinguer recherches mesurées, besoins observés et hypothèses. Concurrents commerciaux, concurrents SERP et sources IA gardent leurs rôles séparés. Une page d’offre ne prouve pas une demande. Un regroupement sans comparaison SERP reste une hypothèse d’intention. L’exploration n’est pas un marché exhaustif.
+
+Prioriser par adéquation à l’offre, intention business et opportunité démontrée, puis faisabilité, coût, dépendances et délai justifié. Conserver les exclusions. Aucun score numérique de priorité, `brand_fit`, produit de notes ou CPC ne détermine l’ordre. Le CPC n’est jamais une estimation de revenu. Les scores techniques existants restent des diagnostics techniques, séparés de la sélection business.
+
+Le calculateur laisse les inconnues à `null`. Il ne génère aucun taux, coût ni délai. Ne jamais additionner Google, questions clients et IA, ni des scénarios alternatifs. Prudent, central et favorable ne sont renseignés que si leurs hypothèses sont documentées ; sinon afficher « non estimable avec les données disponibles ». Montrer actuel, additionnel, potentiel et capacité. Une citation IA n’est pas une vente.
+
+Les accords portent sur l’empreinte du dossier présenté. Changer une hypothèse impose sa revalidation. Conserver cadrage, shortlist, panel, collecte payante, opportunités, plan puis livrables comme décisions distinctes. Une validation de plan n’autorise ni publication ni envoi. TASM reste un concept externe dont l’auteur est à identifier ; ne pas l’attribuer sans source.
+
+Exécuter avec `python -B` (installer d'abord `python -m pip install jsonschema`). Les manifestes `.business.json` attestent les fichiers effectivement chargés et les calculs locaux ; ils n’attestent aucune collecte externe. Réemploi audit → GEO : `importer.py`, relecture du périmètre et de la fraîcheur, sans changer les dates de collecte. Ancien format : correspondance explicite, nouvelle version à côté de l’original, état historique conservé. Aucun réassemblage de dossier livré sans demande.
+
+### Emplacement, sélection et restitution GEO
+
+Après les étapes 1 et 2, constituer le périmètre exploré et qualifier les candidats. L’exploration de la stratégie globale étudie les candidats business ; la sélection des 5 à 10 priorités vient après validation de la stratégie complète. Après les observations de l’étape 4, présenter le registre commun et obtenir l’accord sur les opportunités avant l’architecture URL, la production et la roadmap. Une action sur l’offre, la conversion ou le suivi commercial peut conditionner la production ; documenter la preuve et la mesure du test.
+
+La version canonique suit les dix étapes et les treize parties ci-dessous. `strategie-mot-cle` est exécuté par un agent dédié pour chacun des 5 à 10 mots-clés business validés du portefeuille ; il reste utilisable isolément. Les validations humaines du pilote restent obligatoires.
+
+Enrichir la Synthèse business avec demande, concurrence, choix et limites ; le Dashboard avec scénarios, hypothèses et mesures ; Roadmap et Top des actions avec identifiants, responsable proposé, charge, coût, dépendances et critères de revue. Les dix actions sont un maximum utile ; ne pas compléter artificiellement.
+
+```bash
+python -B .claude/skills/strategie-geo/scripts/build_dashboard.py DOSSIER 'Entreprise' --business
+```
+
+Cette commande lit `DOSSIER/data/opportunites-business.json`, calcule une fois et écrit `dashboard-business.html` plus son manifeste. Les données CSV anciennes ne remplacent pas ce contrat. Choisir une nouvelle version de dossier pour une révision ; le script refuse d’écraser le rendu. Le dashboard est un suivi, pas la preuve que la stratégie est terminée. Le rapport final conserve les treize parties et les accords.
+
+Le module automatique `voids` n’est pas distribué avec SEOKB2 : déclarer le module indisponible et classer manuellement les lacunes avec leurs extraits. Lire un prompt ne vaut pas appel de l’outil. Conserver les permissions propres à `geo-citations` et le protocole des relevés ; aucun appel payant implicite.
+
+## ÉTAPE 1 — BUSINESS
+
+### Comprendre l'entreprise avant de travailler les mots-clés
+
+Analyse le site et les informations disponibles pour identifier :
+
+- Les produits et services commercialisés.
+- Les offres qui génèrent réellement du chiffre d'affaires.
+- Les différents profils de clients.
+- Leurs problèmes, frustrations et motivations d'achat.
+- Les fonctionnalités et bénéfices des offres.
+- Les objections rencontrées avant l'achat.
+- Les éléments qui déclenchent une décision commerciale.
+- Les conversions attendues : devis, rendez-vous, démos, essais, achats.
+
+### Construire une fiche par offre
+
+Pour chaque offre, préciser :
+
+| Élément | Information attendue |
+|---|---|
+| Offre | Produit ou service |
+| Cible | Profil d'acheteur |
+| Problème | Situation à résoudre |
+| Déclencheur | Pourquoi acheter maintenant ? |
+| Solution | Comment l'entreprise intervient |
+| Preuve | Expérience ou résultat disponible |
+| URL | Page commerciale |
+| Conversion | Action recherchée |
+
+### Livrable
+
+Une cartographie des offres et des parcours commerciaux.
+
+**Principe :** la stratégie part de ce que l'entreprise vend, pas de ce qui possède le plus gros volume de recherche.
 
 ---
 
-## 2. PRINCIPES NON NÉGOCIABLES
+## ÉTAPE 2 — DONNÉES PROPRIÉTAIRES
 
-### 2.1 Partir de l'entreprise
+### Identifier les informations disponibles
 
-Toujours commencer par :
-1. Ses offres.
-2. Ses clients.
-3. Les problèmes qu'elle résout.
-4. Les questions de ses prospects.
-5. Son expertise.
-6. Ses données propriétaires.
-7. Ses objectifs commerciaux.
+Exploite en priorité :
 
-Ne pas construire la stratégie à partir d'une simple
-liste de mots-clés générés par une IA.
+1. Google Search Console : requêtes, impressions, clics, pages et positions.
+2. CRM : motifs de prise de contact, objections et opportunités.
+3. Appels commerciaux : questions posées avant l'achat.
+4. SAV et support : problèmes réellement rencontrés.
+5. Études de cas : expériences clients et résultats.
+6. Documentation produit : fonctionnalités et usages.
+7. Avis et témoignages : bénéfices et difficultés exprimés.
+8. Analytics : parcours utilisateurs et conversions.
+9. Outils internes : statistiques et analyses originales.
+10. Expertise métier : méthodes, décisions et retours du terrain.
 
-### 2.2 Une intention principale = une URL
+### Organiser la matière
 
-Une page possède une intention principale.
+Classer les informations en cinq catégories :
 
-Elle peut répondre à plusieurs micro-intentions associées.
+- **Questions réelles :** ce que les acheteurs veulent comprendre.
+- **Problèmes :** ce qui les empêche d'avancer.
+- **Objections :** ce qui freine leur décision.
+- **Preuves :** ce qui démontre la valeur de l'entreprise.
+- **Résultats :** ce qui permet de mesurer cette valeur.
+
+### Livrable
+
+Une bibliothèque de matière propriétaire associée aux offres.
+
+**Principe :** les données réelles doivent alimenter les contenus avant toute génération de nouvelles idées par l'IA.
+
+---
+
+## ÉTAPE 3 — MOTS-CLÉS BUSINESS ET MICRO-INTENTIONS
+
+### Sélectionner les intentions prioritaires
+
+Explorer les mots-clés business directement liés aux offres de l'entreprise. La sélection finale de 5 à 10 priorités intervient après la stratégie globale complète.
+
+Utilise trois portes de décision.
+
+**Porte 1 — OFFRE**
+
+L'entreprise vend-elle une solution correspondant à cette recherche ?
+
+**Porte 2 — INTENTION**
+
+La recherche correspond-elle à un problème, un besoin ou une situation d'achat ?
+
+**Porte 3 — OPPORTUNITÉ**
+
+L'entreprise dispose-t-elle de l'expertise, des preuves et des ressources nécessaires pour apporter une réponse réellement utile ?
+
+Ne retiens que les sujets qui passent les trois portes.
+
+### Identifier cinq micro-intentions
+
+Pour chaque mot-clé business, décompose l'intention principale en cinq besoins distincts.
+
+Exemple pour « agent SEO » :
+
+1. Comprendre ce qu'est un agent SEO.
+2. Apprendre à construire un agent.
+3. Automatiser des tâches SEO.
+4. Choisir un kit d'agents prêt à installer.
+5. Déployer plusieurs agents sur ses projets clients.
+
+### Construire le panel de questions IA
+
+Pour chaque mot-clé business, identifie **10 à 15 questions naturelles** que les acheteurs pourraient poser aux moteurs IA.
+
+Classe-les selon le parcours d'achat :
+
+| Étape | Objectif |
+|---|---|
+| Découverte | Comprendre son problème |
+| Exploration | Découvrir les solutions possibles |
+| Évaluation | Trouver une solution adaptée |
+| Décision | Préparer l'achat |
+
+Pour chaque question, indiquer :
+
+- La formulation exacte.
+- La micro-intention.
+- Le profil de l'acheteur.
+- L'étape du parcours.
+- L'offre concernée.
+- La source de la question.
+- L'URL associée.
+- La valeur commerciale.
+
+### Livrable
+
+Candidats business, intentions et questions en nombre justifié par les sources. Après la stratégie globale, sélectionner 5 à 10 priorités et confier chacune à un agent strategie-mot-cle.
+
+**Règle : les questions ne correspondent pas automatiquement à des pages. Elles constituent une cartographie des besoins des acheteurs.**
+
+---
+
+## ÉTAPE 4 — GROUPES DE VISIBILITÉ IA
+
+### Construire les groupes
+
+Organise les questions en groupes de visibilité cohérents.
+
+Un groupe peut correspondre à :
+
+- Une offre.
+- Une fonctionnalité.
+- Un secteur d'activité.
+- Un type de client.
+- Un cas d'utilisation.
+- Une situation d'achat.
+- Un marché géographique.
+
+Un groupe de visibilité est un périmètre de suivi, pas obligatoirement une page.
+
+### Observer les réponses IA
+
+Utilise le panel de questions pour suivre :
+
+- ChatGPT.
+- Gemini.
+- Perplexity.
+- Les expériences IA de Google pertinentes.
+
+Pour chaque question, enregistrer :
+
+| Indicateur | Information recherchée |
+|---|---|
+| Mention | L'entreprise est-elle nommée ? |
+| Recommandation | Est-elle proposée comme solution ? |
+| Citation | Une URL du site est-elle citée ? |
+| Couverture | Quels besoins sont représentés ? |
+| Compréhension | Quelles informations sont reprises ? |
+| Lacune | Quelles réponses utiles manquent ? |
+
+Structurer les observations par offre, intention, moteur, marché et période.
+
+### Transformer les lacunes en opportunités
+
+Chaque lacune doit conduire à une action précise.
+
+Exemples :
+
+- Offre peu présente : enrichir sa présentation.
+- Fonctionnalité peu comprise : ajouter une démonstration.
+- Question d'achat absente : compléter une page existante.
+- Preuves insuffisantes : exploiter une étude de cas.
+- Présence externe limitée : distribuer une ressource originale.
+
+### Analyse des lacunes documentaires
+
+Déclencheur : dès que le panel de questions (étape 3) a ses réponses IA relevées, et avant l'architecture d'URL (étape 5). Lecture seule des relevés `geo-citations`, aucun appel API. Le module automatique d'analyse des lacunes n'est pas distribué avec SEOKB2 : le classement se fait à la main, question par question et moteur par moteur, avec l'extrait de la réponse qui justifie chaque étiquette.
+
+Classer chaque question en lacune A (absente), B (insuffisante), C (obsolète), D (contradictoire), E (non corroborée), F (mal reliée à l'intention), documentée, non observable ou données insuffisantes, puis croiser avec la matière du client (PREUVE DISPONIBLE / HYPOTHÈSE / PREUVE À OBTENIR).
+
+Règles de lecture : une absence de citation n'est pas une absence de sources ; une lacune détectée est une piste à confirmer tant que son étiquette n'est pas validée par le benchmark ; une lacune sans preuve disponible est « non exploitable en l'état » et ne donne aucune affirmation à publier ; une question documentée ne reçoit pas de page ; une intention principale par URL, jamais une page par lacune.
+
+### Livrable
+
+Un tableau de bord de visibilité IA et une première liste d'opportunités.
+
+**Principe :** une citation, une mention et une recommandation sont trois résultats différents. Les mesurer séparément.
+
+---
+
+## Validation des opportunités avant l’architecture
+
+Exécuter le contrat commun, présenter les preuves, exclusions, conditions économiques et moyens ; attendre l’accord explicite sur cette version. Les étapes suivantes réutilisent les identifiants validés.
+
+## ÉTAPE 5 — ARCHITECTURE SEO × GEO
+
+### Cartographier les URLs
+
+Pour chaque question, associe une page existante ou une destination à construire.
+
+Prends l'une des cinq décisions :
+
+**CONSERVER**
+
+La page correspond à l'intention et possède déjà un rôle clair.
+
+**ENRICHIR**
+
+La page existe, mais manque de réponses, de démonstrations ou de preuves.
+
+**REGROUPER**
+
+Plusieurs pages traitent essentiellement la même intention.
+
+**CRÉER**
+
+Une intention autonome justifie une nouvelle ressource.
+
+**NE PAS PRODUIRE**
+
+La question ne présente pas suffisamment de valeur ou est déjà couverte.
+
+### Règle fondamentale
+
+**Une intention principale = une URL responsable.**
+
+Plusieurs micro-intentions peuvent enrichir la même page.
 
 Exemple :
 
-Page : Consultant GEO
+Page : `/agent-seo/`
 
-Questions intégrées :
-- Comment apparaître dans ChatGPT ?
-- Comment améliorer ses citations IA ?
-- Quel budget prévoir pour une stratégie GEO ?
-- Comment mesurer la visibilité IA ?
-- Comment obtenir des clients via ChatGPT ?
+Questions couvertes :
 
-Ces cinq questions ne nécessitent pas cinq pages.
+- Qu'est-ce qu'un agent SEO ?
+- Que peut-on automatiser ?
+- Comment fonctionne Claude Code ?
+- Que contient le kit ?
+- Combien coûte-t-il ?
+- Comment l'installer ?
 
-Une page supplémentaire n'est proposée que lorsqu'une
-intention autonome apporte une utilité distincte.
+Ces questions peuvent être traitées par des sections, des tableaux, des démonstrations et une FAQ courte.
 
-### 2.3 Limiter les priorités commerciales
+Elles ne nécessitent pas six URLs.
 
-Sélectionner au maximum cinq mots-clés business
-prioritaires par cycle stratégique.
+### Construire trois niveaux
 
-Pour chacun :
-- Une intention principale.
-- Jusqu'à cinq micro-intentions structurantes.
-- 10 à 15 questions naturelles.
-- Une URL commerciale responsable.
-- Des preuves propriétaires.
-- Des indicateurs d'acquisition.
+**Niveau 1 — Pages business**
 
-Ne jamais chercher à atteindre cinq mots-clés
-si moins de cinq sont réellement pertinents.
+Présentent les produits, services et offres commerciales.
 
-### 2.4 La matière propriétaire est prioritaire
+**Niveau 2 — Pages d'appui**
 
-Rechercher systématiquement :
-- Appels commerciaux.
-- Tickets SAV.
-- Conversations clients.
-- Données CRM.
-- Avis et témoignages.
+Traiter une intention autonome : guide, tutoriel, étude de cas, méthode ou démonstration.
+
+**Niveau 3 — Ressources de découverte**
+
+Répondent aux problèmes rencontrés avant la recherche d'une solution précise.
+
+### Maillage interne
+
+Organise les parcours :
+
+Problème → Ressource utile → Page commerciale → Conversion.
+
+Les contenus de découverte doivent orienter vers les ressources adaptées.
+
+Les pages d'appui doivent renforcer les pages business.
+
+Les pages commerciales peuvent également renvoyer vers les preuves qui facilitent la décision.
+
+### Fondations techniques
+
+Inclure dans la stratégie :
+
+- Accessibilité des pages importantes.
+- Crawl et indexation.
+- Gestion des URLs canoniques.
+- Architecture interne cohérente.
+- Contenus textuels accessibles.
+- Présentation claire des offres et de l'entreprise.
+- Données structurées pertinentes.
+- Accessibilité aux robots de recherche IA concernés.
+
+### Livrable
+
+Une cartographie URL par URL indiquant :
+
+| Intention | URL responsable | Décision | Action |
+|---|---|---|---|
+| ... | ... | Conserver | ... |
+| ... | ... | Enrichir | ... |
+| ... | ... | Regrouper | ... |
+| ... | ... | Créer | ... |
+
+**Principe :** enrichir ce qui existe avant d'augmenter le nombre de pages.
+
+---
+
+## ÉTAPE 6 — PREUVES PROPRIÉTAIRES
+
+### Identifier les preuves à intégrer
+
+Pour chaque offre et chaque micro-intention, rechercher :
+
 - Études de cas.
 - Démonstrations.
-- Données produit.
-- Résultats de missions.
-- Documentation interne.
-- Données Google Search Console.
-- Expertise métier.
-
-Cette matière doit guider les réponses, les exemples
-et les recommandations.
-
-### 2.5 Le GEO n'est pas une usine à contenus
-
-Ne jamais assimiler :
-- Une question à une URL.
-- Une micro-intention à un article.
-- Un secteur à une page obligatoire.
-- Une fonctionnalité à une page obligatoire.
-- Une absence de citation à un besoin de publication.
-
-Enrichir l'existant avant d'envisager la création
-de nouvelles URLs.
-
-### 2.6 Conversion avant trafic
-
-Prioriser les actions qui contribuent :
-1. Aux clients signés.
-2. Aux leads qualifiés.
-3. Aux demandes de démonstration ou devis.
-4. Aux prises de contact.
-5. Au trafic commercial utile.
-6. Aux recommandations IA.
-7. Aux citations et mentions IA.
-
-Ne pas optimiser uniquement le nombre de citations.
-
----
-
-## 3. DÉCLENCHEMENT DU SKILL
-
-Déclencher ce skill pour les demandes suivantes :
-
-- Construire une stratégie GEO.
-- Améliorer la visibilité d'une entreprise dans ChatGPT.
-- Développer les citations IA d'un site.
-- Créer une stratégie SEO × IA.
-- Identifier les questions d'acheteurs à couvrir.
-- Organiser des groupes de visibilité IA.
-- Construire une roadmap GEO.
-- Développer l'acquisition depuis les moteurs IA.
-- Structurer une stratégie de contenu orientée GEO.
-- Améliorer une stratégie GEO existante.
-
-Ne pas déclencher ce skill pour :
-- Une simple rédaction d'article.
-- Une correction technique isolée.
-- Une demande d'audit d'indexation uniquement.
-- Une recherche de mots-clés sans objectif GEO.
-- Un reporting sans demande stratégique.
-
-Dans ces situations, utiliser le skill spécialisé adapté.
-
----
-
-## 4. CONTEXTE ET MÉMOIRE DU PROJET
-
-Le skill fonctionne dans le contexte du projet actif.
-
-Commencer par exploiter les documents disponibles.
-
-Sources possibles :
-
-/projet/
-/entreprise/
-/offres/
-/clients/
-/sources/
-/crm/
-/sav/
-/appels/
-/gsc/
-/site/
-/pages/
-/contenus/
-/etudes-de-cas/
-/strategie/
-/memoire/
-
-Adapter les chemins à l'organisation réelle du coffre.
-
-Ne pas exiger une arborescence identique.
-
-### Informations à récupérer
-
-IDENTITÉ
-- Nom de l'entreprise.
-- Domaine.
-- Marchés et langues.
-- Positionnement.
-- Produits et services.
-
-COMMERCE
-- Clients cibles.
-- Problèmes des clients.
-- Cycle de vente.
-- Objections.
-- Modes de conversion.
-- Objectifs commerciaux.
-
-SITE
-- URLs commerciales.
-- Pages produits.
-- Pages services.
-- Guides.
-- Études de cas.
-- Pages sectorielles.
-- Pages tarifaires.
-- Outils et ressources.
-
-DONNÉES
-- GSC.
-- Analytics.
-- CRM.
-- Support.
-- Appels.
+- Captures produit.
+- Résultats clients.
+- Données originales.
+- Expériences métier.
+- Méthodes propriétaires.
 - Témoignages.
-- Données propriétaires.
+- Processus internes.
+- Exemples concrets.
 
-RÈGLE :
-Exploiter le contexte présent avant de demander
-de nouvelles informations à l'utilisateur.
+### Construire la matrice des preuves
 
-Si une donnée manque, la signaler comme "non disponible"
-et poursuivre avec les éléments existants.
-
-Ne jamais inventer de données commerciales,
-de résultats clients ou de mesures de visibilité.
-
----
-
-# PHASE 1 — COMPRENDRE LE BUSINESS
-
-## 5. CARTOGRAPHIER LES OFFRES
-
-Pour chaque offre, produire une fiche.
-
-### Fiche offre
-
-NOM :
-[Nom de l'offre]
-
-TYPE :
-[Produit / Service / Formation / Outil]
-
-CLIENT :
-[Profil d'acheteur]
-
-PROBLÈME PRINCIPAL :
-[Problème résolu]
-
-DÉCLENCHEUR D'ACHAT :
-[Situation qui provoque la recherche]
-
-RÉSULTAT ATTENDU :
-[Transformation recherchée]
-
-FONCTIONNALITÉS :
-[Éléments concrets de l'offre]
-
-OBJECTIONS :
-[Freins à l'achat]
-
-PREUVES DISPONIBLES :
-[Résultats, cas clients, démonstrations]
-
-URL :
-[URL principale]
-
-CONVERSION :
-[Action commerciale recherchée]
-
-### Objectif
-
-Comprendre précisément ce que l'entreprise peut apporter
-à un prospect et dans quelle situation celui-ci
-serait susceptible de la choisir.
-
----
-
-## 6. IDENTIFIER LES MOTS-CLÉS BUSINESS
-
-Sélectionner jusqu'à cinq mots-clés business.
-
-Un mot-clé business représente une intention
-directement liée à une offre commercialisable.
-
-Il peut désigner :
-- Un produit.
-- Un service.
-- Une catégorie de solution.
-- Une expertise.
-- Un besoin commercial spécifique.
-
-### Méthode des trois portes
-
-Chaque proposition passe par trois portes.
-
-PORTE 1 — OFFRE
-
-L'entreprise possède-t-elle une offre pertinente
-pour répondre à cette intention ?
-
-PORTE 2 — INTENTION
-
-Cette recherche correspond-elle à un véritable besoin
-ou à une situation d'achat identifiable ?
-
-PORTE 3 — OPPORTUNITÉ
-
-Existe-t-il une manière utile d'apporter une réponse,
-une expertise ou une preuve spécifique ?
-
-Décision :
-- RETENIR
-- REPORTER
-- ÉCARTER
-
-Ne pas créer de score numérique artificiel.
-
-### Livrable
-
-| Mot-clé business | Offre | Acheteur | Intention | URL |
-|---|---|---|---|---|
-| ... | ... | ... | ... | ... |
-
----
-
-# PHASE 2 — CARTOGRAPHIER LES INTENTIONS
-
-## 7. CRÉER LES GROUPES DE VISIBILITÉ
-
-Construire les groupes autour des offres
-et des besoins commerciaux.
-
-Un groupe est un espace d'observation stratégique.
-
-Il ne correspond pas obligatoirement à une URL.
-
-Exemples de groupes :
-- Produit.
-- Fonctionnalité.
-- Cas d'utilisation.
-- Secteur.
-- Profil d'acheteur.
-- Problème.
-- Marché géographique.
-
-### Structure
-
-GROUPE :
-[Nom]
-
-OFFRE ASSOCIÉE :
-[Offre]
-
-ACHETEURS :
-[Profils]
-
-PROBLÈMES :
-[Besoins rencontrés]
-
-INTENTIONS :
-[Situations de recherche]
-
-PAGES EXISTANTES :
-[URLs]
-
-CONVERSION :
-[Objectif]
-
-Les groupes doivent rendre la visibilité IA
-lisible à l'échelle du business.
-
----
-
-## 8. IDENTIFIER CINQ MICRO-INTENTIONS
-
-Pour chaque mot-clé business, proposer jusqu'à
-cinq micro-intentions structurantes.
-
-Une micro-intention décrit ce que l'acheteur
-veut réellement comprendre, décider ou accomplir.
-
-Elle ne doit pas être une simple reformulation
-du mot-clé principal.
-
-### Exemple
-
-Mot-clé business :
-Logiciel de compte rendu IA
-
-Micro-intentions :
-1. Automatiser la rédaction d'un compte rendu.
-2. Personnaliser le format du document.
-3. Extraire les décisions et les actions.
-4. Envoyer les informations dans un CRM.
-5. Choisir un outil adapté à son organisation.
-
-### Sortie attendue
-
-| Micro-intention | Besoin réel | Acheteur | Relation avec l'offre |
-|---|---|---|---|
-| ... | ... | ... | ... |
-
-Si le projet utilise une validation humaine
-entre les étapes, soumettre ces propositions
-avant de construire le panel de questions.
-
----
-
-## 9. GÉNÉRER LES QUESTIONS D'ACHETEURS
-
-Pour chaque mot-clé business :
-produire 10 à 15 questions naturelles.
-
-Les questions doivent découler :
-- Des micro-intentions.
-- Des demandes réelles des prospects.
-- Des objections.
-- Des expériences clients.
-- Des données propriétaires.
-- Des usages du produit.
-
-Elles peuvent couvrir plusieurs étapes du parcours.
-
-### Étape A — Découverte
-
-L'acheteur cherche à comprendre un problème.
-
-Exemples :
-- Pourquoi mes commerciaux ne remplissent-ils pas le CRM ?
-- Comment éviter de perdre des informations en réunion ?
-
-### Étape B — Exploration
-
-L'acheteur cherche comment résoudre son problème.
-
-Exemples :
-- Comment automatiser les comptes rendus ?
-- Peut-on connecter une transcription à un CRM ?
-
-### Étape C — Évaluation
-
-L'acheteur cherche une solution adaptée.
-
-Exemples :
-- Quel logiciel de réunion IA pour une équipe commerciale ?
-- Quel outil fonctionne avec Salesforce ?
-
-### Étape D — Décision
-
-L'acheteur envisage une action commerciale.
-
-Exemples :
-- Combien coûte un assistant IA de réunion ?
-- Peut-on essayer ce type d'outil gratuitement ?
-
-### Format de chaque question
-
-ID :
-[Q001]
-
-QUESTION :
-[Question naturelle]
-
-MICRO-INTENTION :
-[Besoin concerné]
-
-ÉTAPE :
-[Découverte / Exploration / Évaluation / Décision]
-
-ACHETEUR :
-[Profil]
-
-SOURCE :
-[Appels / SAV / CRM / GSC / Expertise / Hypothèse]
-
-OFFRE :
-[Offre commerciale]
-
-URL :
-[Page susceptible d'y répondre]
-
-VALEUR BUSINESS :
-[Pourquoi cette question compte]
-
-### Règles
-
-- Ne pas répéter quinze fois la même intention.
-- Ne pas écrire des questions artificiellement SEO.
-- Ne pas forcer une répartition égale entre les étapes.
-- Favoriser les questions précises et naturelles.
-- Préserver les formulations issues des vrais prospects.
-- Ne pas créer automatiquement une URL par question.
-
-### Livrable
-
-Un panel de 10 à 15 questions par mot-clé business,
-structuré en groupes de visibilité.
-
----
-
-# PHASE 3 — CARTOGRAPHIER LES PAGES
-
-## 10. ASSOCIER CHAQUE QUESTION À UNE URL
-
-Pour chaque question, déterminer sa destination.
-
-Décisions possibles :
-
-A. INTÉGRER
-La question enrichit une page existante.
-
-B. ENRICHIR
-La page existe, mais nécessite une nouvelle section,
-un exemple ou une preuve.
-
-C. CRÉER UNE PAGE D'APPUI
-La question relève d'une intention autonome
-nécessitant une ressource dédiée.
-
-D. CRÉER UNE PAGE BUSINESS
-Une intention commerciale distincte n'est
-représentée par aucune URL adaptée.
-
-E. NE PAS PRODUIRE
-La question est secondaire, redondante ou hors cible.
-
-### Critères pour une nouvelle page
-
-Créer une URL uniquement si :
-
-1. L'intention est distincte.
-2. La réponse mérite un contenu autonome.
-3. L'entreprise apporte une vraie matière spécifique.
-4. La page possède une utilité claire dans le parcours.
-5. Son rôle est différent des URLs existantes.
-
-### Règle de regroupement
-
-Si plusieurs questions peuvent être satisfaites
-par une réponse cohérente sur la même page,
-les regrouper.
-
-Ne pas transformer les pages en FAQ géantes.
-
-Les questions peuvent devenir :
-- Une section H2.
-- Une section H3.
-- Un tableau.
-- Une démonstration.
-- Un exemple.
-- Un cas d'utilisation.
-- Une FAQ courte.
-- Une preuve.
-- Un passage dans une section existante.
-
-### Livrable
-
-| Question | URL | Traitement | Élément à ajouter |
-|---|---|---|---|
-| ... | ... | Intégrer | H2 |
-| ... | ... | Enrichir | Exemple |
-| ... | ... | Appui | Guide |
-| ... | ... | Ne pas produire | — |
-
----
-
-## 11. DÉFINIR L'ARCHITECTURE GEO
-
-Construire une architecture autour des
-pages commerciales responsables.
-
-### Niveau 1 — Pages business
-
-Elles présentent les offres et favorisent
-la conversion.
-
-Exemples :
-- Service.
-- Produit.
-- Formation.
-- Logiciel.
-- Offre sectorielle.
-
-### Niveau 2 — Pages d'appui
-
-Elles traitent une intention spécifique
-qui mérite un traitement autonome.
-
-Exemples :
-- Tutoriel.
-- Méthode.
-- Cas client.
-- Guide pratique.
-- Démonstration.
-- Ressource sectorielle.
-
-### Niveau 3 — Ressources de découverte
-
-Elles répondent aux problèmes qui précèdent
-la recherche d'une offre.
-
-Exemples :
-- Glossaire orienté usage.
-- Questions métier.
-- Problèmes opérationnels.
-- Méthodes de travail.
-
-### Maillage
-
-PAGE BUSINESS
-  ↑
-PAGES D'APPUI
-  ↑
-RESSOURCES DE DÉCOUVERTE
-
-Le maillage doit permettre de passer
-naturellement du problème à la solution.
-
-Les pages d'appui renvoient aux offres concernées.
-
-Les pages business renvoient aux ressources
-qui facilitent la décision.
-
----
-
-# PHASE 4 — EXPLOITER LES PREUVES
-
-## 12. CARTOGRAPHIER LA MATIÈRE PROPRIÉTAIRE
-
-Pour chaque question et micro-intention,
-identifier les ressources internes mobilisables.
-
-### Catégories de matière
-
-1. Expertise métier.
-2. Cas clients.
-3. Chiffres propriétaires.
-4. Démonstrations.
-5. Captures produit.
-6. Témoignages.
-7. Méthodes et processus.
-8. Questions SAV.
-9. Conversations commerciales.
-10. Documentation interne.
-11. Résultats obtenus.
-12. Retours d'expérience.
-
-### Matrice
-
-| Question | Matière disponible | Utilisation |
+| Intention | Preuve disponible | Utilisation |
 |---|---|---|
-| ... | Cas client | Exemple dans la page |
-| ... | Données CRM | Statistique originale |
-| ... | Démonstration | Vidéo ou capture |
-| ... | Méthode interne | Guide pratique |
-| ... | Ticket support | Réponse à une objection |
+| Comprendre une solution | Démonstration | Page produit |
+| Évaluer une prestation | Étude de cas | Page commerciale |
+| Résoudre un problème | Expertise terrain | Guide pratique |
+| Mesurer un résultat | Données propriétaires | Étude originale |
+| Préparer un achat | Témoignage | Page de conversion |
 
-### Types de preuves
+### Transformer une preuve en plusieurs ressources
 
-PREUVE DE FONCTIONNEMENT
-Montrer comment une solution fonctionne.
+Exemple : une étude de cas client.
 
-PREUVE D'EXPÉRIENCE
-Montrer une situation réellement rencontrée.
+Elle peut enrichir :
 
-PREUVE DE RÉSULTAT
-Montrer les résultats obtenus.
+1. Une page commerciale.
+2. Une page sectorielle.
+3. Un contenu pédagogique.
+4. Une démonstration vidéo.
+5. Une newsletter.
+6. Une publication professionnelle.
 
-PREUVE D'EXPERTISE
-Expliquer une méthode ou une décision métier.
+### Livrable
 
-PREUVE D'ADÉQUATION
-Montrer à quel profil ou usage la solution convient.
+Une bibliothèque de preuves associées aux pages et aux intentions.
 
-### Objectif
-
-Construire des réponses enrichies d'informations
-issues de l'expérience réelle de l'entreprise.
-
-La valeur du contenu ne doit pas venir uniquement
-de la reformulation d'informations génériques.
+**Principe :** l'expertise réelle de l'entreprise doit constituer la matière principale des réponses GEO.
 
 ---
 
-# PHASE 5 — OBSERVER LA VISIBILITÉ IA
+## ÉTAPE 7 — OPTIMISATION DES PAGES
 
-## 13. CONSTRUIRE LE SUIVI GEO
+### Pages commerciales
 
-Utiliser les questions retenues comme panel
-de suivi de la visibilité IA.
+Pour chaque URL prioritaire, proposer une structure adaptée.
 
-### Dimensions
+Elle peut comprendre :
 
-- Groupe.
-- Offre.
-- Micro-intention.
-- Question.
-- Étape d'achat.
-- Moteur IA.
-- Marché.
-- Langue.
-- Période.
+1. L'offre et sa proposition de valeur.
+2. Le problème qu'elle résout.
+3. Les clients concernés.
+4. Son fonctionnement.
+5. Ses bénéfices.
+6. Les cas d'utilisation.
+7. Des exemples concrets.
+8. Les preuves clients.
+9. Les questions importantes.
+10. Les prix et modalités.
+11. Un appel à l'action.
 
-### Indicateurs
+### Pages sectorielles
 
-MENTION
-L'entreprise apparaît-elle dans la réponse ?
+Lorsque le besoin le justifie :
 
-RECOMMANDATION
-L'entreprise est-elle présentée comme une solution
-adaptée au besoin de l'acheteur ?
+- Problème propre au secteur.
+- Situations rencontrées.
+- Fonctionnalités adaptées.
+- Exemple client.
+- Résultats obtenus.
+- Prochaine étape.
 
-CITATION
-Une URL du site est-elle citée ?
+### Guides pédagogiques
 
-COUVERTURE
-Quelle part du panel fait apparaître l'entreprise ?
+Pour les questions de découverte :
 
-PRÉCISION
-Les informations reprises sur l'entreprise
-correspondent-elles à son offre ?
+- Réponse directe.
+- Explication.
+- Méthode.
+- Exemple.
+- Erreurs fréquentes.
+- Ressources complémentaires.
+- Lien vers l'offre pertinente.
 
-### Structure des données
+### Études de cas
 
-| Date | Moteur | Groupe | Question | Mention | Recommandation | URL citée |
-|---|---|---|---|---|---|---|
+Présenter :
 
-Séparer les informations observées des informations
-non disponibles.
+- Le client.
+- Le problème initial.
+- L'objectif.
+- La solution.
+- Les actions réalisées.
+- Les résultats.
+- Les enseignements.
+- L'offre associée.
 
-Ne jamais fabriquer une présence ou un pourcentage.
+### Outils et ressources
 
-### Vues du dashboard
+Identifier les situations où un outil serait plus utile qu'un article :
 
-1. Visibilité globale.
-2. Visibilité par offre.
-3. Visibilité par micro-intention.
-4. Visibilité par étape d'achat.
-5. Visibilité par moteur.
-6. Visibilité par pays et langue.
-7. Pages les plus citées.
-8. Questions commerciales non couvertes.
+- Simulateur.
+- Calculateur.
+- Audit interactif.
+- Template.
+- Démonstration.
+- Tableau de bord.
+- Jeu de données pédagogique.
 
-### Objectif
+### Livrable
 
-Comprendre où et pour quelles intentions
-l'entreprise apparaît dans les réponses IA.
+Pour chaque URL à travailler :
 
-Le dashboard sert à orienter les actions.
+**URL :** [...]
 
-Il n'est pas la finalité de la stratégie.
+**Intention principale :** [...]
 
----
+**Questions à couvrir :** [...]
 
-# PHASE 6 — TRANSFORMER LES LACUNES EN ACTIONS
+**Sections à enrichir :** [...]
 
-## 14. DIAGNOSTIC GEO
+**Preuves à intégrer :** [...]
 
-Pour chaque opportunité, identifier
-la réponse opérationnelle appropriée.
+**Maillage à développer :** [...]
 
-| Situation | Action |
-|---|---|
-| Offre peu visible | Renforcer la page commerciale |
-| Fonctionnalité absente | Ajouter des exemples d'utilisation |
-| Questions d'achat peu couvertes | Enrichir les sections décisionnelles |
-| Usage sectoriel peu représenté | Développer une preuve sectorielle |
-| Informations produit incomplètes | Clarifier les fonctionnalités |
-| Citations faibles | Renforcer le contenu de l'URL |
-| Manque de preuves | Exploiter les données propriétaires |
-| Faible présence externe | Développer la distribution |
-| Faible visibilité locale | Adapter les ressources au marché |
-| Manque de conversion | Améliorer le parcours commercial |
+**Conversion attendue :** [...]
 
-### Fiche d'opportunité
+**Priorité :** [...]
 
-ID :
-[GEO-001]
-
-GROUPE :
-[Nom]
-
-OFFRE :
-[Offre]
-
-QUESTION :
-[Question]
-
-SITUATION :
-[Observation]
-
-INTENTION :
-[Besoin]
-
-URL :
-[Page]
-
-MATIÈRE PROPRIÉTAIRE :
-[Données disponibles]
-
-ACTION :
-[Proposition]
-
-RÉSULTAT ATTENDU :
-[Impact commercial]
-
-INDICATEUR :
-[KPI]
-
-PRIORITÉ :
-[Maintenant / Ensuite / Plus tard]
-
-### Règle
-
-Une opportunité doit toujours déboucher
-sur une action précise.
-
-Éviter les recommandations vagues :
-- Améliorer le GEO.
-- Produire plus de contenu.
-- Augmenter les citations.
-- Renforcer l'autorité.
-
-Préférer :
-- Ajouter un exemple de compte rendu CRM.
-- Expliquer les étapes d'intégration.
-- Ajouter une étude de cas SaaS.
-- Enrichir la section sur les tarifs.
-- Relier un tutoriel à une page produit.
+**Principe :** ne pas ajouter des sections pour allonger les pages. Chaque ajout doit résoudre un problème de compréhension, de décision ou de conversion.
 
 ---
 
-# PHASE 7 — CONSTRUIRE LES CONTENUS
+## ÉTAPE 8 — DISTRIBUTION EXTERNE
 
-## 15. LES SIX LEVIERS GEO
+### Développer la présence au-delà du site
 
-### LEVIER A — PAGES COMMERCIALES
-
-Mission :
-Permettre à l'acheteur de comprendre
-ce que l'entreprise propose.
-
-Structure possible :
-1. Offre.
-2. Problème résolu.
-3. Profils concernés.
-4. Fonctionnement.
-5. Bénéfices.
-6. Cas d'utilisation.
-7. Preuves.
-8. Questions d'achat.
-9. Prix ou modalités.
-10. Conversion.
-
-Ne pas imposer cette structure si une organisation
-plus pertinente existe déjà.
-
-### LEVIER B — PAGES SECTORIELLES
-
-Mission :
-Montrer comment l'offre répond aux besoins
-d'un secteur particulier.
-
-Contenu :
-1. Problème sectoriel.
-2. Situation des acheteurs.
-3. Usage de la solution.
-4. Fonctionnalités spécifiques.
-5. Exemple concret.
-6. Résultat.
-7. Questions sectorielles.
-8. Conversion.
-
-Chaque page sectorielle doit apporter une valeur
-propre au secteur traité.
-
-### LEVIER C — AIDE À LA DÉCISION
-
-Mission :
-Faciliter le choix d'une solution.
-
-Contenu :
-1. Situation de départ.
-2. Critères de sélection.
-3. Besoins essentiels.
-4. Fonctionnalités nécessaires.
-5. Contraintes.
-6. Budget.
-7. Cas concrets.
-8. Recommandations adaptées.
-9. Prochaine étape.
-
-### LEVIER D — CONTENUS DE DÉCOUVERTE
-
-Mission :
-Répondre aux problèmes avant même
-que l'acheteur recherche une solution précise.
-
-Contenu :
-1. Définition ou problème.
-2. Causes.
-3. Conséquences.
-4. Méthodes possibles.
-5. Exemples.
-6. Questions associées.
-7. Ressources complémentaires.
-8. Offre pertinente.
-
-### LEVIER E — ÉTUDES DE CAS
-
-Mission :
-Apporter des preuves issues du terrain.
-
-Contenu :
-1. Situation du client.
-2. Problème.
-3. Objectif.
-4. Solution.
-5. Mise en œuvre.
-6. Résultats.
-7. Enseignements.
-8. Offre concernée.
-
-Une étude de cas peut enrichir plusieurs
-pages et supports de communication.
-
-### LEVIER F — DONNÉES ET OUTILS
-
-Mission :
-Créer des ressources originales utiles
-aux acheteurs.
-
-Exemples :
-- Simulateurs.
-- Calculateurs.
-- Audits interactifs.
-- Données agrégées.
-- Études propriétaires.
-- Démonstrations.
-- Modèles.
-- Guides opérationnels.
-
-Chaque ressource doit posséder une utilité concrète
-et un lien pertinent avec les offres.
-
----
-
-# PHASE 8 — DISTRIBUTION EXTERNE
-
-## 16. ÉTENDRE LA PRÉSENCE DE L'ENTREPRISE
-
-La visibilité IA ne dépend pas uniquement
-des pages du site.
-
-Construire une stratégie de distribution
-à partir des contenus et preuves existants.
-
-### Canaux possibles
+Identifie les canaux où les ressources de l'entreprise peuvent apporter une valeur réelle :
 
 - Médias spécialisés.
 - Publications professionnelles.
-- Sites sectoriels.
 - Communautés métier.
-- Reddit.
 - Forums.
+- Reddit.
+- LinkedIn.
 - YouTube.
 - Podcasts.
 - Newsletters.
-- Réseaux professionnels.
-- Événements et conférences.
+- Publications sectorielles.
 
-### Méthode
+### Construire la distribution par ressource
 
-Pour chaque ressource majeure :
+Pour chaque contenu important :
 
-1. Identifier le public concerné.
+1. Identifier les publics concernés.
 2. Sélectionner les canaux pertinents.
-3. Adapter le contenu au contexte.
-4. Valoriser les données originales.
-5. Partager des exemples utiles.
-6. Associer la publication à une offre
-   ou à une ressource pertinente.
+3. Adapter le format.
+4. Mettre en avant les preuves originales.
+5. Expliquer un problème réel.
+6. Donner accès à la ressource.
+7. Relier la diffusion à une offre lorsque cela est pertinent.
 
-### Exemple de distribution
+### Exemple
 
-SOURCE :
-Une étude de cas SaaS.
+Une étude client peut donner :
 
-DÉCLINAISONS :
-- Page étude de cas sur le site.
-- Extrait dans une page commerciale.
-- Publication LinkedIn.
-- Newsletter.
-- Vidéo de démonstration.
-- Contribution à une publication spécialisée.
-- Réponse utile dans une communauté métier.
+- Une page complète sur le site.
+- Une vidéo de démonstration.
+- Trois publications LinkedIn.
+- Une newsletter.
+- Un extrait technique.
+- Une contribution dans un média professionnel.
 
-L'objectif est de réutiliser la même expertise
-dans différents contextes pertinents.
+### Distribution continue
 
-### Règle
+La distribution commence dès la publication des premières preuves.
 
-La distribution doit apporter une valeur
-réelle aux personnes qui consultent ces canaux.
+Elle n'est pas une opération réservée à la fin du projet.
 
-Ne pas recourir à l'achat de liens SEO,
-aux fausses recommandations ou aux faux avis.
+### Livrable
 
----
+Un plan de distribution associant :
 
-# PHASE 9 — CONVERSION
+| Ressource | Canal | Public | Objectif |
+|---|---|---|---|
+| ... | ... | ... | ... |
 
-## 17. RELIER LE GEO À L'ACQUISITION
-
-Chaque groupe de visibilité doit être relié
-à un objectif commercial.
-
-### Exemples
-
-ENTREPRISE DE SERVICES
-- Demande de devis.
-- Prise de rendez-vous.
-- Pré-audit.
-- Contact qualifié.
-
-SAAS
-- Inscription.
-- Essai gratuit.
-- Démonstration.
-- Activation.
-- Abonnement.
-
-E-COMMERCE
-- Consultation produit.
-- Ajout au panier.
-- Achat.
-- Commande récurrente.
-
-FORMATION
-- Candidature.
-- Inscription.
-- Achat du programme.
-
-OUTIL
-- Utilisation.
-- Inscription.
-- Achat.
-- Passage vers une offre supérieure.
-
-### Parcours commercial
-
-QUESTION
-  ↓
-RÉPONSE UTILE
-  ↓
-PAGE PERTINENTE
-  ↓
-PREUVE
-  ↓
-OFFRE
-  ↓
-CONVERSION
-
-Ne pas terminer les pages sur une simple réponse
-informationnelle lorsqu'une suite commerciale
-utile existe.
-
-La conversion doit correspondre à l'intention
-et au niveau de maturité du visiteur.
+**Principe :** développer la présence de l'entreprise grâce à des contributions utiles, sans fausses recommandations ni achat de liens SEO.
 
 ---
 
-## 18. KPI ET MESURE BUSINESS
+## ÉTAPE 9 — ACQUISITION ET PERFORMANCE
 
-Structurer les indicateurs en quatre niveaux.
+### Construire quatre niveaux de mesure
 
-### Niveau 1 — Visibilité
+**Niveau 1 — VISIBILITÉ IA**
 
-- Mentions IA.
-- Recommandations IA.
+- Mentions de la marque.
+- Recommandations.
 - Couverture des questions.
 - Visibilité par offre.
-- Visibilité par intention.
+- Visibilité par étape d'achat.
 
-### Niveau 2 — Citations
+**Niveau 2 — CITATIONS**
 
-- Pages citées.
-- Fréquence de citation.
-- Groupes associés.
-- Sources externes.
-- Thématiques citées.
+- URLs citées.
+- Types de pages utilisées.
+- Thématiques associées.
+- Présence sur des sources externes.
 
-### Niveau 3 — Acquisition
+**Niveau 3 — ACQUISITION**
 
-- Impressions GSC.
+- Impressions Google.
 - Clics organiques.
-- Sessions IA.
+- Sessions issues des moteurs IA.
 - Visites des pages commerciales.
-- Demandes de contact.
 - Essais gratuits.
+- Formulaires.
 - Rendez-vous.
+- Demandes de devis.
 
-### Niveau 4 — Business
+**Niveau 4 — BUSINESS**
 
 - Leads qualifiés.
 - Opportunités commerciales.
-- Clients.
+- Clients signés.
+- Ventes.
 - Chiffre d'affaires.
+- MRR pour les SaaS.
 - Taux de conversion.
-- Valeur des clients acquis.
 
-### Tableau de bord
+### Construire les parcours de conversion
 
-| Groupe | Visibilité IA | Clics | Leads | Clients |
+Exemple pour un SaaS :
+
+Question IA → Page produit → Démonstration → Essai gratuit → Activation → Abonnement.
+
+Exemple pour un consultant :
+
+Question IA → Page service → Étude de cas → Rendez-vous → Proposition → Client.
+
+Exemple pour un e-commerce :
+
+Question IA → Guide d'achat → Fiche produit → Panier → Commande.
+
+Exemple pour une formation :
+
+Question IA → Ressource pédagogique → Programme → Candidature → Inscription.
+
+### Dashboard commercial
+
+| Groupe | Visibilité IA | Clics | Conversions | Clients |
 |---|---|---|---|---|
 | Offre A | ... | ... | ... | ... |
 | Offre B | ... | ... | ... | ... |
 | Offre C | ... | ... | ... | ... |
 
-Les données réellement mesurées doivent rester
-distinctes des hypothèses et des objectifs.
+### Livrable
 
-### Indicateur final
+Un dashboard GEO × SEO × Business, avec un suivi par offre et par intention commerciale.
 
-La contribution de la stratégie
-à l'acquisition de clients.
+**Principe :** les mentions et citations orientent la stratégie. Les leads et clients mesurent sa réussite commerciale.
 
 ---
 
-# PHASE 10 — PRIORISATION
+## ÉTAPE 10 — ROADMAP ET PRIORISATION
 
-## 19. CONSTRUIRE LA ROADMAP
+### Prioriser les opportunités
 
-Prioriser les opportunités dans cet ordre :
+Chaque action doit répondre à cinq questions :
 
-1. Corriger les obstacles majeurs des pages business.
-2. Enrichir les pages qui servent directement l'achat.
-3. Intégrer les questions commerciales manquantes.
-4. Ajouter les preuves propriétaires.
-5. Développer les cas d'utilisation pertinents.
-6. Créer les pages d'appui nécessaires.
-7. Développer la distribution externe.
-8. Étendre les marchés et les segments.
+**QUOI ?** Quelle action ?
 
-Ne pas suivre aveuglément cet ordre :
-une opportunité commerciale particulièrement
-forte peut justifier une priorité différente.
+**OÙ ?** Quelle URL ou ressource ?
 
-### Classement
+**POURQUOI ?** Quel problème d'acheteur ?
 
-PRIORITÉ IMMÉDIATE
-Action importante pouvant être engagée maintenant.
+**AVEC QUOI ?** Quelle donnée ou preuve ?
 
-PRIORITÉ SUIVANTE
-Action utile nécessitant une étape préalable
-ou apportant un bénéfice secondaire.
+**POUR QUEL RÉSULTAT ?** Quelle conversion attendue ?
 
-PLUS TARD
-Action intéressante mais non essentielle
-au cycle actuel.
+Classer ensuite les actions selon :
 
-### Roadmap à 90 jours
+- Leur proximité avec une décision d'achat.
+- Leur impact commercial attendu.
+- Les informations disponibles.
+- Leur effort de réalisation.
+- Leur contribution aux offres prioritaires.
 
-MOIS 1 — STRATÉGIE ET FONDATIONS
+### P0 — Priorité immédiate
 
-- Cartographie des offres.
-- Sélection des intentions business.
-- Groupes de visibilité.
-- Panel de questions IA.
-- Association questions / URLs.
-- Inventaire des preuves.
-- Diagnostic initial.
-- Priorités commerciales.
+Actions touchant directement les pages commerciales, la compréhension des offres ou les parcours de conversion.
 
-MOIS 2 — PAGES ET PREUVES
+### P1 — Priorité suivante
 
-- Optimisation des pages commerciales.
-- Intégration des micro-intentions.
-- Amélioration du maillage.
-- Études de cas.
-- Démonstrations.
-- Contenus d'appui prioritaires.
-- Amélioration des parcours de conversion.
+Améliorations des pages d'appui, preuves propriétaires et ressources utiles.
 
-MOIS 3 — DISTRIBUTION ET ACQUISITION
+### P2 — Développement
 
-- Distribution des contenus.
-- Publications originales.
-- Contributions sectorielles.
-- Exploitation des données propriétaires.
-- Suivi de la visibilité.
-- Analyse des conversions.
-- Nouvelles priorités.
+Distribution supplémentaire, nouvelles thématiques ou nouveaux marchés.
 
----
+### Roadmap de 90 jours
 
-# PHASE 11 — AGENTS ET ORCHESTRATION
+**MOIS 1 — BUSINESS ET FONDATIONS**
 
-## 20. RÉPARTITION DES MISSIONS
+Semaines 1–2 :
 
-Le skill Stratégie GEO est responsable
-de la stratégie globale.
+- Cartographier les offres.
+- Exploiter les données propriétaires.
+- Retenir les mots-clés business.
+- Construire les micro-intentions.
+- Constituer les questions IA.
+- Associer les URLs.
 
-Il ne doit pas exécuter indistinctement
-toutes les tâches spécialisées.
+Semaines 3–4 :
 
-### Agent Stratégie GEO
+- Déployer le tableau de bord.
+- Consolider les pages commerciales.
+- Améliorer le maillage.
+- Clarifier les conversions.
+- Intégrer les premières preuves.
 
-Mission :
-- Comprendre les offres.
-- Identifier les intentions.
-- Organiser les groupes.
-- Construire le panel de questions.
-- Déterminer les URLs responsables.
-- Définir les priorités.
+**Livrable :** stratégie structurée, architecture des pages et premiers contenus commerciaux renforcés.
 
-### Agent Observation GEO
+**MOIS 2 — CONTENUS ET PREUVES**
 
-Mission :
-- Observer les réponses IA.
-- Collecter les mentions.
-- Collecter les citations.
-- Suivre les groupes.
-- Alimenter le dashboard.
+Semaines 5–6 :
 
-### Agent Contenu
+- Enrichir les pages business.
+- Publier les meilleures études de cas.
+- Développer les démonstrations.
+- Exploiter les données originales.
 
-Mission :
-- Enrichir les pages.
-- Développer les sections.
-- Exploiter les preuves.
-- Préparer les contenus d'appui.
+Semaines 7–8 :
 
-### Agent Maillage
+- Travailler les intentions adjacentes.
+- Améliorer les contenus d'appui.
+- Relier les ressources aux offres.
+- Développer les premiers supports de distribution.
 
-Mission :
-- Organiser les liens internes.
-- Relier les pages d'appui aux pages business.
-- Améliorer la navigation entre les intentions.
+**Livrable :** bibliothèque de preuves et contenus reliés aux parcours d'achat.
 
-### Agent Distribution
+**MOIS 3 — DISTRIBUTION ET ACQUISITION**
 
-Mission :
-- Identifier les canaux pertinents.
-- Adapter les contenus.
-- Proposer les contributions.
-- Développer la présence externe.
+Semaines 9–10 :
 
-### Agent Business
+- Diffuser les ressources.
+- Développer les contributions professionnelles.
+- Publier les démonstrations.
+- Alimenter les communautés pertinentes.
 
-Mission :
-- Exploiter les données GSC et CRM.
-- Suivre les conversions.
-- Relier les actions aux résultats commerciaux.
-- Proposer de nouvelles priorités.
+Semaines 11–12 :
 
-### Règle d'orchestration
+- Analyser les performances.
+- Identifier les nouvelles opportunités.
+- Renforcer les pages prioritaires.
+- Ajuster les parcours commerciaux.
+- Préparer le cycle suivant.
 
-L'agent Stratégie GEO peut proposer
-des tâches aux autres agents.
-
-Il garde la responsabilité :
-- Des intentions.
-- De l'architecture stratégique.
-- Des priorités commerciales.
-- De la cohérence générale.
+**Livrable :** un système d'acquisition continu associant visibilité, contenus, distribution et résultats commerciaux.
 
 ---
 
-# PHASE 12 — MÉMOIRE ET APPRENTISSAGE
+# ORCHESTRATION MULTI-AGENTS
 
-## 21. MÉMORISER LES DÉCISIONS
+Le système peut être réparti entre six agents spécialisés.
 
-Conserver les éléments importants
-dans la mémoire du projet.
+| Agent | Mission |
+|---|---|
+| Stratégie | Offres, mots-clés business, micro-intentions et questions |
+| Observation GEO | Mentions, recommandations, citations et tableau de bord |
+| Contenu | Pages, exemples, études de cas et preuves |
+| Architecture | URLs, structure et maillage |
+| Distribution | Publications, communautés et ressources externes |
+| Business | GSC, CRM, conversions, ventes et priorisation |
 
-### Données à conserver
+### Mémoire commune
 
-- Offres prioritaires.
-- Profils d'acheteurs.
-- Intentions retenues.
-- Questions commerciales.
-- URLs principales.
-- Pages d'appui proposées.
-- Matière propriétaire.
-- Opportunités.
-- Décisions stratégiques.
-- Actions engagées.
-- Résultats commerciaux.
-- Nouveaux enseignements.
+Conserver dans le projet :
 
-### Exemple de structure
+- `offres.md` — Offres et clients.
+- `donnees.md` — Données propriétaires disponibles.
+- `intentions.md` — Mots-clés business et micro-intentions.
+- `questions.md` — Panel IA.
+- `visibilite.md` — Observations GEO.
+- `urls.md` — Architecture et décisions.
+- `preuves.md` — Études de cas et ressources originales.
+- `opportunites.md` — Actions proposées.
+- `distribution.md` — Plan de diffusion.
+- `conversion.md` — Parcours commerciaux.
+- `roadmap.md` — Plan sur 90 jours.
+- `resultats.md` — Indicateurs et résultats.
+- `decisions.md` — Arbitrages et apprentissages.
 
-/strategie-geo/
-  strategie.md
-  offres.md
-  groupes.md
-  mots-cles-business.md
-  micro-intentions.md
-  questions.md
-  urls.md
-  preuves.md
-  opportunites.md
-  roadmap.md
-  decisions.md
-  resultats.md
+Réutilise les fichiers déjà présents si le projet dispose d'une organisation équivalente.
 
-Réutiliser la structure du projet
-si ces informations existent déjà ailleurs.
-
-Éviter les doublons documentaires.
-
-Chaque nouvelle décision enrichit la mémoire commune.
+Les agents travaillent sur des missions complémentaires et partagent les décisions stratégiques.
 
 ---
 
-# PHASE 13 — LIVRABLE FINAL
+# FORMAT OBLIGATOIRE DU LIVRABLE FINAL
 
-## 22. FORMAT OBLIGATOIRE DE SORTIE
+Présente les résultats dans cet ordre :
 
-Chaque stratégie GEO doit être présentée
-dans l'ordre suivant.
+**1. SYNTHÈSE BUSINESS**
 
-### 1. Synthèse exécutive
+Offres, acheteurs, problèmes, opportunités et objectif commercial.
 
-- Objectif commercial.
-- Offres retenues.
-- Problème principal.
-- Opportunités majeures.
-- Priorité des 90 jours.
+**2. DONNÉES PROPRIÉTAIRES**
 
-Maximum 200 mots.
+Sources disponibles, questions réelles et preuves exploitables.
 
-### 2. Cartographie des offres
+**3. MOTS-CLÉS BUSINESS ÉTUDIÉS**
 
-Tableau :
-- Offre.
-- Client.
-- Problème.
-- Résultat recherché.
-- Conversion.
+Mot-clé, offre, intention, URL et conversion.
 
-### 3. Mots-clés business
+**4. MICRO-INTENTIONS**
 
-Maximum cinq.
+Jusqu'à cinq besoins distincts par mot-clé.
 
-Pour chacun :
-- Intention principale.
-- Offre associée.
-- URL responsable.
-- Objectif de conversion.
+**5. PANEL DE QUESTIONS IA**
 
-### 4. Groupes de visibilité
+10 à 15 questions par mot-clé, classées selon le parcours d'achat.
 
-Pour chaque groupe :
-- Offre.
-- Fonctionnalités ou usages.
-- Clients.
-- Problèmes.
-- Étapes d'achat.
+**6. GROUPES DE VISIBILITÉ**
 
-### 5. Micro-intentions
+Répartition par offre, fonctionnalité, usage et profil d'acheteur.
 
-Jusqu'à cinq micro-intentions
-par mot-clé business.
+**7. CARTOGRAPHIE DES URLS**
 
-Chaque micro-intention décrit
-un besoin distinct de l'acheteur.
+Conserver, enrichir, regrouper, créer ou ne pas produire.
 
-### 6. Questions IA
+**8. MATRICE DES PREUVES**
 
-10 à 15 questions par mot-clé business.
+Données propriétaires et utilisation dans les contenus.
 
-Classer selon :
-- Découverte.
-- Exploration.
-- Évaluation.
-- Décision.
+**9. PLAN D'OPTIMISATION**
 
-### 7. Cartographie des URLs
+Sections à enrichir, exemples à intégrer, maillage et CTA par URL.
 
-Tableau :
+**10. DISTRIBUTION EXTERNE**
 
-| Intention | URL | Décision | Action |
-|---|---|---|---|
+Canaux, ressources à diffuser et objectifs.
 
-Décisions :
-- Conserver.
-- Enrichir.
-- Créer une page d'appui.
-- Créer une page business.
-- Ne pas produire.
+**11. DASHBOARD GEO × BUSINESS**
 
-### 8. Matrice des preuves
+Visibilité, recommandations, citations, trafic, leads et clients.
 
-Tableau :
+**12. ROADMAP SUR 90 JOURS**
 
-| Intention | Preuve | Source | Utilisation |
-|---|---|---|---|
+Actions, priorités, responsables, livrables et résultats attendus.
 
-### 9. Plan d'optimisation
+**13. TOP 10 DES ACTIONS**
 
-Pour chaque page importante :
-- URL.
-- Intention principale.
-- Questions associées.
-- Sections à travailler.
-- Preuves à intégrer.
-- Conversion attendue.
-
-### 10. Distribution externe
-
-- Thématiques.
-- Canaux pertinents.
-- Ressources à diffuser.
-- Actions prioritaires.
-
-### 11. Dashboard
-
-- Visibilité.
-- Citations.
-- Acquisition.
-- Business.
-
-### 12. Roadmap 90 jours
-
-- Mois 1 : stratégie et fondations.
-- Mois 2 : contenus et preuves.
-- Mois 3 : distribution et acquisition.
-
-### 13. Décisions à prendre
-
-Présenter uniquement les arbitrages
-qui nécessitent une décision stratégique.
-
-### 14. Prochaines actions
-
-Trois à cinq actions maximum.
-
-Chaque action comporte :
-- Une mission précise.
-- Une URL ou un périmètre.
-- Un responsable ou agent.
-- Un livrable attendu.
-- Un objectif commercial.
+Classement P0, P1 et P2, avec les URLs concernées.
 
 ---
 
-# PHASE 14 — MODE D'INTERACTION
+# RÈGLES ABSOLUES
 
-## 23. PROGRESSION PAR ÉTAPES
-
-La méthode peut fonctionner en deux modes.
-
-### MODE COMPLET
-
-Utiliser lorsque l'utilisateur demande :
-- Une stratégie GEO complète.
-- Un plan de 90 jours.
-- Une stratégie pour un site.
-- Une roadmap d'acquisition.
-
-Produire la stratégie à partir des informations
-disponibles.
-
-Signaler les éléments manquants sans bloquer
-l'ensemble du travail.
-
-### MODE GUIDÉ
-
-Utiliser lorsque l'utilisateur souhaite
-construire la stratégie progressivement.
-
-ÉTAPE 1
-Proposer les mots-clés business et
-les cinq micro-intentions de chacun.
-
-Présenter les propositions à l'utilisateur.
-
-ÉTAPE 2
-Construire les 10 à 15 questions par mot-clé
-à partir des intentions retenues.
-
-Présenter le panel à l'utilisateur.
-
-ÉTAPE 3
-Associer les questions aux URLs,
-identifier les preuves et construire
-les opportunités.
-
-Présenter les arbitrages à l'utilisateur.
-
-ÉTAPE 4
-Générer la stratégie finale et la roadmap.
-
-Ne pas transformer le mode guidé
-en succession de questions inutiles.
+1. Commencer par les offres et les problèmes des acheteurs.
+2. Ne pas sélectionner les mots-clés uniquement selon leur volume.
+3. Achever la stratégie globale, en tirer 5 à 10 mots-clés business prioritaires validés, puis lancer un agent strategie-mot-cle par terme.
+4. Décomposer chaque mot-clé en micro-intentions distinctes.
+5. Produire 10 à 15 questions naturelles par groupe.
+6. Ne jamais créer automatiquement une page par question.
+7. Attribuer une intention principale à chaque URL.
+8. Privilégier l'enrichissement des pages existantes.
+9. Utiliser prioritairement les données propriétaires.
+10. Intégrer de vraies preuves dans les contenus.
+11. Relier les ressources de découverte aux pages commerciales.
+12. Développer la présence externe à partir de contenus originaux.
+13. Séparer mentions, citations, recommandations et conversions.
+14. Ne jamais inventer de données de visibilité ou de résultats commerciaux.
+15. Donner une action concrète pour chaque opportunité.
+16. Conserver les décisions dans la mémoire du projet.
+17. Mesurer les leads, les ventes et les clients.
+18. Ajuster la stratégie selon les performances obtenues.
+19. Après le panel et les réponses IA, lancer le Gap Analyzer avant de proposer des contenus : une opportunité exige une lacune observée, une intention d'acheteur réelle et une preuve vérifiable du client.
+20. Ne jamais déduire d'une absence de citation que le moteur n'a utilisé aucune source, ni d'un sujet peu documenté qu'il est une opportunité commerciale.
 
 ---
-
-## 24. STYLE DES RÉPONSES
-
-Écrire dans un français naturel et professionnel.
-
-Privilégier :
-- Les décisions concrètes.
-- Les tableaux lisibles.
-- Les exemples précis.
-- Les formulations courtes.
-- Les conséquences commerciales.
-- Les actions directement exploitables.
-
-Éviter :
-- Le jargon inutile.
-- Les affirmations génériques.
-- Les longues introductions théoriques.
-- Les scores arbitraires.
-- Les recommandations vagues.
-- Les listes de pages sans justification.
-- Les contenus produits uniquement pour augmenter
-  le volume du site.
-
-Chaque recommandation doit répondre à :
-
-QUOI ?
-Quelle action entreprendre ?
-
-OÙ ?
-Quelle page, offre ou ressource concerne-t-elle ?
-
-POURQUOI ?
-Quel besoin de l'acheteur est concerné ?
-
-AVEC QUOI ?
-Quelle expertise ou donnée mobiliser ?
-
-POUR QUEL RÉSULTAT ?
-Quelle contribution commerciale est recherchée ?
-
----
-
-# PHASE 15 — BOUCLE CONTINUE
-
-## 25. FAIRE ÉVOLUER LA STRATÉGIE
-
-À chaque nouveau cycle :
-
-1. Intégrer les nouvelles questions des acheteurs.
-2. Actualiser les intentions commerciales.
-3. Exploiter les nouvelles données propriétaires.
-4. Observer les évolutions de visibilité IA.
-5. Identifier les opportunités.
-6. Adapter les pages concernées.
-7. Développer la distribution.
-8. Analyser les résultats d'acquisition.
-9. Réviser les priorités.
-10. Enrichir la mémoire du projet.
-
-La stratégie doit s'améliorer grâce
-à l'expérience accumulée.
-
-Elle ne doit pas repartir de zéro
-à chaque nouvelle exécution.
-
----
-
-# RÈGLES FINALES
-
-1. Toujours partir des offres et des acheteurs.
-
-2. Utiliser les données propriétaires comme
-   principale matière stratégique.
-
-3. Retenir cinq mots-clés business maximum
-   par cycle.
-
-4. Développer jusqu'à cinq micro-intentions
-   par mot-clé business.
-
-5. Construire 10 à 15 questions naturelles
-   par mot-clé.
-
-6. Ne jamais créer automatiquement
-   une URL pour chaque question.
-
-7. Privilégier l'enrichissement des pages existantes.
-
-8. Utiliser les études de cas et l'expertise réelle
-   pour enrichir les réponses.
-
-9. Construire des groupes de visibilité
-   reliés à des offres commerciales.
-
-10. Considérer mentions, citations et recommandations
-    comme des signaux distincts.
-
-11. Développer la distribution externe
-    à partir de ressources utiles.
-
-12. Relier les intentions aux pages,
-    les pages aux preuves,
-    et les preuves aux conversions.
-
-13. Faire travailler les agents selon
-    leur mission principale.
-
-14. Conserver les décisions et découvertes
-    dans la mémoire du projet.
-
-15. Prioriser les leads qualifiés,
-    les clients et le chiffre d'affaires.
 
 # DOCTRINE CENTRALE
 
-Le GEO ne consiste pas à produire toujours plus
-de pages pour être cité par les moteurs IA.
+Le GEO ne consiste pas à produire davantage de pages pour augmenter artificiellement les citations IA.
 
-Il consiste à comprendre les problèmes des acheteurs,
-à produire les réponses les plus utiles à partir
-de l'expertise réelle de l'entreprise,
-à rendre ces réponses accessibles dans les bons
-contextes et à transformer cette visibilité
-en opportunités commerciales.
+Il consiste à comprendre ce que les acheteurs demandent aux moteurs IA, à associer leurs questions aux bonnes offres, à enrichir les pages avec l'expertise réelle de l'entreprise et à développer une présence utile dans les sources accessibles.
 
-La réussite d'une stratégie GEO ne se résume pas
-au nombre de citations IA.
+Le système doit relier :
 
-Elle se mesure à sa capacité à faire découvrir,
-comprendre et choisir une entreprise.
+**PROBLÈME → QUESTION → RÉPONSE → PREUVE → OFFRE → CONVERSION.**
+
+Chaque cycle enrichit le précédent.
+
+**La finalité n'est pas le nombre de citations. C'est le nombre de clients acquis grâce à une meilleure visibilité et à des réponses plus pertinentes.**

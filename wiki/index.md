@@ -2,7 +2,7 @@
 type: register
 title: Catalogue SEOKB2
 created: 2026-11-06
-updated: 2026-11-06
+updated: 2026-11-12
 tags: [seokb2]
 status: stable
 confidence: high
@@ -15,7 +15,10 @@ Liste des notes effectivement incluses. Les liens historiques peuvent viser des 
 
 - [[000-home]]
 - [[agents/agent-avocats]]
+- [[agents/go-to-market]]
 - [[agents/ia-employe]]
+- [[agents/team-strategie]]
+- [[agents/team-strategie-mode-emploi]]
 - [[apprentissage/2026-09-19]]
 - [[apprentissage/2026-09-26]]
 - [[apprentissage/2026-09-27]]

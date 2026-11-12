@@ -29,7 +29,7 @@ python3 .seokb/runtime/doctor.py
 python3 .seokb/runtime/dashboard.py --port 0
 ```
 
-Le diagnostic doit indiquer `2.0.0`, le dépôt `timboussardon-sketch/SEOKB2` et une liste vide `modified_or_missing`. Le dashboard affiche les notes du coffre et sa base commune. Relancer l'agent pour charger les skills.
+Le diagnostic doit indiquer `2.1.0`, le dépôt `timboussardon-sketch/SEOKB2` et une liste vide `modified_or_missing`. Le dashboard affiche les notes du coffre et sa base commune. Relancer l'agent pour charger les skills.
 
 ## Texte à donner à l'agent de l'élève
 
