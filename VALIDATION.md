@@ -1,3 +1,15 @@
+# Vérification SEOKB2 2.2.0 — 12 novembre 2026
+
+Vérifications locales exécutées sur macOS (Node 22.23.4, PostgreSQL 15 local) :
+
+- Agent prospect, avant modification : 85 tests sur 86. Le test en échec (`missions.test.ts`, relances) l'était déjà dans la source : l'email envoyé porte l'URL de l'expéditeur en dernière ligne, le test attendait le texte seul. Corrigé.
+- Après neutralisation de l'identité : `tsc --noEmit` sans erreur, 87 tests sur 87 (deux tests ajoutés : bandeau configuré joint par CID, absence de bandeau sans `EMAIL_BANNER_FILE`). Une exécution sur quatre a donné 1 échec en 370 s, non reproduit à la relance (20 s) ; cause non identifiée.
+- `python3 tests/test_install.py` : 8 tests.
+- Installation dans un coffre neuf par l'installateur réel : `doctor.py` indique 2.2.0, 1249 fichiers contrôlés, aucun manquant ou altéré. Les 113 fichiers de l'agent arrivent dans `.seokb/base/agent-prospect/`, le skill dans `.claude/skills/agent-prospect/`. L'agent installé est identique octet pour octet à la copie testée.
+- Recherche dans l'arbre de l'agent et du skill : aucun chemin `/Users/`, nom d'entreprise ou de personne de Tim, clé, ni adresse réelle. Les adresses des tests sont fictives (`.example`, `.test`).
+
+Limites : `next build` non lancé, seulement `tsc`. Les pages du tableau de bord (`/suivi`, `/r/<jeton>`, aperçu d'email) n'ont pas été ouvertes. Aucun appel réel à Claude, à Resend ou à Gmail, aucun email envoyé. Non testé sous Windows : `scripts/db-start.sh` et `scripts/service.sh` supposent un shell POSIX.
+
 # Vérification SEOKB2 2.1.0 — 12 novembre 2026
 
 Vérifications locales exécutées avec Python sur macOS.
