@@ -38,6 +38,15 @@ def plan(source, target):
             old=old[:old.index(start)]+old[old.index(end)+len(end):]
         block='\n'+start+'\nLire `.seokb/AGENTS.md` pour SEOKB2. Ces règles remplacent les anciennes consignes de mise à jour Organikk ; les autres consignes personnelles restent applicables.\n'+end+'\n'
         files[name]=(old.rstrip()+'\n'+block).encode()
+    # Déclare la vérification au démarrage dans .claude/settings.json, sans toucher au reste.
+    sp=checked(target,'.claude/settings.json')
+    try: settings=json.loads(sp.read_text()) if sp.exists() else {}
+    except json.JSONDecodeError: settings=None
+    if isinstance(settings,dict):
+        start=settings.setdefault('hooks',{}).setdefault('SessionStart',[])
+        if not any('verifier-maj.sh' in h.get('command','') for e in start if isinstance(e,dict) for h in e.get('hooks',[]) if isinstance(h,dict)):
+            start.append({'matcher':'startup','hooks':[{'type':'command','command':'bash "$CLAUDE_PROJECT_DIR/.claude/hooks/verifier-maj.sh"','timeout':20}]})
+            files['.claude/settings.json']=(json.dumps(settings,indent=2,ensure_ascii=False)+'\n').encode()
     # Retire only the three known old hooks; preserve settings and other hooks.
     for name in ['mettre-a-jour','verifier-maj','installer-skills']:
         command='update.py' if name in ['mettre-a-jour','verifier-maj'] else 'doctor.py'
@@ -73,7 +82,7 @@ def install(source,target,replace=False,dry=False):
         p=checked(target,rel)
         if p.exists() and not p.is_file(): raise ValueError('Fichier attendu : '+rel)
         if not p.exists() or p.read_bytes()==data: continue
-        if rel in ['CLAUDE.md','AGENTS.md']: continue
+        if rel in ['CLAUDE.md','AGENTS.md','.claude/settings.json']: continue
         oldhash=previous['files'].get(rel)
         if oldhash and digest(p.read_bytes())==oldhash: continue
         # Legacy-owned files can be replaced only when identical to their installed package.
@@ -111,7 +120,7 @@ def install(source,target,replace=False,dry=False):
                 if os.path.exists(tmp): os.unlink(tmp)
             written.append(rel)
         for rel in stale: checked(target,rel).unlink()
-        state={'version':(source/'VERSION').read_text().strip(),'repository':'https://github.com/timboussardon-sketch/SEOKB2.git','files':{k:digest(v) for k,v in payload.items() if not k.startswith('wiki/')}}
+        state={'version':(source/'VERSION').read_text().strip(),'repository':'https://github.com/timboussardon-sketch/SEOKB2.git','files':{k:digest(v) for k,v in payload.items() if not k.startswith('wiki/') and k!='.claude/settings.json'}}
         mf.write_text(json.dumps(state,indent=2)+'\n')
     except BaseException:
         restore(target,backup);raise

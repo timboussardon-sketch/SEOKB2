@@ -1,5 +1,9 @@
 # Versions
 
+## 2.3.1 — 2026-11-13
+
+Les mises à jour s'annoncent d'elles-mêmes : à l'ouverture de Claude Code, une fois par jour, le coffre vérifie le dépôt SEOKB2 et, si une version plus récente existe, affiche « SEOKB2 X disponible » dans le terminal et Claude la propose dans sa première réponse avec les nouveautés, sans la lancer sans accord. L'installateur déclare cette vérification dans `.claude/settings.json` en conservant les autres réglages ; un fichier de réglages illisible n'est pas touché. Rien ne s'affiche quand le coffre est à jour. Un dépôt inaccessible donne une ligne d'avertissement, sans bloquer la session. Les coffres installés en 2.0.0 à 2.3.0 sans l'ancien pack doivent lancer une fois « mets à jour SEOKB2 » pour recevoir la vérification.
+
 ## 2.3.0 — 2026-11-13
 
 Trois briques de pilotage. Skill `brief-matin` : un brief de moins de 400 mots qui met en tête les décisions à prendre, puis les faits sourcés, les inférences marquées, le travail fait et les questions ; le dashboard affiche le dernier brief sur sa page d'accueil. Skill `reponse-fil` : prépare la réponse à un fil d'emails (demande, engagements déjà pris avec leur source, manques, choix à trancher hors du brouillon, brouillon dans ta voix) et n'envoie jamais. Skill `sauvegarde-coffre` et script `sauvegarde.py` : archive ZIP du coffre vers un dossier synchronisé ou un disque externe, contrôlée par relecture, 7 archives gardées, restauration dans un dossier vide ; `.env*`, `_backups/` et la bibliothèque réinstallable sont exclus. Aucune tâche planifiée n'est installée.

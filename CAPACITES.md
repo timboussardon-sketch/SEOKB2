@@ -1,4 +1,4 @@
-# Capacités et limites de SEOKB2 2.3.0
+# Capacités et limites de SEOKB2 2.3.1
 
 | Composant | État et prérequis |
 |---|---|
@@ -13,6 +13,7 @@
 | GSC, SERP, navigateurs, API | Accès de l'élève à configurer ; aucune donnée collectée par l'installation |
 | Veille arXiv | Collecte manuelle par les outils web disponibles ; pas de runner personnel |
 | Agent prospect | Code dans `.seokb/base/agent-prospect/`, à copier hors du coffre ; Node.js et PostgreSQL local ; simulation sans clé ; mode réel : clé API Claude ou Claude Code ; envoi : compte Resend de l'élève ; aucun envoi sans son clic |
+| Annonce des mises à jour | Vérification au démarrage de Claude Code, une fois par jour ; Git et accès au dépôt ; silencieuse si à jour |
 | Brief du matin, réponse à un fil | Skills sans dépendance ; lisent le coffre ; messagerie et agenda seulement par un connecteur que l'élève autorise ; rien n'est envoyé ; aucune tâche planifiée |
 | Sauvegarde du coffre | Python standard ; destination choisie par l'élève (dossier synchronisé ou disque externe) ; archive non chiffrée ; planification à faire soi-même |
 | Index vectoriel, routines, newsletters, campagnes et listes de prospection de Tim | Références historiques archivées ; non installées et non promises comme actives |

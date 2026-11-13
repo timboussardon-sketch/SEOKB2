@@ -1,3 +1,11 @@
+# Vérification SEOKB2 2.3.1 — 13 novembre 2026
+
+- `python3 tests/test_verification_maj.py` : 7 tests (annonce d'une version plus récente avec ses nouveautés, silence le même jour, silence si à jour, dépôt inaccessible sans blocage, ajout du hook en conservant les réglages et hooks existants, coffre neuf, réglages illisibles non touchés, réglages modifiés ensuite sans conflit ni alerte de `doctor.py`). `tests/test_install.py` : 8 tests. `tests/test_sauvegarde.py` : 4 tests.
+- Coffre neuf installé par l'installateur réel, version locale forcée à 2.2.0 : le hook interroge le vrai dépôt GitHub et annonce la 2.3.0 ; un second appel le même jour ne dit rien.
+- Session réelle `claude -p` (Haiku) dans ce coffre : la première réponse propose la mise à jour avec les nouveautés et indique qu'elle ne sera lancée qu'avec accord.
+
+Limites : l'affichage du message dans le terminal interactif n'a pas été observé (le mode `-p` ne montre que la réponse). Non testé sous Windows (le hook passe par `bash`, comme les versions précédentes).
+
 # Vérification SEOKB2 2.3.0 — 13 novembre 2026
 
 Vérifications locales exécutées sur macOS avec Python :
