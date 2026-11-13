@@ -1,3 +1,16 @@
+# Vérification SEOKB2 2.3.0 — 13 novembre 2026
+
+Vérifications locales exécutées sur macOS avec Python :
+
+- `python3 tests/test_sauvegarde.py` : 4 tests (aller-retour, exclusion de `.env*`, `_backups/` et `.seokb/base/`, destination dans le coffre refusée, rotation, restauration dans un dossier non vide refusée).
+- `python3 tests/test_install.py` : 8 tests.
+- Installation dans un coffre neuf par l'installateur réel : `doctor.py` indique 2.3.0, 1253 fichiers contrôlés, aucun manquant ou altéré ; les skills `brief-matin`, `reponse-fil` et `sauvegarde-coffre` arrivent dans `.claude/skills/`.
+- Dashboard du coffre neuf servi en local : la page d'accueil affiche le dernier fichier de `wiki/pilotage/brief-matin/`.
+- Sauvegarde du coffre neuf vers un dossier extérieur puis restauration dans un dossier vide : les notes sont retrouvées.
+- Lignes ajoutées scannées : aucun chemin `/Users/`, nom de Tim, de client ou de prospect, clé ni adresse réelle.
+
+Limites : les skills `brief-matin` et `reponse-fil` n'ont pas été exécutés par un modèle dans un coffre élève ; la version source de `brief-matin` a tourné une fois sur le coffre de Tim. Aucun connecteur Gmail ou agenda testé côté élève. Non testé sous Windows.
+
 # Vérification SEOKB2 2.2.0 — 12 novembre 2026
 
 Vérifications locales exécutées sur macOS (Node 22.23.4, PostgreSQL 15 local) :

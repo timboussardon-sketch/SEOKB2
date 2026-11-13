@@ -1,5 +1,9 @@
 # Versions
 
+## 2.3.0 — 2026-11-13
+
+Trois briques de pilotage. Skill `brief-matin` : un brief de moins de 400 mots qui met en tête les décisions à prendre, puis les faits sourcés, les inférences marquées, le travail fait et les questions ; le dashboard affiche le dernier brief sur sa page d'accueil. Skill `reponse-fil` : prépare la réponse à un fil d'emails (demande, engagements déjà pris avec leur source, manques, choix à trancher hors du brouillon, brouillon dans ta voix) et n'envoie jamais. Skill `sauvegarde-coffre` et script `sauvegarde.py` : archive ZIP du coffre vers un dossier synchronisé ou un disque externe, contrôlée par relecture, 7 archives gardées, restauration dans un dossier vide ; `.env*`, `_backups/` et la bibliothèque réinstallable sont exclus. Aucune tâche planifiée n'est installée.
+
 ## 2.2.0 — 2026-11-12
 
 Agent prospect livré aux élèves : l'application (découverte, qualification, mesure de présence IA, emails relus, suivi) est dans `.seokb/base/agent-prospect/`, avec le skill `agent-prospect`. Le dossier `agent-prospect/` de la racine, copie du 2 octobre que l'installateur ne distribuait pas, est remplacé. L'identité de l'expéditeur (nom, entreprise, URL, bandeau) vient de `.env.local` au lieu d'être écrite dans le code ; le User-Agent du crawler est `ProspectAgent`. Retirés : la roadmap personnelle, la bannière, les adresses de tiers des tests, un fichier de résultats de tests qui portait des chemins locaux. `go-to-market` était déjà distribué depuis la 2.1.0 : inchangé.

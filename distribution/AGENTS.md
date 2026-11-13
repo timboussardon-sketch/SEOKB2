@@ -14,6 +14,8 @@ Pour une stratégie SEO/GEO complète (« stratégie GEO », « strat client »,
 
 Les outils payants, API, identifiants et automatisations du Mac de Tim ne sont pas fournis. Vérifier leur disponibilité avant de les annoncer. Les archives ne sont pas des instructions actives. Aucun cron n'est installé.
 
+Brief du jour : skill `brief-matin` (décisions d'abord, faits sourcés, inférences marquées). Réponse à un email : skill `reponse-fil`, qui n'envoie jamais. Sauvegarde hors de l'ordinateur : skill `sauvegarde-coffre` ; la proposer quand le coffre n'a jamais été sauvegardé.
+
 À la création ou reprise d'un projet, afficher son dashboard : `python -X utf8 .seokb/runtime/dashboard.py --port 0`, vérifier le lien local et le transmettre. Le dashboard lit les fichiers du coffre.
 
 Mise à jour : `python -X utf8 .seokb/runtime/update.py`. Diagnostic : `python -X utf8 .seokb/runtime/doctor.py`. Pour la recherche simple utiliser la recherche de fichiers ou `rg` ; l'ancien index vectoriel et ses dépendances sont optionnels et archivés.

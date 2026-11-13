@@ -26,6 +26,9 @@ def serve(root,port):
     paths=[p for p in paths if not query or query in p.name.casefold() or query in p.read_text(errors='replace').casefold()]
     state=json.loads((root/'.seokb/manifest.json').read_text())
     body='<h2>'+html.escape(root.name)+'</h2><p>SEOKB2 '+html.escape(state['version'])+' · '+str(len(paths))+' notes dans cette sélection.</p><p>Sources et productions personnelles conservées. Outils externes à connecter selon la mission. Aucun cron installé.</p>'
+    briefs=sorted((root/'wiki/pilotage/brief-matin').glob('20*.md')) if section=='wiki' and not query else []
+    if briefs:
+     rel=briefs[-1].relative_to(root).as_posix();body+='<h3>Dernier brief du matin</h3><pre>'+html.escape(briefs[-1].read_text(errors='replace'))+'</pre><p><a href="/note?path='+quote(rel)+'">'+html.escape(rel)+'</a></p>'
     body+='<form><input type="hidden" name="section" value="'+html.escape(section,quote=True)+'"><input name="q" placeholder="Rechercher dans les notes" value="'+html.escape(query,quote=True)+'"><button>Rechercher</button></form><ul>'
     for p in paths[:300]:
      rel=p.relative_to(root).as_posix();body+='<li><a href="/note?path='+quote(rel)+'">'+html.escape(rel)+'</a></li>'
