@@ -124,7 +124,9 @@ sur 16 bâtis sur `nom, nom, nom`. Le bug était le moule, pas la phrase.
 
    Il sort 1 sur un HARD (chaîne bannie de la règle mère) et liste les WARN
    (`X, jamais Y`, charnières, conclusions de fin de paragraphe, blocs trop
-   réguliers). Plus le lint du repo s'il existe (`npm run check:anti-ai` si ton repo en a un). Ils attrapent tes propres rechutes, et ils en attrapent.
+   réguliers, grappe de 3 familles de tells dans un même paragraphe, phrases
+   de longueur trop uniforme). Un tell isolé passe, c'est la densité qui compte.
+   Plus le lint du repo s'il existe (`npm run check:anti-ai` si ton repo en a un). Ils attrapent tes propres rechutes, et ils en attrapent.
 
    **Un vert n'est pas un bon à livrer.** Le script cherche des chaînes ; une
    phrase générique sans chaîne bannie passe au vert et doit quand même sauter.

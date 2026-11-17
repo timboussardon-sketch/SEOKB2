@@ -1,4 +1,4 @@
-# Capacités et limites de SEOKB2 2.3.1
+# Capacités et limites de SEOKB2 2.3.2
 
 | Composant | État et prérequis |
 |---|---|

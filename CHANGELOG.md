@@ -1,5 +1,9 @@
 # Versions
 
+## 2.3.2 — 2026-11-17
+
+`slop.mjs` (skill `redaction-anti-ia`) détecte deux gabarits de plus : une grappe de trois familles de tells dans un même paragraphe, et des phrases de longueur trop uniforme sur l'ensemble du texte. Un tell isolé reste toléré, c'est la densité qui alerte. Correction : « évidemment », « bien sûr » et « naturellement » n'étaient jamais détectés (la limite de mot `\b` ignore les lettres accentuées). Les deux nouveautés sont des alertes (WARN), jamais bloquantes sans `--strict`.
+
 ## 2.3.1 — 2026-11-13
 
 Les mises à jour s'annoncent d'elles-mêmes : à l'ouverture de Claude Code, une fois par jour, le coffre vérifie le dépôt SEOKB2 et, si une version plus récente existe, affiche « SEOKB2 X disponible » dans le terminal et Claude la propose dans sa première réponse avec les nouveautés, sans la lancer sans accord. L'installateur déclare cette vérification dans `.claude/settings.json` en conservant les autres réglages ; un fichier de réglages illisible n'est pas touché. Rien ne s'affiche quand le coffre est à jour. Un dépôt inaccessible donne une ligne d'avertissement, sans bloquer la session. Les coffres installés en 2.0.0 à 2.3.0 sans l'ancien pack doivent lancer une fois « mets à jour SEOKB2 » pour recevoir la vérification.

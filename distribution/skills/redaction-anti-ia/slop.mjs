@@ -53,7 +53,7 @@ const WARN = [
   [/\b(plutôt que|au lieu de)\b/gi, "opposition « plutôt que / au lieu de »", 2],
   [/\b(un|une|de|des)\s+vrai(e|es|s)?\s+\w+/gi, "« vrai » en épithète d'insistance", 1],
   [/\b(concrètement|en pratique|en réalité|en fait)\b/gi, "charnière de transition", 1],
-  [/\bévidemment\b|\bbien sûr\b|\bnaturellement\b/gi, "adverbe de connivence", 1],
+  [/(?<![\wà-ÿ])(évidemment|bien sûr|naturellement)(?![\wà-ÿ])/gi, "adverbe de connivence", 1],
 ];
 
 // Fin de paragraphe qui explique ce qu'on vient de lire. Marqueur n°1.
@@ -101,6 +101,7 @@ function derniereePhrase(p) {
   return phrases[phrases.length - 1] || "";
 }
 
+const SEUIL_PHRASES = 0.40; // calibré le 2026-11-17 sur 80 textes : aucune alerte sur des articles publiés, 0.42-0.44 = prose de fiche
 let codeSortie = 0;
 
 for (const fichier of fichiers) {
@@ -149,6 +150,40 @@ for (const fichier of fichiers) {
       hits.warn.push({
         libelle: `blocs trop réguliers (dispersion ${dispersion.toFixed(2)}, attendu > 0.35)`,
         n: paras.length,
+        seuil: 0,
+      });
+    }
+  }
+
+
+  // Grappe locale : un tell isolé est survivable, trois familles différentes dans
+  // un même paragraphe sont un gabarit (critère de densité, pas de présence).
+  const familles = [...HARD.map(([re]) => re), ...WARN.map(([re]) => re)];
+  const grappes = paras.filter((p) => {
+    const n = familles.filter((re) => new RegExp(re.source, re.flags.replace("g", "")).test(p)).length;
+    return n >= 3;
+  });
+  if (grappes.length > 0) {
+    hits.warn.push({
+      libelle: "grappe de tells (3 familles ou plus dans un même paragraphe)",
+      n: grappes.length,
+      seuil: 0,
+      exemples: grappes.slice(0, 3).map((p) => p.slice(0, 90)),
+    });
+  }
+
+  // Phrases de longueur trop uniforme sur l'ensemble du texte.
+  const lg = paras
+    .flatMap((p) => p.split(/(?<=[.!?…])\s+/))
+    .map((f) => f.split(/\s+/).filter(Boolean).length)
+    .filter((n) => n >= 3);
+  if (lg.length >= 15) {
+    const m = lg.reduce((a, b) => a + b, 0) / lg.length;
+    const cv = Math.sqrt(lg.reduce((a, b) => a + (b - m) ** 2, 0) / lg.length) / m;
+    if (cv < SEUIL_PHRASES) {
+      hits.warn.push({
+        libelle: `phrases de longueur trop uniforme (variation ${cv.toFixed(2)}, attendu > ${SEUIL_PHRASES})`,
+        n: lg.length,
         seuil: 0,
       });
     }
