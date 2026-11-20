@@ -27,6 +27,7 @@ def plan(source, target):
     tree(source/'distribution/base','.seokb/base')
     for key in existing: files[key]=(source/key.removeprefix('.seokb/base/')).read_bytes()
     tree(source/'distribution/skills','.claude/skills')
+    if (source/'distribution/agents').is_dir(): tree(source/'distribution/agents','.claude/agents')
     tree(source/'scripts','.seokb/runtime')
     files['.seokb/AGENTS.md']=(source/'distribution/AGENTS.md').read_bytes()
     files['.seokb/VERSION']=(source/'VERSION').read_bytes()

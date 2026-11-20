@@ -1,3 +1,12 @@
+# Vérification SEOKB2 2.4.0 — 20 novembre 2026
+
+- `python3 tests/test_teams_etat.py` : 4 tests (les six agents et `phases.json` installés et cohérents, cycle démarrer → livrer → valider, refus de valider un fichier modifié après présentation, refus de démarrer une phase dont la dépendance n'est pas validée, une correction remet la phase et ses suivantes à revoir).
+- `tests/test_install.py`, `tests/test_sauvegarde.py`, `tests/test_verification_maj.py` : OK.
+- Coffre neuf installé par l'installateur réel : `doctor.py` indique 2.4.0 et une liste `modified_or_missing` vide ; six agents dans `.claude/agents/`.
+- Coffre installé en 2.3.2 puis mis à jour en 2.4.0 : aucun conflit, un agent personnel et une note personnelle conservés.
+- Recherche dans les lignes ajoutées : aucun chemin `/Users/`, nom de personne, de client ou d'entreprise, clé ni adresse.
+- Non fait : aucune exécution des 14 étapes par les agents sur un cas réel ; la team n'a été lancée ni sous Windows ni avec Codex.
+
 # Vérification SEOKB2 2.3.1 — 13 novembre 2026
 
 - `python3 tests/test_verification_maj.py` : 7 tests (annonce d'une version plus récente avec ses nouveautés, silence le même jour, silence si à jour, dépôt inaccessible sans blocage, ajout du hook en conservant les réglages et hooks existants, coffre neuf, réglages illisibles non touchés, réglages modifiés ensuite sans conflit ni alerte de `doctor.py`). `tests/test_install.py` : 8 tests. `tests/test_sauvegarde.py` : 4 tests.

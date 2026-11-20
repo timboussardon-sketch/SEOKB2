@@ -1,0 +1,13 @@
+{
+  "team": "mots-cles",
+  "phases": [
+    {"id": "cadrage", "titre": "Cadrage : site, offre, conversion, marché, coffre, données", "role": "pilote", "etapes": [], "depend": [], "validation": true, "accord": "le cadrage (slug, coffre, données disponibles et manquantes)"},
+    {"id": "collecte", "titre": "Keyword Planner et Search Console", "role": "mots-cles-collecte", "etapes": [1, 2], "depend": ["cadrage"], "validation": true, "accord": "les données réelles collectées et ce qui manque"},
+    {"id": "recherche", "titre": "Overview, recherche, résistants à l'IA", "role": "mots-cles-recherche", "etapes": [3, 4, 5], "depend": ["collecte"], "validation": false},
+    {"id": "business", "titre": "Filtre des 4 piliers, mots-clés business", "role": "mots-cles-business", "etapes": [6], "depend": ["recherche"], "validation": true, "accord": "la liste des 3 à 5 requêtes retenues et les écartées"},
+    {"id": "architecture", "titre": "Clustering, décisionnels, cluster AEO, pSEO", "role": "mots-cles-architecture", "etapes": [7, 8, 9, 10], "depend": ["business"], "validation": true, "accord": "les clusters, leur pré-décision URL provisoire et les modèles pSEO"},
+    {"id": "audience", "titre": "Peurs et objections, entités vectorielles", "role": "mots-cles-audience", "etapes": [11, 12], "depend": ["business"], "validation": false},
+    {"id": "briefs", "titre": "Un brief par cluster validé, BLOQUÉ sinon", "role": "mots-cles-brief", "etapes": [13], "depend": ["architecture", "audience"], "validation": false},
+    {"id": "rapport", "titre": "Rapport de pré-décision, annexes, contrôles", "role": "pilote", "etapes": [14], "depend": ["briefs"], "validation": true, "accord": "le rapport de pré-décision"}
+  ]
+}

@@ -1,4 +1,4 @@
-# Capacités et limites de SEOKB2 2.3.2
+# Capacités et limites de SEOKB2 2.4.0
 
 | Composant | État et prérequis |
 |---|---|
@@ -8,6 +8,7 @@
 | Skills SEO | Pack élèves 1.5.6 adapté ; les scripts métier conservent leurs dépendances propres |
 | Stratégie GEO | Pilote distribué en dix étapes ; collecte réelle conditionnée aux outils disponibles et aux autorisations de coût |
 | Team stratégie | Python 3.10+ et Claude Code (`claude`) ou Codex (`codex`, connexion ChatGPT) dans le PATH ; chaque mission d'un spécialiste consomme l'accès de l'élève à cet agent ; spécialistes en lecture seule sur le coffre, le coordinateur enregistre leurs livrables ; testée sur macOS, avec un faux agent et un appel réel de Claude Code |
+| Team mots-clés | Claude Code : le pilote est la session, les six agents sont des sous-agents de `.claude/agents/` ; Python 3.10+ pour le suivi d'état ; volumes seulement depuis un export Keyword Planner ou la Search Console de l'utilisateur ; suivi d'état et installation testés, aucune exécution complète des 14 étapes sur un cas réel dans cette version |
 | Dossier d'opportunités chiffré | Le validateur requiert `python -m pip install jsonschema` ; un dossier qualitatif n'en a pas besoin |
 | Citations IA | Panel et analyse utilisables ; service privé de Tim absent ; connecter un outil ou fournir des observations |
 | GSC, SERP, navigateurs, API | Accès de l'élève à configurer ; aucune donnée collectée par l'installation |

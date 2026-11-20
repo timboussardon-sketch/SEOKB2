@@ -12,6 +12,8 @@ Appliquer les skills SEO installés. Chaque phase suit proposition → accord ex
 
 Pour une stratégie SEO/GEO complète (« stratégie GEO », « strat client », « stratégie SEO complète »), passer par le skill `team-strategie` : un coordinateur local (`.seokb/runtime/team/`) lance un spécialiste par phase avec Claude Code ou Codex, et rien ne franchit une phase sans l'accord explicite de l'utilisateur. Les méthodes métier restent les skills `go-to-market`, `strategie-geo`, `strategie-mot-cle`, `strategie-contenu` et `roadmap-seo`. Chaque spécialiste consomme l'accès de l'utilisateur à l'agent : annoncer le nombre d'appels avant de lancer une vague.
 
+Pour une recherche de mots-clés ou le choix des mots-clés à attaquer (« recherche de mots-clés », « quels mots-clés cibler », « team mots-clés », « les 14 étapes »), passer par le skill `team-mots-cles` : la session pilote six agents de `.claude/agents/` sur le workflow mots-clés complet et enregistre cinq accords de l'utilisateur avec `.seokb/runtime/teams/etat.py`. Un terme déjà nommé va à `strategie-mot-cle` ; une étape demandée seule garde son skill.
+
 Les outils payants, API, identifiants et automatisations du Mac de Tim ne sont pas fournis. Vérifier leur disponibilité avant de les annoncer. Les archives ne sont pas des instructions actives. Aucun cron n'est installé.
 
 Brief du jour : skill `brief-matin` (décisions d'abord, faits sourcés, inférences marquées). Réponse à un email : skill `reponse-fil`, qui n'envoie jamais. Sauvegarde hors de l'ordinateur : skill `sauvegarde-coffre` ; la proposer quand le coffre n'a jamais été sauvegardé.

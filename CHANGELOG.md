@@ -1,5 +1,9 @@
 # Versions
 
+## 2.4.0 — 2026-11-20
+
+Team mots-clés : dire « recherche de mots-clés » ou « team mots-clés » lance un pilote qui déroule les 14 étapes du workflow mots-clés complet avec six agents (collecte, recherche, business, architecture, audience, briefs). Le pilote s'arrête sur cinq accords : cadrage, données collectées, mots-clés business, clusters, rapport. Un fichier modifié après sa présentation doit être remontré avant d'être validé ; une correction relance la phase et remet ses suivantes à revoir. La méthode ne change pas : elle reste `workflow-mots-cles-complet`. Nouveau skill `team-mots-cles`, six agents installés dans `.claude/agents/`, suivi d'état `.seokb/runtime/teams/etat.py`. L'installateur distribue désormais les agents. Aucune donnée n'est collectée par l'installation : sans export Keyword Planner ni accès Search Console, les étapes concernées sortent en BLOQUÉ.
+
 ## 2.3.2 — 2026-11-17
 
 `slop.mjs` (skill `redaction-anti-ia`) détecte deux gabarits de plus : une grappe de trois familles de tells dans un même paragraphe, et des phrases de longueur trop uniforme sur l'ensemble du texte. Un tell isolé reste toléré, c'est la densité qui alerte. Correction : « évidemment », « bien sûr » et « naturellement » n'étaient jamais détectés (la limite de mot `\b` ignore les lettres accentuées). Les deux nouveautés sont des alertes (WARN), jamais bloquantes sans `--strict`.
