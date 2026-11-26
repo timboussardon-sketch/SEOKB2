@@ -1,5 +1,9 @@
 # Versions
 
+## 2.5.1 — 2026-11-26
+
+Récap du soir : chaque ligne nomme le chantier ou le dossier concerné, comme dans le récap de seo-kb (la 2.5.0 ne le demandait pas au modèle). Rien d'autre ne change dans les alertes ni dans la planification.
+
 ## 2.5.0 — 2026-11-26
 
 Deux agents quotidiens, envoyés par Gmail ou WhatsApp (skill `agents-quotidiens`) : des alertes Search Console chaque matin quand le trafic ou les positions baissent, et un récap très simple de la journée chaque soir. **Alertes** : chaque matin à partir de 9 h, les 7 derniers jours de la Search Console sont comparés aux 7 d'avant, sur toutes les propriétés visibles ou sur une liste choisie. Cinq cas déclenchent une alerte : baisse de trafic du site, page qui perd ses clics, page qui sort du top 10, requête du top 20 qui perd plus de 3 positions, données arrêtées. Sous des seuils minimaux, aucune conclusion. Les règles sont fixes, sans IA, et une même alerte n'est pas renvoyée pendant 6 jours. Sans alerte, aucun message. **Récap** : chaque soir à partir de 20 h, 5 à 10 lignes d'actions tirées des commits du coffre, des notes modifiées et des demandes des sessions Claude Code. Le récap est condensé par haiku si `claude` est disponible, sinon il part en liste brute. Envoi par le Gmail de l'élève (mot de passe d'application) ou par WhatsApp via CallMeBot (service tiers gratuit, usage personnel), ou les deux ; les rapports sont aussi écrits dans `wiki/pilotage/`. Réglages et secrets dans `.env.local`, que la vérification ajoute au `.gitignore`. La tâche horaire (LaunchAgent, Planificateur de tâches Windows ou cron) n'est posée que sur l'accord de l'élève (`agents_quotidiens.py planifier`, `retirer` pour l'enlever) ; l'installation n'en pose aucune.

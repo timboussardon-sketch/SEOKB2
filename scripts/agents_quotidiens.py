@@ -194,7 +194,7 @@ def condenser(commits, fichiers, demandes):
               [f'- {f}' for f in fichiers] + ['## Demandes dans les sessions Claude'] + [f'- {d}' for d in demandes]
     consigne = ("Voici les commits, les fichiers modifiés et les demandes du jour dans un coffre SEO.\n"
                 "Écris le récap de la journée : 5 à 10 lignes, une action faite par ligne, commençant par « - ».\n"
-                "Chaque ligne dit ce qui a été fait, au passé composé, en français courant ; regroupe un même chantier en une ligne.\n"
+                "Chaque ligne nomme le chantier ou le dossier concerné, puis dit ce qui a été fait, au passé composé, en français courant ; regroupe un même chantier en une ligne.\n"
                 "Garde les chiffres et les noms tels quels. Rien d'autre : pas de titre, pas d'introduction, pas de conclusion. N'invente rien.\n\n"
                 + '\n'.join(matiere))
     r = subprocess.run([claude, '-p', '--model', 'haiku'], input=consigne, capture_output=True, text=True,
