@@ -16,7 +16,7 @@ Pour une recherche de mots-clés ou le choix des mots-clés à attaquer (« rech
 
 Les outils payants, API, identifiants et automatisations du Mac de Tim ne sont pas fournis. Vérifier leur disponibilité avant de les annoncer. Les archives ne sont pas des instructions actives. Aucun cron n'est installé.
 
-Brief du jour : skill `brief-matin` (décisions d'abord, faits sourcés, inférences marquées). Réponse à un email : skill `reponse-fil`, qui n'envoie jamais. Sauvegarde hors de l'ordinateur : skill `sauvegarde-coffre` ; la proposer quand le coffre n'a jamais été sauvegardé.
+Brief du jour : skill `brief-matin` (décisions d'abord, faits sourcés, inférences marquées). Réponse à un email : skill `reponse-fil`, qui n'envoie jamais. Sauvegarde hors de l'ordinateur : skill `sauvegarde-coffre` ; la proposer quand le coffre n'a jamais été sauvegardé. Alertes Search Console du matin et récap simple du soir, par Gmail ou WhatsApp : skill `agents-quotidiens` ; la tâche planifiée ne se pose qu'après l'accord explicite de l'utilisateur.
 
 À la création ou reprise d'un projet, afficher son dashboard : `python -X utf8 .seokb/runtime/dashboard.py --port 0`, vérifier le lien local et le transmettre. Le dashboard lit les fichiers du coffre.
 

@@ -1,4 +1,4 @@
-# Capacités et limites de SEOKB2 2.4.0
+# Capacités et limites de SEOKB2 2.5.0
 
 | Composant | État et prérequis |
 |---|---|
@@ -17,6 +17,7 @@
 | Annonce des mises à jour | Vérification au démarrage de Claude Code, une fois par jour ; Git et accès au dépôt ; silencieuse si à jour |
 | Brief du matin, réponse à un fil | Skills sans dépendance ; lisent le coffre ; messagerie et agenda seulement par un connecteur que l'élève autorise ; rien n'est envoyé ; aucune tâche planifiée |
 | Sauvegarde du coffre | Python standard ; destination choisie par l'élève (dossier synchronisé ou disque externe) ; archive non chiffrée ; planification à faire soi-même |
+| Alertes Search Console et récap du jour | Python standard ; alertes : identifiants OAuth Search Console de l'élève en lecture seule (`GSC_CREDENTIALS`) ; envoi : Gmail de l'élève (mot de passe d'application) et/ou WhatsApp via CallMeBot (service tiers, le texte y transite) ; récap condensé par `claude` s'il est dans le PATH, sinon liste brute ; tâche horaire posée seulement sur accord (Mac, Windows, Linux) ; planification testée sur macOS, Windows et Linux non testés ; envois Gmail et WhatsApp non testés avec un compte réel dans cette version |
 | Index vectoriel, routines, newsletters, campagnes et listes de prospection de Tim | Références historiques archivées ; non installées et non promises comme actives |
 
 La validation de cette version porte sur l'installation, la migration, la conservation des fichiers, les conflits, le diagnostic, la navigation locale et la team stratégie (coordinateur, contrats, enchaînement des phases, provider avec faux agent, un appel réel de Claude Code sur un cas fictif). Elle n'atteste pas une exécution complète de chaque workflow SEO ni une collecte externe. Les nouvelles évolutions métier du coffre de Tim qui ne figurent pas dans le pack portable sont conservées comme références historiques, sans promesse d'exécution.
